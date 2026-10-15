@@ -1,0 +1,18 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Hydrating Face Cream",
+    "brand": "Mock Certified Brand",
+    "barcode": "0000000000001",
+    "category": "face cream",
+    "exposure_type": "leave_on",
+    "labels": []
+  },
+  "ingredients": [
+    { "position": 1, "raw": "AQUA", "normalized": "aqua", "matched": true, "confidence": 1.0 },
+    { "position": 2, "raw": "GLYCERIN", "normalized": "glycerin", "matched": true, "confidence": 1.0 },
+    { "position": 3, "raw": "PHENOXYETHANOL", "normalized": "phenoxyethanol", "matched": true, "confidence": 1.0 }
+  ],
+  "needs_review": false,
+  "warnings": []
+}

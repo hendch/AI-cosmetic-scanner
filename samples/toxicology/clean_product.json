@@ -1,0 +1,56 @@
+{
+  "agent": "toxicology",
+  "prompt_version": "mock",
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": true,
+      "hazards": [],
+      "concern_level": "insufficient_evidence",
+      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "missing_information": [
+        "evidence in knowledge base"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    },
+    {
+      "position": 2,
+      "ingredient": "glycerin",
+      "matched": true,
+      "hazards": [],
+      "concern_level": "none_identified",
+      "risk_interpretation": "No hazard classification or concern identified in the retrieved evidence.",
+      "missing_information": [],
+      "evidence_confidence": "medium",
+      "sources": [
+        "mock_clp_glycerin"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "phenoxyethanol",
+      "matched": true,
+      "hazards": [
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Irrit. 2 (H319)",
+          "source_id": "mock_clp_phenoxyethanol",
+          "quote": "MOCK - replace with retrieved text"
+        }
+      ],
+      "concern_level": "low",
+      "risk_interpretation": "A hazard classification exists for the pure substance. Consumer risk depends on concentration and exposure, which are unknown.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "mock_clp_phenoxyethanol",
+        "mock_sccs_phenoxyethanol"
+      ]
+    }
+  ],
+  "warnings": []
+}

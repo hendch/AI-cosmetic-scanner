@@ -1,0 +1,59 @@
+{
+  "agent": "toxicology",
+  "prompt_version": "mock",
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": true,
+      "hazards": [],
+      "concern_level": "insufficient_evidence",
+      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "missing_information": [
+        "evidence in knowledge base"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    },
+    {
+      "position": 2,
+      "ingredient": "phenoxyethanol",
+      "matched": true,
+      "hazards": [
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Irrit. 2 (H319)",
+          "source_id": "mock_clp_phenoxyethanol",
+          "quote": "MOCK - replace with retrieved text"
+        }
+      ],
+      "concern_level": "low",
+      "risk_interpretation": "A hazard classification exists for the pure substance. Consumer risk depends on concentration and exposure, which are unknown.",
+      "missing_information": [
+        "concentration",
+        "ingredient name from OCR, unverified"
+      ],
+      "evidence_confidence": "low",
+      "sources": [
+        "mock_clp_phenoxyethanol",
+        "mock_sccs_phenoxyethanol"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "xyl0-blend",
+      "matched": false,
+      "hazards": [],
+      "concern_level": "insufficient_evidence",
+      "risk_interpretation": "Ingredient not recognised as an INCI name; no evidence retrieved.",
+      "missing_information": [
+        "recognised INCI name"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    }
+  ],
+  "warnings": [
+    "barcode not found or no ingredients"
+  ]
+}
