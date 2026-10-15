@@ -22,8 +22,14 @@
       "hazards": [
         {
           "endpoint": "eye_irritation",
-          "classification": "CLP Eye Irrit. 2 (H319)",
-          "source_id": "mock_clp_phenoxyethanol",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "MOCK - replace with retrieved text"
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 4 (H302); STOT SE 3 (H335)",
+          "source_id": "clp_test_ingredients",
           "quote": "MOCK - replace with retrieved text"
         }
       ],
@@ -35,8 +41,8 @@
       ],
       "evidence_confidence": "low",
       "sources": [
-        "mock_clp_phenoxyethanol",
-        "mock_sccs_phenoxyethanol"
+        "clp_test_ingredients",
+        "sccs_phenoxyethanol_2016"
       ]
     },
     {

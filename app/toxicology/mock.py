@@ -17,7 +17,7 @@ CANNED_FINDINGS = {
             Hazard(
                 endpoint="sensitisation",
                 classification="CLP Skin Sens. 1A (H317)",
-                source_id="mock_clp_methylisothiazolinone",
+                source_id="clp_test_ingredients",
                 quote=MOCK_QUOTE,
             )
         ],
@@ -28,16 +28,22 @@ CANNED_FINDINGS = {
         ),
         missing_information=["concentration"],
         evidence_confidence="high",
-        sources=["mock_clp_methylisothiazolinone", "mock_sccs_methylisothiazolinone"],
+        sources=["clp_test_ingredients", "sccs_methylisothiazolinone_2015"],
     ),
     "phenoxyethanol": dict(
         hazards=[
             Hazard(
                 endpoint="eye_irritation",
-                classification="CLP Eye Irrit. 2 (H319)",
-                source_id="mock_clp_phenoxyethanol",
+                classification="CLP Eye Dam. 1 (H318)",
+                source_id="clp_test_ingredients",
                 quote=MOCK_QUOTE,
-            )
+            ),
+            Hazard(
+                endpoint="other",
+                classification="CLP Acute Tox. 4 (H302); STOT SE 3 (H335)",
+                source_id="clp_test_ingredients",
+                quote=MOCK_QUOTE,
+            ),
         ],
         concern_level="low",
         risk_interpretation=(
@@ -46,7 +52,7 @@ CANNED_FINDINGS = {
         ),
         missing_information=["concentration"],
         evidence_confidence="high",
-        sources=["mock_clp_phenoxyethanol", "mock_sccs_phenoxyethanol"],
+        sources=["clp_test_ingredients", "sccs_phenoxyethanol_2016"],
     ),
     "glycerin": dict(
         hazards=[],
@@ -54,7 +60,7 @@ CANNED_FINDINGS = {
         risk_interpretation="No hazard classification or concern identified in the retrieved evidence.",
         missing_information=[],
         evidence_confidence="medium",
-        sources=["mock_clp_glycerin"],
+        sources=["clp_test_ingredients"],
     ),
 }
 

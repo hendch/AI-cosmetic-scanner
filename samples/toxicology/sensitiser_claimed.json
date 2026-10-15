@@ -25,7 +25,7 @@
       "missing_information": [],
       "evidence_confidence": "medium",
       "sources": [
-        "mock_clp_glycerin"
+        "clp_test_ingredients"
       ]
     },
     {
@@ -36,7 +36,7 @@
         {
           "endpoint": "sensitisation",
           "classification": "CLP Skin Sens. 1A (H317)",
-          "source_id": "mock_clp_methylisothiazolinone",
+          "source_id": "clp_test_ingredients",
           "quote": "MOCK - replace with retrieved text"
         }
       ],
@@ -47,8 +47,8 @@
       ],
       "evidence_confidence": "high",
       "sources": [
-        "mock_clp_methylisothiazolinone",
-        "mock_sccs_methylisothiazolinone"
+        "clp_test_ingredients",
+        "sccs_methylisothiazolinone_2015"
       ]
     }
   ],
