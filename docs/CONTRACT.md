@@ -1,6 +1,6 @@
 # n8n ⇄ FastAPI contract  (schema_version `0.1`)
 
-Source of truth in code: `contract/models.py` (Pydantic v2). Check with `python contract/test_contract.py`.
+Source of truth in code: `app/integration/schemas.py` (Pydantic v2). Check with `pytest tests/test_integration.py`.
 
 ## Golden rules
 1. n8n POSTs the **whole envelope** as JSON to each endpoint.
