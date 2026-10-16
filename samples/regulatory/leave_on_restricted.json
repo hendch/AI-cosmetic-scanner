@@ -1,0 +1,251 @@
+{
+  "agent": "regulatory",
+  "prompt_version": "mock",
+  "product_context": {
+    "category": "face cream",
+    "exposure_type": "leave_on"
+  },
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": true,
+      "regulatory_status": "no_restriction_found",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+      "missing_information": [],
+      "evidence_confidence": "high",
+      "sources": [
+        "regulatory_scope"
+      ]
+    },
+    {
+      "position": 2,
+      "ingredient": "niacinamide",
+      "matched": true,
+      "regulatory_status": "no_restriction_found",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+      "missing_information": [],
+      "evidence_confidence": "high",
+      "sources": [
+        "regulatory_scope"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "salicylic acid",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "III",
+          "entry": "98",
+          "source_id": "eu_1223_2009_annex_iii"
+        },
+        {
+          "annex": "V",
+          "entry": "3",
+          "source_id": "eu_1223_2009_annex_v"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "III/98",
+          "type": "product_type",
+          "requirement": "(a) Rinse-off hair products (b) Other products except body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant (c) Body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant",
+          "result": "satisfied",
+          "reason": "The product (face cream) matches item (b) of the entry; the limits of item (b) apply."
+        },
+        {
+          "entry": "III/98",
+          "type": "max_concentration",
+          "requirement": "(a) 3,0 % (b) 2,0 % (c) 0,5 %",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        },
+        {
+          "entry": "III/98",
+          "type": "usage",
+          "requirement": "(a) (b) (c) Not to be used in preparations for children under 3 years of age. Not to be used in applications that may lead to exposure of the end-user's lungs by inhalation. Not to be used in oral products. For purposes other than inhibiting the development of micro-organisms in the product. This purpose has to be apparent from the presentation of the product. These levels are inclusive of any use of salicylic acid.",
+          "result": "unknown",
+          "reason": "Not checked against the product information."
+        },
+        {
+          "entry": "III/98",
+          "type": "labelling",
+          "requirement": "(a) (b) (c) Not to be used for children under 3 years of age",
+          "result": "unknown",
+          "reason": "The label text is not available to check the required wording."
+        },
+        {
+          "entry": "V/3",
+          "type": "max_concentration",
+          "requirement": "0,5 % (acid)",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        },
+        {
+          "entry": "V/3",
+          "type": "usage",
+          "requirement": "Not to be used in products for children under 3 years of age. Not to be used in oral products. Not to be used in applications that may lead to exposure of the end-user's lungs by inhalation. (Salts: not to be used in products for children under 3 years of age, except for shampoos.)",
+          "result": "unknown",
+          "reason": "Not checked against the product information."
+        },
+        {
+          "entry": "V/3",
+          "type": "labelling",
+          "requirement": "Not to be used for children under 3 years of age",
+          "result": "unknown",
+          "reason": "The label text is not available to check the required wording."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex III entry 98, Annex V entry 3); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration",
+        "label text"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_iii",
+        "eu_1223_2009_annex_v"
+      ]
+    },
+    {
+      "position": 4,
+      "ingredient": "retinol",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "III",
+          "entry": "376",
+          "source_id": "eu_1223_2009_annex_iii"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "III/376",
+          "type": "product_type",
+          "requirement": "(a) Body lotion (b) other leave-on and rinse-off products",
+          "result": "satisfied",
+          "reason": "The product (face cream) matches item (b) of the entry; the limits of item (b) apply."
+        },
+        {
+          "entry": "III/376",
+          "type": "max_concentration",
+          "requirement": "(a) 0,05 % Retinol Equivalent (RE) (b) 0,3 % RE",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        },
+        {
+          "entry": "III/376",
+          "type": "labelling",
+          "requirement": "For any cosmetic product containing Retinol, Retinyl Acetate or Retinyl Palmitate the following, labelling is obligatory: 'Contains Vitamin A. Consider your daily intake before use'.",
+          "result": "unknown",
+          "reason": "The label text is not available to check the required wording."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex III entry 376); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration",
+        "label text"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_iii"
+      ]
+    },
+    {
+      "position": 5,
+      "ingredient": "methylisothiazolinone",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "V",
+          "entry": "57",
+          "source_id": "eu_1223_2009_annex_v"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "V/57",
+          "type": "product_type",
+          "requirement": "Rinse-off products",
+          "result": "not_satisfied",
+          "reason": "The product is a leave-on product; the entry allows rinse-off products only."
+        },
+        {
+          "entry": "V/57",
+          "type": "max_concentration",
+          "requirement": "0,0015 %",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        }
+      ],
+      "compliance_check": "not_satisfied",
+      "explanation": "Allowed only under conditions (Annex V entry 57); at least one condition is not met for this product.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_v"
+      ]
+    },
+    {
+      "position": 6,
+      "ingredient": "zinc pyrithione",
+      "matched": true,
+      "regulatory_status": "prohibited",
+      "entries": [
+        {
+          "annex": "II",
+          "entry": "1670",
+          "source_id": "eu_1223_2009_annex_ii"
+        }
+      ],
+      "conditions": [],
+      "compliance_check": "not_satisfied",
+      "explanation": "Listed in Annex II entry 1670 of Regulation (EC) No 1223/2009: prohibited in cosmetic products.",
+      "missing_information": [],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_ii"
+      ]
+    },
+    {
+      "position": 7,
+      "ingredient": "sodium benzoate",
+      "matched": true,
+      "regulatory_status": "not_assessed",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "This ingredient is not covered by the current regulatory corpus.",
+      "missing_information": [
+        "evidence in regulatory corpus"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    }
+  ],
+  "warnings": [],
+  "run": {
+    "mode": "mock",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "status_disagreements": 0,
+    "overrides": []
+  }
+}

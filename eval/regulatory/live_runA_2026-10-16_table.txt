@@ -1,0 +1,23 @@
+| prompt_version | status_accuracy | compliance_accuracy | condition_accuracy | citation_validity | wording_violations | llm_calls | retries | fallbacks | overrides | status_disagreements | seconds |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| v1 | 100.0 | 91.1 | 94.1 | 100.0 | 0 | 25 | 0 | 0 | 30 | 4 | 64.3 |
+| v2 | 100.0 | 97.8 | 100.0 | 100.0 | 0 | 25 | 0 | 0 | 16 | 0 | 58.2 |
+| v3 | 100.0 | 93.3 | 94.1 | 100.0 | 0 | 26 | 1 | 0 | 22 | 0 | 76.7 |
+
+Errors (v1):
+  products/face_sunscreen benzophenone-3: compliance not_satisfied != unknown
+  products/anti_dandruff_shampoo limonene: compliance not_satisfied != unknown
+  products/toothpaste salicylic acid: compliance unknown != not_satisfied
+  products/toothpaste salicylic acid: III/98 usage ['satisfied'] != not_satisfied
+  products/toothpaste salicylic acid: V/3 usage ['satisfied'] != not_satisfied
+  products/toothpaste limonene: compliance not_satisfied != unknown
+
+Errors (v2):
+  input/leave_on_restricted salicylic acid: compliance not_satisfied != unknown
+
+Errors (v3):
+  products/anti_dandruff_shampoo limonene: compliance not_satisfied != unknown
+  products/toothpaste salicylic acid: compliance unknown != not_satisfied
+  products/toothpaste salicylic acid: III/98 usage ['satisfied'] != not_satisfied
+  products/toothpaste salicylic acid: V/3 usage ['satisfied'] != not_satisfied
+  products/toothpaste limonene: compliance not_satisfied != unknown

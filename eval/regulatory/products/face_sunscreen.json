@@ -1,0 +1,57 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Daily Face Sunscreen SPF 30",
+    "brand": "Eval Brand",
+    "barcode": "",
+    "category": "face sunscreen",
+    "exposure_type": "leave_on",
+    "labels": []
+  },
+  "ingredients": [
+    {
+      "position": 1,
+      "raw": "AQUA",
+      "normalized": "aqua",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 2,
+      "raw": "HOMOSALATE",
+      "normalized": "homosalate",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 3,
+      "raw": "OCTOCRYLENE",
+      "normalized": "octocrylene",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 4,
+      "raw": "BENZOPHENONE-3",
+      "normalized": "benzophenone-3",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 5,
+      "raw": "TITANIUM DIOXIDE",
+      "normalized": "titanium dioxide",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 6,
+      "raw": "NIACINAMIDE",
+      "normalized": "niacinamide",
+      "matched": true,
+      "confidence": 1.0
+    }
+  ],
+  "needs_review": false,
+  "warnings": []
+}
