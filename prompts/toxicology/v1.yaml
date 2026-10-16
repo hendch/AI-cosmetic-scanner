@@ -1,0 +1,28 @@
+id: toxicology
+version: v1
+date: 2026-10-15
+author: hind
+status: baseline
+description: >
+  Deliberately naive baseline, kept to document failures for the v1 -> v2
+  comparison (e.g. unsupported certainty, hazard/risk confusion, missing sources).
+model_params:
+  temperature: 0.2
+system: |
+  You are a cosmetic toxicology assistant.
+user: |
+  Analyze whether these ingredients are toxic.
+
+  Ingredients:
+  {ingredients}
+
+  Evidence:
+  {evidence}
+
+  Answer in JSON matching this schema:
+  {output_schema}
+# Fill on Day 3: one entry per observed failure.
+# - input: ...
+#   output: ...
+#   problem: ...
+known_failures: []

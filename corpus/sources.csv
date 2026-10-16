@@ -1,0 +1,15 @@
+source_id,doc_type,filename,source,document_title,url,ingredients,publication_date,accessed_date,added_by
+sccs_benzophenone-3_2021,sccs_opinion,toxicology/sccs/sccs_benzophenone-3_2021.pdf,SCCS,SCCS/1625/20 Opinion on Benzophenone-3,,benzophenone-3,2021-03-31,2026-10-15,hind
+sccs_bht_2021,sccs_opinion,toxicology/sccs/sccs_bht_2021.pdf,SCCS,SCCS/1636/21 Opinion on Butylated Hydroxytoluene (BHT),,bht,2021-12-02,2026-10-15,hind
+sccs_homosalate_2021,sccs_opinion,toxicology/sccs/sccs_homosalate_2021.pdf,SCCS,SCCS/1638/21 Scientific Advice on the safety of Homosalate as a UV-filter in cosmetic products,,homosalate,2021-12-02,2026-10-15,hind
+sccs_methylisothiazolinone_2015,sccs_opinion,toxicology/sccs/sccs_methylisothiazolinone_2015.pdf,SCCS,SCCS/1557/15 Opinion on Methylisothiazolinone (MI) Submission III (sensitisation only),,methylisothiazolinone,2015-12-15,2026-10-15,hind
+sccs_octocrylene_2021,sccs_opinion,toxicology/sccs/sccs_octocrylene_2021.pdf,SCCS,SCCS/1627/21 Opinion on Octocrylene,,octocrylene,2021-03-31,2026-10-15,hind
+sccs_parabens_2013,sccs_opinion,toxicology/sccs/sccs_parabens_2013.pdf,SCCS,SCCS/1514/13 Opinion on Parabens (propyl- and butylparaben),,propylparaben;butylparaben,2013-05-03,2026-10-15,hind
+sccs_phenoxyethanol_2016,sccs_opinion,toxicology/sccs/sccs_phenoxyethanol_2016.pdf,SCCS,SCCS/1575/16 Opinion on Phenoxyethanol,,phenoxyethanol,2016-10-06,2026-10-15,hind
+sccs_propylparaben_2021,sccs_opinion,toxicology/sccs/sccs_propylparaben_2021.pdf,SCCS,SCCS/1623/20 Opinion on Propylparaben (PP),,propylparaben,2021-03-31,2026-10-15,hind
+sccs_retinol_2022,sccs_opinion,toxicology/sccs/sccs_retinol_2022.pdf,SCCS,SCCS/1639/21 Revision of the Opinion on vitamin A (Retinol; Retinyl Acetate; Retinyl Palmitate),,retinol;retinyl acetate;retinyl palmitate,2022-10-25,2026-10-15,hind
+sccs_salicylic_acid_2023,sccs_opinion,toxicology/sccs/sccs_salicylic_acid_2023.pdf,SCCS,SCCS/1646/22 Opinion on Salicylic acid,,salicylic acid,2023-06-07,2026-10-15,hind
+sccs_titanium_dioxide_nano_coating_2024,sccs_opinion,toxicology/sccs/sccs_titanium_dioxide_nano_coating_2024.pdf,SCCS,SCCS/1667/24 Opinion on new coating for Titanium Dioxide (nano form),,titanium dioxide,2024-10-25,2026-10-15,hind
+sccs_zinc_pyrithione_2020,sccs_opinion,toxicology/sccs/sccs_zinc_pyrithione_2020.pdf,SCCS,SCCS/1614/19 Opinion on Zinc Pyrithione (ZPT) Submission III,,zinc pyrithione,2020-03-04,2026-10-15,hind
+clp_annexvi_atp23,clp_harmonised,toxicology/clp/annex_vi_clp_table_atp23_en.xlsx,ECHA,Annex VI to CLP Table 3 (unofficial Excel; up to ATP23 / Delegated Regulation (EU) 2025/1222),https://echa.europa.eu/information-on-chemicals/annex-vi-to-clp,multiple,2025-06-20,2026-10-15,hind
+clp_test_ingredients,clp_summary,toxicology/clp/clp_test_ingredients.csv,ECHA (derived),CLP classification per test ingredient (harmonised from Annex VI ATP23; notified from ECHA CHEM),https://chem.echa.europa.eu,multiple,2026-10-15,2026-10-15,hind
