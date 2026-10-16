@@ -1,0 +1,18 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Daily Shampoo",
+    "brand": "Example Brand",
+    "barcode": "0000000000002",
+    "category": "shampoo",
+    "exposure_type": "rinse_off",
+    "labels": ["en:cruelty-free", "en:vegan"]
+  },
+  "ingredients": [
+    { "position": 1, "raw": "AQUA", "normalized": "aqua", "matched": true, "confidence": 1.0 },
+    { "position": 2, "raw": "GLYCERIN", "normalized": "glycerin", "matched": true, "confidence": 1.0 },
+    { "position": 3, "raw": "METHYLISOTHIAZOLINONE", "normalized": "methylisothiazolinone", "matched": true, "confidence": 1.0 }
+  ],
+  "needs_review": false,
+  "warnings": []
+}

@@ -1,0 +1,56 @@
+{
+  "agent": "toxicology",
+  "prompt_version": "mock",
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": true,
+      "hazards": [],
+      "concern_level": "insufficient_evidence",
+      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "missing_information": [
+        "evidence in knowledge base"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    },
+    {
+      "position": 2,
+      "ingredient": "glycerin",
+      "matched": true,
+      "hazards": [],
+      "concern_level": "none_identified",
+      "risk_interpretation": "No hazard classification or concern identified in the retrieved evidence.",
+      "missing_information": [],
+      "evidence_confidence": "medium",
+      "sources": [
+        "clp_test_ingredients"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "methylisothiazolinone",
+      "matched": true,
+      "hazards": [
+        {
+          "endpoint": "sensitisation",
+          "classification": "CLP Skin Sens. 1A (H317)",
+          "source_id": "clp_test_ingredients",
+          "quote": "MOCK - replace with retrieved text"
+        }
+      ],
+      "concern_level": "moderate",
+      "risk_interpretation": "Classified as a skin sensitiser. Whether this matters for this product depends on concentration and on leave-on vs. rinse-off use.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_methylisothiazolinone_2015"
+      ]
+    }
+  ],
+  "warnings": []
+}
