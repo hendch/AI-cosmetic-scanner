@@ -1,0 +1,82 @@
+{
+  "agent": "regulatory",
+  "prompt_version": "mock",
+  "product_context": {
+    "category": "face cream",
+    "exposure_type": "leave_on"
+  },
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": true,
+      "regulatory_status": "no_restriction_found",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+      "missing_information": [],
+      "evidence_confidence": "high",
+      "sources": [
+        "regulatory_scope"
+      ]
+    },
+    {
+      "position": 2,
+      "ingredient": "glycerin",
+      "matched": true,
+      "regulatory_status": "no_restriction_found",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+      "missing_information": [],
+      "evidence_confidence": "high",
+      "sources": [
+        "regulatory_scope"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "phenoxyethanol",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "V",
+          "entry": "29",
+          "source_id": "eu_1223_2009_annex_v"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "V/29",
+          "type": "max_concentration",
+          "requirement": "1,0 %",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex V entry 29); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_v"
+      ]
+    }
+  ],
+  "warnings": [],
+  "run": {
+    "mode": "mock",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "status_disagreements": 0,
+    "overrides": []
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "mode": "live",
+  "prompt_version": "v1",
+  "status_accuracy": 100.0,
+  "compliance_accuracy": 86.7,
+  "condition_accuracy": 94.1,
+  "citation_validity": 100.0,
+  "wording_violations": 0,
+  "cases": 45,
+  "scored_conditions": 34,
+  "llm_calls": 25,
+  "retries": 0,
+  "fallbacks": 0,
+  "overrides": 25,
+  "status_disagreements": 6,
+  "seconds": 55.2,
+  "errors": [
+    "products/body_lotion benzophenone-3: compliance not_satisfied != unknown",
+    "products/face_sunscreen benzophenone-3: compliance not_satisfied != unknown",
+    "products/body_sunscreen_spray benzophenone-3: compliance not_satisfied != unknown",
+    "products/anti_dandruff_shampoo limonene: compliance not_satisfied != unknown",
+    "products/toothpaste salicylic acid: compliance unknown != not_satisfied",
+    "products/toothpaste salicylic acid: III/98 usage ['satisfied'] != not_satisfied",
+    "products/toothpaste salicylic acid: V/3 usage ['satisfied'] != not_satisfied",
+    "products/toothpaste limonene: compliance not_satisfied != unknown"
+  ],
+  "override_details": [
+    "products/body_lotion: phenoxyethanol [0] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_lotion: retinol [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_lotion: retinol [2] label text not available -> 'unknown' (LLM said 'satisfied')",
+    "products/body_lotion: salicylic acid [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_lotion: salicylic acid [3] label text not available -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_lotion: salicylic acid [4] concentration unknown -> 'unknown' (LLM said 'satisfied')",
+    "products/body_lotion: salicylic acid [6] label text not available -> 'unknown' (LLM said 'satisfied')",
+    "products/face_sunscreen: homosalate [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_sunscreen_spray: benzophenone-3 [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/body_sunscreen_spray: benzophenone-3 [3] label text not available -> 'unknown' (LLM said 'not_satisfied')",
+    "products/anti_dandruff_shampoo: methylisothiazolinone [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/anti_dandruff_shampoo: salicylic acid [3] label text not available -> 'unknown' (LLM said 'satisfied')",
+    "products/anti_dandruff_shampoo: salicylic acid [6] label text not available -> 'unknown' (LLM said 'satisfied')",
+    "products/baby_nappy_cream: phenoxyethanol [0] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/baby_nappy_cream: propylparaben [0] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "products/baby_nappy_cream: propylparaben [2] label text not available -> 'unknown' (LLM said 'not_satisfied')",
+    "products/toothpaste: bht [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "input/clean_product: phenoxyethanol [0] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "input/sensitiser_claimed: methylisothiazolinone [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "input/leave_on_restricted: retinol [2] label text not available -> 'unknown' (LLM said 'satisfied')",
+    "input/leave_on_restricted: salicylic acid [1] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "input/leave_on_restricted: salicylic acid [3] label text not available -> 'unknown' (LLM said 'not_satisfied')",
+    "input/leave_on_restricted: salicylic acid [4] concentration unknown -> 'unknown' (LLM said 'not_satisfied')",
+    "input/leave_on_restricted: salicylic acid [6] label text not available -> 'unknown' (LLM said 'not_satisfied')",
+    "input/ocr_unknown_brand: phenoxyethanol [0] concentration unknown -> 'unknown' (LLM said 'not_satisfied')"
+  ],
+  "raw_answers": [
+    {
+      "case": "products/body_lotion",
+      "ingredient": "phenoxyethanol",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of phenoxyethanol is unknown and the maximum allowed concentration is 1.0%.\"\n    }\n  ],\n  \"explanation\": \"The product is not compliant as the concentration of phenoxyethanol is unknown and exceeds the maximum allowed limit of 1.0%.\",\n  \"missing_information\": [\n    \"concentration of phenoxyethanol\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/body_lotion",
+      "ingredient": "retinol",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a body lotion, which matches the product type in Annex III entry 376.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of retinol is unknown and must not exceed 0.05% Retinol Equivalent (RE) for body lotions.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The required labelling 'Contains Vitamin A. Consider your daily intake before use' is compliant.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to the unknown concentration of retinol, which must not exceed 0.05% RE. The labelling requirement is satisfied.\",\n  \"missing_information\": [\n    \"Concentration of retinol in the product\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/body_lotion",
+      "ingredient": "benzophenone-3",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a body lotion, which falls under category b) Body products, including propellant and pump spray products.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of benzophenone-3 is unknown and not provided on the label.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration of benzophenone-3 as a UV filter in body products is 0.5%, but the exact concentration is unknown.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"unknown\",\n      \"reason\": \"The labeling requirement for containing benzophenone-3 is not met due to the unknown concentration.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to the unknown concentration of benzophenone-3, which exceeds the allowed limit if present. The labeling requirement is also not met.\",\n  \"missing_information\": [\n    \"Concentration of benzophenone-3\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/body_lotion",
+      "ingredient": "salicylic acid",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a body lotion, which falls under category (c) and the concentration limit is 0.5%.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration is unknown and must be within 0.5%.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not a rinse-off hair product, oral product, or one that may lead to inhalation exposure.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product must be labeled as not to be used for children under 3 years of age.\"\n    },\n    {\n      \"index\": 4,\n      \"result\": \"satisfied\",\n      \"reason\": \"The concentration limit is 0.5%.\"\n    },\n    {\n      \"index\": 5,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not a child product and not an oral product.\"\n    },\n    {\n      \"index\": 6,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product must be labeled as not to be used for children under 3 years of age.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to the unknown concentration and the lack of specific labeling for children under 3 years of age. The concentration must be 0.5% or less and the product must be clearly labeled accordingly.\",\n  \"missing_information\": [\n    \"Concentration of salicylic acid in the product\",\n    \"Labeling indicating the product is not for use on children under 3 years of age\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\",\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/face_sunscreen",
+      "ingredient": "octocrylene",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is categorized as 'Other products' which matches the conditions specified in Annex VI entry 10.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of octocrylene is not provided.\"\n    }\n  ],\n  \"explanation\": \"The product is categorized as 'Other products', which matches the conditions specified in Annex VI entry 10. However, the concentration of octocrylene is unknown and must be within the limits specified.\",\n  \"missing_information\": [\n    \"concentration of octocrylene\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/face_sunscreen",
+      "ingredient": "homosalate",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a face sunscreen, which falls under the category of face products as specified in the regulation.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of homosalate is unknown and must not exceed 7.34% as per the regulation.\"\n    }\n  ],\n  \"explanation\": \"The product is a face sunscreen, which is allowed. However, the concentration of homosalate is unknown and must not exceed 7.34%.\",\n  \"missing_information\": [\n    \"Concentration of homosalate\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/face_sunscreen",
+      "ingredient": "benzophenone-3",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a face sunscreen, which falls under category a) in Annex VI entry 4.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of benzophenone-3 is unknown and must be determined.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of benzophenone-3 must not exceed 0.5% to be used as a UV filter, but the exact concentration is unknown.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"unknown\",\n      \"reason\": \"The exact concentration of benzophenone-3 is unknown, and thus the labelling condition cannot be verified.\"\n    }\n  ],\n  \"explanation\": \"The product is a face sunscreen, which is allowed under Annex VI entry 4. However, the concentration of benzophenone-3 is unknown, making it impossible to determine if it is within the allowed limits.\",\n  \"missing_information\": [\n    \"Concentration of benzophenone-3\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/face_sunscreen",
+      "ingredient": "titanium dioxide",
+      "text": "{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a face sunscreen, which falls under category (c) in Annex III, entry 321.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of titanium dioxide is unknown.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"Titanium dioxide is to be used in the pigmentary form, which is consistent with the product type.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"satisfied\",\n      \"reason\": \"The purity criteria are met as per Commission Directive 95/45/E (E 171).\"\n    },\n    {\n      \"index\": 4,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of titanium dioxide is unknown.\"\n    },\n    {\n      \"index\": 5,\n      \"result\": \"satisfied\",\n      \"reason\": \"The maximum concentration for category (c) in Annex III, entry 321 is 25%, which is not specified but is within the allowed range.\"\n    }\n  ],\n  \"explanation\": \"The product is allowed under EU cosmetics law, but the concentration of titanium dioxide is unknown. The product must comply with the maximum concentration of 25% and be used in the pigmentary form.\",\n  \"missing_information\": [\n    \"concentration of titanium dioxide\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\",\n    \"eu_1223_2009_annex_iv\",\n    \"eu_1223_2009_annex_vi\"\n  ]\n}"
+    },
+    {
+      "case": "products/body_sunscreen_spray",
+      "ingredient": "homosalate",
+      "text": "```json\n{\n  \"regulatory_status\": \"prohibited\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product is a body sunscreen spray, which does not fall under the category of face products (with the exception of propellant spray products) allowed by Annex VI entry 3.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The maximum concentration is unknown and cannot be verified against the allowed limit of 7.34%.\"\n    }\n  ],\n  \"explanation\": \"The product is not allowed under Annex VI entry 3 as it is a body sunscreen spray, not a face product. Additionally, the concentration of homosalate is unknown, making it impossible to determine compliance with the maximum concentration limit.\",\n  \"missing_information\": [\n    \"Concentration of homosalate in the product\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/body_sunscreen_spray",
+      "ingredient": "octocrylene",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is categorized as a body sunscreen spray, which falls under 'Other products' and the maximum concentration limit for octocrylene in this category is 10%.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of octocrylene in the product is unknown.\"\n    }\n  ],\n  \"explanation\": \"The product is compliant with the category classification but the concentration of octocrylene is not provided, making the regulatory status restricted until confirmed.\",\n  \"missing_information\": [\n    \"concentration of octocrylene\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/body_sunscreen_spray",
+      "ingredient": "benzophenone-3",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a body sunscreen spray, which falls under category b) in Annex VI, and the regulation applies to this category.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration of benzophenone-3 in body products is 2.2%, but the concentration is unknown and could exceed this limit.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"If benzophenone-3 is used at the maximum allowed concentration of 2.2%, the levels used as a UV filter must not exceed 1.7%, which is not known.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The label must state 'Contains Benzophenone-3', but this is not provided.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to unknown concentration of benzophenone-3, which could exceed the allowed limit, and missing label information.\",\n  \"missing_information\": [\n    \"Concentration of benzophenone-3\",\n    \"Labeling stating 'Contains Benzophenone-3'\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_vi\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/anti_dandruff_shampoo",
+      "ingredient": "methylisothiazolinone",
+      "text": "```json\n{\n  \"regulatory_status\": \"prohibited\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a rinse-off product.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of methylisothiazolinone is unknown and the maximum allowed concentration is 0.0015%, which cannot be determined without this information.\"\n    }\n  ],\n  \"explanation\": \"The product is a rinse-off shampoo, which is allowed. However, the concentration of methylisothiazolinone is unknown and must not exceed 0.0015%.\",\n  \"missing_information\": [\n    \"Concentration of methylisothiazolinone\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/anti_dandruff_shampoo",
+      "ingredient": "limonene",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of limonene is unknown, and the regulation requires it to be indicated in the ingredient list when its concentration exceeds 0.01% for rinse-off products.\"\n    }\n  ],\n  \"explanation\": \"The product is an Anti-Dandruff Shampoo, which is a rinse-off product. According to EU regulations, limonene must be indicated in the ingredient list if its concentration exceeds 0.01%. Since the concentration is unknown, the product is not compliant.\",\n  \"missing_information\": [\n    \"concentration of limonene\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/anti_dandruff_shampoo",
+      "ingredient": "salicylic acid",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a rinse-off hair product, which matches the criteria in Annex III entry 98.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of salicylic acid is unknown and must be determined to comply with the maximum concentration limits.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The use of salicylic acid is not for oral products, and the product is not an application that may lead to inhalation exposure.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not intended for children under 3 years of age.\"\n    },\n    {\n      \"index\": 4,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of salicylic acid is unknown and must be determined to comply with the maximum concentration limits.\"\n    },\n    {\n      \"index\": 5,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product and is not intended for children under 3 years of age.\"\n    },\n    {\n      \"index\": 6,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product and is not intended for children under 3 years of age.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to the unknown concentration of salicylic acid, which must be within the limits specified in the regulation. The product otherwise complies with the conditions for use.\",\n  \"missing_information\": [\n    \"Concentration of salicylic acid in the product\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\",\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/baby_nappy_cream",
+      "ingredient": "phenoxyethanol",
+      "text": "{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration of phenoxyethanol in a leave-on product for children under three is 1.0%, but the concentration is unknown.\"\n    }\n  ],\n  \"explanation\": \"The product is not compliant as the concentration of phenoxyethanol exceeds the allowed limit of 1.0% for leave-on products for children under three.\",\n  \"missing_information\": [\n    \"Concentration of phenoxyethanol\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}"
+    },
+    {
+      "case": "products/baby_nappy_cream",
+      "ingredient": "propylparaben",
+      "text": "{\n  \"regulatory_status\": \"prohibited\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration is unknown and therefore cannot be verified against the maximum concentration limit.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product is a leave-on product designed for application on the nappy area of children under three years of age.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product requires the 'Do not use on the nappy area' warning, which is not present.\"\n    }\n  ],\n  \"explanation\": \"The product is prohibited due to the use of propylparaben in a leave-on product for children under three years of age, and the lack of the required warning.\",\n  \"missing_information\": [\n    \"Concentration of propylparaben\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}"
+    },
+    {
+      "case": "products/toothpaste",
+      "ingredient": "bht",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is classified as toothpaste, which falls under item (b) of the entry.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration for BHT in toothpaste is 0.1%, but the concentration is unknown.\"\n    }\n  ],\n  \"explanation\": \"The product is classified as toothpaste, which is covered by the regulation. However, the concentration of BHT is unknown, and it must not exceed 0.1%.\",\n  \"missing_information\": [\n    \"Concentration of BHT in the product\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/toothpaste",
+      "ingredient": "limonene",
+      "text": "```json\n{\n  \"regulatory_status\": \"not_satisfied\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of limonene is unknown, and the ingredient is not indicated in the list of ingredients, which is required for rinse-off products when the concentration exceeds 0.01%.\"\n    }\n  ],\n  \"explanation\": \"The product is a rinse-off toothpaste, and limonene is not indicated in the ingredient list. Additionally, the concentration of the ingredient is unknown, which makes it impossible to determine compliance with the concentration limits.\",\n  \"missing_information\": [\n    \"Concentration of limonene in the product\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\"\n  ]\n}\n```"
+    },
+    {
+      "case": "products/toothpaste",
+      "ingredient": "salicylic acid",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is categorized as 'Other products except body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant' which matches the conditions in Annex III entry 98.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of salicylic acid is unknown and cannot be verified against the maximum concentration limits.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product and does not involve inhalation exposure, thus the restrictions do not apply.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"unknown\",\n      \"reason\": \"The label does not provide information on whether the product is for children under 3 years of age.\"\n    },\n    {\n      \"index\": 4,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of salicylic acid is unknown and cannot be verified against the maximum concentration limits.\"\n    },\n    {\n      \"index\": 5,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product and does not involve inhalation exposure, thus the restrictions do not apply.\"\n    },\n    {\n      \"index\": 6,\n      \"result\": \"unknown\",\n      \"reason\": \"The label does not provide information on whether the product is for children under 3 years of age.\"\n    }\n  ],\n  \"explanation\": \"The product is categorized as 'Other products except body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant' and thus falls under the restrictions of Annex III entry 98. However, the product's compliance cannot be fully determined due to the unknown concentration of salicylic acid and lack of information on the target age group.\",\n  \"missing_information\": [\n    \"concentration of salicylic acid\",\n    \"information on whether the product is for children under 3 years of age\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\",\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/clean_product",
+      "ingredient": "phenoxyethanol",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of phenoxyethanol is unknown and the maximum allowed concentration is 1.0%.\"\n    }\n  ],\n  \"explanation\": \"Phenoxyethanol is restricted to a maximum concentration of 1.0% in leave-on cosmetic products under EU law, but the concentration in the product is unknown.\",\n  \"missing_information\": [\n    \"concentration of phenoxyethanol\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/sensitiser_claimed",
+      "ingredient": "methylisothiazolinone",
+      "text": "```json\n{\n  \"regulatory_status\": \"prohibited\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a rinse-off product.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The concentration of methylisothiazolinone is unknown and the maximum allowed concentration is 0.0015%, which cannot be determined without this information.\"\n    }\n  ],\n  \"explanation\": \"The product is a rinse-off shampoo, but the concentration of methylisothiazolinone is unknown, making it impossible to determine compliance with the maximum allowed concentration of 0.0015%.\",\n  \"missing_information\": [\n    \"concentration of methylisothiazolinone\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/leave_on_restricted",
+      "ingredient": "methylisothiazolinone",
+      "text": "```json\n{\n  \"regulatory_status\": \"prohibited\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product is a leave-on product, while Annex V entry 57 allows only rinse-off products.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of methylisothiazolinone is unknown.\"\n    }\n  ],\n  \"explanation\": \"The product is prohibited from containing methylisothiazolinone as it is a leave-on product, which does not comply with the rinse-off product condition specified in Annex V entry 57. Additionally, the concentration of the ingredient is unknown, making it impossible to determine compliance with the maximum concentration limit.\",\n  \"missing_information\": [\n    \"Concentration of methylisothiazolinone\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/leave_on_restricted",
+      "ingredient": "retinol",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is categorized as a leave-on product, which matches the conditions specified in Annex III entry 376.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"unknown\",\n      \"reason\": \"The concentration of retinol is not provided, making it impossible to determine if it complies with the maximum concentration limits.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The required labelling is present on the product.\"\n    }\n  ],\n  \"explanation\": \"The product is categorized as a leave-on cream, which is compliant with the conditions specified in Annex III entry 376. However, the concentration of retinol is unknown, making compliance with the maximum concentration limits uncertain.\",\n  \"missing_information\": [\n    \"Retinol concentration\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/leave_on_restricted",
+      "ingredient": "salicylic acid",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is a face cream, which falls under category (b) of the entry.\"\n    },\n    {\n      \"index\": 1,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration for category (b) is 2.0%, but the concentration is unknown.\"\n    },\n    {\n      \"index\": 2,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product or intended for inhalation.\"\n    },\n    {\n      \"index\": 3,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product is not labeled for use on children under 3 years of age.\"\n    },\n    {\n      \"index\": 4,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration for the acid form is 0.5%, but the concentration is unknown.\"\n    },\n    {\n      \"index\": 5,\n      \"result\": \"satisfied\",\n      \"reason\": \"The product is not an oral product or intended for inhalation.\"\n    },\n    {\n      \"index\": 6,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The product is not labeled for use on children under 3 years of age.\"\n    }\n  ],\n  \"explanation\": \"The product is restricted due to unknown concentration and lack of appropriate labeling for children under 3 years of age and the face cream category's concentration limit.\",\n  \"missing_information\": [\n    \"Concentration of salicylic acid in the product\",\n    \"Labeling for use on children under 3 years of age\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_iii\",\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    },
+    {
+      "case": "input/ocr_unknown_brand",
+      "ingredient": "phenoxyethanol",
+      "text": "```json\n{\n  \"regulatory_status\": \"restricted\",\n  \"conditions\": [\n    {\n      \"index\": 0,\n      \"result\": \"not_satisfied\",\n      \"reason\": \"The maximum concentration of phenoxyethanol in a ready-to-use preparation is 1.0%, but the concentration is unknown.\"\n    }\n  ],\n  \"explanation\": \"Phenoxyethanol is restricted to a maximum concentration of 1.0% in ready-to-use preparations under EU cosmetics law, but the concentration is unknown.\",\n  \"missing_information\": [\n    \"concentration of phenoxyethanol\"\n  ],\n  \"evidence_ids\": [\n    \"eu_1223_2009_annex_v\"\n  ]\n}\n```"
+    }
+  ]
+}

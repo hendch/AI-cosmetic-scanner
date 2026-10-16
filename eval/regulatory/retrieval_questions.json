@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "author": "kreemi",
+    "date": "2026-10-16",
+    "corpus_version": "EUR-Lex consolidated 2026-05-18",
+    "use": "Retrieval evaluation (Recall@k, MRR): a hit is a result with this source_id and metadata.entry. Run once with the ingredient filter and once without (query only) to show the effect of filtering and of chunking."
+  },
+  "questions": [
+    {
+      "id": "reg-01",
+      "question": "What restrictions apply to methylisothiazolinone in leave-on products?",
+      "ingredient": "methylisothiazolinone",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_v",
+          "entry": "57"
+        }
+      ]
+    },
+    {
+      "id": "reg-02",
+      "question": "Maximum concentration of phenoxyethanol as a preservative",
+      "ingredient": "phenoxyethanol",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_v",
+          "entry": "29"
+        }
+      ]
+    },
+    {
+      "id": "reg-03",
+      "question": "Is zinc pyrithione allowed in cosmetic products?",
+      "ingredient": "zinc pyrithione",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_ii",
+          "entry": "1670"
+        }
+      ]
+    },
+    {
+      "id": "reg-04",
+      "question": "Salicylic acid limits in rinse-off hair products",
+      "ingredient": "salicylic acid",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_iii",
+          "entry": "98"
+        }
+      ]
+    },
+    {
+      "id": "reg-05",
+      "question": "Salicylic acid used as a preservative, maximum concentration",
+      "ingredient": "salicylic acid",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_v",
+          "entry": "3"
+        }
+      ]
+    },
+    {
+      "id": "reg-06",
+      "question": "Retinol maximum concentration in body lotion and required warning",
+      "ingredient": "retinol",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_iii",
+          "entry": "376"
+        }
+      ]
+    },
+    {
+      "id": "reg-07",
+      "question": "Combined limit for propylparaben and butylparaben, nappy area",
+      "ingredient": "propylparaben",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_v",
+          "entry": "12a"
+        }
+      ]
+    },
+    {
+      "id": "reg-08",
+      "question": "Homosalate as UV filter: which products are allowed?",
+      "ingredient": "homosalate",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_vi",
+          "entry": "3"
+        }
+      ]
+    },
+    {
+      "id": "reg-09",
+      "question": "Benzophenone-3 limits in face, body and other products",
+      "ingredient": "benzophenone-3",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_vi",
+          "entry": "4"
+        }
+      ]
+    },
+    {
+      "id": "reg-10",
+      "question": "Titanium dioxide nano form conditions as UV filter",
+      "ingredient": "titanium dioxide (nano)",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_vi",
+          "entry": "27a"
+        }
+      ]
+    },
+    {
+      "id": "reg-11",
+      "question": "When must limonene be listed on the label?",
+      "ingredient": "limonene",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_iii",
+          "entry": "88"
+        }
+      ]
+    },
+    {
+      "id": "reg-12",
+      "question": "BHT maximum concentration in toothpaste",
+      "ingredient": "bht",
+      "expected": [
+        {
+          "source_id": "eu_1223_2009_annex_iii",
+          "entry": "325"
+        }
+      ]
+    }
+  ]
+}
