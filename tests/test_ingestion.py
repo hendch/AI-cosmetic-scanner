@@ -19,7 +19,7 @@ def test_barcode_found(monkeypatch):
     assert r.status_code == 200
     body = ProductInput.model_validate(r.json())
     assert body.source == "barcode"
-    assert body.product.category.exposure == "leave_on"
+    assert body.product.exposure_type == "leave_on"
     assert [i.normalized for i in body.ingredients if i.matched] == ["phenoxyethanol", "retinol"]
     assert body.needs_review is True          # aqua / parfum are not in KNOWN
 
