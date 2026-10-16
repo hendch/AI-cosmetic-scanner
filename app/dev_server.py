@@ -9,8 +9,11 @@ from fastapi import FastAPI
 from app.ethics.router import router as ethics_router
 from app.regulatory.router import router as regulatory_router
 from app.toxicology.router import router as toxicology_router
+from app.ingestion.router import router as ingestion_router
+
 
 app = FastAPI(title="AI Cosmetic Safety - toxicology, ethics & regulatory (dev)")
 app.include_router(toxicology_router)
 app.include_router(ethics_router)
+app.include_router(ingestion_router)
 app.include_router(regulatory_router)

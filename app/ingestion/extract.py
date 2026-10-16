@@ -22,7 +22,11 @@ def exposure_from_categories(tags):
         return "rinse_off"
     if any(k in joined for k in LEAVE_ON):
         return "leave_on"
-    return "unknown"
+    return None
+
+
+def category_text(tags):
+    return tags[-1].split(":")[-1].replace("-", " ") if tags else ""
 
 
 def scan_barcode(img_bytes: bytes) -> Optional[str]:
@@ -42,7 +46,7 @@ def normalize(raw, pos):
     m = process.extractOne(c, KNOWN, scorer=fuzz.ratio)
     digits = lambda s: re.sub(r"\D", "", s)
     ok = bool(m and m[1] >= 92 and digits(c) == digits(m[0]))  # strict: "-3" must equal "-4"
-    return {"position": pos, "raw": raw, "normalized": m[0] if ok else None,
+    return {"position": pos, "raw": raw, "normalized": m[0] if ok else c,
             "matched": ok, "confidence": round(m[1] / 100, 2) if m else 0.0}
 
 
@@ -62,8 +66,7 @@ def lookup_barcode(code):
 def build_response(barcode: Optional[str]) -> dict:
     out = {"source": None,
            "product": {"name": "", "brand": "", "barcode": barcode or "",
-                       "category": {"tags": [], "exposure": "unknown"},
-                       "labels": []},
+                       "category": "", "exposure_type": None, "labels": []},
            "ingredients": [], "needs_review": False, "warnings": []}
     text = None
     if barcode:
@@ -72,7 +75,7 @@ def build_response(barcode: Optional[str]) -> dict:
             cats = p.get("categories_tags", [])
             out["product"].update(
                 name=p.get("product_name", ""), brand=p.get("brands", ""),
-                category={"tags": cats, "exposure": exposure_from_categories(cats)},
+                category=category_text(cats), exposure_type=exposure_from_categories(cats),
                 labels=p.get("labels_tags", []))
         if p and p.get("ingredients_text"):
             text, out["source"] = p["ingredients_text"], "barcode"
