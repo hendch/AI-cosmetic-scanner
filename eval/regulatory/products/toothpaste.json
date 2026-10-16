@@ -1,0 +1,43 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Whitening Toothpaste",
+    "brand": "Eval Brand",
+    "barcode": "",
+    "category": "toothpaste",
+    "exposure_type": "rinse_off",
+    "labels": []
+  },
+  "ingredients": [
+    {
+      "position": 1,
+      "raw": "AQUA",
+      "normalized": "aqua",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 2,
+      "raw": "BHT",
+      "normalized": "bht",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 3,
+      "raw": "SALICYLIC ACID",
+      "normalized": "salicylic acid",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 4,
+      "raw": "LIMONENE",
+      "normalized": "limonene",
+      "matched": true,
+      "confidence": 1.0
+    }
+  ],
+  "needs_review": false,
+  "warnings": []
+}

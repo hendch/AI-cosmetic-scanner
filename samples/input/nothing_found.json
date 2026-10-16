@@ -1,0 +1,19 @@
+{
+  "source": null,
+  "product": {
+    "name": "",
+    "brand": "",
+    "barcode": "",
+    "category": {
+      "tags": [],
+      "exposure": "unknown"
+    },
+    "labels": []
+  },
+  "ingredients": [],
+  "needs_review": true,
+  "warnings": [
+    "no barcode detected",
+    "no input produced ingredients"
+  ]
+}
