@@ -1,4 +1,4 @@
-"""Regenerate samples/toxicology and samples/ethics from samples/input.
+"""Regenerate samples/toxicology, samples/ethics and samples/regulatory from samples/input.
 
 Usage: python -m scripts.generate_samples
 """
@@ -8,13 +8,14 @@ from pathlib import Path
 
 from app.common_schemas import ProductInput
 from app.ethics.mock import build_mock_response as ethics_mock
+from app.regulatory.mock import build_mock_response as regulatory_mock
 from app.toxicology.mock import build_mock_response as toxicology_mock
 
 SAMPLES = Path(__file__).resolve().parent.parent / "samples"
 
 
 def main() -> None:
-    for agent, build in (("toxicology", toxicology_mock), ("ethics", ethics_mock)):
+    for agent, build in (("toxicology", toxicology_mock), ("ethics", ethics_mock), ("regulatory", regulatory_mock)):
         out_dir = SAMPLES / agent
         out_dir.mkdir(exist_ok=True)
         for input_file in sorted((SAMPLES / "input").glob("*.json")):
