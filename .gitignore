@@ -3,3 +3,4 @@ __pycache__/
 .pytest_cache/
 *.pyc
 corpus/toxicology/clp/annex_vi_clp_table_atp23_en.xlsx
+data/peta_brands.json
