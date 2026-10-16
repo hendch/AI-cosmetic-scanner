@@ -1,0 +1,438 @@
+{
+  "_meta": {
+    "author": "kreemi",
+    "date": "2026-10-16",
+    "corpus_version": "EUR-Lex consolidated 2026-05-18",
+    "how": "Expected regulatory output per product and ingredient. 'conditions' lists only the conditions whose result is certain; others are not scored.",
+    "products": "eval/regulatory/products/*.json and samples/input/*.json"
+  },
+  "cases": {
+    "products/body_lotion": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "glycerin": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "retinol": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/376",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "III/376",
+            "type": "max_concentration",
+            "result": "unknown"
+          },
+          {
+            "entry": "III/376",
+            "type": "labelling",
+            "result": "unknown"
+          }
+        ],
+        "why": "Body lotion = item (a), 0,05 % RE; concentration unknown"
+      },
+      "salicylic acid": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/98",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "III/98",
+            "type": "max_concentration",
+            "result": "unknown"
+          },
+          {
+            "entry": "V/3",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Body lotion = item (c), 0,5 %"
+      },
+      "benzophenone-3": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/4",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "VI/4",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Body products = item (b), 2,2 %"
+      },
+      "phenoxyethanol": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/29",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      }
+    },
+    "products/face_sunscreen": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "niacinamide": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "homosalate": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/3",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "VI/3",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Face product, not a spray"
+      },
+      "octocrylene": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/10",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      },
+      "benzophenone-3": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/4",
+            "type": "product_type",
+            "result": "satisfied"
+          }
+        ],
+        "why": "Face product = item (a), 6 %"
+      },
+      "titanium dioxide": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/27",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      }
+    },
+    "products/body_sunscreen_spray": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "homosalate": {
+        "status": "restricted",
+        "compliance": "not_satisfied",
+        "conditions": [
+          {
+            "entry": "VI/3",
+            "type": "product_type",
+            "result": "not_satisfied"
+          }
+        ],
+        "why": "Homosalate is allowed in face products only (not propellant sprays)"
+      },
+      "benzophenone-3": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "VI/4",
+            "type": "product_type",
+            "result": "satisfied"
+          }
+        ],
+        "why": "Body products including spray = item (b)"
+      },
+      "octocrylene": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "why": "Propellant spray (9 %) or other (10 %): both allowed, concentration unknown"
+      }
+    },
+    "products/anti_dandruff_shampoo": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "salicylic acid": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/98",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "III/98",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Rinse-off hair product = item (a), 3 %"
+      },
+      "zinc pyrithione": {
+        "status": "prohibited",
+        "compliance": "not_satisfied",
+        "why": "Annex II entry 1670"
+      },
+      "methylisothiazolinone": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/57",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "V/57",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      },
+      "limonene": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "why": "Must be listed above 0,001 % / 0,01 %; peroxide value unknown"
+      }
+    },
+    "products/baby_nappy_cream": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "glycerin": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "propylparaben": {
+        "status": "restricted",
+        "compliance": "not_satisfied",
+        "conditions": [
+          {
+            "entry": "V/12a",
+            "type": "usage",
+            "result": "not_satisfied"
+          },
+          {
+            "entry": "V/12a",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Annex V/12a: not to be used in leave-on products for the nappy area of children under three. Needs interpretation (LLM)."
+      },
+      "phenoxyethanol": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/29",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      }
+    },
+    "products/toothpaste": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "bht": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/325",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "III/325",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ],
+        "why": "Toothpaste = item (b), 0,1 %"
+      },
+      "salicylic acid": {
+        "status": "restricted",
+        "compliance": "not_satisfied",
+        "conditions": [
+          {
+            "entry": "III/98",
+            "type": "usage",
+            "result": "not_satisfied"
+          },
+          {
+            "entry": "V/3",
+            "type": "usage",
+            "result": "not_satisfied"
+          }
+        ],
+        "why": "Not to be used in oral products. Needs interpretation (LLM)."
+      },
+      "limonene": {
+        "status": "restricted",
+        "compliance": "unknown"
+      }
+    },
+    "input/clean_product": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "glycerin": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "phenoxyethanol": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/29",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      }
+    },
+    "input/sensitiser_claimed": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "glycerin": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "methylisothiazolinone": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/57",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "V/57",
+            "type": "max_concentration",
+            "result": "unknown"
+          }
+        ]
+      }
+    },
+    "input/leave_on_restricted": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "niacinamide": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "salicylic acid": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/98",
+            "type": "product_type",
+            "result": "satisfied"
+          }
+        ]
+      },
+      "retinol": {
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "III/376",
+            "type": "product_type",
+            "result": "satisfied"
+          },
+          {
+            "entry": "III/376",
+            "type": "labelling",
+            "result": "unknown"
+          }
+        ]
+      },
+      "methylisothiazolinone": {
+        "status": "restricted",
+        "compliance": "not_satisfied",
+        "conditions": [
+          {
+            "entry": "V/57",
+            "type": "product_type",
+            "result": "not_satisfied"
+          }
+        ]
+      },
+      "zinc pyrithione": {
+        "status": "prohibited",
+        "compliance": "not_satisfied"
+      },
+      "sodium benzoate": {
+        "status": "not_assessed",
+        "compliance": "not_applicable",
+        "why": "Outside the corpus scope"
+      }
+    },
+    "input/ocr_unknown_brand": {
+      "aqua": {
+        "status": "no_restriction_found",
+        "compliance": "not_applicable"
+      },
+      "phenoxyethanol": {
+        "status": "restricted",
+        "compliance": "unknown"
+      },
+      "xyl0-blend": {
+        "status": "not_assessed",
+        "compliance": "not_applicable"
+      }
+    }
+  }
+}
