@@ -1,0 +1,4 @@
+﻿configuration,ranking_questions,Recall@3,Recall@5,MRR,coverage_questions,coverage_accuracy,coverage_scored,errors
+structured_filtered,10,1.0,1.0,0.9,1,1.0,1,0
+structured_unfiltered,10,1.0,1.0,0.9,1,0.0,1,0
+fixed_filtered,10,0.2,0.2,0.15,1,1.0,1,0

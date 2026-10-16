@@ -1,0 +1,268 @@
+﻿question_id,question,ingredient,type,configuration,strategy,use_filter,expected_evidence_id,expected_source_id,key_text,covered,coverage_question,coverage_pass,returned_count,returned_evidence_ids,returned_source_ids,relevant_ranks,hit_at_3,hit_at_5,reciprocal_rank,top_result_text,error
+Q01,What limit applies to phenoxyethanol when it is used to preserve a cosmetic?,Phenoxyethanol,concentration,structured_filtered,structured,True,EV-PHENOXYETHANOL-ANNEXV,eu_1223_2009,1.0,True,False,,4,EV-PHENOXYETHANOL-ANNEXV | EV-C3DCF50D | EV-PHENOXYETHANOL-SCCS-OVERALL | EV-PHENOXYETHANOL-ECHA-GAP,eu_1223_2009 | fixture_source | sccs_phenoxyethanol | eu_1223_2009,1,True,True,1.0,"Ingredient: PHENOXYETHANOL (also known as: 2-Phenoxyethanol, 122-99-6, 204-589-7)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex V, entry 29
+Status: restricted
+Restriction: Permitted as a preservative in cosmetic products only within the stated limits.
+Maximum concentration: 1.0%
+Source wording: 29	2-Phenoxyethanol	PHENOXYETHANOL	122-99-6	204-589-7		1.0%",
+Q02,What is the highest BHT level allowed in toothpaste?,Butylated Hydroxytoluene,product type,structured_filtered,structured,True,EV-BHT-ANNEX,eu_1223_2009,"0,1",True,False,,2,EV-BHT-SCCS-OVERALL | EV-BHT-ANNEX,sccs_bht | eu_1223_2009,2,True,True,0.5,"Ingredient: BUTYLATED HYDROXYTOLUENE (also known as: 2,6-Di-Tert-Butyl-4-Methylphenol, BHT)
+Source: SCCS Opinion on BHT (SCCS/1636/21), SCCS/1636/21 Opinion on Butylated Hydroxytoluene (BHT), Conclusion p. 26
+Status: assessed
+Conditions: BHT is considered safe up to 0.001% in mouthwash, 0.1% in toothpaste, and 0.8% in other leave-on and rinse-off products, including combined use at these concentrations.
+Hazard classification: The SCCS assessed BHT in light of concerns regarding its potential end",
+Q03,Does the allowed amount of salicylic acid change for rinse-off hair products?,Salicylic acid,product type,structured_filtered,structured,True,EV-SALICYLIC-ACID-ANNEXIII,eu_1223_2009,3.0,True,False,,3,EV-SALICYLIC-ACID-SCCS-OVERALL | EV-SALICYLIC-ACID-ANNEXIII | EV-SALICYLIC-ACID-ANNEXV,sccs_salicylic_acid | eu_1223_2009 | eu_1223_2009,2,True,True,0.5,"Ingredient: SALICYLIC ACID (also known as: Benzoic acid, 2-hydroxy-, 69-72-7, 200-712-3)
+Source: SCCS Opinion on Salicylic acid (SCCS/1646/22), SCCS/1646/22, Final Opinion on Salicylic Acid (pp. 54–55)
+Status: assessed
+Conditions: Maximum concentrations are 0.5% as a preservative, 3.0% for rinse-off hair products, 2.0% for other eligible products, and 0.5% for body lotions, eye shadow, mascara, eyeliner, lipstick, oral products, and non-spray deodorants. Not applicable to sprayable products that",
+Q04,Can zinc pyrithione be an ingredient in cosmetics at all?,Zinc pyrithione,prohibited,structured_filtered,structured,True,EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009,1670,True,False,,2,EV-ZINC-PYRITHIONE-ANNEXII | EV-ZINC-PYRITHIONE-SCCS-OVERALL,eu_1223_2009 | sccs_zinc_pyrithione,1,True,True,1.0,"Ingredient: ZINC PYRITHIONE (also known as: Pyrithione zinc, (T-4)-bis[1-(hydroxy-κO)pyridine-2(1H)-thionato-κS]zinc, ZPT, 13463-41-7, 236-671-3)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex II, entry 1670
+Status: prohibited
+Restriction: Listed as a prohibited substance in cosmetic products.
+Maximum concentration: Not permitted
+Product type: All cosmetic products
+Source wording: 1670	Pyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)- thiona",
+Q05,Is niacinamide subject to any EU cosmetics restriction?,Niacinamide,not listed,structured_filtered,structured,True,EV-NIACINAMIDE-NOTLISTED,eu_1223_2009,,True,False,,2,EV-NIACINAMIDE-NOTLISTED | EV-AAB03E71,eu_1223_2009 | fixture_source,1,True,True,1.0,"Ingredient: NIACINAMIDE (also known as: Nicotinamide)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annexes II, III, IV, V, VI (searched)
+Status: not listed
+Restriction: No entry found for this substance in Annexes II-VI of the consolidated version dated 2026-05-18.",
+Q06,What did the scientific committee decide about homosalate as a sunscreen filter?,Homosalate,scientific opinion,structured_filtered,structured,True,EV-HOMOSALATE-SCCS-OVERALL,sccs_homosalate,0.5%,True,False,,2,EV-HOMOSALATE-SCCS-OVERALL | EV-HOMOSALATE-ANNEXVI,sccs_homosalate | eu_1223_2009,1,True,True,1.0,"Ingredient: HOMOSALATE (also known as: Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester)
+Source: SCCS Opinion on Homosalate (SCCS/1622/20), SCCS/1622/20, Final Opinion on Homosalate (p. 52)
+Status: assessed
+Conditions: Homosalate is considered safe as a UV filter up to a maximum concentration of 0.5% in the final cosmetic product. Exposure from products outside the scope of the opinion and combined exposure to salicylic acid or other salicylates were not considered. The efficacy of homo",
+Q07,What is the combined ceiling when titanium dioxide and its nano form are used together?,Titanium dioxide (nano),concentration,structured_filtered,structured,True,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,eu_1223_2009,25%,True,False,,2,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI | EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,eu_1223_2009 | sccs_titanium_dioxide_nano,1,True,True,1.0,"Ingredient: TITANIUM DIOXIDE (NANO) (also known as: Titanium dioxide (nano), 13463-67-7, 1317-70-0, 1317-80-2, 236-675-5, 215-280-1, 215-282-2)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex VI, entry 27a
+Status: restricted
+Restriction: In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the sum shall not exceed the limit of 25%.
+Maximum concentration: 25% - In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the ",
+Q08,Why could the experts not conclude that the coated nano titanium dioxide is safe?,Titanium dioxide (nano),hazard / uncertainty,structured_filtered,structured,True,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,sccs_titanium_dioxide_nano,Eclipse 70,True,False,,2,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL | EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,sccs_titanium_dioxide_nano | eu_1223_2009,1,True,True,1.0,"Ingredient: TITANIUM DIOXIDE (NANO) (also known as: Titanium dioxide (nano), Eclipse 70, 13463-67-7, 1317-70-0, 1317-80-2)
+Source: SCCS Opinion on Titanium dioxide (nano) coating (SCCS/1667/24), SCCS/1667/24, Final Opinion on New Coating for Titanium Dioxide (Nano Form) (p. 44)
+Status: assessed
+Conditions: Safety could not be established for Eclipse 70 based on the submitted information. Additional data on physicochemical properties, coating stability, dermal absorption, toxicology, and exposure",
+Q09,What are the allowed levels of oxybenzone in face products versus body products?,Oxybenzone,alias,structured_filtered,structured,True,EV-BENZOPHENONE-3-ANNEXVI,eu_1223_2009,"2,2%",True,False,,1,EV-BENZOPHENONE-3-ANNEXVI,eu_1223_2009,1,True,True,1.0,"Ingredient: BENZOPHENONE-3 (also known as: 2-Hydroxy-4-methoxybenzophenone, Oxybenzone, 131-57-7, 205-031-5)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex VI, entry 4
+Status: restricted
+Restriction: Permitted as a preservative in cosmetic products only within the stated limits.
+Maximum concentration: a) 6% b) 2,2% c) 0,5% Footnote 1: However, cosmetic products containing '2-Hydroxy-4-methoxy-benzophenone/Oxybenzone' and complying with the restrictions se",
+Q10,Which age group was left out of the safety assessment of vitamin A in cosmetics?,Vitamin A,alias + opinion,structured_filtered,structured,True,EV-VITAMIN-A-SCCS-OVERALL,sccs_vitamin_a,under 1 year,True,False,,2,EV-VITAMIN-A-SCCS-OVERALL | EV-VITAMIN-A-ANNEXIII,sccs_vitamin_a | eu_1223_2009,1,True,True,1.0,"Ingredient: RETINOL; RETINYL ACETATE; RETINYL PALMITATE (also known as: Vitamin A, Retinol, Retinyl Acetate, Retinyl Palmitate)
+Source: SCCS Opinion on Vitamin A (SCCS/1576/16), SCCS/1576/16, Final Opinion on Vitamin A (Retinol, Retinyl Acetate and Retinyl Palmitate) and Corrigendum (pp. 69–70)
+Status: assessed
+Conditions: Maximum concentrations assessed are 0.05% Retinol Equivalent (RE) in body lotions and 0.3% RE in other leave-on and rinse-off products, subject to the applicable regulatory re",
+Q11,Is ceramide NP restricted in cosmetics?,Ceramide NP,not covered,structured_filtered,structured,True,,,,False,True,True,0,,,,,,,,
+Q01,What limit applies to phenoxyethanol when it is used to preserve a cosmetic?,Phenoxyethanol,concentration,structured_unfiltered,structured,False,EV-PHENOXYETHANOL-ANNEXV,eu_1223_2009,1.0,True,False,,5,EV-PHENOXYETHANOL-ANNEXV | EV-C3DCF50D | EV-PHENOXYETHANOL-SCCS-OVERALL | EV-BENZOPHENONE-3-ANNEXVI | EV-PHENOXYETHANOL-ECHA-GAP,eu_1223_2009 | fixture_source | sccs_phenoxyethanol | eu_1223_2009 | eu_1223_2009,1,True,True,1.0,"Ingredient: PHENOXYETHANOL (also known as: 2-Phenoxyethanol, 122-99-6, 204-589-7)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex V, entry 29
+Status: restricted
+Restriction: Permitted as a preservative in cosmetic products only within the stated limits.
+Maximum concentration: 1.0%
+Source wording: 29	2-Phenoxyethanol	PHENOXYETHANOL	122-99-6	204-589-7		1.0%",
+Q02,What is the highest BHT level allowed in toothpaste?,Butylated Hydroxytoluene,product type,structured_unfiltered,structured,False,EV-BHT-ANNEX,eu_1223_2009,"0,1",True,False,,5,EV-BHT-SCCS-OVERALL | EV-BHT-ANNEX | EV-C3DCF50D | EV-HOMOSALATE-ANNEXVI | EV-PHENOXYETHANOL-ANNEXV,sccs_bht | eu_1223_2009 | fixture_source | eu_1223_2009 | eu_1223_2009,2,True,True,0.5,"Ingredient: BUTYLATED HYDROXYTOLUENE (also known as: 2,6-Di-Tert-Butyl-4-Methylphenol, BHT)
+Source: SCCS Opinion on BHT (SCCS/1636/21), SCCS/1636/21 Opinion on Butylated Hydroxytoluene (BHT), Conclusion p. 26
+Status: assessed
+Conditions: BHT is considered safe up to 0.001% in mouthwash, 0.1% in toothpaste, and 0.8% in other leave-on and rinse-off products, including combined use at these concentrations.
+Hazard classification: The SCCS assessed BHT in light of concerns regarding its potential end",
+Q03,Does the allowed amount of salicylic acid change for rinse-off hair products?,Salicylic acid,product type,structured_unfiltered,structured,False,EV-SALICYLIC-ACID-ANNEXIII,eu_1223_2009,3.0,True,False,,5,EV-SALICYLIC-ACID-SCCS-OVERALL | EV-SALICYLIC-ACID-ANNEXIII | EV-SALICYLIC-ACID-ANNEXV | EV-HOMOSALATE-SCCS-OVERALL | EV-ZINC-PYRITHIONE-SCCS-OVERALL,sccs_salicylic_acid | eu_1223_2009 | eu_1223_2009 | sccs_homosalate | sccs_zinc_pyrithione,2,True,True,0.5,"Ingredient: SALICYLIC ACID (also known as: Benzoic acid, 2-hydroxy-, 69-72-7, 200-712-3)
+Source: SCCS Opinion on Salicylic acid (SCCS/1646/22), SCCS/1646/22, Final Opinion on Salicylic Acid (pp. 54–55)
+Status: assessed
+Conditions: Maximum concentrations are 0.5% as a preservative, 3.0% for rinse-off hair products, 2.0% for other eligible products, and 0.5% for body lotions, eye shadow, mascara, eyeliner, lipstick, oral products, and non-spray deodorants. Not applicable to sprayable products that",
+Q04,Can zinc pyrithione be an ingredient in cosmetics at all?,Zinc pyrithione,prohibited,structured_unfiltered,structured,False,EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009,1670,True,False,,5,EV-ZINC-PYRITHIONE-ANNEXII | EV-ZINC-PYRITHIONE-SCCS-OVERALL | EV-OCTOCRYLENE-SCCS-OVERALL | EV-VITAMIN-A-ANNEXIII | EV-OCTOCRYLENE-ANNEXVI,eu_1223_2009 | sccs_zinc_pyrithione | sccs_octocrylene | eu_1223_2009 | eu_1223_2009,1,True,True,1.0,"Ingredient: ZINC PYRITHIONE (also known as: Pyrithione zinc, (T-4)-bis[1-(hydroxy-κO)pyridine-2(1H)-thionato-κS]zinc, ZPT, 13463-41-7, 236-671-3)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex II, entry 1670
+Status: prohibited
+Restriction: Listed as a prohibited substance in cosmetic products.
+Maximum concentration: Not permitted
+Product type: All cosmetic products
+Source wording: 1670	Pyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)- thiona",
+Q05,Is niacinamide subject to any EU cosmetics restriction?,Niacinamide,not listed,structured_unfiltered,structured,False,EV-NIACINAMIDE-NOTLISTED,eu_1223_2009,,True,False,,5,EV-NIACINAMIDE-NOTLISTED | EV-AAB03E71 | EV-BENZOPHENONE-3-ANNEXVI | EV-VITAMIN-A-ANNEXIII | EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009 | fixture_source | eu_1223_2009 | eu_1223_2009 | eu_1223_2009,1,True,True,1.0,"Ingredient: NIACINAMIDE (also known as: Nicotinamide)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annexes II, III, IV, V, VI (searched)
+Status: not listed
+Restriction: No entry found for this substance in Annexes II-VI of the consolidated version dated 2026-05-18.",
+Q06,What did the scientific committee decide about homosalate as a sunscreen filter?,Homosalate,scientific opinion,structured_unfiltered,structured,False,EV-HOMOSALATE-SCCS-OVERALL,sccs_homosalate,0.5%,True,False,,5,EV-HOMOSALATE-SCCS-OVERALL | EV-HOMOSALATE-ANNEXVI | EV-BENZOPHENONE-3-SCCS-OVERALL | EV-OCTOCRYLENE-SCCS-OVERALL | EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,sccs_homosalate | eu_1223_2009 | sccs_benzophenone-3 | sccs_octocrylene | eu_1223_2009,1,True,True,1.0,"Ingredient: HOMOSALATE (also known as: Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester)
+Source: SCCS Opinion on Homosalate (SCCS/1622/20), SCCS/1622/20, Final Opinion on Homosalate (p. 52)
+Status: assessed
+Conditions: Homosalate is considered safe as a UV filter up to a maximum concentration of 0.5% in the final cosmetic product. Exposure from products outside the scope of the opinion and combined exposure to salicylic acid or other salicylates were not considered. The efficacy of homo",
+Q07,What is the combined ceiling when titanium dioxide and its nano form are used together?,Titanium dioxide (nano),concentration,structured_unfiltered,structured,False,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,eu_1223_2009,25%,True,False,,5,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI | EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL | EV-OCTOCRYLENE-SCCS-OVERALL | EV-ZINC-PYRITHIONE-ANNEXII | EV-CE09175B,eu_1223_2009 | sccs_titanium_dioxide_nano | sccs_octocrylene | eu_1223_2009 | fixture_source,1,True,True,1.0,"Ingredient: TITANIUM DIOXIDE (NANO) (also known as: Titanium dioxide (nano), 13463-67-7, 1317-70-0, 1317-80-2, 236-675-5, 215-280-1, 215-282-2)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex VI, entry 27a
+Status: restricted
+Restriction: In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the sum shall not exceed the limit of 25%.
+Maximum concentration: 25% - In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the ",
+Q08,Why could the experts not conclude that the coated nano titanium dioxide is safe?,Titanium dioxide (nano),hazard / uncertainty,structured_unfiltered,structured,False,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,sccs_titanium_dioxide_nano,Eclipse 70,True,False,,5,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL | EV-TITANIUM-DIOXIDE-NANO-ANNEXVI | EV-BENZOPHENONE-3-SCCS-OVERALL | EV-OCTOCRYLENE-SCCS-OVERALL | EV-HOMOSALATE-SCCS-OVERALL,sccs_titanium_dioxide_nano | eu_1223_2009 | sccs_benzophenone-3 | sccs_octocrylene | sccs_homosalate,1,True,True,1.0,"Ingredient: TITANIUM DIOXIDE (NANO) (also known as: Titanium dioxide (nano), Eclipse 70, 13463-67-7, 1317-70-0, 1317-80-2)
+Source: SCCS Opinion on Titanium dioxide (nano) coating (SCCS/1667/24), SCCS/1667/24, Final Opinion on New Coating for Titanium Dioxide (Nano Form) (p. 44)
+Status: assessed
+Conditions: Safety could not be established for Eclipse 70 based on the submitted information. Additional data on physicochemical properties, coating stability, dermal absorption, toxicology, and exposure",
+Q09,What are the allowed levels of oxybenzone in face products versus body products?,Oxybenzone,alias,structured_unfiltered,structured,False,EV-BENZOPHENONE-3-ANNEXVI,eu_1223_2009,"2,2%",True,False,,5,EV-BENZOPHENONE-3-ANNEXVI | EV-BENZOPHENONE-3-SCCS-OVERALL | EV-VITAMIN-A-ANNEXIII | EV-PROPYLPARABEN-SCCS-OVERALL | EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009 | sccs_benzophenone-3 | eu_1223_2009 | sccs_propylparaben | eu_1223_2009,1,True,True,1.0,"Ingredient: BENZOPHENONE-3 (also known as: 2-Hydroxy-4-methoxybenzophenone, Oxybenzone, 131-57-7, 205-031-5)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex VI, entry 4
+Status: restricted
+Restriction: Permitted as a preservative in cosmetic products only within the stated limits.
+Maximum concentration: a) 6% b) 2,2% c) 0,5% Footnote 1: However, cosmetic products containing '2-Hydroxy-4-methoxy-benzophenone/Oxybenzone' and complying with the restrictions se",
+Q10,Which age group was left out of the safety assessment of vitamin A in cosmetics?,Vitamin A,alias + opinion,structured_unfiltered,structured,False,EV-VITAMIN-A-SCCS-OVERALL,sccs_vitamin_a,under 1 year,True,False,,5,EV-VITAMIN-A-SCCS-OVERALL | EV-VITAMIN-A-ANNEXIII | EV-PHENOXYETHANOL-SCCS-OVERALL | EV-SALICYLIC-ACID-SCCS-OVERALL | EV-PROPYLPARABEN-SCCS-OVERALL,sccs_vitamin_a | eu_1223_2009 | sccs_phenoxyethanol | sccs_salicylic_acid | sccs_propylparaben,1,True,True,1.0,"Ingredient: RETINOL; RETINYL ACETATE; RETINYL PALMITATE (also known as: Vitamin A, Retinol, Retinyl Acetate, Retinyl Palmitate)
+Source: SCCS Opinion on Vitamin A (SCCS/1576/16), SCCS/1576/16, Final Opinion on Vitamin A (Retinol, Retinyl Acetate and Retinyl Palmitate) and Corrigendum (pp. 69–70)
+Status: assessed
+Conditions: Maximum concentrations assessed are 0.05% Retinol Equivalent (RE) in body lotions and 0.3% RE in other leave-on and rinse-off products, subject to the applicable regulatory re",
+Q11,Is ceramide NP restricted in cosmetics?,Ceramide NP,not covered,structured_unfiltered,structured,False,,,,True,True,False,5,EV-BENZOPHENONE-3-ANNEXVI | EV-NIACINAMIDE-NOTLISTED | EV-TITANIUM-DIOXIDE-NANO-ANNEXVI | EV-ZINC-PYRITHIONE-ANNEXII | EV-BENZOPHENONE-3-SCCS-OVERALL,eu_1223_2009 | eu_1223_2009 | eu_1223_2009 | eu_1223_2009 | sccs_benzophenone-3,,,,,"Ingredient: BENZOPHENONE-3 (also known as: 2-Hydroxy-4-methoxybenzophenone, Oxybenzone, 131-57-7, 205-031-5)
+Source: Regulation (EC) No 1223/2009 on cosmetic products (consolidated version), Annex VI, entry 4
+Status: restricted
+Restriction: Permitted as a preservative in cosmetic products only within the stated limits.
+Maximum concentration: a) 6% b) 2,2% c) 0,5% Footnote 1: However, cosmetic products containing '2-Hydroxy-4-methoxy-benzophenone/Oxybenzone' and complying with the restrictions se",
+Q01,What limit applies to phenoxyethanol when it is used to preserve a cosmetic?,Phenoxyethanol,concentration,fixed_filtered,fixed,True,EV-PHENOXYETHANOL-ANNEXV,eu_1223_2009,1.0,True,False,,5,FX-sccs_phenoxyethanol-010 | FX-sccs_phenoxyethanol-011 | FX-sccs_phenoxyethanol-158 | FX-sccs_phenoxyethanol-013 | FX-sccs_phenoxyethanol-014,sccs_phenoxyethanol | sccs_phenoxyethanol | sccs_phenoxyethanol | sccs_phenoxyethanol | sccs_phenoxyethanol,,False,False,0.0,"xyethanol 
+___________________________________________________________________________________________ 
+ 
+5 
+ 
+ 
+1. BACKGROUND 
+Phenoxyethanol CAS n. 122-99-6 as preservative is regulated in Annex V/29 of the 
+Cosmetics Regulation (EC) n. 1223/2009. 
+ 
+According to the Cosmetics Regulation (EC) n.1223/2009 Phenoxyethanol is authorized as a 
+preservative in cosmetic formulations at a maximum concentration of 1.0%.  
+ 
+In September 2012, the Commission received a risk assessment submitted by the F",
+Q02,What is the highest BHT level allowed in toothpaste?,Butylated Hydroxytoluene,product type,fixed_filtered,fixed,True,EV-BHT-ANNEX,eu_1223_2009,"0,1",True,False,,5,FX-sccs_bht-001 | FX-sccs_bht-054 | FX-sccs_bht-020 | FX-sccs_bht-053 | FX-sccs_bht-002,sccs_bht | sccs_bht | sccs_bht | sccs_bht | sccs_bht,,False,False,0.0,". Wijnhoven  
+ 
+SCCS external experts 
+Dr A. Koutsodimou 
+Prof. W. Uter 
+Dr N. von Goetz 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+All Declarations of Working Group members are available on the following webpage:  
+Register of Commission expert groups and other similar entities (europa.eu) 
+ 
+ 
+This Opinion has been subject to a commenting period of eight weeks after its initial 
+publication (from 27 September to 23 November 2021). Comments received during this 
+period were considered by the SCCS. For this Opinion, ",
+Q03,Does the allowed amount of salicylic acid change for rinse-off hair products?,Salicylic acid,product type,fixed_filtered,fixed,True,EV-SALICYLIC-ACID-ANNEXIII,eu_1223_2009,3.0,True,False,,5,FX-sccs_salicylic_acid-032 | FX-sccs_salicylic_acid-003 | FX-sccs_salicylic_acid-093 | FX-sccs_salicylic_acid-017 | FX-sccs_salicylic_acid-031,sccs_salicylic_acid | sccs_salicylic_acid | sccs_salicylic_acid | sccs_salicylic_acid | sccs_salicylic_acid,,False,False,0.0,"2.327 
+Make up remover 
+ 
+1454 
+ 
+163 
+ 
+11.210 
+Mascara 
+ 
+906 
+ 
+0 
+ 
+0.000 
+Mouthwash 
+ 
+68 
+ 
+0 
+ 
+0.000 
+Rinse off conditioner 
+ 
+2071 
+ 
+39 
+ 
+1.883 
+
+SCCS/1646/22 
+Final Opinion 
+Opinion on salicylic acid (CAS No. 69-72-7, EC No. 200-712-3) 
+___________________________________________________________________________________________ 
+ 
+ 
+ 
+20
+Shampoo 
+ 
+2692 
+ 
+575 
+ 
+21.360 
+Shower gel 
+ 
+2985 
+ 
+386 
+ 
+12.931 
+Toothpaste 
+ 
+517 
+ 
+0 
+ 
+0.000 
+ 
+Ref: Updated Dossier on the Human Safety Ev",
+Q04,Can zinc pyrithione be an ingredient in cosmetics at all?,Zinc pyrithione,prohibited,fixed_filtered,fixed,True,EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009,1670,True,False,,5,FX-sccs_zinc_pyrithione-013 | FX-sccs_zinc_pyrithione-010 | FX-sccs_zinc_pyrithione-016 | FX-sccs_zinc_pyrithione-048 | FX-sccs_zinc_pyrithione-002,sccs_zinc_pyrithione | sccs_zinc_pyrithione | sccs_zinc_pyrithione | sccs_zinc_pyrithione | sccs_zinc_pyrithione,,False,False,0.0,"3 of Annex VI to Regulation (EC) No 1272/2008. 
+In April 2019, a safety dossier on ZPT was submitted by Cosmetics Europe to demonstrate 
+the safety of the ingredient as an anti-dandruff in rinse-off hair products. 
+Terms of reference 
+ 
+1. In view of the conditions laid out in Article 15(d) of the Regulation (EC) No 1223/2009 
+and taking into account the scientific data provided, does the SCCS consider Zinc Pyrithione 
+safe when used as an anti-dandruff in rinse-off hair products up to a maximum",
+Q05,Is niacinamide subject to any EU cosmetics restriction?,Niacinamide,not listed,fixed_filtered,fixed,True,EV-NIACINAMIDE-NOTLISTED,eu_1223_2009,,True,False,,1,FX-fixture_source-000,fixture_source,,False,False,0.0,"Ingredient: Phenoxyethanol (also known as: 2-phenoxyethanol)
+Source: FIXTURE - test data, not a real regulatory source, Annex V, entry FX1
+Status: restricted
+Restriction: Permitted as a preservative only up to a maximum concentration.
+Maximum concentration: [FIXTURE] 1.0 %
+Product type: all cosmetic products
+Conditions: [FIXTURE] Placeholder condition text.
+
+Ingredient: Niacinamide (also known as: nicotinamide)
+Source: FIXTURE - test data, not a real regulatory source, No annex entry
+Status: no ",
+Q06,What did the scientific committee decide about homosalate as a sunscreen filter?,Homosalate,scientific opinion,fixed_filtered,fixed,True,EV-HOMOSALATE-SCCS-OVERALL,sccs_homosalate,0.5%,True,False,,5,FX-sccs_homosalate-052 | FX-sccs_homosalate-003 | FX-sccs_homosalate-049 | FX-sccs_homosalate-016 | FX-sccs_homosalate-118,sccs_homosalate | sccs_homosalate | sccs_homosalate | sccs_homosalate | sccs_homosalate,,False,False,0.0,"and performance. 
+Ref. 83 
+ 
+ 
+SCCS overall comment on Toxicokinetics 
+Several in vitro dermal penetration studies using rat and human skin have been performed. 
+For MoS calculation, the SCCS selected a new skin penetration study using human skin from 
+which a dermal absorption of 5.3% (mean + 1SD: 3.86±1.43) was derived. Systemic 
+bioavailability of homosalate after dermal application was confirmed by the detection of 
+homosalate in plasma of volunteers after topical application of sunscreen pr",
+Q07,What is the combined ceiling when titanium dioxide and its nano form are used together?,Titanium dioxide (nano),concentration,fixed_filtered,fixed,True,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,eu_1223_2009,25%,True,False,,5,FX-sccs_titanium_dioxide_nano-089 | FX-sccs_titanium_dioxide_nano-001 | FX-sccs_titanium_dioxide_nano-002 | FX-sccs_titanium_dioxide_nano-088 | FX-sccs_titanium_dioxide_nano-011,sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano,,False,False,0.0,"safe the use of Titanium Dioxide 
+(nano) coated with a combination of w/w 6% Aluminium Hydroxide, 14% Sodium 
+Myristoyl Sarcosinate and 10% Dimethicone, for use as UV filter in dermally applied 
+cosmetic products? 
+ 
+Considering all the provided information, the SCCS is of the view that there are a 
+number of uncertainties and data gaps that do not allow a conclusion on the safety of 
+titanium dioxide (nano) coated with a combination of w/w 6% Aluminium Hydroxide, 
+14% Sodium Myristoyl Sarcosina",
+Q08,Why could the experts not conclude that the coated nano titanium dioxide is safe?,Titanium dioxide (nano),hazard / uncertainty,fixed_filtered,fixed,True,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,sccs_titanium_dioxide_nano,Eclipse 70,True,False,,5,FX-sccs_titanium_dioxide_nano-089 | FX-sccs_titanium_dioxide_nano-001 | FX-sccs_titanium_dioxide_nano-002 | FX-sccs_titanium_dioxide_nano-088 | FX-sccs_titanium_dioxide_nano-013,sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano | sccs_titanium_dioxide_nano,1 | 2 | 3 | 4,True,True,1.0,"safe the use of Titanium Dioxide 
+(nano) coated with a combination of w/w 6% Aluminium Hydroxide, 14% Sodium 
+Myristoyl Sarcosinate and 10% Dimethicone, for use as UV filter in dermally applied 
+cosmetic products? 
+ 
+Considering all the provided information, the SCCS is of the view that there are a 
+number of uncertainties and data gaps that do not allow a conclusion on the safety of 
+titanium dioxide (nano) coated with a combination of w/w 6% Aluminium Hydroxide, 
+14% Sodium Myristoyl Sarcosina",
+Q09,What are the allowed levels of oxybenzone in face products versus body products?,Oxybenzone,alias,fixed_filtered,fixed,True,EV-BENZOPHENONE-3-ANNEXVI,eu_1223_2009,"2,2%",True,False,,5,FX-sccs_benzophenone-3-122 | FX-eu_1223_2009-486 | FX-sccs_benzophenone-3-133 | FX-sccs_benzophenone-3-015 | FX-sccs_benzophenone-3-127,sccs_benzophenone-3 | eu_1223_2009 | sccs_benzophenone-3 | sccs_benzophenone-3 | sccs_benzophenone-3,2,True,True,0.5,"Program, Contract No. NO1-ES-5026, Study No. SMVCE-87-095, 19 November 
+1987 (investigations were part of NTP sponsored subchronic studies in rodents reported by 
+French J. E. (1992)). 
+European Chemical Agency. Oxybenzone (131-57-7). First published: 25-Jun-2013. Last 
+modified: 
+25 
+Apr-2019.https://echa.europa.eu/de/registration-dossier/-/registered-
+dossier/5515/7/6/2/?documentUUID=032f1ee3-4484-4d16-9c77-bf10bea10fd7 
+European Commission. 2018. Review of Regulation (EC) No 1223/2009 of the ",
+Q10,Which age group was left out of the safety assessment of vitamin A in cosmetics?,Vitamin A,alias + opinion,fixed_filtered,fixed,True,EV-VITAMIN-A-SCCS-OVERALL,sccs_vitamin_a,under 1 year,True,False,,5,FX-sccs_vitamin_a-136 | FX-sccs_vitamin_a-010 | FX-sccs_vitamin_a-135 | FX-sccs_vitamin_a-137 | FX-sccs_vitamin_a-122,sccs_vitamin_a | sccs_vitamin_a | sccs_vitamin_a | sccs_vitamin_a | sccs_vitamin_a,,False,False,0.0,"(hand and face cream, body lotion, rinse-off products) contain 
+Vitamin A at the maximum concentrations. Based on these estimates, the SCCS considers 
+that the use of Vitamin A in the respective cosmetic products at the maximum notified 
+concentration per se is safe for children above 1 year old. 
+ 
+3. Does the SCCS have any further scientific concerns with regard to the use of Vitamin A 
+(retinol, retinyl palmitate, and retinyl acetate,) in cosmetic products?  
+ 
+- 
+Based on information provide",
+Q11,Is ceramide NP restricted in cosmetics?,Ceramide NP,not covered,fixed_filtered,fixed,True,,,,False,True,True,0,,,,,,,,

@@ -1,0 +1,34 @@
+
+[
+  {
+    "id": "EV-OCTOCRYLENE-ANNEXVI",
+    "ingredient": "OCTOCRYLENE",
+    "aliases": [
+      "2-Cyano-3,3-diphenyl acrylic acid 2-ethylhexyl ester",
+      "6197-30-4",
+      "228-250-8"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex VI",
+    "entry_ref": "10",
+    "product_type": "a) Propellant spray products b) Other products",
+    "status": "restricted",
+    "restriction": "Permitted as a UV filter in cosmetic products only within the stated concentration limits. Benzophenone as an impurity and/or degradation product of Octocrylene shall be kept at trace level.",
+    "max_concentration": "a) 9% b) 10%",
+    "source_quote": "10\t2-Cyano-3,3-diphenyl acrylic acid 2-ethylhexyl ester / Octocrylene\tOCTOCRYLENE\t6197-30-4\t228-250-8\ta) Propellant spray products b) Other products\ta) 9% b) 10% Footnote (*3): Benzophenone as an impurity and/or degradation product of Octocrylene shall be kept at trace level."
+  },
+  {
+    "id": "EV-OCTOCRYLENE-SCCS-OVERALL",
+    "ingredient": "OCTOCRYLENE",
+    "aliases": [
+      "2-Cyano-3,3-diphenyl acrylic acid 2-ethylhexyl ester"
+    ],
+    "source_id": "sccs_octocrylene",
+    "section": "SCCS/1627/21, Final Opinion on Octocrylene (p. 44)",
+    "status": "assessed",
+    "hazard": "The SCCS identified indications from some in vivo studies of potential endocrine effects, but the evidence was insufficient to establish a specific endocrine-related toxicological point of departure. Contact sensitisation has been reported, although reported cases of allergic contact dermatitis appear negligible relative to widespread use. Photoallergy is strongly associated with previous photoallergy to topical ketoprofen.",
+    "opinion": "The SCCS considers Octocrylene safe as a UV filter at concentrations up to 10% when used individually and for specified combinations of sunscreen cream or lotion, pump spray, face cream, hand cream, and lipstick. However, 10% or higher in sunscreen propellant sprays is not considered safe when used in combination with other Octocrylene-containing products. For combined use with face cream, hand cream, and lipstick containing 10% Octocrylene, the concentration in sunscreen propellant spray should not exceed 9%. Although evidence of potential endocrine effects remains inconclusive, further research may be warranted. Environmental safety was not assessed.",
+    "conditions": "Octocrylene is considered safe up to 10% as a UV filter when used individually. For combined use involving sunscreen propellant spray and face cream, hand cream, and lipstick containing 10% Octocrylene, the concentration in the propellant spray should not exceed 9%. Benzophenone, as an impurity and/or degradation product, should be kept at trace level. Exposure from products outside the scope of the SCCS opinion was not considered.",
+    "source_quote": "The use of Octocrylene in sunscreen propellant spray is considered safe when its concentration does not exceed 9% when used together with face cream, hand cream, and lipstick containing 10% Octocrylene."
+  }
+]
