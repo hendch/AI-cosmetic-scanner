@@ -64,7 +64,7 @@ def lookup_barcode(code):
 
 
 def build_response(barcode: Optional[str]) -> dict:
-    out = {"source": None,
+    out = {"source": "none",
            "product": {"name": "", "brand": "", "barcode": barcode or "",
                        "category": "", "exposure_type": None, "labels": []},
            "ingredients": [], "needs_review": False, "warnings": []}

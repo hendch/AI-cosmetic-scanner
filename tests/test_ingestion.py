@@ -27,6 +27,6 @@ def test_barcode_found(monkeypatch):
 def test_nothing_found():
     r = client.post("/ingestion/extract")
     body = ProductInput.model_validate(r.json())
-    assert body.source is None
+    assert body.source == "none"
     assert body.needs_review is True
     assert "no barcode detected" in body.warnings

@@ -1,19 +1,14 @@
 {
-  "source": null,
+  "source": "none",
   "product": {
     "name": "",
     "brand": "",
     "barcode": "",
-    "category": {
-      "tags": [],
-      "exposure": "unknown"
-    },
+    "category": "",
+    "exposure_type": null,
     "labels": []
   },
   "ingredients": [],
   "needs_review": true,
-  "warnings": [
-    "no barcode detected",
-    "no input produced ingredients"
-  ]
+  "warnings": ["no barcode detected", "no input produced ingredients"]
 }
