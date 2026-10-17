@@ -4,13 +4,8 @@
     "name": "Hydra Cream",
     "brand": "Acme",
     "barcode": "3600550000000",
-    "category": {
-      "tags": [
-        "en:face-creams",
-        "en:moisturizers"
-      ],
-      "exposure": "leave_on"
-    },
+    "category": "moisturizers",
+    "exposure_type": "leave_on",
     "labels": [
       "en:vegan",
       "en:cruelty-free"
@@ -20,7 +15,7 @@
     {
       "position": 1,
       "raw": "Aqua",
-      "normalized": null,
+      "normalized": "aqua",
       "matched": false,
       "confidence": 0.33
     },
@@ -48,7 +43,7 @@
     {
       "position": 5,
       "raw": "Parfum (Fragrance)",
-      "normalized": null,
+      "normalized": "parfum",
       "matched": false,
       "confidence": 0.43
     }

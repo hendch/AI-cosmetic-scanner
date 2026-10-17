@@ -3,4 +3,10 @@ __pycache__/
 .git/
 .env
 tests/
-corpus/
+eval/
+frontend/
+deploy/
+# local data (RAG index, PETA list) is mounted as a volume in docker-compose.yml
+data/
+# ECHA source table, only needed by scripts/build_clp_table.py
+corpus/toxicology/clp/*.xlsx

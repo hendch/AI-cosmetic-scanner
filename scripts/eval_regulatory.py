@@ -23,7 +23,7 @@ import time
 from pathlib import Path
 
 from app.common_schemas import ProductInput
-from app.regulatory.llm import load_prompt
+from app.regulatory.agent import load_prompt
 
 ROOT = Path(__file__).resolve().parent.parent
 EVAL = ROOT / "eval" / "regulatory"
@@ -42,9 +42,9 @@ def _load_product(key: str) -> ProductInput:
 
 
 def _recording_chat(key: str, raw: list[dict]):
-    from app.regulatory.llm import openai_chat
+    from app.common.llm import chat_function
 
-    chat = openai_chat()
+    chat = chat_function()
 
     def recorded(messages, temperature, max_tokens):
         m = re.search(r"(?:INGREDIENT|Ingredient): (.+?) \(position", messages[1]["content"])

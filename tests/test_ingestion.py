@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.common_schemas import ProductInput
-from app.dev_server import app
+from app.main import app
 from app.ingestion import extract as ex
 
 client = TestClient(app)

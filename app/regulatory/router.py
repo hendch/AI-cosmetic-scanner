@@ -10,7 +10,7 @@ import os
 from fastapi import APIRouter
 
 from app.common_schemas import ProductInput
-from app.regulatory import llm  # noqa: F401  loads .env, so REGULATORY_MODE and HF_TOKEN from .env reach _mode()
+from app.common import llm  # noqa: F401  loads .env, so REGULATORY_MODE and HF_TOKEN from .env reach _mode()
 from app.regulatory.mock import build_mock_response
 from app.regulatory.schemas import RegulatoryResponse
 

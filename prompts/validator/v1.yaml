@@ -16,5 +16,5 @@ system: |
 user: |
   Report:
   {draft}
-# Filled from evaluation/validator runs: one entry per observed failure.
+# Filled from eval/validator runs: one entry per observed failure.
 known_failures: []

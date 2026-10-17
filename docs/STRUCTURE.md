@@ -5,8 +5,10 @@ One FastAPI app, one module per person. Each person owns their module folder; Ly
 ```
 AI-cosmetic-safety/
 ├── app/
+│   ├── main.py                # the only entry point: includes every module's router
 │   ├── common_schemas.py      # shared input format (product + ingredients from barcode/OCR)
-│   ├── dev_server.py          # local test server (temporary; the real entry point is Lyna's)
+│   ├── common/
+│   │   └── llm.py             # shared LLM client, prompt loader, JSON answer parser
 │   ├── toxicology/            # Hind
 │   │   ├── schemas.py         # Pydantic output schema
 │   │   ├── mock.py            # mock agent (Day 1), replaced by the real agent on Day 2
@@ -26,11 +28,16 @@ AI-cosmetic-safety/
 │   │   ├── sccs/              # SCCS opinion PDFs
 │   │   └── clp/               # CLP classification table
 │   └── <your_area>/           # e.g. regulatory/
+├── eval/<module>/             # evaluation sets and results (rag/, regulatory/, validator/)
 ├── scripts/                   # one-off / data-building scripts (run with python -m scripts.<name>)
 ├── tests/                     # pytest tests, one file per module
+├── data/                      # local, gitignored: RAG index, PETA list (built by scripts)
+├── deploy/                    # n8n workflow, database init
+├── frontend/                  # mobile app (Expo)
 ├── docs/
-├── requirements.txt
-└── .gitignore
+├── Dockerfile, docker-compose.yml
+├── requirements.txt           # direct dependencies only, hand-written (no pip freeze)
+└── .env.example               # copy to .env
 ```
 
 ## Conventions
@@ -41,7 +48,15 @@ Each module in `app/<module>/` has:
 - `router.py`: a FastAPI `APIRouter` with prefix `/<module>`, e.g. `POST /regulatory/analyze`.
 - `mock.py` on Day 1, so n8n can run end to end before the real logic exists.
 
-Lyna's main app includes every module's router. To test locally, add your router to `app/dev_server.py`.
+`app/main.py` includes every module's router: add one line to `ROUTER_MODULES` when a new module lands. Tests use the same app (`from app.main import app`).
+
+### LLM calls
+Use `app/common/llm.py`, never a client of your own:
+- `load_prompt("<agent>", "v2")` reads `prompts/<agent>/v2.yaml` and returns a `Prompt` (`render(**fields)` gives the messages).
+- `chat(messages, temperature, max_tokens)` makes one call (one retry on network errors, 429 and 5xx). It raises `LLMError`.
+- `chat_function()` gives a chat function to pass to your agent, so tests can pass a fake model instead.
+- `parse_json_object(answer)` extracts the JSON object from a model answer (it tolerates ``` fences).
+Settings come from `.env` (see `.env.example`).
 
 ### Shared input
 `app/common_schemas.py` holds `ProductInput`, the barcode/OCR output (product, brand, category, labels, ingredients). Agents take it as-is, so n8n passes it through without transforming it. Change it only after agreeing with Muaadh.
@@ -77,8 +92,9 @@ Agents use the same names for the same things:
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-uvicorn app.dev_server:app --reload      # API docs at http://127.0.0.1:8000/docs
-pytest -q
+copy .env.example .env                  # then fill HF_TOKEN
+uvicorn app.main:app --reload           # API docs at http://127.0.0.1:8000/docs
+pytest -q                               # runs tests/ only (pytest.ini)
 ```
 
-Add any new dependencies to `requirements.txt`.
+Add new dependencies to `requirements.txt` by hand, as a direct dependency with a minimum version.

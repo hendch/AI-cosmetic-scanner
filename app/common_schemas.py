@@ -30,7 +30,7 @@ class Product(BaseModel):
 
 
 class ProductInput(BaseModel):
-    source: str  # "barcode" | "ocr"
+    source: Literal["barcode", "ocr"] | None = None  # None when nothing produced ingredients
     product: Product
     ingredients: list[Ingredient]
     needs_review: bool = False

@@ -1,0 +1,174 @@
+{
+  "agent": "regulatory",
+  "prompt_version": "mock",
+  "product_context": {
+    "category": "moisturizers",
+    "exposure_type": "leave_on"
+  },
+  "findings": [
+    {
+      "position": 1,
+      "ingredient": "aqua",
+      "matched": false,
+      "regulatory_status": "not_assessed",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+      "missing_information": [
+        "recognised INCI name"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    },
+    {
+      "position": 2,
+      "ingredient": "phenoxyethanol",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "V",
+          "entry": "29",
+          "source_id": "eu_1223_2009_annex_v"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "V/29",
+          "type": "max_concentration",
+          "requirement": "1,0 %",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex V entry 29); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_v"
+      ]
+    },
+    {
+      "position": 3,
+      "ingredient": "retinol",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "III",
+          "entry": "376",
+          "source_id": "eu_1223_2009_annex_iii"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "III/376",
+          "type": "product_type",
+          "requirement": "(a) Body lotion (b) other leave-on and rinse-off products",
+          "result": "satisfied",
+          "reason": "The product (moisturizers) matches item (b) of the entry; the limits of item (b) apply."
+        },
+        {
+          "entry": "III/376",
+          "type": "max_concentration",
+          "requirement": "(a) 0,05 % Retinol Equivalent (RE) (b) 0,3 % RE",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        },
+        {
+          "entry": "III/376",
+          "type": "labelling",
+          "requirement": "For any cosmetic product containing Retinol, Retinyl Acetate or Retinyl Palmitate the following, labelling is obligatory: 'Contains Vitamin A. Consider your daily intake before use'.",
+          "result": "unknown",
+          "reason": "The label text is not available to check the required wording."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex III entry 376); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration",
+        "label text"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_iii"
+      ]
+    },
+    {
+      "position": 4,
+      "ingredient": "propylparaben",
+      "matched": true,
+      "regulatory_status": "restricted",
+      "entries": [
+        {
+          "annex": "V",
+          "entry": "12a",
+          "source_id": "eu_1223_2009_annex_v"
+        }
+      ],
+      "conditions": [
+        {
+          "entry": "V/12a",
+          "type": "max_concentration",
+          "requirement": "0,14 % (as acid) for the sum of the individual concentrations 0,8 % (as acid) for mixtures of substances mentioned in entry 12 and 12a, where the sum of the individual concentrations of butyl- and propylparaben and their salts does not exceed 0,14 %",
+          "result": "unknown",
+          "reason": "Concentration is not provided on the label."
+        },
+        {
+          "entry": "V/12a",
+          "type": "usage",
+          "requirement": "Not to be used in leave-on products designed for application on the nappy area of children under three years of age.",
+          "result": "unknown",
+          "reason": "Not checked against the product information."
+        },
+        {
+          "entry": "V/12a",
+          "type": "labelling",
+          "requirement": "For leave-on products designed for children under three years of age: 'Do not use on the nappy area'",
+          "result": "unknown",
+          "reason": "The label text is not available to check the required wording."
+        }
+      ],
+      "compliance_check": "unknown",
+      "explanation": "Allowed only under conditions (Annex V entry 12a); the product information is not enough to confirm they are met.",
+      "missing_information": [
+        "concentration",
+        "label text"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "eu_1223_2009_annex_v"
+      ]
+    },
+    {
+      "position": 5,
+      "ingredient": "parfum",
+      "matched": false,
+      "regulatory_status": "not_assessed",
+      "entries": [],
+      "conditions": [],
+      "compliance_check": "not_applicable",
+      "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+      "missing_information": [
+        "recognised INCI name"
+      ],
+      "evidence_confidence": "low",
+      "sources": []
+    }
+  ],
+  "warnings": [],
+  "run": {
+    "mode": "mock",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "status_disagreements": 0,
+    "overrides": []
+  }
+}

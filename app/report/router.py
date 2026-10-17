@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
 from app.report.agent import ValidatorError, validate_draft
-from app.report.llm import LLMError
+from app.common.llm import LLMError
 from app.report.schemas import ValidateRequest, ValidateResponse
 
 router = APIRouter(prefix="/report", tags=["report"])

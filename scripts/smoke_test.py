@@ -1,3 +1,8 @@
+"""Smoke test of the RAG stack: embedding model + Qdrant round trip.
+
+Usage: python -m scripts.smoke_test
+"""
+
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct

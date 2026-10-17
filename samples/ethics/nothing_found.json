@@ -1,0 +1,30 @@
+{
+  "agent": "ethics",
+  "prompt_version": "mock",
+  "brand": "",
+  "parent_company": null,
+  "status": "NOT_VERIFIED",
+  "status_reason": "Brand unknown, so no claim or certification could be checked.",
+  "evidence": [
+    {
+      "type": "regulatory",
+      "source": "Regulation (EC) No 1223/2009, Art. 18",
+      "detail": "Animal testing of cosmetics and their ingredients is banned for products marketed in the EU.",
+      "source_id": "eu_1223_2009_art18"
+    }
+  ],
+  "certifications_checked": [
+    "Leaping Bunny",
+    "PETA Beauty Without Bunnies"
+  ],
+  "certifications_found": [],
+  "conflicts": [],
+  "missing_information": [
+    "brand"
+  ],
+  "evidence_confidence": "low",
+  "warnings": [
+    "no barcode detected",
+    "no input produced ingredients"
+  ]
+}
