@@ -1,0 +1,45 @@
+config,id,type,ingredient,answerable,covered_returned,n_results,rank_strict,rank_lenient,top1_id,top1_score,ms
+structured + filter,Q01,concentration,Phenoxyethanol,True,True,2,1.0,1.0,EV-PHENOXYETHANOL-ANNEXV,0.8273,31.3
+structured + filter,Q02,product type,Butylated Hydroxytoluene,True,True,2,2.0,1.0,EV-BHT-SCCS-OVERALL,0.8477,30.8
+structured + filter,Q03,product type,Salicylic acid,True,True,3,2.0,1.0,EV-SALICYLIC-ACID-SCCS-OVERALL,0.7697,31.6
+structured + filter,Q04,prohibited,Zinc pyrithione,True,True,2,1.0,1.0,EV-ZINC-PYRITHIONE-ANNEXII,0.8116,31.3
+structured + filter,Q05,not listed,Niacinamide,True,True,1,1.0,1.0,EV-NIACINAMIDE-NOTLISTED,0.7897,34.1
+structured + filter,Q06,scientific opinion,Homosalate,True,True,2,1.0,1.0,EV-HOMOSALATE-SCCS-OVERALL,0.7406,32.8
+structured + filter,Q07,concentration,Titanium dioxide (nano),True,True,2,1.0,1.0,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,0.7006,31.6
+structured + filter,Q08,hazard / uncertainty,Titanium dioxide (nano),True,True,2,1.0,1.0,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,0.8265,34.5
+structured + filter,Q09,alias,Oxybenzone,True,True,1,1.0,1.0,EV-BENZOPHENONE-3-ANNEXVI,0.7839,37.5
+structured + filter,Q10,alias + opinion,Vitamin A,True,True,2,1.0,1.0,EV-VITAMIN-A-SCCS-OVERALL,0.7796,37.5
+structured + filter,Q11,not covered,Ceramide NP,False,False,0,,,,,45.3
+"structured, no filter",Q01,concentration,Phenoxyethanol,True,True,10,1.0,1.0,EV-PHENOXYETHANOL-ANNEXV,0.8273,38.6
+"structured, no filter",Q02,product type,Butylated Hydroxytoluene,True,True,10,2.0,1.0,EV-BHT-SCCS-OVERALL,0.8477,35.6
+"structured, no filter",Q03,product type,Salicylic acid,True,True,10,2.0,1.0,EV-SALICYLIC-ACID-SCCS-OVERALL,0.7697,36.5
+"structured, no filter",Q04,prohibited,Zinc pyrithione,True,True,10,1.0,1.0,EV-ZINC-PYRITHIONE-ANNEXII,0.8116,37.0
+"structured, no filter",Q05,not listed,Niacinamide,True,True,10,1.0,1.0,EV-NIACINAMIDE-NOTLISTED,0.7897,39.2
+"structured, no filter",Q06,scientific opinion,Homosalate,True,True,10,1.0,1.0,EV-HOMOSALATE-SCCS-OVERALL,0.7406,45.5
+"structured, no filter",Q07,concentration,Titanium dioxide (nano),True,True,10,1.0,1.0,EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,0.7006,38.8
+"structured, no filter",Q08,hazard / uncertainty,Titanium dioxide (nano),True,True,10,1.0,1.0,EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,0.8265,34.1
+"structured, no filter",Q09,alias,Oxybenzone,True,True,10,1.0,1.0,EV-BENZOPHENONE-3-ANNEXVI,0.7839,42.4
+"structured, no filter",Q10,alias + opinion,Vitamin A,True,True,10,1.0,1.0,EV-VITAMIN-A-SCCS-OVERALL,0.7796,74.4
+"structured, no filter",Q11,not covered,Ceramide NP,False,True,10,,,EV-BENZOPHENONE-3-ANNEXVI,0.7133,30.5
+fixed + name post-filter,Q01,concentration,Phenoxyethanol,True,True,10,,1.0,FX-sccs_phenoxyethanol-010,0.8036,51.8
+fixed + name post-filter,Q02,product type,Butylated Hydroxytoluene,True,True,10,,1.0,FX-sccs_bht-001,0.804,47.2
+fixed + name post-filter,Q03,product type,Salicylic acid,True,True,10,10.0,2.0,FX-sccs_salicylic_acid-032,0.795,46.8
+fixed + name post-filter,Q04,prohibited,Zinc pyrithione,True,True,10,,,FX-sccs_zinc_pyrithione-013,0.754,43.8
+fixed + name post-filter,Q05,not listed,Niacinamide,True,False,0,,,,,46.5
+fixed + name post-filter,Q06,scientific opinion,Homosalate,True,True,10,6.0,6.0,FX-sccs_homosalate-052,0.753,45.8
+fixed + name post-filter,Q07,concentration,Titanium dioxide (nano),True,True,9,8.0,5.0,FX-sccs_titanium_dioxide_nano-089,0.6709,45.3
+fixed + name post-filter,Q08,hazard / uncertainty,Titanium dioxide (nano),True,True,7,1.0,1.0,FX-sccs_titanium_dioxide_nano-089,0.82,41.6
+fixed + name post-filter,Q09,alias,Oxybenzone,True,True,6,2.0,2.0,FX-sccs_benzophenone-3-122,0.7653,46.2
+fixed + name post-filter,Q10,alias + opinion,Vitamin A,True,True,10,,,FX-sccs_vitamin_a-136,0.8032,43.0
+fixed + name post-filter,Q11,not covered,Ceramide NP,False,False,0,,,,,52.0
+"fixed, no filter",Q01,concentration,Phenoxyethanol,True,True,10,,1.0,FX-sccs_phenoxyethanol-010,0.8036,57.9
+"fixed, no filter",Q02,product type,Butylated Hydroxytoluene,True,True,10,,1.0,FX-sccs_bht-001,0.804,47.6
+"fixed, no filter",Q03,product type,Salicylic acid,True,True,10,10.0,2.0,FX-sccs_salicylic_acid-032,0.795,43.6
+"fixed, no filter",Q04,prohibited,Zinc pyrithione,True,True,10,,,FX-sccs_zinc_pyrithione-013,0.754,44.4
+"fixed, no filter",Q05,not listed,Niacinamide,True,True,10,,,FX-eu_1223_2009-437,0.7257,47.2
+"fixed, no filter",Q06,scientific opinion,Homosalate,True,True,10,6.0,6.0,FX-sccs_homosalate-052,0.753,54.9
+"fixed, no filter",Q07,concentration,Titanium dioxide (nano),True,True,10,9.0,9.0,FX-sccs_titanium_dioxide_nano-089,0.6709,49.0
+"fixed, no filter",Q08,hazard / uncertainty,Titanium dioxide (nano),True,True,10,1.0,1.0,FX-sccs_titanium_dioxide_nano-089,0.82,46.9
+"fixed, no filter",Q09,alias,Oxybenzone,True,True,10,2.0,2.0,FX-sccs_benzophenone-3-122,0.7653,49.7
+"fixed, no filter",Q10,alias + opinion,Vitamin A,True,True,10,,,FX-sccs_vitamin_a-136,0.8032,73.4
+"fixed, no filter",Q11,not covered,Ceramide NP,False,True,10,,,FX-sccs_vitamin_a-012,0.7439,43.9

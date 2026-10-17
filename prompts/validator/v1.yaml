@@ -1,0 +1,20 @@
+id: validator
+version: v1
+date: 2026-10-16
+author: omar
+status: baseline
+description: >
+  Deliberately naive baseline, kept to document failures for the v1 -> v2 comparison.
+  It asks for a yes/no review of the whole draft, without asking the model to check
+  each claim against its cited excerpt. Expected failures: accepts claims because a
+  citation exists, misses hazard-to-risk leaps, misses brand claims shown as certification.
+model_params:
+  temperature: 0  # team rule; model and endpoint come from .env
+system: |
+  You check cosmetic product reports. Say whether the report is correct.
+  Return JSON: {"valid": true or false, "issues": ["..."]}
+user: |
+  Report:
+  {draft}
+# Filled from evaluation/validator runs: one entry per observed failure.
+known_failures: []

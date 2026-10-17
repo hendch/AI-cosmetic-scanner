@@ -1,0 +1,42 @@
+
+[
+  {
+    "id": "EV-TITANIUM-DIOXIDE-NANO-ANNEXVI",
+    "ingredient": "TITANIUM DIOXIDE (NANO)",
+    "aliases": [
+      "Titanium dioxide (nano)",
+      "13463-67-7",
+      "1317-70-0",
+      "1317-80-2",
+      "236-675-5",
+      "215-280-1",
+      "215-282-2"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex VI",
+    "entry_ref": "27a",
+    "product_type": "UV-filter in cosmetic products",
+    "status": "restricted",
+    "restriction": "In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the sum shall not exceed the limit of 25%.",
+    "max_concentration": "25% - In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the sum shall not exceed the limit of 25%.",
+    "source_quote": "27a\tTitanium dioxide (nano)\tTITANIUM DIOXIDE (NANO)\t13463-67-7[1]/ 1317-70-0[2]/ 1317-80-2[3]\t236-675-5[1] /215-280-1[2]/ 215-282-2[3]\t\t25% - In case of combined use of Titanium Dioxide and Titanium Dioxide (nano), the sum shall not exceed the limit of 25%."
+  },
+  {
+    "id": "EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL",
+    "ingredient": "TITANIUM DIOXIDE (NANO)",
+    "aliases": [
+      "Titanium dioxide (nano)",
+      "Eclipse 70",
+      "13463-67-7",
+      "1317-70-0",
+      "1317-80-2"
+    ],
+    "source_id": "sccs_titanium_dioxide_nano",
+    "section": "SCCS/1667/24, Final Opinion on New Coating for Titanium Dioxide (Nano Form) (p. 44)",
+    "status": "assessed",
+    "hazard": "The SCCS identified uncertainties and data gaps concerning titanium dioxide (nano) coated with 6% Aluminium Hydroxide, 14% Sodium Myristoyl Sarcosinate, and 10% Dimethicone (Eclipse 70). The available information did not establish similarity to previously assessed titanium dioxide nanomaterials regarding physicochemical characteristics, coating stability, or lack of dermal absorption.",
+    "opinion": "The SCCS could not conclude that titanium dioxide (nano) coated with 6% Aluminium Hydroxide, 14% Sodium Myristoyl Sarcosinate, and 10% Dimethicone (Eclipse 70) is safe for use as a UV filter in dermally applied cosmetic products. Further physicochemical, toxicological, and exposure data specific to this nanomaterial are needed to resolve the identified uncertainties. This conclusion concerns the specific coated material assessed and should not be interpreted as a general finding that all forms of titanium dioxide (nano) are unsafe.",
+    "conditions": "Safety could not be established for Eclipse 70 based on the submitted information. Additional data on physicochemical properties, coating stability, dermal absorption, toxicology, and exposure are needed. The general Annex VI concentration limit is 25% for titanium dioxide and titanium dioxide (nano) combined.",
+    "source_quote": "Considering all the provided information, the SCCS is of the view that there are a number of uncertainties and data gaps that do not allow a conclusion on the safety of titanium dioxide (nano) coated with a combination of w/w 6% Aluminium Hydroxide, 14% Sodium Myristoyl Sarcosinate and 10% Dimethicone (Eclipse 70)."
+  }
+]

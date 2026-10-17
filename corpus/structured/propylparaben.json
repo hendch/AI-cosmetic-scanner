@@ -1,0 +1,23 @@
+[
+  {
+    "id": "EV-PROPYLPARABEN-ANNEXV",
+    "ingredient": "PROPYLPARABEN",
+    "aliases": ["Propyl 4-hydroxy­benzoate and its salts","SODIUM PROPYLPARABEN", "POTASSIUM PROPYLPARABEN", "94-13-3", "35285-69-9", "84930-16-5"],
+    "source_id": "eu_1223_2009",
+    "section": "Annex V",
+    "entry_ref": "12 a",
+    "status": "restricted",
+    "restriction": "Permitted as a preservative in cosmetic products only within the stated limits.",
+    "max_concentration": "- 0,14% (as acid) for the sum of the individual concentrations - 0,8% (as acid) for mixtures of substances mentioned in entry 12 and 12a, here the sum of the individual concentrations of butyl and propylparaben and their salts does not exceed 0,14%",
+    "source_quote": "12 a\tButyl 4-hydroxy­benzoate and its salts Propyl 4-hydroxy­benzoate and its salts\tBUTYLPARABEN/PROPYLPARABEN/SODIUM PROPOYLPARABEN/SODIUM BUTYLPARABEN/POTASSIUM BUTYLPARABEN/POTASSIUM PROPYLPARABEN\t94-26-8/ 94-13-3/ 35285-69-9/ 36457-20-2/ 38566-94-8/ 84930-16-5\t202-318-7/ 202-307-7/ 252-488-1/ 253-049-7/ 254-009-1/ 284-597-5\t\t- 0,14% (as acid) for the sum of the individual concentrations - 0,8% (as acid) for mixtures of substances mentioned in entry 12 and 12a, here the sum of the individual concentrations of butyl and propylparaben and their salts does not exceed 0,14%"
+  },
+  {
+    "id": "EV-PROPYLPARABEN-SCCS-OVERALL",
+    "ingredient": "Propylparaben",
+    "aliases": ["Propyl 4-hydroxy­benzoate"],
+    "source_id": "sccs_propylparaben",
+    "section": "SCCS opinion, conclusion",
+    "status": "assessed",
+    "opinion": "The SCCS considers Propylparaben safe for use as a preservative in cosmetic products at concentrations up to 0.14%. Although available data indicate potential endocrine effects, the evidence is insufficient to classify Propylparaben as an endocrine-disrupting substance or to establish a risk assessment threshold based on such effects. Environmental safety was not assessed."
+  }
+]

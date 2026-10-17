@@ -5,7 +5,6 @@ so the app starts at every stage of the project.
 Run with: uvicorn app.main:app --reload
 """
 import importlib
-
 from fastapi import FastAPI
 
 app = FastAPI(title="AI Cosmetic Safety")
@@ -16,7 +15,7 @@ ROUTER_MODULES = [
     "app.toxicology.router",
     "app.ethics.router",
     "app.regulatory.router",
-    "app.retrieval.router",
+    "app.rag.router",
     "app.ingestion.router",
     "app.report.router",
 ]
@@ -34,3 +33,4 @@ for module_path in ROUTER_MODULES:
 @app.get("/health")
 async def health():
     return {"ok": True}
+

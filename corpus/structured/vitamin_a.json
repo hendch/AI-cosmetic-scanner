@@ -1,0 +1,49 @@
+
+[
+  {
+    "id": "EV-VITAMIN-A-ANNEXIII",
+    "ingredient": "Retinol",
+    "aliases": [
+      "Vitamin A",
+      "Retinol",
+      "Retinyl Acetate",
+      "Retinyl Palmitate",
+      "(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraen-1-ol",
+      "[(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] acetate",
+      "[(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] hexadecanoate",
+      "11103-57-4",
+      "68-26-8",
+      "127-47-9",
+      "79-81-2",
+      "234-328-2",
+      "200-683-7",
+      "204-844-2",
+      "201-228-5"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex III",
+    "entry_ref": "376",
+    "product_type": "(a) Body lotion (b) other leave-on and rinse-off products",
+    "status": "restricted",
+    "restriction": "Concentration limits are expressed as Retinol Equivalent (RE). Retinoic acid is prohibited in cosmetic products and must not be present except as an unavoidable trace impurity with a justified limit.",
+    "max_concentration": "(a) 0,05 % Retinol Equivalent (RE) (b) 0,3 % RE",
+    "source_quote": "376\t(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraen-1-ol; [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] acetate; [(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenyl] hexadecanoate\tRetinol; Retinyl Acetate; Retinyl Palmitate\t11103-57-4/ 68-26-8; 127-47-9; 79-81-2\t234-328-2/ 200-683-7; 204-844-2; 201-228-5\t(a) Body lotion (b) other leave-on and rinse-off products\t(a) 0,05 % Retinol Equivalent (RE) (b) 0,3 % RE"
+  },
+  {
+    "id": "EV-VITAMIN-A-SCCS-OVERALL",
+    "ingredient": "RETINOL; RETINYL ACETATE; RETINYL PALMITATE",
+    "aliases": [
+      "Vitamin A",
+      "Retinol",
+      "Retinyl Acetate",
+      "Retinyl Palmitate"
+    ],
+    "source_id": "sccs_vitamin_a",
+    "section": "SCCS/1576/16, Final Opinion on Vitamin A (Retinol, Retinyl Acetate and Retinyl Palmitate) and Corrigendum (pp. 69–70)",
+    "status": "assessed",
+    "hazard": "The SCCS identified teratogenic potential, liver toxicity, and local skin effects as critical toxicological endpoints for vitamin A. Dietary exposure may already approach the tolerable upper intake level (UL), meaning additional exposure from cosmetics could exceed it. Data gaps remain regarding impurities, product stability, and exposure from dietary supplements and certain vitamin A derivatives.",
+    "opinion": "The SCCS considers retinol, retinyl acetate, and retinyl palmitate safe at the maximum notified concentrations in the assessed cosmetic product categories, including for children above 1 year under the evaluated conditions. However, total vitamin A exposure from diet, supplements, and cosmetics is an important concern, particularly for susceptible groups. The assessment does not cover sunscreen products, children under 1 year, retinyl linoleate, or retinal. Manufacturers should ensure product stability and control impurities, particularly retinoic acid.",
+    "conditions": "Maximum concentrations assessed are 0.05% Retinol Equivalent (RE) in body lotions and 0.3% RE in other leave-on and rinse-off products, subject to the applicable regulatory restrictions. The SCCS considered 1500 μg RE/day for adults and children above 6 years and 800 μg RE/day for children aged 1–3 years when assessing systemic exposure. Exposure from dietary supplements was not included. Vitamin A-containing sunscreen products and exposure in children under 1 year were not assessed. Retinoic acid must not be present except as an unavoidable trace impurity with a justified limit, and retinol formulations require adequate stabilisation.",
+    "source_quote": "Based on these estimates, the SCCS considers that the use of Vitamin A in the respective cosmetic products at the maximum notified concentration per se is safe for children above 1 year old."
+  }
+]

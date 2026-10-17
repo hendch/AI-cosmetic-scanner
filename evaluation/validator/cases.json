@@ -1,0 +1,387 @@
+[
+  {
+    "case_id": "supported_draft",
+    "description": "Correct draft: conditional status with unknown concentration, hazard stated as a classification, brand claim reported as a claim.",
+    "expected_valid": true,
+    "expected_flags": [],
+    "draft": {
+      "product": {
+        "name": "Hydrating Face Cream",
+        "brand": "Example Brand",
+        "barcode": "0000000000001"
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "phenoxyethanol",
+          "name": "Phenoxyethanol",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "conditional",
+            "condition_result": "unknown",
+            "explanation": "Authorized as a preservative up to a maximum concentration of 1.0% (Annex V/29). The label does not give the concentration, so this condition cannot be checked.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ]
+          },
+          "toxicology": {
+            "hazards": [
+              {
+                "label": "Eye Dam. 1 (H318)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              }
+            ],
+            "consumer_risk": "not_assessable",
+            "explanation": "The substance has a harmonised CLP classification for serious eye damage (H318). Consumer risk depends on concentration and exposure, which are unknown."
+          },
+          "missing_information": [
+            "concentration"
+          ],
+          "evidence_ids": [
+            "sccs_phenoxyethanol_2016#background",
+            "clp_test_ingredients#phenoxyethanol"
+          ]
+        },
+        {
+          "position": 2,
+          "ingredient_id": "glycerin",
+          "name": "Glycerin",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_rule_found_in_snapshot",
+            "condition_result": "not_assessed",
+            "explanation": "No entry for this substance was found in the indexed regulation snapshot.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "hazards": [],
+            "consumer_risk": "not_assessable",
+            "explanation": "No harmonised CLP classification in the retrieved evidence."
+          },
+          "missing_information": [],
+          "evidence_ids": [
+            "clp_test_ingredients#glycerin"
+          ]
+        }
+      ],
+      "cruelty_free": {
+        "status": "claimed",
+        "scope": "product",
+        "explanation": "The product is labelled cruelty-free on Open Beauty Facts. No independent certification was found.",
+        "evidence_ids": [
+          "obf_labels#0000000000001"
+        ],
+        "checked_at": "2026-10-16"
+      },
+      "sources": [
+        {
+          "evidence_id": "sccs_phenoxyethanol_2016#background",
+          "kind": "regulation",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://health.ec.europa.eu/scientific-committees",
+          "source_version": "SCCS/1575/16",
+          "excerpt": "Phenoxyethanol CAS n. 122-99-6 as preservative is regulated in Annex V/29 of the Cosmetics Regulation (EC) n. 1223/2009. According to the Cosmetics Regulation (EC) n.1223/2009 Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#phenoxyethanol",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://echa.europa.eu/information-on-chemicals/annex-vi-to-clp",
+          "source_version": "CLP Annex VI ATP17",
+          "excerpt": "2-phenoxyethanol, CAS 122-99-6, harmonised classification (Annex VI index 603-098-00-9, ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "glycerin"
+          ],
+          "source_url": "https://chem.echa.europa.eu/100.000.263",
+          "source_version": "ECHA CHEM",
+          "excerpt": "Glycerol, CAS 56-81-5: no harmonised classification in Annex VI to CLP."
+        },
+        {
+          "evidence_id": "obf_labels#0000000000001",
+          "kind": "brand_claim",
+          "ingredient_ids": [],
+          "source_url": "https://world.openbeautyfacts.org",
+          "source_version": "2026-10-16",
+          "excerpt": "Product labels on Open Beauty Facts: en:cruelty-free."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "risk_leap_and_false_compliance",
+    "description": "Toxicology turns the H318 classification into harm to the user and advice; regulatory claims the 1.0% limit is met although the concentration is unknown.",
+    "expected_valid": false,
+    "expected_flags": [
+      [
+        "toxicology",
+        "phenoxyethanol"
+      ],
+      [
+        "regulatory",
+        "phenoxyethanol"
+      ]
+    ],
+    "draft": {
+      "product": {
+        "name": "Hydrating Face Cream",
+        "brand": "Example Brand",
+        "barcode": "0000000000001"
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "phenoxyethanol",
+          "name": "Phenoxyethanol",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "conditional",
+            "condition_result": "satisfied",
+            "explanation": "This product complies with the 1.0% maximum concentration for phenoxyethanol.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ]
+          },
+          "toxicology": {
+            "hazards": [
+              {
+                "label": "Eye Dam. 1 (H318)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              }
+            ],
+            "consumer_risk": "not_assessable",
+            "explanation": "Phenoxyethanol in this cream can seriously damage your eyes, so avoid using it near the eyes."
+          },
+          "missing_information": [
+            "concentration"
+          ],
+          "evidence_ids": [
+            "sccs_phenoxyethanol_2016#background",
+            "clp_test_ingredients#phenoxyethanol"
+          ]
+        },
+        {
+          "position": 2,
+          "ingredient_id": "glycerin",
+          "name": "Glycerin",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_rule_found_in_snapshot",
+            "condition_result": "not_assessed",
+            "explanation": "No entry for this substance was found in the indexed regulation snapshot.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "hazards": [],
+            "consumer_risk": "not_assessable",
+            "explanation": "No harmonised CLP classification in the retrieved evidence."
+          },
+          "missing_information": [],
+          "evidence_ids": [
+            "clp_test_ingredients#glycerin"
+          ]
+        }
+      ],
+      "cruelty_free": {
+        "status": "claimed",
+        "scope": "product",
+        "explanation": "The product is labelled cruelty-free on Open Beauty Facts. No independent certification was found.",
+        "evidence_ids": [
+          "obf_labels#0000000000001"
+        ],
+        "checked_at": "2026-10-16"
+      },
+      "sources": [
+        {
+          "evidence_id": "sccs_phenoxyethanol_2016#background",
+          "kind": "regulation",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://health.ec.europa.eu/scientific-committees",
+          "source_version": "SCCS/1575/16",
+          "excerpt": "Phenoxyethanol CAS n. 122-99-6 as preservative is regulated in Annex V/29 of the Cosmetics Regulation (EC) n. 1223/2009. According to the Cosmetics Regulation (EC) n.1223/2009 Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#phenoxyethanol",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://echa.europa.eu/information-on-chemicals/annex-vi-to-clp",
+          "source_version": "CLP Annex VI ATP17",
+          "excerpt": "2-phenoxyethanol, CAS 122-99-6, harmonised classification (Annex VI index 603-098-00-9, ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "glycerin"
+          ],
+          "source_url": "https://chem.echa.europa.eu/100.000.263",
+          "source_version": "ECHA CHEM",
+          "excerpt": "Glycerol, CAS 56-81-5: no harmonised classification in Annex VI to CLP."
+        },
+        {
+          "evidence_id": "obf_labels#0000000000001",
+          "kind": "brand_claim",
+          "ingredient_ids": [],
+          "source_url": "https://world.openbeautyfacts.org",
+          "source_version": "2026-10-16",
+          "excerpt": "Product labels on Open Beauty Facts: en:cruelty-free."
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "wrong_subject_and_brand_as_certification",
+    "description": "Glycerin hazard cites the phenoxyethanol CLP entry; a brand label claim is reported as verified certification.",
+    "expected_valid": false,
+    "expected_flags": [
+      [
+        "toxicology",
+        "glycerin"
+      ],
+      [
+        "ethics",
+        null
+      ]
+    ],
+    "draft": {
+      "product": {
+        "name": "Hydrating Face Cream",
+        "brand": "Example Brand",
+        "barcode": "0000000000001"
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "phenoxyethanol",
+          "name": "Phenoxyethanol",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "conditional",
+            "condition_result": "unknown",
+            "explanation": "Authorized as a preservative up to a maximum concentration of 1.0% (Annex V/29). The label does not give the concentration, so this condition cannot be checked.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ]
+          },
+          "toxicology": {
+            "hazards": [
+              {
+                "label": "Eye Dam. 1 (H318)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              }
+            ],
+            "consumer_risk": "not_assessable",
+            "explanation": "The substance has a harmonised CLP classification for serious eye damage (H318). Consumer risk depends on concentration and exposure, which are unknown."
+          },
+          "missing_information": [
+            "concentration"
+          ],
+          "evidence_ids": [
+            "sccs_phenoxyethanol_2016#background",
+            "clp_test_ingredients#phenoxyethanol"
+          ]
+        },
+        {
+          "position": 2,
+          "ingredient_id": "glycerin",
+          "name": "Glycerin",
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_rule_found_in_snapshot",
+            "condition_result": "not_assessed",
+            "explanation": "No entry for this substance was found in the indexed regulation snapshot.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "hazards": [
+              {
+                "label": "Eye Dam. 1 (H318)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              }
+            ],
+            "consumer_risk": "not_assessable",
+            "explanation": "Glycerin is classified for serious eye damage (H318)."
+          },
+          "missing_information": [],
+          "evidence_ids": [
+            "clp_test_ingredients#glycerin"
+          ]
+        }
+      ],
+      "cruelty_free": {
+        "status": "verified",
+        "scope": "product",
+        "explanation": "The brand is certified cruelty-free.",
+        "evidence_ids": [
+          "obf_labels#0000000000001"
+        ],
+        "checked_at": "2026-10-16"
+      },
+      "sources": [
+        {
+          "evidence_id": "sccs_phenoxyethanol_2016#background",
+          "kind": "regulation",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://health.ec.europa.eu/scientific-committees",
+          "source_version": "SCCS/1575/16",
+          "excerpt": "Phenoxyethanol CAS n. 122-99-6 as preservative is regulated in Annex V/29 of the Cosmetics Regulation (EC) n. 1223/2009. According to the Cosmetics Regulation (EC) n.1223/2009 Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#phenoxyethanol",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "phenoxyethanol"
+          ],
+          "source_url": "https://echa.europa.eu/information-on-chemicals/annex-vi-to-clp",
+          "source_version": "CLP Annex VI ATP17",
+          "excerpt": "2-phenoxyethanol, CAS 122-99-6, harmonised classification (Annex VI index 603-098-00-9, ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "kind": "toxicology",
+          "ingredient_ids": [
+            "glycerin"
+          ],
+          "source_url": "https://chem.echa.europa.eu/100.000.263",
+          "source_version": "ECHA CHEM",
+          "excerpt": "Glycerol, CAS 56-81-5: no harmonised classification in Annex VI to CLP."
+        },
+        {
+          "evidence_id": "obf_labels#0000000000001",
+          "kind": "brand_claim",
+          "ingredient_ids": [],
+          "source_url": "https://world.openbeautyfacts.org",
+          "source_version": "2026-10-16",
+          "excerpt": "Product labels on Open Beauty Facts: en:cruelty-free."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,199 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai",
+  "runs": [
+    {
+      "prompt_version": "v4",
+      "case_id": "supported_draft",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "attempts": 1,
+      "seconds": 4.2,
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Authorized as a preservative up to a maximum concentration of 1.0% (Annex V/29).",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [],
+        "unsupported_evidence_ids": []
+      }
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "risk_leap_and_false_compliance",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "2/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        },
+        {
+          "agent": "regulatory",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        }
+      ],
+      "attempts": 1,
+      "seconds": 5.7,
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "This product complies with the 1.0% maximum concentration for phenoxyethanol.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt only states the maximum concentration but does not conclude compliance."
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol in this cream can seriously damage your eyes, so avoid using it near the eyes.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt states the hazard but does not provide a consumer risk conclusion."
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts. No independent certification was found.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "unsupported",
+            "reason": "The claim is a brand claim and requires a certification for verification."
+          }
+        ],
+        "issues": [
+          "The claim about phenoxyethanol compliance is overstated as it only mentions the maximum concentration.",
+          "The claim about phenoxyethanol's consumer risk is overstated as it provides a risk conclusion without evidence.",
+          "The cruelty-free claim is unsupported as it requires a certification, not just a brand claim."
+        ],
+        "unsupported_evidence_ids": [
+          "obf_labels#0000000000001"
+        ]
+      }
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "wrong_subject_and_brand_as_certification",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "1/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "glycerin",
+          "flagged": false
+        },
+        {
+          "agent": "ethics",
+          "ingredient_id": null,
+          "flagged": true
+        }
+      ],
+      "attempts": 1,
+      "seconds": 6.5,
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Authorized as a preservative up to a maximum concentration of 1.0% (Annex V/29).",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "The substance has a harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Consumer risk depends on concentration and exposure, which are unknown.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt does not state the consumer risk, only the classification."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "glycerin",
+            "claim": "No entry for this substance was found in the indexed regulation snapshot.",
+            "evidence_ids": [],
+            "verdict": "unsupported",
+            "reason": "No evidence provided."
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The brand is certified cruelty-free.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "unsupported",
+            "reason": "The evidence is a brand claim, not a certification."
+          }
+        ],
+        "issues": [
+          "The consumer risk for phenoxyethanol is overstated.",
+          "No evidence provided for glycerin's regulatory status.",
+          "The cruelty-free status is unsupported as it is a brand claim, not a certification."
+        ],
+        "unsupported_evidence_ids": []
+      }
+    }
+  ]
+}
