@@ -1,0 +1,12 @@
+id,question,ingredient,expected_evidence_id,expected_source_id,key_text,type
+Q01,What limit applies to phenoxyethanol when it is used to preserve a cosmetic?,Phenoxyethanol,EV-PHENOXYETHANOL-ANNEXV,eu_1223_2009,1.0,concentration
+Q02,What is the highest BHT level allowed in toothpaste?,Butylated Hydroxytoluene,EV-BHT-ANNEX,eu_1223_2009,"0,1",product type
+Q03,Does the allowed amount of salicylic acid change for rinse-off hair products?,Salicylic acid,EV-SALICYLIC-ACID-ANNEXIII,eu_1223_2009,3.0,product type
+Q04,Can zinc pyrithione be an ingredient in cosmetics at all?,Zinc pyrithione,EV-ZINC-PYRITHIONE-ANNEXII,eu_1223_2009,1670,prohibited
+Q05,Is niacinamide subject to any EU cosmetics restriction?,Niacinamide,EV-NIACINAMIDE-NOTLISTED,eu_1223_2009,,not listed
+Q06,What did the scientific committee decide about homosalate as a sunscreen filter?,Homosalate,EV-HOMOSALATE-SCCS-OVERALL,sccs_homosalate,0.5%,scientific opinion
+Q07,What is the combined ceiling when titanium dioxide and its nano form are used together?,Titanium dioxide (nano),EV-TITANIUM-DIOXIDE-NANO-ANNEXVI,eu_1223_2009,25%,concentration
+Q08,Why could the experts not conclude that the coated nano titanium dioxide is safe?,Titanium dioxide (nano),EV-TITANIUM-DIOXIDE-NANO-SCCS-OVERALL,sccs_titanium_dioxide_nano,Eclipse 70,hazard / uncertainty
+Q09,What are the allowed levels of oxybenzone in face products versus body products?,Oxybenzone,EV-BENZOPHENONE-3-ANNEXVI,eu_1223_2009,"2,2%",alias
+Q10,Which age group was left out of the safety assessment of vitamin A in cosmetics?,Vitamin A,EV-VITAMIN-A-SCCS-OVERALL,sccs_vitamin_a,under 1 year,alias + opinion
+Q11,Is ceramide NP restricted in cosmetics?,Ceramide NP,,,,not covered

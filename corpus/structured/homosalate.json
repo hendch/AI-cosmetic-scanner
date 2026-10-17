@@ -1,0 +1,34 @@
+
+[
+  {
+    "id": "EV-HOMOSALATE-ANNEXVI",
+    "ingredient": "HOMOSALATE",
+    "aliases": [
+      "Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester",
+      "118-56-9",
+      "204-260-8"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex VI",
+    "entry_ref": "3",
+    "product_type": "Face products with the exception of propellent spray products",
+    "status": "restricted",
+    "restriction": "Permitted as a UV filter in cosmetic products only within the stated concentration limit.",
+    "max_concentration": "7,34 %",
+    "source_quote": "3\tBenzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester / Homosalate\tHOMOSALATE\t118-56-9\t204-260-8\tFace products with the exception of propellent spray products\t7,34 %"
+  },
+  {
+    "id": "EV-HOMOSALATE-SCCS-OVERALL",
+    "ingredient": "HOMOSALATE",
+    "aliases": [
+      "Benzoic acid, 2-hydroxy-, 3,3,5-trimethylcyclohexyl ester"
+    ],
+    "source_id": "sccs_homosalate",
+    "section": "SCCS/1622/20, Final Opinion on Homosalate (p. 52)",
+    "status": "assessed",
+    "hazard": "The SCCS identified concerns regarding the potential endocrine-disrupting properties of homosalate. The available evidence from in silico modelling, in vitro tests, and in vivo studies was considered inconclusive and insufficient to establish a specific endocrine-related toxicological point of departure for safety assessment.",
+    "opinion": "Homosalate is not considered safe as a UV filter in cosmetic products at concentrations up to 10%. The SCCS considers it safe for consumers only up to a maximum concentration of 0.5% in the final product. Although some studies suggest potential endocrine effects, the current evidence is inconclusive. Further considerations include exposure from other products and combined exposure to salicylic acid and other salicylates, which were not assessed.",
+    "conditions": "Homosalate is considered safe as a UV filter up to a maximum concentration of 0.5% in the final cosmetic product. Exposure from products outside the scope of the opinion and combined exposure to salicylic acid or other salicylates were not considered. The efficacy of homosalate at lower concentrations was outside the SCCS remit.",
+    "source_quote": "In the SCCS’s opinion, the use of homosalate as a UV filter in cosmetic products is safe for the consumer up to a maximum concentration of 0.5% homosalate in the final product."
+  }
+]

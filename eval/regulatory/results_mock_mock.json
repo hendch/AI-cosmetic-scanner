@@ -1,0 +1,26 @@
+{
+  "mode": "mock",
+  "prompt_version": "mock",
+  "status_accuracy": 100.0,
+  "compliance_accuracy": 95.6,
+  "condition_accuracy": 91.2,
+  "citation_validity": 100.0,
+  "wording_violations": 0,
+  "cases": 45,
+  "scored_conditions": 34,
+  "llm_calls": 0,
+  "retries": 0,
+  "fallbacks": 0,
+  "overrides": 0,
+  "status_disagreements": 0,
+  "seconds": 0.0,
+  "errors": [
+    "products/baby_nappy_cream propylparaben: compliance unknown != not_satisfied",
+    "products/baby_nappy_cream propylparaben: V/12a usage ['unknown'] != not_satisfied",
+    "products/toothpaste salicylic acid: compliance unknown != not_satisfied",
+    "products/toothpaste salicylic acid: III/98 usage ['unknown'] != not_satisfied",
+    "products/toothpaste salicylic acid: V/3 usage ['unknown'] != not_satisfied"
+  ],
+  "override_details": [],
+  "raw_answers": []
+}

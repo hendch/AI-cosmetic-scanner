@@ -1,0 +1,36 @@
+
+[
+  {
+    "id": "EV-BHT-ANNEX",
+    "ingredient": "BUTYLATED HYDROXYTOLUENE",
+    "aliases": [
+      "2,6-Di-Tert-Butyl-4-Methylphenol",
+      "128-37-0",
+      "204-881-4",
+      "BHT"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex III",
+    "entry_ref": "325",
+    "product_type": "a) Mouthwash b) Toothpaste c) Other leave-on and rinse-off products",
+    "status": "restricted",
+    "restriction": "Permitted in cosmetic products only within the stated concentration limits.",
+    "max_concentration": "a) 0,001 % b) 0,1 % c) 0,8 %",
+    "source_quote": "325\t2,6-Di-Tert-Butyl-4-Methylphenol\tButylated Hydroxytoluene\t128-37-0\t204-881-4\ta) Mouthwash b) Toothpaste c) Other leave-on and rinse-off products\ta) 0,001 % b) 0,1 % c) 0,8 %"
+  },
+  {
+    "id": "EV-BHT-SCCS-OVERALL",
+    "ingredient": "BUTYLATED HYDROXYTOLUENE",
+    "aliases": [
+      "2,6-Di-Tert-Butyl-4-Methylphenol",
+      "BHT"
+    ],
+    "source_id": "sccs_bht",
+    "section": "SCCS/1636/21 Opinion on Butylated Hydroxytoluene (BHT), Conclusion p. 26",
+    "status": "assessed",
+    "hazard": "The SCCS assessed BHT in light of concerns regarding its potential endocrine-disrupting properties. Environmental safety was not assessed because environmental aspects fall outside the SCCS mandate.",
+    "opinion": "The SCCS considers BHT safe for use in mouthwash at concentrations up to 0.001%, in toothpaste up to 0.1%, and in other leave-on and rinse-off cosmetic products up to 0.8%. BHT is also considered safe when these product categories are used in combination at their respective maximum concentrations. The assessment does not cover environmental safety.",
+    "conditions": "BHT is considered safe up to 0.001% in mouthwash, 0.1% in toothpaste, and 0.8% in other leave-on and rinse-off products, including combined use at these concentrations.",
+    "source_quote": "BHT is also considered safe for a combined use of mouthwash at a concentration of 0.001%, toothpaste at a concentration of 0.1% and other leave-on and rinse-off products at the concentration of 0.8%."
+  }
+]

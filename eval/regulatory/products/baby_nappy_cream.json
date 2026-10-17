@@ -1,0 +1,43 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Baby Nappy Cream",
+    "brand": "Eval Brand",
+    "barcode": "",
+    "category": "baby nappy cream for children under three",
+    "exposure_type": "leave_on",
+    "labels": []
+  },
+  "ingredients": [
+    {
+      "position": 1,
+      "raw": "AQUA",
+      "normalized": "aqua",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 2,
+      "raw": "GLYCERIN",
+      "normalized": "glycerin",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 3,
+      "raw": "PROPYLPARABEN",
+      "normalized": "propylparaben",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 4,
+      "raw": "PHENOXYETHANOL",
+      "normalized": "phenoxyethanol",
+      "matched": true,
+      "confidence": 1.0
+    }
+  ],
+  "needs_review": false,
+  "warnings": []
+}

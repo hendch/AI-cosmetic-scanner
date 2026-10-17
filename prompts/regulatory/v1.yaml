@@ -1,0 +1,81 @@
+id: regulatory
+version: v1
+date: 2026-10-16
+author: kreemi
+status: baseline
+description: >
+  Deliberately naive baseline, kept to document failures for the v1 -> v2 comparison
+  (e.g. answering from memory instead of the evidence, mixing up the annexes, calling a
+  restricted ingredient "illegal" or "safe", guessing concentrations, missing citations).
+  It receives the same inputs and must return the same JSON as v2, so both are scored on
+  the same test cases.
+model_params:
+  temperature: 0.2
+  max_tokens: 700
+system: |
+  You are a cosmetics regulation assistant.
+user: |
+  Is this ingredient allowed in this product under EU cosmetics law, and is the product compliant?
+
+  Product: {product}
+  Ingredient: {ingredient}
+  Concentration: {concentration}
+
+  Evidence:
+  {evidence}
+
+  Conditions to check:
+  {conditions}
+
+  Answer in JSON matching this schema:
+  {output_schema}
+# Fill on Day 3: one entry per observed failure.
+# - input: ...
+#   output: ...
+#   problem: ...
+known_failures:
+  - input: "Which annex of Regulation 1223/2009 lists allowed preservatives? (no evidence given, quick model test on 2026-10-16)"
+    output: '{"annex": "Annex II", "confidence": "high"}'
+    problem: >
+      Wrong from memory with high confidence: preservatives are Annex V; Annex II is the
+      list of prohibited substances. Shows why status must come from retrieved annex text.
+  # Observed 2026-10-16, Qwen/Qwen2.5-7B-Instruct:featherless-ai, temperature 0.2, same evidence as v2.
+  - input: "methylisothiazolinone, face cream (leave_on), Annex V/57 given as evidence"
+    output: '"regulatory_status": "prohibited", "explanation": "Methylisothiazolinone is prohibited in leave-in products ..."'
+    problem: >
+      Wrong status: Annex V entries are allowed preservatives with conditions, not prohibitions.
+      The product-type condition fails, but the substance is not an Annex II prohibition.
+  - input: "phenoxyethanol, face cream, Annex V/29 max 1,0 %, concentration unknown"
+    output: '"result": "not_satisfied", "explanation": "The product is not compliant as the concentration ... exceeds the maximum allowed limit of 1.0% without knowing the exact concentration."'
+    problem: >
+      Treats unknown concentration as a violation and gives a compliance verdict. Same failure
+      for methylisothiazolinone in a shampoo and for retinol.
+  - input: "retinol, face cream, labelling 'Contains Vitamin A ...', no label text given"
+    output: '"result": "satisfied", "reason": "The label includes the required warning ..."'
+    problem: Invents a fact (the label was never provided).
+  - input: "all v1 cases"
+    output: "answers wrapped in ```json fences"
+    problem: Not a pure JSON object; the parser tolerates it but v2 asks for JSON only.
+  # Observed 2026-10-16 in two full live eval runs (scripts/eval_regulatory.py, 25 calls each, temperature 0).
+  - input: "salicylic acid, toothpaste (rinse_off), V/3 usage 'Not to be used in oral products ...'"
+    output: '"result": "satisfied", "reason": "The product is not an oral product and does not involve inhalation exposure, so this condition is satisfied."'
+    problem: >
+      States a false fact about the product itself: a toothpaste is an oral product, so the
+      condition is not met. Not caught by any code rule (usage conditions are left to the LLM).
+  - input: "benzophenone-3, face sunscreen, VI/4 usage 'If used at 0,5 % to protect product formulation ...', concentration unknown"
+    output: '"result": "not_satisfied", "reason": "The concentration of benzophenone-3 is unknown, but if it were to be used at 0.5%, the levels used as a UV filter must not exceed 5.5% ..."'
+    problem: >
+      Invents a hypothetical concentration and fails the product on it (in the second run, for
+      benzophenone-3 in all three sunscreen/body products). The condition is typed
+      "usage", so the unknown-concentration safety rule (max_concentration only) does not apply.
+  - input: "limonene, shampoo and toothpaste (rinse_off), III/88 'indicated in the list of ingredients when its concentration exceeds 0,01 % in rinse-off', concentration unknown"
+    output: '"result": "not_satisfied", "reason": "The concentration of limonene is unknown, and the regulation requires it to be indicated in the ingredient list if its concentration exceeds 0.01% ..."'
+    problem: Unknown information treated as a violation, on a usage condition the code rule does not cover.
+  - input: "homosalate (VI/3), propylparaben (V/12a), methylisothiazolinone (V/57, twice)"
+    output: '"regulatory_status": "prohibited", "explanation": "The product is prohibited because it is a body sunscreen spray, which is not covered by the allowed product types ..."'
+    problem: >
+      4-6 of 25 answers per run changed the status to "prohibited" for Annex V/VI entries. Ignored by the
+      agent (status_disagreements), since the status always comes from the retrieved annex.
+  - input: "all v1 cases (25 answers)"
+    output: "25-30 safety overrides per run: 15 unknown-concentration conditions answered not_satisfied (or not_applicable), 10-15 label warnings answered satisfied/not_satisfied without label text"
+    problem: Without the strict rules, the model decides what it cannot know; the code rules carry v1.

@@ -1,0 +1,5 @@
+config,n,strict R@3,strict R@5,strict MRR,lenient R@3,lenient R@5,lenient MRR,not_covered_ok,avg_ms
+structured + filter,10,1.0,1.0,0.9,1.0,1.0,1.0,1/1,34.4
+"structured, no filter",10,1.0,1.0,0.9,1.0,1.0,1.0,0/1,41.1
+fixed + name post-filter,10,0.2,0.2,0.189,0.5,0.6,0.437,1/1,46.4
+"fixed, no filter",10,0.2,0.2,0.188,0.5,0.5,0.428,0/1,50.8

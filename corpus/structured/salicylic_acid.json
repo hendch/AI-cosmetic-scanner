@@ -1,0 +1,53 @@
+
+[
+  {
+    "id": "EV-SALICYLIC-ACID-ANNEXV",
+    "ingredient": "SALICYLIC ACID",
+    "aliases": [
+      "Salicylic acid",
+      "69-72-7",
+      "200-712-3"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex V",
+    "entry_ref": "3",
+    "product_type": "Salicylic acid used as a preservative in cosmetic products",
+    "status": "restricted",
+    "restriction": "Permitted as a preservative in cosmetic products within the stated concentration limit. Not applicable to sprayable products, including mouth sprays, that may lead to exposure of the end-user's lungs by inhalation.",
+    "max_concentration": "Salicylic acid: 0,5 % (acid)",
+    "source_quote": "3\tSalicylic acid\tSALICYLIC ACID\t69-72-7\t200-712-3\tSalicylic acid: 0,5 % (acid)"
+  },
+  {
+    "id": "EV-SALICYLIC-ACID-ANNEXIII",
+    "ingredient": "SALICYLIC ACID",
+    "aliases": [
+      "Benzoic acid, 2-hydroxy-",
+      "69-72-7",
+      "200-712-3"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex III",
+    "entry_ref": "98",
+    "product_type": "(a) Rinse-off hair products (b) Other products except body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant (c) Body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant",
+    "status": "restricted",
+    "restriction": "Not applicable to sprayable products, including mouth sprays, that may lead to exposure of the end-user's lungs by inhalation. Use in products for children under 3 years of age is not allowed.",
+    "max_concentration": "(a) 3.0% (b) 2.0% (c) 0.5%",
+    "source_quote": "98\tBenzoic acid, 2-hydroxy-\tSALICYLIC ACID\t69-72-7\t200-712-3\t(a) Rinse-off hair products (b) Other products except body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant (c) Body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant\t(a) 3.0% (b) 2.0% (c) 0.5%"
+  },
+  {
+    "id": "EV-SALICYLIC-ACID-SCCS-OVERALL",
+    "ingredient": "SALICYLIC ACID",
+    "aliases": [
+      "Benzoic acid, 2-hydroxy-",
+      "69-72-7",
+      "200-712-3"
+    ],
+    "source_id": "sccs_salicylic_acid",
+    "section": "SCCS/1646/22, Final Opinion on Salicylic Acid (pp. 54–55)",
+    "status": "assessed",
+    "hazard": "The SCCS identified salicylic acid as an eye irritant with the potential to cause serious eye damage. Safety concerns were also noted for children aged 3–10 years due to the absence of exposure data for this age group.",
+    "opinion": "The SCCS considers salicylic acid safe as a preservative at concentrations up to 0.5% under the current restrictions. For other cosmetic purposes, it is considered safe up to 3.0% in rinse-off hair products, 2.0% in other eligible products, and 0.5% in body lotions, eye makeup, lipstick, oral products, and non-spray deodorants. These conclusions do not apply to sprayable products that may expose the lungs through inhalation. Further caution is warranted for children aged 3–10 years because exposure data are lacking.",
+    "conditions": "Maximum concentrations are 0.5% as a preservative, 3.0% for rinse-off hair products, 2.0% for other eligible products, and 0.5% for body lotions, eye shadow, mascara, eyeliner, lipstick, oral products, and non-spray deodorants. Not applicable to sprayable products that may lead to lung exposure by inhalation. Salicylic acid is not permitted in products for children under 3 years of age. The assessment applies to salicylic acid only, not other salicylates or salicylic acid salts.",
+    "source_quote": "The SCCS is of the opinion that salicylic acid (CAS 69-72-7) is safe when used as preservative at a concentration of 0.5 % in cosmetic products, considering its current restrictions in place."
+  }
+]
