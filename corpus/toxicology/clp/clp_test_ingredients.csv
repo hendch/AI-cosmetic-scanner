@@ -1,16 +1,16 @@
 ingredient,echa_substance_name,cas,ec,harmonised,annex_vi_index_no,annex_vi_chemical_name,atp,hazard_classes,hazard_statements,notified_classification,notified_source_url,accessed_date,note
-glycerin,Glycerol,56-81-5,200-289-5,no,,,,,,,https://chem.echa.europa.eu/100.000.263,,
-niacinamide,Nicotinamide,98-92-0,202-713-4,no,,,,,,,https://chem.echa.europa.eu/100.002.467,,
+glycerin,Glycerol,56-81-5,200-289-5,no,,,,,,Not classified,https://chem.echa.europa.eu/100.000.263,2026-10-16,
+niacinamide,Nicotinamide,98-92-0,202-713-4,no,,,,,,Eye Irrit. 2 (H319),https://chem.echa.europa.eu/100.002.467,2026-10-16,
 phenoxyethanol,2-phenoxyethanol,122-99-6,204-589-7,yes,603-098-00-9,2-phenoxyethanol,ATP17,Acute Tox. 4; STOT SE 3; Eye Dam. 1,H302; H335; H318,,,,
 methylisothiazolinone,2-methylisothiazol-3(2H)-one,2682-20-4,220-239-6,yes,613-326-00-9,2-methylisothiazol-3(2H)-one,ATP13,Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1,H330; H311; H301; H314; H318; H317; H400; H410,,,,
 salicylic acid,salicylic acid,69-72-7,200-712-3,yes,607-732-00-5,salicylic acid,ATP13,Repr. 2; Acute Tox. 4; Eye Dam. 1,H361d; H302; H318,,,,
-bht,"2,6-di-tert-butyl-p-cresol",128-37-0,204-881-4,no,,,,,,,https://chem.echa.europa.eu/100.004.439,,
-retinol,Retinol,68-26-8,200-683-7,no,,,,,,,https://chem.echa.europa.eu/100.000.621,,
-homosalate,Homosalate,118-56-9,204-260-8,no,,,,,,,https://chem.echa.europa.eu/100.003.874,,
-octocrylene,Octocrilene,6197-30-4,228-250-8,no,,,,,,,https://chem.echa.europa.eu/100.025.683,,
-benzophenone-3,Oxybenzone,131-57-7,205-031-5,no,,,,,,,https://chem.echa.europa.eu/100.004.575,,
-propylparaben,Propyl 4-hydroxybenzoate,94-13-3,202-307-7,no,,,,,,,https://chem.echa.europa.eu/100.002.098,,
-butylparaben,butyl 4-hydroxybenzoate,94-26-8,202-318-7,no,,,,,,,https://chem.echa.europa.eu/100.002.108,,
-titanium dioxide,Titanium dioxide,13463-67-7,236-675-5,no,,,,,,,https://chem.echa.europa.eu/100.033.327,,"Former harmonised Carc. 2 (inhalation, powder form) was annulled by the EU courts; not in Annex VI ATP23."
+bht,"2,6-di-tert-butyl-p-cresol",128-37-0,204-881-4,no,,,,,,Aquatic Chronic 1 (H410),https://chem.echa.europa.eu/100.004.439,2026-10-16,
+retinol,Retinol,68-26-8,200-683-7,no,,,,,,Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413),https://chem.echa.europa.eu/100.000.621,2026-10-16,
+homosalate,Homosalate,118-56-9,204-260-8,no,,,,,,Repr. 2 (H361d); Aquatic Chronic 1 (H410),https://chem.echa.europa.eu/100.003.874,2026-10-16,
+octocrylene,Octocrilene,6197-30-4,228-250-8,no,,,,,,Repr. 2 (H361f); Aquatic Chronic 1 (H410),https://chem.echa.europa.eu/100.025.683,2026-10-16,
+benzophenone-3,Oxybenzone,131-57-7,205-031-5,no,,,,,,Aquatic Acute 1 (H400); Aquatic Chronic 2 (H411),https://chem.echa.europa.eu/100.004.575,2026-10-16,
+propylparaben,Propyl 4-hydroxybenzoate,94-13-3,202-307-7,no,,,,,,Aquatic Chronic 3 (H412),https://chem.echa.europa.eu/100.002.098,2026-10-16,
+butylparaben,butyl 4-hydroxybenzoate,94-26-8,202-318-7,no,,,,,,Skin Irrit. 2 (H315); Eye Dam. 1 (H318); Aquatic Chronic 3 (H412),https://chem.echa.europa.eu/100.002.108,2026-10-16,
+titanium dioxide,Titanium dioxide,13463-67-7,236-675-5,no,,,,,,Not classified,https://chem.echa.europa.eu/100.033.327,2026-10-16,"Former harmonised Carc. 2 (inhalation, powder form) was annulled by the EU courts; not in Annex VI ATP23."
 butylphenyl methylpropional,2-(4-tert-butylbenzyl)propionaldehyde,80-54-6,201-289-8,yes,605-041-00-3,2-(4-tert-butylbenzyl)propionaldehyde,ATP15,Repr. 1B,H360Fd,,,,Lilial; banned in EU cosmetics as CMR.
 zinc pyrithione,pyrithione zinc,13463-41-7,236-671-3,yes,613-333-00-7,pyrithione zinc; (T-4)-bis[1-(hydroxy-.kappa.O)pyridine-2(1H)-thionato-.kappa.S]zinc,ATP15,Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1,H360D; H330; H301; H372; H318; H400; H410,,,,Banned in EU cosmetics as CMR.

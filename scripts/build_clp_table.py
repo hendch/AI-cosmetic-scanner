@@ -51,16 +51,36 @@ TEST_INGREDIENTS = [
 # notified classification, filled in by hand from that page.
 # ingredient: (ECHA CHEM URL, notified classification, accessed date)
 NOTIFIED = {
-    "glycerin": ("https://chem.echa.europa.eu/100.000.263", "", ""),
-    "niacinamide": ("https://chem.echa.europa.eu/100.002.467", "", ""),
-    "bht": ("https://chem.echa.europa.eu/100.004.439", "", ""),
-    "retinol": ("https://chem.echa.europa.eu/100.000.621", "", ""),
-    "homosalate": ("https://chem.echa.europa.eu/100.003.874", "", ""),
-    "octocrylene": ("https://chem.echa.europa.eu/100.025.683", "", ""),
-    "benzophenone-3": ("https://chem.echa.europa.eu/100.004.575", "", ""),
-    "propylparaben": ("https://chem.echa.europa.eu/100.002.098", "", ""),
-    "butylparaben": ("https://chem.echa.europa.eu/100.002.108", "", ""),
-    "titanium dioxide": ("https://chem.echa.europa.eu/100.033.327", "", ""),
+    "glycerin": ("https://chem.echa.europa.eu/100.000.263", "Not classified", "2026-10-16"),
+    "niacinamide": ("https://chem.echa.europa.eu/100.002.467", "Eye Irrit. 2 (H319)", "2026-10-16"),
+    "bht": ("https://chem.echa.europa.eu/100.004.439", "Aquatic Chronic 1 (H410)", "2026-10-16"),
+    "retinol": (
+        "https://chem.echa.europa.eu/100.000.621",
+        "Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)",
+        "2026-10-16",
+    ),
+    "homosalate": (
+        "https://chem.echa.europa.eu/100.003.874",
+        "Repr. 2 (H361d); Aquatic Chronic 1 (H410)",
+        "2026-10-16",
+    ),
+    "octocrylene": (
+        "https://chem.echa.europa.eu/100.025.683",
+        "Repr. 2 (H361f); Aquatic Chronic 1 (H410)",
+        "2026-10-16",
+    ),
+    "benzophenone-3": (
+        "https://chem.echa.europa.eu/100.004.575",
+        "Aquatic Acute 1 (H400); Aquatic Chronic 2 (H411)",
+        "2026-10-16",
+    ),
+    "propylparaben": ("https://chem.echa.europa.eu/100.002.098", "Aquatic Chronic 3 (H412)", "2026-10-16"),
+    "butylparaben": (
+        "https://chem.echa.europa.eu/100.002.108",
+        "Skin Irrit. 2 (H315); Eye Dam. 1 (H318); Aquatic Chronic 3 (H412)",
+        "2026-10-16",
+    ),
+    "titanium dioxide": ("https://chem.echa.europa.eu/100.033.327", "Not classified", "2026-10-16"),
 }
 
 FIELDS = [
