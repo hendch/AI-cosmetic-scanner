@@ -12,7 +12,7 @@ from pathlib import Path
 
 from app.common_schemas import ProductInput
 from app.regulatory.agent import analyze
-from app.regulatory.llm import load_prompt
+from app.regulatory.agent import load_prompt
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT = ROOT / "eval" / "regulatory" / "live_answers_2026-10-16_v3.json"

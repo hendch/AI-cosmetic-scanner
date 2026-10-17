@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from app.dev_server import app
+from app.main import app
 from app.regulatory.schemas import RegulatoryResponse
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -118,12 +118,12 @@ def test_evaluation_runs_in_mock_mode():
 
 
 def test_router_loads_dotenv_before_choosing_the_mode():
-    # .env (REGULATORY_MODE, HF_TOKEN) is loaded by app.regulatory.llm; the router must import it,
+    # .env (REGULATORY_MODE, HF_TOKEN) is loaded by app.common.llm; the router must import it,
     # otherwise the API stays in mock mode even with a configured .env. Fresh interpreter, since
     # the other test modules already import llm.
     import subprocess
     import sys
 
-    code = "import sys, app.regulatory.router; print('app.regulatory.llm' in sys.modules)"
+    code = "import sys, app.regulatory.router; print('app.common.llm' in sys.modules)"
     out = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True, check=True)
     assert out.stdout.strip() == "True"

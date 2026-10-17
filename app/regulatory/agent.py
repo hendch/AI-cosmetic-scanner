@@ -20,7 +20,8 @@ from pydantic import BaseModel, ValidationError
 from app.common_schemas import Ingredient, Product, ProductInput
 from app.regulatory import rules
 from app.regulatory.kb import load_kb
-from app.regulatory.llm import ChatFn, Prompt, load_prompt, model_name, openai_chat, parse_json_object
+from app.common.llm import ChatFn, Prompt, chat_function, model_name, parse_json_object
+from app.common.llm import load_prompt as load_agent_prompt
 from app.regulatory.retrieval import Passage, RetrievalError, search_regulation
 from app.regulatory.schemas import (
     AgentRunStats,
@@ -30,6 +31,12 @@ from app.regulatory.schemas import (
     RegulatoryFinding,
     RegulatoryResponse,
 )
+
+
+def load_prompt(version: str | None = None) -> Prompt:
+    """prompts/regulatory/<version>.yaml; default from REGULATORY_PROMPT_VERSION (v4)."""
+    return load_agent_prompt("regulatory",version or os.environ.get("REGULATORY_PROMPT_VERSION", "v4"))
+
 
 FORBIDDEN_WORDS = re.compile(r"\b(safe|safely|unsafe|illegal|unlawful|dangerous|toxic|harmful)\b", re.I)
 
@@ -211,7 +218,7 @@ def _assess(ingredient: Ingredient, product: Product, prompt: Prompt, chat: Chat
 
 def analyze(payload: ProductInput, chat: ChatFn | None = None, prompt: Prompt | None = None) -> RegulatoryResponse:
     prompt = prompt or load_prompt()
-    chat = chat or openai_chat()
+    chat = chat or chat_function()
     stats = AgentRunStats(mode="live", model=model_name(), retrieval_backend=os.environ.get("RETRIEVAL_BACKEND", "local"))
     warnings = list(payload.warnings)
     workers = int(os.environ.get("REGULATORY_MAX_PARALLEL", "4"))

@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from app.dev_server import app
+from app.main import app
 from app.ethics.schemas import EthicsResponse
 from app.toxicology.schemas import ToxicologyResponse
 

@@ -1,0 +1,23 @@
+{
+  "agent": "regulatory",
+  "prompt_version": "mock",
+  "product_context": {
+    "category": "",
+    "exposure_type": null
+  },
+  "findings": [],
+  "warnings": [
+    "no barcode detected",
+    "no input produced ingredients"
+  ],
+  "run": {
+    "mode": "mock",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "status_disagreements": 0,
+    "overrides": []
+  }
+}

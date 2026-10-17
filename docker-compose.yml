@@ -27,6 +27,9 @@ services:
   scanner-api:
     build: .
     container_name: scanner-api
+    env_file: .env          # LLM settings (HF_TOKEN, LLM_MODEL, ...)
+    volumes:
+      - ./data:/code/data   # RAG index and PETA list, built locally (gitignored)
     ports:
       - "8000:8000"
     healthcheck:

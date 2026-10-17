@@ -1,3 +1,8 @@
+"""Check corpus/sources.yaml and corpus/structured/ before indexing.
+
+Usage: python -m scripts.check_corpus
+"""
+
 import collections
 from app.rag import config, ingest
 from app.rag.chunkers import record_id

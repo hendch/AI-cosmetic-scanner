@@ -4,10 +4,8 @@
     "name": "",
     "brand": "",
     "barcode": "",
-    "category": {
-      "tags": [],
-      "exposure": "unknown"
-    },
+    "category": "",
+    "exposure_type": null,
     "labels": []
   },
   "ingredients": [],

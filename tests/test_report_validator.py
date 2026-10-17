@@ -7,11 +7,12 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app.report import agent, llm
+from app.common import llm
+from app.report import agent
 from app.report.router import router
 from app.report.schemas import Draft, ValidatorOutput
 
-CASES = json.loads((Path(__file__).resolve().parent.parent / "evaluation" / "validator" / "cases.json").read_text(encoding="utf-8"))
+CASES = json.loads((Path(__file__).resolve().parent.parent / "eval" / "validator" / "cases.json").read_text(encoding="utf-8"))
 DRAFT = Draft.model_validate(CASES[0]["draft"])
 
 app = FastAPI()

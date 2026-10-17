@@ -42,7 +42,7 @@ system: |
 user: |
   Draft report to validate:
   {draft}
-# Observed on 2026-10-16 (evaluation/validator/results/2026-10-16_1446) with Qwen/Qwen2.5-7B-Instruct:featherless-ai, temperature 0.
+# Observed on 2026-10-16 (eval/validator/results/2026-10-16_1446) with Qwen/Qwen2.5-7B-Instruct:featherless-ai, temperature 0.
 known_failures:
   - scenario: supported_draft
     output: 'ethics "The product is labelled cruelty-free on Open Beauty Facts." -> unsupported, "brand statement and not an independent certification"'

@@ -7,7 +7,7 @@ from app.rag.schemas import RetrieveRequest, RetrieveResponse
 from app.rag.mock import mock_retrieve
 from app.rag.retrieve import retrieve as real_retrieve, IndexNotBuilt
 
-router = APIRouter()
+router = APIRouter(prefix="/rag", tags=["rag"])
 
 USE_MOCK = os.getenv("RAG_MOCK", "0") == "1"
 ALLOW_FIXED = os.getenv("RAG_ALLOW_FIXED", "0") == "1"

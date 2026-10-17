@@ -12,7 +12,7 @@ from pathlib import Path
 import yaml
 from pydantic import ValidationError
 
-from app.report import llm
+from app.common import llm
 from app.report.schemas import Draft, ValidateResponse, ValidatorOutput
 
 PROMPTS_DIR = Path(__file__).resolve().parents[2] / "prompts" / "validator"

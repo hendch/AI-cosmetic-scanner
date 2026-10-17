@@ -1,0 +1,33 @@
+{
+  "agent": "ethics",
+  "prompt_version": "mock",
+  "brand": "Acme",
+  "parent_company": null,
+  "status": "CLAIMED",
+  "status_reason": "Product carries a cruelty-free label on Open Beauty Facts, but the brand was not found in any certification list checked.",
+  "evidence": [
+    {
+      "type": "brand_claim",
+      "source": "Open Beauty Facts labels",
+      "detail": "en:cruelty-free",
+      "source_id": "obf_labels"
+    },
+    {
+      "type": "regulatory",
+      "source": "Regulation (EC) No 1223/2009, Art. 18",
+      "detail": "Animal testing of cosmetics and their ingredients is banned for products marketed in the EU.",
+      "source_id": "eu_1223_2009_art18"
+    }
+  ],
+  "certifications_checked": [
+    "Leaping Bunny",
+    "PETA Beauty Without Bunnies"
+  ],
+  "certifications_found": [],
+  "conflicts": [],
+  "missing_information": [
+    "independent certification"
+  ],
+  "evidence_confidence": "medium",
+  "warnings": []
+}

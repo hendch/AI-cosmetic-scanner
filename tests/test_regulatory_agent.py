@@ -5,7 +5,8 @@ from pathlib import Path
 
 from app.common_schemas import ProductInput
 from app.regulatory.agent import analyze
-from app.regulatory.llm import load_prompt, parse_json_object
+from app.common.llm import parse_json_object
+from app.regulatory.agent import load_prompt
 
 SAMPLES = Path(__file__).resolve().parent.parent / "samples" / "input"
 

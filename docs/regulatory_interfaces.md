@@ -97,11 +97,10 @@ agent returns the rule-based result with a warning.
 
 - Split: regulatory = legal status (annexes, Art. 15 CMR rule); toxicology = hazards (CLP, SCCS).
 - `eu_1223_2009_art18` (animal testing) is now a real corpus file for the ethics agent to cite.
-- Shared files changed: `app/dev_server.py` and `scripts/generate_samples.py` (one line each to add the
+- Shared files changed: `scripts/generate_samples.py` (one line to add the
   regulatory module), and a new sample `samples/input/leave_on_restricted.json` (so the toxicology and
   ethics samples gained one file each).
-- Proposal: reuse `app/regulatory/llm.py` (OpenAI-compatible client + YAML prompt loader) as a shared
-  `app/llm_client.py`.
+- The LLM client and prompt loader are now shared in `app/common/llm.py` (was `app/regulatory/llm.py`).
 
 ## How the agent works (summary)
 

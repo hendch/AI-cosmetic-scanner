@@ -1,4 +1,4 @@
-"""Run the validator agent on evaluation/validator/cases.json and record the results.
+"""Run the validator agent on eval/validator/cases.json and record the results.
 
 One model call per case and prompt version (plus at most one retry on bad JSON).
 Credits are shared: the script prints the number of calls before it starts.
@@ -14,10 +14,10 @@ from datetime import datetime
 from pathlib import Path
 
 from app.report.agent import ValidatorError, validate_draft
-from app.report.llm import model_name
+from app.common.llm import model_name
 from app.report.schemas import Draft, ValidatorOutput
 
-EVAL_DIR = Path(__file__).resolve().parent.parent / "evaluation" / "validator"
+EVAL_DIR = Path(__file__).resolve().parent.parent / "eval" / "validator"
 RESULTS_DIR = EVAL_DIR / "results"
 
 
@@ -66,7 +66,7 @@ def write_results(path: Path, model: str, runs: list[dict]) -> None:
         mine = [r for r in runs if r["prompt_version"] == version]
         lines += ["", f"{version}: {sum(r['verdict_correct'] for r in mine)}/{len(mine)} verdicts correct."]
     path.with_suffix(".md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"wrote evaluation/validator/results/{path.name}.md and .json")
+    print(f"wrote eval/validator/results/{path.name}.md and .json")
 
 
 def run(versions: list[str]) -> None:
