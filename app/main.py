@@ -1,31 +1,36 @@
-import os
-from fastapi import FastAPI, HTTPException
-from app.rag.schemas import RetrieveRequest, RetrieveResponse
-from app.rag.mock import mock_retrieve
-from app.rag.retrieve import retrieve as real_retrieve, IndexNotBuilt
+"""Main application entry point (owned by integration).
 
-USE_MOCK = os.getenv("RAG_MOCK", "0") == "1"
-ALLOW_FIXED = os.getenv("RAG_ALLOW_FIXED", "0") == "1"   # eval/debug only
+Includes every module's router. Modules that are not merged yet are skipped,
+so the app starts at every stage of the project.
+Run with: uvicorn app.main:app --reload
+"""
+import importlib
+from fastapi import FastAPI
 
-app = FastAPI(title="Cosmetic Scanner - RAG")
+app = FastAPI(title="AI Cosmetic Safety")
+
+# (module path, router attribute); add a line when a new module lands.
+ROUTER_MODULES = [
+    "app.integration.router",
+    "app.toxicology.router",
+    "app.ethics.router",
+    "app.regulatory.router",
+    "app.rag.router",
+    "app.ingestion.router",
+    "app.report.router",
+]
+
+for module_path in ROUTER_MODULES:
+    try:
+        module = importlib.import_module(module_path)
+    except ModuleNotFoundError as exc:
+        if exc.name != module_path and not module_path.startswith(exc.name or "\0"):
+            raise  # the module exists but one of its imports is broken
+        continue
+    app.include_router(module.router)
 
 
 @app.get("/health")
-def health():
-    return {"status": "ok", "mode": "mock" if USE_MOCK else "real",
-            "strategy": "structured"}
+async def health():
+    return {"ok": True}
 
-
-@app.post("/retrieve", response_model=RetrieveResponse)
-def retrieve(req: RetrieveRequest):
-    if req.strategy == "fixed" and not ALLOW_FIXED:
-        raise HTTPException(
-            status_code=400,
-            detail="Strategy 'fixed' is evaluation-only (rejected for production: "
-                   "it can merge unrelated entries). Use 'structured'.")
-    if USE_MOCK:
-        return mock_retrieve(req)
-    try:
-        return real_retrieve(req)
-    except IndexNotBuilt as e:
-        raise HTTPException(status_code=503, detail=str(e))

@@ -1,0 +1,58 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Hydra Cream",
+    "brand": "Acme",
+    "barcode": "3600550000000",
+    "category": {
+      "tags": [
+        "en:face-creams",
+        "en:moisturizers"
+      ],
+      "exposure": "leave_on"
+    },
+    "labels": [
+      "en:vegan",
+      "en:cruelty-free"
+    ]
+  },
+  "ingredients": [
+    {
+      "position": 1,
+      "raw": "Aqua",
+      "normalized": null,
+      "matched": false,
+      "confidence": 0.33
+    },
+    {
+      "position": 2,
+      "raw": "Phenoxyethanol",
+      "normalized": "phenoxyethanol",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 3,
+      "raw": "Retinol",
+      "normalized": "retinol",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 4,
+      "raw": "Propylparaben",
+      "normalized": "propylparaben",
+      "matched": true,
+      "confidence": 1.0
+    },
+    {
+      "position": 5,
+      "raw": "Parfum (Fragrance)",
+      "normalized": null,
+      "matched": false,
+      "confidence": 0.43
+    }
+  ],
+  "needs_review": true,
+  "warnings": []
+}

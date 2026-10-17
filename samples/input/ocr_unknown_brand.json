@@ -1,0 +1,11 @@
+{
+  "source": "ocr",
+  "product": { "name": "", "brand": "", "barcode": "123" },
+  "ingredients": [
+    { "position": 1, "raw": "Water", "normalized": "aqua", "matched": true, "confidence": 1.0 },
+    { "position": 2, "raw": "Phenoxyethan0l", "normalized": "phenoxyethanol", "matched": true, "confidence": 0.62 },
+    { "position": 3, "raw": "Xyl0-blend", "normalized": "xyl0-blend", "matched": false, "confidence": 0.4 }
+  ],
+  "needs_review": true,
+  "warnings": ["barcode not found or no ingredients"]
+}

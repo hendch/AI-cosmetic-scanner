@@ -1,0 +1,22 @@
+{
+  "source": "barcode",
+  "product": {
+    "name": "Anti-Dandruff Leave-In Cream",
+    "brand": "Example Brand",
+    "barcode": "0000000000003",
+    "category": "face cream",
+    "exposure_type": "leave_on",
+    "labels": []
+  },
+  "ingredients": [
+    { "position": 1, "raw": "AQUA", "normalized": "aqua", "matched": true, "confidence": 1.0 },
+    { "position": 2, "raw": "NIACINAMIDE", "normalized": "niacinamide", "matched": true, "confidence": 1.0 },
+    { "position": 3, "raw": "SALICYLIC ACID", "normalized": "salicylic acid", "matched": true, "confidence": 1.0 },
+    { "position": 4, "raw": "RETINOL", "normalized": "retinol", "matched": true, "confidence": 1.0 },
+    { "position": 5, "raw": "METHYLISOTHIAZOLINONE", "normalized": "methylisothiazolinone", "matched": true, "confidence": 1.0 },
+    { "position": 6, "raw": "ZINC PYRITHIONE", "normalized": "zinc pyrithione", "matched": true, "confidence": 1.0 },
+    { "position": 7, "raw": "SODIUM BENZOATE", "normalized": "sodium benzoate", "matched": true, "confidence": 1.0 }
+  ],
+  "needs_review": false,
+  "warnings": []
+}

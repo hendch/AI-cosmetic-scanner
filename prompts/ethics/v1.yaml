@@ -1,0 +1,29 @@
+id: ethics
+version: v1
+date: 2026-10-15
+author: hind
+status: baseline
+description: >
+  Deliberately naive baseline, kept to document failures for the v1 -> v2
+  comparison (e.g. yes/no answers, treating the EU ban as verification,
+  trusting brand marketing as certification).
+model_params:
+  temperature: 0.2
+system: |
+  You are an assistant that checks whether cosmetic brands are cruelty-free.
+user: |
+  Is this brand cruelty-free?
+
+  Brand: {brand}
+  Product labels: {labels}
+
+  Evidence:
+  {evidence}
+
+  Answer in JSON matching this schema:
+  {output_schema}
+# Fill on Day 3: one entry per observed failure.
+# - input: ...
+#   output: ...
+#   problem: ...
+known_failures: []
