@@ -1,0 +1,28 @@
+[
+  {
+    "id": "EV-BENZOPHENONE-3-ANNEXVI",
+    "ingredient": "BENZOPHENONE-3",
+    "aliases": ["2-Hydroxy-4-methoxybenzophenone","Oxybenzone", "131-57-7", "205-031-5"],
+    "source_id": "eu_1223_2009",
+    "section": "Annex VI",
+    "entry_ref": "4",
+    "product_type":"a) Face products, hand products, and lip products, excluding propellant and pump spray products b) Body products, including propellant and pump spray products c) Other products",
+    "status": "restricted",
+    "restriction": "Permitted as a preservative in cosmetic products only within the stated limits.",
+    "max_concentration": "a) 6% b) 2,2% c) 0,5% Footnote 1: However, cosmetic products containing '2-Hydroxy-4-methoxy-benzophenone/Oxybenzone' and complying with the restrictions set out in Regulation (EC) No 1223/2009 as applicable on 27 July 2022 may be placed on the Union market until 28 January 2023 and be made available on the Union market until 28 July 2023.",
+    "source_quote": "4\t2-Hydroxy-4-methoxybenzophenone / Oxybenzone\tBENZOPHENONE-3\t131-57-7\t205-031-5\ta) Face products, hand products, and lip products, excluding propellant and pump spray products b) Body products, including propellant and pump spray products c) Other products\ta) 6% b) 2,2% c) 0,5% Footnote 1: However, cosmetic products containing '2-Hydroxy-4-methoxy-benzophenone/Oxybenzone' and complying with the restrictions set out in Regulation (EC) No 1223/2009 as applicable on 27 July 2022 may be placed on the Union market until 28 January 2023 and be made available on the Union market until 28 July 2023."
+  },
+  
+ {
+  "id": "EV-BENZOPHENONE-3-SCCS-OVERALL",
+  "ingredient": "BENZOPHENONE-3",
+  "aliases": ["2-Hydroxy-4-methoxybenzophenone"],
+  "source_id": "sccs_benzophenone-3",
+  "section": "SCCS/1625/20, Overall safety assessment of benzophenone-3 (p. 82)",
+  "status": "assessed",
+  "hazard": "The SCCS identified concerns regarding the potential endocrine-disrupting properties of benzophenone-3 (BP-3). The available evidence from in silico modelling, in vitro tests, and in vivo studies was considered inconclusive. The assessment also identified safety concerns associated with the use of BP-3 at 6% as a UV filter in body creams and sunscreen sprays.",
+  "opinion": "Benzophenone-3 can be considered safe under specific conditions of use, depending on the cosmetic product and concentration. The SCCS considers its use as a UV filter up to 6% safe in face creams, hand creams, and lipsticks, but not in body creams or sunscreen sprays at that concentration. For body creams and sunscreen sprays, the maximum safe concentration is 2.2% when BP-3 is used only as a UV filter, or 1.7% when an additional 0.5% is used to protect the cosmetic formulation. Although the evidence does not conclusively establish BP-3 as an endocrine-disrupting substance, further investigation is warranted. Environmental safety was not assessed.",
+  "conditions": "BP-3 is considered safe up to 6% as a UV filter in face creams, hand creams, and lipsticks, and up to 0.5% when used to protect cosmetic formulations. In body creams, propellant sprays, and pump sprays, the maximum safe UV-filter concentration is 2.2%, provided that no additional 0.5% is used to protect the formulation. If BP-3 is also used at 0.5% for formulation protection, the UV-filter concentration should not exceed 1.7%.",
+  "source_quote": "The use of BP-3 as a UV-filter up to a maximum concentration of 6% in sunscreen products, either in the form of body cream, sunscreen propellant spray or pump spray, is not safe for the consumer."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "EV-PHENOXYETHANOL-ANNEXV",
+    "ingredient": "PHENOXYETHANOL",
+    "aliases": ["2-Phenoxyethanol", "122-99-6", "204-589-7"],
+    "source_id": "eu_1223_2009",
+    "section": "Annex V",
+    "entry_ref": "29",
+    "status": "restricted",
+    "restriction": "Permitted as a preservative in cosmetic products only within the stated limits.",
+    "max_concentration": "1.0%",
+    "source_quote": "29\t2-Phenoxyethanol\tPHENOXYETHANOL\t122-99-6\t204-589-7\t\t1.0%"
+  },
+  {
+  "id": "EV-PHENOXYETHANOL-SCCS-OVERALL",
+  "ingredient": "Phenoxyethanol",
+  "aliases": ["2-phenoxyethanol"],
+  "source_id": "sccs_phenoxyethanol",
+  "section": "SCCS/1575/16, Overall safety assessment of 2-phenoxyethanol (p. 82)",
+  "status": "assessed",
+  "hazard": "Haematotoxicity is described as a predominant toxicological feature of 2-phenoxyethanol in vivo and in vitro. Rabbits were the most sensitive species tested. The main metabolite, 2-phenoxyacetic acid, may accumulate in the kidney and may be responsible for kidney toxicity in rats after oral exposure.",
+  "opinion": "Using an adjusted NOAEL of 357 mg/kg bw/day from a 90-day dermal study in rabbits and aggregate exposure for preservatives in cosmetics, a Margin of Safety (MoS) of 130 was derived for adults, against a minimum MoS of 25 selected by the SCCS. The SCCS states this span also covers the safety of infants and babies. For children up to 3 years, exposure may be higher than for adults, but MoS values from reasonable worst-case scenarios are considered sufficient (e.g. MoS of 41 with the EFSA 7 kg default body weight).",
+  "conditions": "Assessment is based on dermal exposure and aggregate exposure to preservatives in cosmetics. The concentration limit is not stated in this excerpt.",
+  "source_quote": "Using an adjusted NOAEL of 357 mg/kg bw/day from a 90-day dermal RDT study in rabbits and the aggregate exposure for preservatives in cosmetics, for adult humans a MoS of 130 was derived."
+  }
+]

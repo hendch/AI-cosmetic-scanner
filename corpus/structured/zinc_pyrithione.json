@@ -1,0 +1,39 @@
+
+[
+  {
+    "id": "EV-ZINC-PYRITHIONE-ANNEXII",
+    "ingredient": "ZINC PYRITHIONE",
+    "aliases": [
+      "Pyrithione zinc",
+      "(T-4)-bis[1-(hydroxy-κO)pyridine-2(1H)-thionato-κS]zinc",
+      "ZPT",
+      "13463-41-7",
+      "236-671-3"
+    ],
+    "source_id": "eu_1223_2009",
+    "section": "Annex II",
+    "entry_ref": "1670",
+    "product_type": "All cosmetic products",
+    "status": "prohibited",
+    "restriction": "Listed as a prohibited substance in cosmetic products.",
+    "max_concentration": "Not permitted",
+    "source_quote": "1670\tPyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)- thionato-.kappa.S]zinc\t13463-41-7\t236-671-3"
+  },
+  {
+    "id": "EV-ZINC-PYRITHIONE-SCCS-OVERALL",
+    "ingredient": "ZINC PYRITHIONE",
+    "aliases": [
+      "Pyrithione zinc",
+      "ZPT",
+      "13463-41-7",
+      "236-671-3"
+    ],
+    "source_id": "sccs_zinc_pyrithione",
+    "section": "SCCS/1614/19, Final Opinion on Zinc Pyrithione (ZPT), submission III, p. 25",
+    "status": "assessed",
+    "hazard": "The SCCS assessed the safety of Zinc Pyrithione as an anti-dandruff ingredient in rinse-off hair products, taking into account the overall exposure from other sources.",
+    "opinion": "The SCCS considers Zinc Pyrithione safe when used as an anti-dandruff ingredient in rinse-off hair products at a maximum concentration of 1%, under the conditions assessed.",
+    "conditions": "Applies to rinse-off hair products used as anti-dandruff products. Maximum concentration assessed: 1%. The assessment takes overall exposure from other sources into account. The opinion reports no further scientific concerns in response to the second question and no minority opinion.",
+    "source_quote": "In line with the conditions laid out in Article 15(d) (i.e. ‘overall exposure from other sources’) of the Regulation (EC) No 1223/2009 and taking into account the scientific data provided, the SCCS considers Zinc Pyrithione (ZPT) as safe when used as an anti-dandruff in rinse-off hair products up to a maximum concentration of 1%."
+  }
+]

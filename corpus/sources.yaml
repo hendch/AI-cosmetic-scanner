@@ -1,0 +1,64 @@
+sources:
+  #fixture_source:
+  #  title: "FIXTURE - test data, not a real regulatory source"
+  #  date: "2026-01-01"
+  #  url: "https://example.org/fixture"
+  #  file: null          # later: "eu_1223_2009_annex_v.pdf" (a file in corpus/raw/)
+  eu_1223_2009:
+    title: "Regulation (EC) No 1223/2009 on cosmetic products (consolidated version)"
+    date: "2026-05-18"
+    url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02009R1223-20260518&qid=1792112470036"
+    file: "eu_1223_2009.pdf"  
+  sccs_phenoxyethanol:
+    title: "SCCS Opinion on Phenoxyethanol (SCCS/1575/16)"
+    date: "2016-10-06"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-phenoxyethanol-2016-10-14_en"
+    file: "sccs_phenoxyethanol.pdf"
+  sccs_propylparaben:
+    title: "SCCS Opinion on Propylparaben (SCCS/1623/20)"
+    date: "2021-03-31"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-propylparaben-2021-04-15_en"
+    file: "sccs_propylparaben.pdf"
+  sccs_benzophenone-3:
+    title: "SCCS Opinion on Benzophenone-3 (SCCS/1625/20)"
+    date: "2021-03-31"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-benzophenone-3-2021-04-15_en"
+    file: "sccs_benzophenone-3.pdf"
+  sccs_bht:
+    title: "SCCS Opinion on BHT (SCCS/1636/21)"
+    date: "2021-12-02"
+    url: "https://health.ec.europa.eu/publications/butylated-hydroxytoluene-bht_en"
+    file: "sccs_bht.pdf"
+  sccs_homosalate:
+    title: "SCCS Opinion on Homosalate (SCCS/1622/20)"
+    date: "2021-06-25"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-homosalate-2021-06-29_en"
+    file: "sccs_homosalate.pdf"
+  sccs_octocrylene:
+    title: "SCCS Opinion on Octocrylene (SCCS/1627/21)"
+    date: "2021-03-31"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-octocrylene-2021-04-15_en"
+    file: "sccs_octocrylene.pdf"
+  sccs_salicylic_acid:
+    title: "SCCS Opinion on Salicylic acid (SCCS/1646/22)"
+    date: "2023-06-07"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-salicylic-acid-2023-06-09_en"
+    file: "sccs_salicylic_acid.pdf"
+  sccs_titanium_dioxide_nano:
+    title: "SCCS Opinion on Titanium dioxide (nano) coating (SCCS/1667/24)"
+    date: "2024-10-25"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-new-coating-titanium-dioxide-nano-form-2024-10-25_en"
+    file: "sccs_titanium_dioxide_nano_coating.pdf"
+  sccs_vitamin_a:
+    title: "SCCS Opinion on Vitamin A (SCCS/1576/16)"
+    date: "2016-10-06"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-vitamin-retinol-retinyl-acetate-retinyl-palmitate-2016-10-14_en"
+    file: "sccs_vitamin_a.pdf"
+  sccs_zinc_pyrithione:
+    title: "SCCS Opinion on Zinc pyrithione (SCCS/1614/19)"
+    date: "2020-03-04"
+    url: "https://health.ec.europa.eu/latest-updates/sccs-final-opinion-zinc-pyrithione-zpt-submission-iii-2020-03-12_en"
+    file: "sccs_zinc_pyrithione.pdf"
+  # ...one entry per further source: SCCS for 2-3 more ingredients, ECHA for 2-3 more,
+  # the EU animal-testing provisions (Article 18 of 1223/2009, covered by the
+  # regulation file, so a record can point to eu_1223_2009 with section "Article 18").
