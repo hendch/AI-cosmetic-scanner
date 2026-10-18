@@ -1,0 +1,15 @@
+# Everything for local development: the API plus index building, corpus scripts, tests and evaluation.
+# Install: pip install -r requirements-dev.txt
+-r requirements.txt
+
+# RAG index building (python -m app.rag.index): local embedding model and PDF parsing
+sentence-transformers>=3.0
+pymupdf>=1.24
+
+# corpus building scripts
+openpyxl>=3.1
+truststore>=0.9
+
+# tests and evaluation
+pytest>=8.0
+pandas>=2.0

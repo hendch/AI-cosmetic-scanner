@@ -3,11 +3,30 @@
 Includes every module's router. Modules that are not merged yet are skipped,
 so the app starts at every stage of the project.
 Run with: uvicorn app.main:app --reload
+
+When SCANNER_API_KEY is set (always on Render), every request except /health must send
+the header X-API-Key: <that value>. The API is public and spends the team's HF credits.
 """
 import importlib
-from fastapi import FastAPI
+import os
+import secrets
+
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 app = FastAPI(title="AI Cosmetic Safety")
+
+API_KEY = os.environ.get("SCANNER_API_KEY", "")
+OPEN_PATHS = {"/health"}
+
+
+@app.middleware("http")
+async def require_api_key(request: Request, call_next):
+    if API_KEY and request.url.path not in OPEN_PATHS:
+        if not secrets.compare_digest(request.headers.get("x-api-key", ""), API_KEY):
+            return JSONResponse({"detail": "Missing or invalid X-API-Key header"}, status_code=401)
+    return await call_next(request)
+
 
 # (module path, router attribute); add a line when a new module lands.
 ROUTER_MODULES = [
@@ -33,4 +52,3 @@ for module_path in ROUTER_MODULES:
 @app.get("/health")
 async def health():
     return {"ok": True}
-

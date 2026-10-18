@@ -12,9 +12,11 @@ class IndexNotBuilt(RuntimeError):
 
 def _to_item(p) -> EvidenceItem:
     pl = p.payload
-    meta = {k: pl.get(k) for k in ("ingredient", "status", "product_type",
-                                   "max_concentration", "entry_ref", "source_id")
-            if pl.get(k) is not None}
+    keys = ("ingredient", "status", "product_type", "max_concentration", "entry_ref", "source_id",
+            # annex entries (doc_type "regulation"): what the regulatory agent needs to rebuild the entry
+            "doc_type", "ingredients", "annex", "entry", "product_type_body_parts", "other_conditions",
+            "warnings", "inci_names", "chemical_name", "cas", "consolidated_version", "source_url")
+    meta = {k: pl.get(k) for k in keys if pl.get(k) is not None}
     return EvidenceItem(evidence_id=pl["evidence_id"], text=pl["text"],
                         score=round(float(p.score), 4), source=pl["source"],
                         section=pl.get("section"), source_date=pl.get("source_date"),

@@ -87,9 +87,14 @@ def settings() -> tuple[str, str, str]:
 
 
 def chat(messages: list[dict], temperature: float = 0.0, max_tokens: int | None = None,
-         timeout: float | None = None) -> str:
-    """One chat completion; returns the raw text answer. One retry on network errors, 429 and 5xx."""
-    base_url, model, api_key = settings()
+         timeout: float | None = None, model: str | None = None) -> str:
+    """One chat completion; returns the raw text answer. One retry on network errors, 429 and 5xx.
+
+    `model` overrides LLM_MODEL for one call (label OCR uses the vision model OCR_MODEL).
+    Message content may be a list of parts (text + image_url), OpenAI-style.
+    """
+    base_url, default_model, api_key = settings()
+    model = model or default_model
     body = {"model": model, "messages": messages, "temperature": temperature}
     if max_tokens:
         body["max_tokens"] = max_tokens

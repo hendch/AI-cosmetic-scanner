@@ -18,6 +18,8 @@ class Ingredient(BaseModel):
     normalized: str
     matched: bool
     confidence: float = Field(ge=0, le=1)
+    # Labels almost never give it; when known (e.g. "2% Niacinamide"), the regulatory agent checks limits with it.
+    concentration_percent: float | None = Field(default=None, ge=0, le=100)
 
 
 class Product(BaseModel):

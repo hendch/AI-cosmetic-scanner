@@ -1,0 +1,109 @@
+# Render Blueprint: every service of the AI Cosmetic Scanner. Create it in the Render dashboard
+# with New > Blueprint and this repository. Full steps and checks: docs/DEPLOY.md
+#
+#   cosmetic-scanner-web  (static, free)  -> app (Expo web build)
+#   cosmetic-scanner-n8n  (starter, $7)   -> orchestration, webhook the app calls
+#   cosmetic-scanner-api  (free)          -> FastAPI: ingestion, OCR, agents, report, validator
+#   cosmetic-scanner-db   (Postgres free) -> n8n's database
+#   Models (Qwen2.5-7B agents, Qwen3-VL OCR, bge-small embeddings) run on the Hugging Face router via HF_TOKEN.
+#
+# The services call each other on their public https URLs (free services cannot receive private
+# network traffic). If Render adds a suffix to a service URL, update SCANNER_API_URL and
+# EXPO_PUBLIC_SCAN_URL below (or in the dashboard) to the real URLs.
+
+envVarGroups:
+  # n8n -> api. Secret: only the api and n8n get it.
+  - name: scanner-api-key
+    envVars:
+      - key: SCANNER_API_KEY
+        generateValue: true
+  # app -> n8n webhook. Built into the public web app, so treat it as public.
+  - name: scanner-webhook-key
+    envVars:
+      - key: EXPO_PUBLIC_WEBHOOK_KEY
+        generateValue: true
+
+services:
+  - type: web
+    name: cosmetic-scanner-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    buildFilter:
+      paths: ["app/**", "corpus/**", "prompts/**", "samples/**", "requirements.txt", "Dockerfile"]
+    envVars:
+      - fromGroup: scanner-api-key
+      - key: HF_TOKEN
+        sync: false                     # paste the team token when the Blueprint is created
+      - key: LLM_BASE_URL
+        value: https://router.huggingface.co/v1
+      - key: LLM_MODEL
+        value: Qwen/Qwen2.5-7B-Instruct:featherless-ai
+      - key: OCR_MODEL
+        value: Qwen/Qwen3-VL-30B-A3B-Instruct
+      - key: LLM_TIMEOUT
+        value: "90"
+      - key: EMBEDDING_BACKEND
+        value: hf
+      - key: REGULATORY_MODE
+        value: live
+      - key: REGULATORY_PROMPT_VERSION
+        value: v4
+      - key: REGULATORY_MAX_PARALLEL
+        value: "4"
+      - key: RETRIEVAL_BACKEND
+        value: rag                      # regulatory agent retrieves annex entries from the RAG index
+
+  - type: web
+    name: cosmetic-scanner-n8n
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    dockerfilePath: ./deploy/n8n/Dockerfile
+    dockerContext: ./deploy/n8n
+    healthCheckPath: /healthz
+    buildFilter:
+      paths: ["deploy/n8n/**"]
+    envVars:
+      - fromGroup: scanner-api-key
+      - fromGroup: scanner-webhook-key
+      - key: SCANNER_API_URL
+        value: https://cosmetic-scanner-api.onrender.com
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true             # never change it after the first deploy
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_HOST
+        fromDatabase: {name: cosmetic-scanner-db, property: host}
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase: {name: cosmetic-scanner-db, property: database}
+      - key: DB_POSTGRESDB_USER
+        fromDatabase: {name: cosmetic-scanner-db, property: user}
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase: {name: cosmetic-scanner-db, property: password}
+
+  - type: web
+    name: cosmetic-scanner-web
+    runtime: static
+    buildCommand: cd frontend && npm ci && npx expo export --platform web
+    staticPublishPath: ./frontend/dist
+    buildFilter:
+      paths: ["frontend/**"]
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - fromGroup: scanner-webhook-key
+      - key: EXPO_PUBLIC_SCAN_URL
+        value: https://cosmetic-scanner-n8n.onrender.com/webhook/cosmetic-scanner-live
+      - key: NODE_VERSION
+        value: "22"
+
+databases:
+  - name: cosmetic-scanner-db
+    plan: free
+    region: frankfurt

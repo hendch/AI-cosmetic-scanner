@@ -14,7 +14,7 @@ export type ProgressListener = (stage: string | null) => void;
 
 const SCAN_URL = process.env.EXPO_PUBLIC_SCAN_URL ?? '';
 const STATUS_URL = process.env.EXPO_PUBLIC_STATUS_URL ?? '';
-const API_KEY = process.env.EXPO_PUBLIC_API_KEY ?? '';
+const WEBHOOK_KEY = process.env.EXPO_PUBLIC_WEBHOOK_KEY ?? '';
 const POLL_MS = 1500;
 
 const LABEL_PHOTO_MESSAGE =
@@ -46,7 +46,7 @@ function sleep(ms: number, signal?: AbortSignal) {
 async function call(url: string, init: RequestInit): Promise<PublicResult> {
   let response: Response;
   try {
-    response = await fetch(url, { ...init, headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY } });
+    response = await fetch(url, { ...init, headers: { 'Content-Type': 'application/json', 'X-API-Key': WEBHOOK_KEY } });
   } catch (err) {
     if ((err as Error).name === 'AbortError') throw err;
     throw new ServiceError(

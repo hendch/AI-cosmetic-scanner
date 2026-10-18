@@ -415,9 +415,16 @@
         "compliance": "not_satisfied"
       },
       "sodium benzoate": {
-        "status": "not_assessed",
-        "compliance": "not_applicable",
-        "why": "Outside the corpus scope"
+        "status": "restricted",
+        "compliance": "unknown",
+        "conditions": [
+          {
+            "entry": "V/1",
+            "type": "product_type",
+            "result": "satisfied"
+          }
+        ],
+        "why": "Annex V entry 1 (added to the corpus 2026-10-18): (c) Leave-on products, 0,5 % (acid); face cream is leave-on, concentration unknown"
       }
     },
     "input/ocr_unknown_brand": {

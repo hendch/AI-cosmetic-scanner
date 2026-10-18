@@ -79,3 +79,25 @@ def structured(rec: dict, sources: dict) -> Chunk:
         "max_concentration": rec.get("max_concentration"),
         "source_date": src.get("date"), "url": src.get("url"),
     })
+
+# Strategy B also covers the regulatory annexes: one chunk per annex entry (corpus/regulatory/*.csv),
+# with the legal fields as metadata, so the regulatory agent can retrieve exact entries.
+REGULATION_FIELDS = ("product_type_body_parts", "max_concentration", "other_conditions", "warnings",
+                     "inci_names", "chemical_name", "cas", "status", "consolidated_version", "source_url")
+
+
+def annex_row(row) -> Chunk:
+    """`row` is an app.regulatory.kb.AnnexRow."""
+    names = sorted({norm(i) for i in row.ingredients}
+                   | {norm(n) for n in row.inci_names.split(";") if n.strip()})
+    eid = f"{row.source_id}#{row.entry}"
+    text = row.as_text()
+    return Chunk(eid, text, {
+        "evidence_id": eid, "text": text, "strategy": "structured", "doc_type": "regulation",
+        "ingredient": norm(row.ingredients[0]) if row.ingredients else "", "names": names,
+        "ingredients": ";".join(row.ingredients), "annex": row.annex, "entry": row.entry,
+        "source_id": row.source_id, "source": f"Regulation (EC) No 1223/2009, Annex {row.annex}",
+        "section": f"Annex {row.annex}", "entry_ref": row.entry,
+        "source_date": row.consolidated_version, "url": row.source_url,
+        **{k: getattr(row, k) for k in REGULATION_FIELDS},
+    })

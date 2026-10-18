@@ -20,8 +20,9 @@ def test_barcode_found(monkeypatch):
     body = ProductInput.model_validate(r.json())
     assert body.source == "barcode"
     assert body.product.exposure_type == "leave_on"
-    assert [i.normalized for i in body.ingredients if i.matched] == ["phenoxyethanol", "retinol"]
-    assert body.needs_review is True          # aqua / parfum are not in KNOWN
+    assert [i.normalized for i in body.ingredients] == ["aqua", "phenoxyethanol", "retinol", "parfum"]
+    assert all(i.matched and i.confidence == 1.0 for i in body.ingredients)
+    assert body.needs_review is False         # every name recognised exactly
 
 
 def test_nothing_found():
@@ -30,3 +31,27 @@ def test_nothing_found():
     assert body.source is None
     assert body.needs_review is True
     assert "no barcode detected" in body.warnings
+
+
+def test_barcode_must_be_digits(monkeypatch):
+    called = []
+    monkeypatch.setattr(ex.requests, "get", lambda *a, **k: called.append(a))
+    assert ex.lookup_barcode("../../../samples/input/barcode_found") is None
+    assert not called  # never reaches the cache file name or the network
+
+
+def test_network_failure_is_reported_not_crashed(monkeypatch):
+    def down(*a, **k):
+        raise ex.requests.ConnectionError("offline")
+
+    monkeypatch.setattr(ex.requests, "get", down)
+    body = client.post("/ingestion/extract", data={"barcode": "99999999"}).json()
+    assert "barcode not found or no ingredients" in body["warnings"]
+
+
+def test_product_name_is_the_fallback_category(monkeypatch):
+    product = {**FAKE_PRODUCT, "product_name": "Bodylotion Creme-Öl", "categories_tags": []}
+    monkeypatch.setattr(ex, "lookup_barcode", lambda code: product)
+    body = client.post("/ingestion/extract", data={"barcode": "123"}).json()
+    assert body["product"]["category"] == "bodylotion creme-öl"
+    assert body["product"]["exposure_type"] == "leave_on"

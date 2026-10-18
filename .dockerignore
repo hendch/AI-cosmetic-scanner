@@ -6,7 +6,7 @@ tests/
 eval/
 frontend/
 deploy/
-# local data (RAG index, PETA list) is mounted as a volume in docker-compose.yml
-data/
+# local data at the repo root (RAG build, PETA list); app/ingestion/data/ must stay in the image
+/data/
 # ECHA source table, only needed by scripts/build_clp_table.py
 corpus/toxicology/clp/*.xlsx

@@ -1,35 +1,12 @@
+# Local copy of the Render deployment (render.yaml): same images, same environment variables.
+#   cp .env.example .env   then fill HF_TOKEN, SCANNER_API_KEY, EXPO_PUBLIC_WEBHOOK_KEY, N8N_ENCRYPTION_KEY, POSTGRES_PASSWORD
+#   docker compose up -d --build
+#   n8n: http://localhost:5678   api: http://localhost:8000/docs   app: cd frontend && npm run web
 services:
-  n8n:
-    image: n8nio/n8n:${N8N_VERSION:-latest}
-    container_name: n8n
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_HOST=localhost
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=http
-      - WEBHOOK_URL=http://localhost:5678/
-      - GENERIC_TIMEZONE=Europe/Berlin
-      - N8N_SECURE_COOKIE=false
-      - N8N_DIAGNOSTICS_ENABLED=false
-      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?set N8N_ENCRYPTION_KEY in .env}
-    volumes:
-      - n8n_data:/home/node/.n8n
-    depends_on:
-      scanner-api:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
-      ollama:
-        condition: service_healthy
-    restart: unless-stopped
-
   scanner-api:
     build: .
     container_name: scanner-api
-    env_file: .env          # LLM settings (HF_TOKEN, LLM_MODEL, ...)
-    volumes:
-      - ./data:/code/data   # RAG index and PETA list, built locally (gitignored)
+    env_file: .env          # HF_TOKEN, LLM_*, OCR_MODEL, SCANNER_API_KEY, ...
     ports:
       - "8000:8000"
     healthcheck:
@@ -39,31 +16,29 @@ services:
       retries: 10
     restart: unless-stopped
 
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
+  n8n:
+    build: ./deploy/n8n
+    container_name: n8n
     ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    healthcheck:
-      test: ["CMD", "ollama", "list"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-    restart: unless-stopped
-
-  # One-shot job: downloads the model into the ollama volume, then exits.
-  ollama-pull:
-    image: ollama/ollama
-    container_name: ollama-pull
+      - "5678:10000"
     environment:
-      - OLLAMA_HOST=http://ollama:11434
-    entrypoint: ["sh", "-c", "ollama pull ${OLLAMA_MODEL:-qwen2.5:7b}"]
+      - N8N_WEBHOOK_URL=http://localhost:5678/
+      - N8N_SECURE_COOKIE=false
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?set N8N_ENCRYPTION_KEY in .env}
+      - SCANNER_API_URL=http://scanner-api:8000
+      - SCANNER_API_KEY=${SCANNER_API_KEY:?set SCANNER_API_KEY in .env}
+      - EXPO_PUBLIC_WEBHOOK_KEY=${EXPO_PUBLIC_WEBHOOK_KEY:?set EXPO_PUBLIC_WEBHOOK_KEY in .env}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_DATABASE=scanner
+      - DB_POSTGRESDB_USER=scanner
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
     depends_on:
-      ollama:
+      scanner-api:
         condition: service_healthy
-    restart: "no"
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
 
   postgres:
     image: postgres:16
@@ -74,7 +49,6 @@ services:
       - POSTGRES_DB=scanner
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./deploy/db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U scanner -d scanner"]
       interval: 5s
@@ -83,6 +57,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  n8n_data:
-  ollama_data:
   pg_data:

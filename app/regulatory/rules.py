@@ -26,6 +26,7 @@ from app.regulatory.schemas import (
 OCR_CONFIDENCE_THRESHOLD = 0.8
 OCR_NOTE = "ingredient name from OCR, unverified"
 NO_CONCENTRATION = "Concentration is not provided on the label."
+LIMIT_NEEDS_INTERPRETATION = "The limit depends on the product type or form; it is interpreted against the concentration given."
 
 
 # ---- gate --------------------------------------------------------------------------
@@ -86,7 +87,7 @@ def entries_from_rows(rows: list[AnnexRow]) -> list[AnnexEntry]:
 # matching of the product category to the lettered items of an entry is done here.
 _STOP = {"product", "products", "and", "or", "the", "of", "in", "for", "form", "with", "use", "other", "a", "an"}
 _SYNONYMS = {"shampoo": "hair", "conditioner": "hair", "hair": "hair", "cream": "cream", "serum": "serum",
-             "toothpaste": "toothpaste", "mouthwash": "mouthwash", "deodorant": "deodorant", "spray": "spray",
+             "toothpaste": "oral", "mouthwash": "oral", "deodorant": "deodorant", "spray": "spray",
              "aerosol": "aerosol", "lipstick": "lip", "balm": "balm"}
 
 
@@ -112,28 +113,39 @@ def _split_items(req: str) -> list[tuple[str, str]]:
     return [(parts[i], parts[i + 1].strip()) for i in range(1, len(parts) - 1, 2)]
 
 
-def _item_matches(item: str, cat: set[str], exposure: str | None) -> bool | None:
-    """True/False if the item clearly does or does not cover the product; None for catch-all items."""
+# Body areas: when an item is about one area and the product names another, the item clearly does
+# not apply; when the product names no area ("sunscreen"), it cannot be decided from the category.
+_AREAS = {"face", "body", "hair", "eye", "lip", "nail", "oral", "mouthwash", "toothpaste", "hand", "foot", "scalp"}
+
+
+def _item_matches(item: str, cat: set[str], exposure: str | None) -> str:
+    """How one lettered item relates to the product: 'match', 'catch_all', 'excluded' or 'unclear'."""
     text = item.lower()
     text = re.split(r",?\s*including\b", text)[0]  # "including spray products" widens, ignore
-    excluded: set[str] = set()
+    excluded: list[set[str]] = []
     for marker in (r"\bexcept\b", r"\bexcluding\b", r"with the exception of"):
         m = re.split(marker, text, maxsplit=1)
         if len(m) == 2:
             text, excl = m
-            excluded = set().union(*[_tokens(x) for x in re.split(r",|\band\b", excl) if x.strip()])
-    if excluded & cat:
-        return False
+            excluded = [t for t in (_tokens(x) for x in re.split(r",|\band\b", excl)) if t]
+    # An exclusion applies only if ALL its words describe the product: "body lotion" does not exclude "body cream".
+    if any(phrase <= cat for phrase in excluded):
+        return "excluded"
     both = "rinse-off" in text and "leave-on" in text  # "leave-on and rinse-off products": no restriction
     if not both and "rinse-off" in text and exposure == "leave_on":
-        return False
+        return "excluded"
     if not both and "leave-on" in text and exposure == "rinse_off":
-        return False
+        return "excluded"
     core = text.replace("rinse-off", "").replace("leave-on", "")
     alternatives = [_tokens(x) for x in re.split(r",|\band\b|\bor\b", core) if _tokens(x)]
     if not alternatives:
-        return None  # "Other products", "Other leave-on and rinse-off products": catch-all
-    return any(alt <= cat for alt in alternatives)
+        return "catch_all"  # "Other products", "Leave-on products" (exposure already checked)
+    if any(alt <= cat for alt in alternatives):
+        return "match"
+    item_areas = set().union(*alternatives) & _AREAS
+    if item_areas and (cat & _AREAS) and not (item_areas & cat):
+        return "excluded"  # e.g. item for face products, product is a body product
+    return "unclear"
 
 
 def match_product_type(req: str, product: Product) -> tuple[str | None, bool | None]:
@@ -142,14 +154,14 @@ def match_product_type(req: str, product: Product) -> tuple[str | None, bool | N
         return None, None
     cat = _tokens(product.category)
     items = _split_items(req)
-    explicit = [(letter, _item_matches(text, cat, product.exposure_type)) for letter, text in items]
-    for letter, ok in explicit:
-        if ok is True:
-            return letter, True
-    for letter, ok in explicit:
-        if ok is None:
-            return letter, True  # catch-all item applies when no explicit item matched
-    return None, False
+    verdicts = [(letter, _item_matches(text, cat, product.exposure_type)) for letter, text in items]
+    for wanted in ("match", "catch_all"):  # an explicit item first, then a catch-all item
+        for letter, v in verdicts:
+            if v == wanted:
+                return letter, True
+    if all(v == "excluded" for _, v in verdicts):
+        return None, False
+    return None, None  # the category does not say which item applies (e.g. "sunscreen" vs face / body)
 
 
 # ---- baseline conditions (no interpretation) ---------------------------------------
@@ -175,7 +187,29 @@ def _product_type_condition(row: AnnexRow, product: Product) -> ConditionCheck:
     return ConditionCheck(entry=row.ref, type="product_type", requirement=req, result=result, reason=reason)
 
 
-def baseline_conditions(row: AnnexRow, product: Product) -> list[ConditionCheck]:
+def single_limit(requirement: str) -> float | None:
+    """'1,0 %' or '0,6 % (acid)' -> 1.0 / 0.6. None when the limit has several values (product types, mixtures)."""
+    values = re.findall(r"(\d+(?:[,.]\d+)?)\s*%", requirement)
+    if len(values) != 1 or re.search(r"\([a-h]\)", requirement):
+        return None
+    return float(values[0].replace(",", "."))
+
+
+def _concentration_condition(row: AnnexRow, concentration: float | None) -> ConditionCheck:
+    req = row.max_concentration
+    if concentration is None:
+        return ConditionCheck(entry=row.ref, type="max_concentration", requirement=req, result="unknown", reason=NO_CONCENTRATION)
+    limit = single_limit(req)
+    if limit is None:
+        return ConditionCheck(entry=row.ref, type="max_concentration", requirement=req, result="unknown",
+                              reason=LIMIT_NEEDS_INTERPRETATION)
+    ok = concentration <= limit
+    return ConditionCheck(entry=row.ref, type="max_concentration", requirement=req,
+                          result="satisfied" if ok else "not_satisfied",
+                          reason=f"Concentration {concentration:g} % is {'within' if ok else 'above'} the {limit:g} % limit.")
+
+
+def baseline_conditions(row: AnnexRow, product: Product, concentration: float | None = None) -> list[ConditionCheck]:
     """Conditions copied from the entry. Only checks that need no interpretation are decided."""
     if row.annex == "II":
         return []
@@ -183,10 +217,7 @@ def baseline_conditions(row: AnnexRow, product: Product) -> list[ConditionCheck]
     if row.product_type_body_parts and row.annex != "IV":
         conditions.append(_product_type_condition(row, product))
     if row.max_concentration:
-        conditions.append(
-            ConditionCheck(entry=row.ref, type="max_concentration", requirement=row.max_concentration,
-                           result="unknown", reason=NO_CONCENTRATION)
-        )
+        conditions.append(_concentration_condition(row, concentration))
     if row.other_conditions:
         conditions.append(
             ConditionCheck(entry=row.ref, type="usage", requirement=row.other_conditions,
@@ -230,7 +261,7 @@ def baseline_explanation(status: RegulatoryStatus, rows: list[AnnexRow], complia
 
 def baseline_finding(ingredient: Ingredient, product: Product, rows: list[AnnexRow]) -> RegulatoryFinding:
     status = status_from_rows(rows)
-    conditions = [c for r in rows for c in baseline_conditions(r, product)]
+    conditions = [c for r in rows for c in baseline_conditions(r, product, ingredient.concentration_percent)]
     compliance = compliance_from(status, conditions)
     return RegulatoryFinding(
         position=ingredient.position,

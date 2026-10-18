@@ -53,13 +53,13 @@ def _by_name(response):
 def test_llm_is_called_only_for_restricted_ingredients():
     llm = FakeLLM()
     resp = analyze(_payload("leave_on_restricted.json"), chat=llm, prompt=load_prompt("v2"))
-    # salicylic acid, retinol, methylisothiazolinone -> 3 calls; aqua, niacinamide, zinc pyrithione, sodium benzoate -> none
-    assert len(llm.calls) == 3
+    # salicylic acid, retinol, methylisothiazolinone, sodium benzoate -> 4 calls; aqua, niacinamide, zinc pyrithione -> none
+    assert len(llm.calls) == 4
     f = _by_name(resp)
     assert f["zinc pyrithione"].regulatory_status == "prohibited"
     assert f["niacinamide"].regulatory_status == "no_restriction_found"
-    assert f["sodium benzoate"].regulatory_status == "not_assessed"
-    assert resp.run.mode == "live" and resp.run.llm_calls == 3 and resp.prompt_version == "v2"
+    assert f["sodium benzoate"].regulatory_status == "restricted"  # Annex V/1, corpus extended 2026-10-18
+    assert resp.run.mode == "live" and resp.run.llm_calls == 4 and resp.prompt_version == "v2"
 
 
 def test_safety_rules_override_the_llm():
@@ -153,4 +153,63 @@ def test_replay_of_recorded_qwen_answers():
     cream = {f["ingredient"]: f for f in results["leave_on_restricted"]["findings"]}
     assert cream["methylisothiazolinone"]["compliance_check"] == "not_satisfied"
     assert cream["salicylic acid"]["conditions"][0]["result"] == "satisfied"  # item (b) matched by rule
-    assert all(r["run"]["fallbacks"] == 0 for r in results.values())
+    # The recorded answers predate sodium benzoate's corpus entry (V/1): no answer for it, so it falls
+    # back to the rule-based result. Every other ingredient replays without fallback.
+    assert results["leave_on_restricted"]["run"]["fallbacks"] == 1
+    assert cream["sodium benzoate"]["regulatory_status"] == "restricted"
+    assert all(r["run"]["fallbacks"] == 0 for name, r in results.items() if name != "leave_on_restricted")
+
+
+def test_missing_token_falls_back_to_rules(monkeypatch):
+    monkeypatch.delenv("HF_TOKEN", raising=False)
+    monkeypatch.delenv("LLM_API_KEY", raising=False)
+    monkeypatch.setenv("LLM_BASE_URL", "https://router.huggingface.co/v1")
+    resp = analyze(_payload("leave_on_restricted.json"))  # no chat given, no token: used to raise (HTTP 500)
+    assert resp.run is None or resp.run.mode == "mock"
+    assert any("LLM unavailable" in w for w in resp.warnings)
+    assert _by_name(resp)["zinc pyrithione"].regulatory_status == "prohibited"
+
+
+# ---- retrieval backends (RAG adapter) ---------------------------------------------------
+
+def test_rag_results_keep_only_annex_entries():
+    from app.regulatory.retrieval import _from_rag
+
+    items = [
+        {"evidence_id": "eu_1223_2009_annex_v#29", "text": "Annex V, entry 29", "score": 0.9,
+         "metadata": {"doc_type": "regulation", "annex": "V", "entry": "29", "source_id": "eu_1223_2009_annex_v",
+                      "ingredients": "phenoxyethanol", "max_concentration": "1,0 %"}},
+        {"evidence_id": "EV-PHENOXYETHANOL-SCCS-OVERALL", "text": "SCCS opinion", "score": 0.8,
+         "metadata": {"source_id": "sccs_phenoxyethanol"}},  # not an annex entry: dropped
+    ]
+    passages = _from_rag(items)
+    assert [(p.annex, p.entry, p.source_id) for p in passages] == [("V", "29", "eu_1223_2009_annex_v")]
+    assert passages[0].to_row().max_concentration == "1,0 %"
+
+
+def test_http_backend_calls_the_rag_route_with_the_key(monkeypatch):
+    from app.regulatory import retrieval
+
+    seen = {}
+
+    class Resp:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"results": [{"evidence_id": "eu_1223_2009_annex_ii#1670", "text": "Annex II", "score": 1.0,
+                                 "metadata": {"doc_type": "regulation", "annex": "II", "entry": "1670",
+                                              "source_id": "eu_1223_2009_annex_ii", "ingredients": "zinc pyrithione"}}]}
+
+    def post(url, json, headers, timeout):
+        seen.update(url=url, body=json, headers=headers)
+        return Resp()
+
+    monkeypatch.setattr(retrieval.httpx, "post", post)
+    monkeypatch.setenv("RETRIEVAL_BACKEND", "http")
+    monkeypatch.setenv("RETRIEVAL_URL", "https://api.example")
+    monkeypatch.setenv("SCANNER_API_KEY", "k")
+    passages = retrieval.search_regulation("zinc pyrithione")
+    assert seen["url"] == "https://api.example/rag/retrieve" and seen["headers"]["X-API-Key"] == "k"
+    assert seen["body"]["ingredient"] == "zinc pyrithione" and seen["body"]["strategy"] == "structured"
+    assert [p.entry for p in passages] == ["1670"]

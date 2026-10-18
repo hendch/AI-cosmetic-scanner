@@ -8,7 +8,7 @@ __pycache__/
 *.pyc
 
 # generated / local data (not redistributed: PETA list, RAG index, barcode lookups)
-data/
+/data/
 app/ingestion/cache/
 
 # ECHA Annex VI table (download it yourself, see corpus/sources.csv)

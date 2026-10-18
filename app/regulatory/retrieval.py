@@ -1,15 +1,11 @@
 """The only place the regulatory agent asks for evidence.
 
-Expected contract with the retrieval service (Haroun), see docs/regulatory_interfaces.md:
-
-    POST {RETRIEVAL_URL}/retrieval/search
-    {"query": str, "filters": {"doc_type": "regulation", "ingredient": str}, "top_k": int}
-    -> {"results": [{"chunk_id", "source_id", "text", "score",
-                     "metadata": {"ingredient", "annex", "entry", ...condition fields}}]}
-
-RETRIEVAL_BACKEND selects the implementation:
-- "local" (default): placeholder that answers from corpus/regulatory/ in the same format.
-- "http": calls Haroun's service at RETRIEVAL_URL.
+RETRIEVAL_BACKEND selects the implementation (all return the same Passage objects):
+- "rag": the RAG vector index (app/rag, Qdrant + bge-small) in the same process. Annex entries are
+  indexed as structure-aware chunks (one chunk per entry, legal fields as metadata). Used on Render.
+- "http": the same RAG endpoint over HTTP: POST {RETRIEVAL_URL}/rag/retrieve (header X-API-Key from
+  SCANNER_API_KEY), for a separately deployed retrieval service.
+- "local" (default): reads corpus/regulatory/ directly, no embeddings (tests, offline work).
 """
 
 import os
@@ -74,26 +70,51 @@ def _local_search(ingredient: str, top_k: int) -> list[Passage]:
     return passages
 
 
+def _from_rag(items: list[dict]) -> list[Passage]:
+    """RAG results -> passages. Only annex-entry chunks (with annex/entry metadata) are kept."""
+    out = []
+    for x in items:
+        meta = x.get("metadata") or {}
+        if meta.get("doc_type") != "regulation" or not meta.get("annex"):
+            continue
+        out.append(Passage(chunk_id=x["evidence_id"], source_id=meta.get("source_id", ""), text=x.get("text", ""),
+                           score=float(x.get("score", 0.0)), metadata=meta))
+    return out
+
+
+def _rag_search(query: str, ingredient: str, top_k: int) -> list[Passage]:
+    from app.common.llm import LLMError
+    from app.rag.retrieve import IndexNotBuilt, retrieve
+    from app.rag.schemas import RetrieveRequest
+
+    try:
+        res = retrieve(RetrieveRequest(ingredient=ingredient, query=query, top_k=top_k, strategy="structured"))
+    except (IndexNotBuilt, LLMError) as e:
+        raise RetrievalError(f"RAG retrieval failed: {e}") from e
+    return _from_rag([r.model_dump() for r in res.results])
+
+
 def _http_search(query: str, ingredient: str, top_k: int) -> list[Passage]:
     url = os.environ.get("RETRIEVAL_URL", "").rstrip("/")
     if not url:
         raise RetrievalError("RETRIEVAL_BACKEND=http but RETRIEVAL_URL is not set")
-    body = {"query": query, "filters": {"doc_type": "regulation", "ingredient": ingredient}, "top_k": top_k}
+    body = {"ingredient": ingredient, "query": query, "top_k": top_k, "strategy": "structured"}
+    headers = {"X-API-Key": os.environ.get("SCANNER_API_KEY", "")}
     try:
-        r = httpx.post(f"{url}/retrieval/search", json=body, timeout=30)
+        r = httpx.post(f"{url}/rag/retrieve", json=body, headers=headers, timeout=30)
         r.raise_for_status()
         results = r.json().get("results", [])
     except (httpx.HTTPError, ValueError) as e:
         raise RetrievalError(f"retrieval service failed: {e}") from e
-    return [Passage(chunk_id=x.get("chunk_id", x["source_id"]), source_id=x["source_id"], text=x.get("text", ""),
-                    score=float(x.get("score", 0.0)), metadata=x.get("metadata", {})) for x in results]
+    return _from_rag(results)
 
 
 def search_regulation(ingredient: str, product_type: str | None = None, top_k: int = 5) -> list[Passage]:
     """Regulation passages about one ingredient. Empty list = nothing found."""
     query = f"{ingredient} restrictions conditions of use" + (f" {product_type.replace('_', '-')}" if product_type else "")
     backend = os.environ.get("RETRIEVAL_BACKEND", "local")
-    passages = _http_search(query, ingredient, top_k) if backend == "http" else _local_search(ingredient, top_k)
+    search = {"http": _http_search, "rag": _rag_search}.get(backend)
+    passages = search(query, ingredient, top_k) if search else _local_search(ingredient, top_k)
     # Keep only passages that really concern this ingredient (fixed-size chunks may not).
     wanted = ingredient.strip().lower()
     return [p for p in passages

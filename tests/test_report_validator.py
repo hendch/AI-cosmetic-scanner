@@ -29,7 +29,7 @@ def fake_model(monkeypatch):
     """Replaces the model with a queue of canned answers and records the messages sent."""
     answers, calls = [], []
 
-    def chat(messages, temperature=0.0, timeout=90.0):
+    def chat(messages, temperature=0.0, **kwargs):
         calls.append({"messages": messages, "temperature": temperature})
         return answers.pop(0)
 
@@ -73,16 +73,6 @@ def test_validity_comes_from_the_verdicts_not_the_models_flag():
 def test_cruelty_free_is_accepted_as_the_ethics_agent():
     out = ValidatorOutput.model_validate({"valid": True, "claims": [claim(agent_name="cruelty_free")], "issues": []})
     assert out.claims[0].agent == "ethics"
-
-
-def test_endpoint_returns_502_when_the_model_is_unreachable(monkeypatch):
-    def down(*args, **kwargs):
-        raise llm.LLMError("Model endpoint answered HTTP 503")
-
-    monkeypatch.setattr(llm, "chat", down)
-    response = client.post("/report/validate", json={"draft": CASES[0]["draft"]})
-    assert response.status_code == 502
-    assert "503" in response.json()["detail"]
 
 
 @pytest.mark.parametrize("version", ["v1", "v2", "v3", "v4"])

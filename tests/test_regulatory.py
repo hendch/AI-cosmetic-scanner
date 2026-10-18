@@ -75,8 +75,11 @@ def test_no_restriction_vs_not_covered():
     f = _findings("leave_on_restricted.json")
     assert f["niacinamide"]["regulatory_status"] == "no_restriction_found"
     assert f["niacinamide"]["sources"] == ["regulatory_scope"]
-    assert f["sodium benzoate"]["regulatory_status"] == "not_assessed"  # not in the corpus scope
-    assert f["sodium benzoate"]["sources"] == []
+    # sodium benzoate: Annex V/1 (corpus extended 2026-10-18); before that it was out of scope
+    assert f["sodium benzoate"]["regulatory_status"] == "restricted"
+    assert f["sodium benzoate"]["entries"][0] == {"annex": "V", "entry": "1", "source_id": "eu_1223_2009_annex_v"}
+    # still out of scope: a recognised ingredient the corpus does not cover
+    assert _findings("barcode_found.json")["parfum"]["regulatory_status"] == "not_assessed"
 
 
 def test_unmatched_and_low_confidence_ingredients():
@@ -127,3 +130,62 @@ def test_router_loads_dotenv_before_choosing_the_mode():
     code = "import sys, app.regulatory.router; print('app.common.llm' in sys.modules)"
     out = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True, check=True)
     assert out.stdout.strip() == "True"
+
+
+# ---- fixes on the end-to-end branch (2026-10-18) ---------------------------------------
+
+SALICYLIC = ("(a) Rinse-off hair products (b) Other products except body lotion, eye shadow, mascara, eyeliner, "
+             "lipstick, roll-on deodorant (c) Body lotion, eye shadow, mascara, eyeliner, lipstick, roll-on deodorant")
+BENZOATES = "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products"
+
+
+@pytest.mark.parametrize(
+    "requirement, category, exposure, expected",
+    [
+        # An exclusion needs ALL its words: "body lotion" does not exclude "body cream" (was a false "not allowed").
+        (SALICYLIC, "body cream", "leave_on", ("b", True)),
+        (SALICYLIC, "eye cream", "leave_on", ("b", True)),
+        (SALICYLIC, "body lotion", "leave_on", ("c", True)),
+        # No body area in the category: cannot tell face from body (was a false "not allowed").
+        ("Face products with the exception of propellent spray products", "sunscreens", "leave_on", (None, None)),
+        ("Face products with the exception of propellent spray products", "body sunscreen spray", "leave_on", (None, False)),
+        (BENZOATES, "toothpaste", "rinse_off", ("b", True)),
+        (BENZOATES, "shower gel", "rinse_off", ("a", True)),
+        (BENZOATES, "body lotion", "leave_on", ("c", True)),
+    ],
+)
+def test_product_type_matching_fixes(requirement, category, exposure, expected):
+    from app.common_schemas import Product
+    from app.regulatory.rules import match_product_type
+
+    assert match_product_type(requirement, Product(category=category, exposure_type=exposure)) == expected
+
+
+def test_concentration_reaches_the_agent_and_is_compared():
+    payload = json.loads((SAMPLES / "input" / "clean_product.json").read_text(encoding="utf-8"))
+    for ing in payload["ingredients"]:
+        if ing["normalized"] == "phenoxyethanol":
+            ing["concentration_percent"] = 0.8
+    phenoxy = {f["ingredient"]: f for f in client.post("/regulatory/analyze", json=payload).json()["findings"]}["phenoxyethanol"]
+    conc = next(c for c in phenoxy["conditions"] if c["type"] == "max_concentration")
+    assert conc["result"] == "satisfied" and "1 %" in conc["reason"]  # V/29: 1,0 %
+    assert "concentration" not in phenoxy["missing_information"]
+
+
+def test_multi_value_limits_are_not_compared_by_rule():
+    from app.regulatory.rules import single_limit
+
+    assert single_limit("1,0 %") == 1.0 and single_limit("0,6 % (acid)") == 0.6
+    assert single_limit("(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)") is None
+    assert single_limit("0,4 % (as acid) for single ester 0,8 % (as acid) for mixtures of esters") is None
+
+
+def test_new_annex_entries():
+    f = _findings("leave_on_restricted.json")
+    assert [e["entry"] for e in f["sodium benzoate"]["entries"]] == ["1"]
+    from app.regulatory.kb import load_kb
+
+    kb = load_kb()
+    assert {r.ref for r in kb.entries_for("isopropylparaben")} == {"II/1374"}
+    assert {r.ref for r in kb.entries_for("benzyl alcohol")} == {"III/45", "V/34"}
+    assert kb.canonical("potassium sorbate") == "potassium sorbate"

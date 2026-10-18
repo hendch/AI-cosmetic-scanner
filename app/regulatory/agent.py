@@ -20,7 +20,7 @@ from pydantic import BaseModel, ValidationError
 from app.common_schemas import Ingredient, Product, ProductInput
 from app.regulatory import rules
 from app.regulatory.kb import load_kb
-from app.common.llm import ChatFn, Prompt, chat_function, model_name, parse_json_object
+from app.common.llm import ChatFn, LLMError, Prompt, chat_function, model_name, parse_json_object
 from app.common.llm import load_prompt as load_agent_prompt
 from app.regulatory.retrieval import Passage, RetrievalError, search_regulation
 from app.regulatory.schemas import (
@@ -70,7 +70,7 @@ OUTPUT_SCHEMA = json.dumps(
 
 # ---- prompt fields ------------------------------------------------------------------------
 def _concentration(ingredient: Ingredient) -> float | None:
-    return getattr(ingredient, "concentration_percent", None)  # not in ProductInput yet
+    return ingredient.concentration_percent
 
 
 def _fields(ingredient: Ingredient, product: Product, status: str, passages: list[Passage],
@@ -138,6 +138,9 @@ def _merge(ingredient: Ingredient, product: Product, baseline: RegulatoryFinding
         if base.type == "labelling" and result in ("satisfied", "not_satisfied"):
             stats.overrides.append(f"{ingredient.normalized} [{i}] label text not available -> 'unknown' (LLM said '{result}')")
             result, reason = "unknown", "The label text is not available to check the required wording."
+        if base.type == "max_concentration" and has_conc and base.result != "unknown" and result != base.result:
+            stats.overrides.append(f"{ingredient.normalized} [{i}] concentration limit decided by rule -> '{base.result}' (LLM said '{result}')")
+            result, reason = base.result, base.reason
         if base.type == "product_type" and base.result != "unknown" and result != base.result:
             stats.overrides.append(f"{ingredient.normalized} [{i}] product type decided by rule -> '{base.result}' (LLM said '{result}')")
             result, reason = base.result, base.reason
@@ -218,7 +221,16 @@ def _assess(ingredient: Ingredient, product: Product, prompt: Prompt, chat: Chat
 
 def analyze(payload: ProductInput, chat: ChatFn | None = None, prompt: Prompt | None = None) -> RegulatoryResponse:
     prompt = prompt or load_prompt()
-    chat = chat or chat_function()
+    if chat is None:
+        try:
+            chat = chat_function()
+        except LLMError as e:
+            # No usable model (e.g. token missing): answer with the rules instead of a 500.
+            from app.regulatory.mock import build_mock_response
+
+            resp = build_mock_response(payload)
+            resp.warnings.append(f"regulatory: LLM unavailable ({e}); rule-based result only")
+            return resp
     stats = AgentRunStats(mode="live", model=model_name(), retrieval_backend=os.environ.get("RETRIEVAL_BACKEND", "local"))
     warnings = list(payload.warnings)
     workers = int(os.environ.get("REGULATORY_MAX_PARALLEL", "4"))
