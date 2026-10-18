@@ -43,7 +43,7 @@ def test_unmatched_and_low_confidence_ingredients_are_flagged():
 @pytest.mark.parametrize(
     "input_name, expected_status",
     [
-        ("clean_product.json", "VERIFIED"),
+        ("clean_product.json", "NOT_VERIFIED"),  # "Mock Certified Brand" is on no real list
         ("sensitiser_claimed.json", "CLAIMED"),
         ("ocr_unknown_brand.json", "NOT_VERIFIED"),
     ],

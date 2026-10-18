@@ -1,17 +1,11 @@
 {
   "agent": "ethics",
-  "prompt_version": "mock",
+  "prompt_version": "rules-v1",
   "brand": "Mock Certified Brand",
   "parent_company": null,
-  "status": "VERIFIED",
-  "status_reason": "Brand found in the Leaping Bunny certified-brands list.",
+  "status": "NOT_VERIFIED",
+  "status_reason": "No cruelty-free claim on the product, and Mock Certified Brand is not on PETA's lists.",
   "evidence": [
-    {
-      "type": "certification",
-      "source": "Leaping Bunny",
-      "detail": "Mock Certified Brand listed as certified.",
-      "source_id": "mock_certified_brands"
-    },
     {
       "type": "regulatory",
       "source": "Regulation (EC) No 1223/2009, Art. 18",
@@ -20,17 +14,14 @@
     }
   ],
   "certifications_checked": [
-    "Leaping Bunny",
     "PETA Beauty Without Bunnies"
   ],
-  "certifications_found": [
-    {
-      "name": "Leaping Bunny",
-      "source_id": "mock_certified_brands"
-    }
-  ],
+  "certifications_found": [],
   "conflicts": [],
-  "missing_information": [],
-  "evidence_confidence": "high",
+  "missing_information": [
+    "brand claim",
+    "independent certification"
+  ],
+  "evidence_confidence": "medium",
   "warnings": []
 }
