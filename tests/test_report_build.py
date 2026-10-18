@@ -71,7 +71,12 @@ def test_placeholder_quotes_are_replaced_by_the_clp_row_or_reported():
 
 
 def test_fake_certification_fails_the_checks():
-    report = build("clean_product")  # ethics mock: "Mock Certified Brand", source not in the corpus
+    req = chain("clean_product")
+    fake = {"name": "Mock list", "source_id": "mock_certified_brands"}  # not in the corpus, placeholder text
+    req["ethics"].update(status="VERIFIED", certifications_found=[fake], evidence=[
+        {"type": "certification", "source": "Mock list", "detail": "MOCK - replace with retrieved text",
+         "source_id": "mock_certified_brands"}])
+    report = client.post("/report/build", json=req).json()
     assert report["cruelty_free"]["status"] == "verified"
     assert not check(report, "citations_known")["passed"]
     assert not check(report, "excerpts_available")["passed"]

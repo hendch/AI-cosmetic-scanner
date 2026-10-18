@@ -1,0 +1,15 @@
+{
+ "source": "PETA Beauty Without Bunnies",
+ "source_id": "peta_beauty_without_bunnies",
+ "retrieved": "2026-10-16",
+ "companies": [
+  {"name": "Catrice", "normalized": "catrice", "status": "dont_test", "labels": [], "url": ""},
+  {"name": "Urban Decay (L’Oréal)", "normalized": "urban decay loreal", "status": "dont_test", "labels": [], "url": ""},
+  {"name": "L’Oreal", "normalized": "loreal", "status": "do_test", "labels": [], "url": ""},
+  {"name": "Nivea (Beiersdorf)", "normalized": "nivea beiersdorf", "status": "do_test", "labels": [], "url": ""},
+  {"name": "Beiersdorf", "normalized": "beiersdorf", "status": "do_test", "labels": [], "url": ""},
+  {"name": "Good Parent GmbH", "normalized": "good parent gmbh", "status": "dont_test", "labels": [], "url": ""},
+  {"name": "Twice Listed", "normalized": "twice listed", "status": "dont_test", "labels": [], "url": ""},
+  {"name": "Twice Listed", "normalized": "twice listed", "status": "do_test", "labels": [], "url": ""}
+ ]
+}

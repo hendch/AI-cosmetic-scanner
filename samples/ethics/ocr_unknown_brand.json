@@ -1,6 +1,6 @@
 {
   "agent": "ethics",
-  "prompt_version": "mock",
+  "prompt_version": "rules-v1",
   "brand": "",
   "parent_company": null,
   "status": "NOT_VERIFIED",
@@ -14,7 +14,6 @@
     }
   ],
   "certifications_checked": [
-    "Leaping Bunny",
     "PETA Beauty Without Bunnies"
   ],
   "certifications_found": [],

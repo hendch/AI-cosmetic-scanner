@@ -1,10 +1,10 @@
 {
   "agent": "ethics",
-  "prompt_version": "mock",
+  "prompt_version": "rules-v1",
   "brand": "Example Brand",
   "parent_company": null,
   "status": "NOT_VERIFIED",
-  "status_reason": "No cruelty-free claim or certification found for this brand.",
+  "status_reason": "No cruelty-free claim on the product, and Example Brand is not on PETA's lists.",
   "evidence": [
     {
       "type": "regulatory",
@@ -14,7 +14,6 @@
     }
   ],
   "certifications_checked": [
-    "Leaping Bunny",
     "PETA Beauty Without Bunnies"
   ],
   "certifications_found": [],
