@@ -27,6 +27,13 @@ OCR_CONFIDENCE_THRESHOLD = 0.8
 OCR_NOTE = "ingredient name from OCR, unverified"
 NO_CONCENTRATION = "Concentration is not provided on the label."
 LIMIT_NEEDS_INTERPRETATION = "The limit depends on the product type or form; it is interpreted against the concentration given."
+# "The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g)
+# when its concentration exceeds: - 0,001 % in leave-on products - 0,01 % in rinse-off products", nothing more.
+LISTED_ABOVE_THRESHOLD = re.compile(
+    r"The presence of the substance (?:must|shall) be indicated in the list of ingredients referred to in "
+    r"Article 19\(1\)(?:\(g\)|, point \(g\)),? when its concentration exceeds:[^.]*?rinse-off products\.?",
+    re.IGNORECASE,
+)
 
 
 # ---- gate --------------------------------------------------------------------------
@@ -218,12 +225,24 @@ def baseline_conditions(row: AnnexRow, product: Product, concentration: float | 
         conditions.append(_product_type_condition(row, product))
     if row.max_concentration:
         conditions.append(_concentration_condition(row, concentration))
-    if row.other_conditions:
+    if row.other_conditions and LISTED_ABOVE_THRESHOLD.fullmatch(row.other_conditions.strip()):
+        # Fragrance allergens (Annex III): the only condition is to name the substance in the ingredient
+        # list above a threshold. We read the name from that list, so the condition is met.
+        conditions.append(
+            ConditionCheck(entry=row.ref, type="labelling", requirement=row.other_conditions, result="satisfied",
+                           reason="The substance is named in the product's ingredient list, as the entry requires.")
+        )
+    elif row.other_conditions:
         conditions.append(
             ConditionCheck(entry=row.ref, type="usage", requirement=row.other_conditions,
                            result="unknown", reason="Not checked against the product information.")
         )
-    if row.warnings:
+    if row.warnings and LISTED_ABOVE_THRESHOLD.fullmatch(row.warnings.strip()):
+        conditions.append(
+            ConditionCheck(entry=row.ref, type="labelling", requirement=row.warnings, result="satisfied",
+                           reason="The substance is named in the product's ingredient list, as the entry requires.")
+        )
+    elif row.warnings:
         conditions.append(
             ConditionCheck(entry=row.ref, type="labelling", requirement=row.warnings,
                            result="unknown", reason="The label text is not available to check the required wording.")

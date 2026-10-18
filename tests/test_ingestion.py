@@ -40,13 +40,27 @@ def test_barcode_must_be_digits(monkeypatch):
     assert not called  # never reaches the cache file name or the network
 
 
-def test_network_failure_is_reported_not_crashed(monkeypatch):
+def test_network_failure_is_retried_then_reported_not_crashed(monkeypatch):
+    calls = []
+
     def down(*a, **k):
+        calls.append(k["timeout"])
         raise ex.requests.ConnectionError("offline")
 
     monkeypatch.setattr(ex.requests, "get", down)
     body = client.post("/ingestion/extract", data={"barcode": "99999999"}).json()
+    assert calls == [10, 20]
+    assert "product database unavailable" in body["warnings"]  # n8n: "try again", not "take a photo"
+
+
+def test_unknown_barcode_is_not_an_outage(monkeypatch):
+    class NotFound:
+        status_code = 404
+
+    monkeypatch.setattr(ex.requests, "get", lambda *a, **k: NotFound())
+    body = client.post("/ingestion/extract", data={"barcode": "99999998"}).json()
     assert "barcode not found or no ingredients" in body["warnings"]
+    assert "product database unavailable" not in body["warnings"]
 
 
 def test_product_name_is_the_fallback_category(monkeypatch):

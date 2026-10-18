@@ -1,0 +1,12 @@
+# End-to-end scenarios 2026-10-18_1459
+
+Webhook: `http://localhost:5678/webhook/cosmetic-scanner-live`
+
+| Scenario | What it shows | Seconds | Result |
+|---|---|---|---|
+| 1_barcode_found | Barcode in Open Beauty Facts: ingredient list from the database, full report. | 14.5 | status: completed; product: Balea Bodylotion Creme-Öl; input_source: barcode; ingredients: 15; restricted: sodium benzoate (V/1), piroctone olamine (V/35), potassium sorbate (V/4); concentration_unknown: 3; cruelty_free: not_verified; evidence_coverage: 5/15; ai_validator: 7 issues; validator_prompt: v5 |
+| 2_ocr_fallback_step1 | Barcode not in Open Beauty Facts: the app is asked for a label photo; the photo is read by OCR. | 0.4 | status: needs_input; message: This product has no ingredient list in the product database. Take a photo of the ingredient list on the back of the product. |
+| 2_ocr_fallback_step2 | (label photo) | 21.5 | status: completed; product: CeraVe Skummande Rens; input_source: ocr; ingredients: 25; restricted: sodium benzoate (V/1), phenoxyethanol (V/29); concentration_unknown: 2; cruelty_free: not_verified; evidence_coverage: 5/25; ai_validator: 2 issues; validator_prompt: v5 |
+| 3_unknown_ingredient | Ingredient names the dictionary does not know: shown as not recognised, not assessed. | 0.8 | status: completed; product: Neutrogena Neutrogena Lipcare Stick Norwegian Formula; input_source: barcode; ingredients: 17; not_recognised: Synthetic Wax, Polyisobutene, Copernicia Cerifera Cera; concentration_unknown: 0; cruelty_free: not_verified; evidence_coverage: 2/17; ai_validator: passed |
+| 4_missing_concentration | Restricted ingredients whose limit depends on a concentration the label does not give. | 46.4 | status: completed; product: Balea Shampoo Anti-Schuppen; input_source: barcode; ingredients: 21; restricted: piroctone olamine (V/35), sodium benzoate (V/1), potassium sorbate (V/4), linalool (III/84); concentration_unknown: 3; cruelty_free: not_verified; evidence_coverage: 7/21; ai_validator: 8 issues; validator_prompt: v5 |
+| 5_no_cruelty_free_evidence | No brand claim or certification found: animal testing reported as not verified. | 19.7 | status: completed; product: Isana Gesichtswasser; input_source: barcode; ingredients: 14; not_recognised: Aloe Barbadensis Leaf Juice; restricted: benzyl alcohol (III/45, V/34), linalool (III/84), limonene (III/88); concentration_unknown: 3; cruelty_free: not_verified; evidence_coverage: 5/14; ai_validator: 3 issues; validator_prompt: v5 |

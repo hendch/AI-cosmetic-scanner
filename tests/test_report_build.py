@@ -97,6 +97,17 @@ def test_judged_concentration_limit_fails():
     assert not check(report, "missing_concentration")["passed"]
 
 
+def test_status_must_match_the_cited_annex():
+    req = chain("barcode_found")
+    report = client.post("/report/build", json=req).json()
+    assert check(report, "status_matches_annex")["passed"]
+    restricted = next(f for f in req["regulatory"]["findings"] if f["regulatory_status"] == "restricted")
+    restricted["regulatory_status"] = "prohibited"  # an Annex III/V entry reported as prohibited
+    report = client.post("/report/build", json=req).json()
+    issues = check(report, "status_matches_annex")["issues"]
+    assert issues and restricted["ingredient"] in issues[0] and not report["validation"]["passed"]
+
+
 def test_verdict_wording_fails():
     req = chain("sensitiser_claimed")
     req["toxicology"]["findings"][0]["risk_interpretation"] = "This ingredient is toxic, avoid it."

@@ -14,6 +14,7 @@ VERDICT_WORDS = re.compile(
     r"\b(safe|unsafe|dangerous|harmful|toxic|non-toxic|causes? cancer|should be avoided|avoid|illegal)\b",
     re.IGNORECASE,
 )
+ANNEX_SOURCE = re.compile(r"eu_1223_2009_annex_(ii|iii|iv|v|vi)")
 
 
 def _claim_evidence(ing: IngredientReport) -> list[tuple[str, list[str]]]:
@@ -125,5 +126,24 @@ def run_checks(req: ReportRequest, report: Report) -> list[ValidationCheck]:
         if words:
             wording.append(f"{where}: uses verdict wording ({', '.join(words)})")
     add("no_safety_verdicts", "error", "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.", wording)
+
+    # 9. The regulatory status matches the annex it cites: Annex II lists prohibited substances,
+    # Annexes III to VI list substances allowed under conditions. (The validator model missed a
+    # restricted fragrance allergen reported as "prohibited": eval/validator, real_soap_planted_errors.)
+    annex_issues = []
+    for ing in report.ingredients:
+        status = ing.regulatory.status
+        if status not in ("prohibited", "restricted"):
+            continue
+        annexes = {m.group(1) for eid in ing.regulatory.evidence_ids if eid in sources
+                   for m in [ANNEX_SOURCE.fullmatch(sources[eid].source_id)] if m}
+        if not annexes:
+            continue  # no regulation evidence: claims_have_evidence / excerpts_available report it
+        if status == "prohibited" and "ii" not in annexes:
+            annex_issues.append(f"regulatory/{ing.ingredient_id}: 'prohibited' but cites Annex "
+                                f"{', '.join(sorted(a.upper() for a in annexes))}, not Annex II")
+        if status == "restricted" and not annexes - {"ii"}:
+            annex_issues.append(f"regulatory/{ing.ingredient_id}: 'restricted' but cites only Annex II (prohibited)")
+    add("status_matches_annex", "error", "Prohibited cites Annex II; restricted cites Annexes III to VI.", annex_issues)
 
     return checks

@@ -213,3 +213,15 @@ def test_http_backend_calls_the_rag_route_with_the_key(monkeypatch):
     assert seen["url"] == "https://api.example/rag/retrieve" and seen["headers"]["X-API-Key"] == "k"
     assert seen["body"]["ingredient"] == "zinc pyrithione" and seen["body"]["strategy"] == "structured"
     assert [p.entry for p in passages] == ["1670"]
+
+
+def test_allergen_named_in_the_list_is_decided_by_rule_without_a_model_call():
+    payload = _payload("leave_on_restricted.json")
+    linalool = payload.ingredients[0].model_copy(update={"raw": "LINALOOL", "normalized": "linalool", "matched": True,
+                                                         "position": 99})
+    payload = payload.model_copy(update={"ingredients": [linalool]})
+    llm = FakeLLM(result="unknown")
+    finding = analyze(payload, chat=llm, prompt=load_prompt("v2")).findings[0]
+    assert finding.regulatory_status == "restricted" and finding.compliance_check == "satisfied"
+    assert [(c.type, c.result) for c in finding.conditions] == [("labelling", "satisfied")]
+    assert llm.calls == []  # nothing left for the model to interpret

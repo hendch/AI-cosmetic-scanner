@@ -383,5 +383,655 @@
         }
       ]
     }
+  },
+  {
+    "case_id": "real_balea_lotion",
+    "expected_valid": true,
+    "expected_flags": [],
+    "description": "Real report, Balea Bodylotion Creme-Öl (4066447870213, leave-on), rules-only regulatory agent. Three correct Annex V restrictions with lettered items; concentrations unknown. Nothing to flag.",
+    "draft": {
+      "ingredients": [
+        {
+          "ingredient_id": "sodium benzoate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (c) of the entry; the limits of item (c) apply."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "piroctone olamine",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/35",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products (b) Other products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (b) of the entry; the limits of item (b) apply."
+              },
+              {
+                "entry": "V/35",
+                "type": "max_concentration",
+                "requirement": "(a) 1,0 % (b) 0,5 %",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "potassium sorbate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/4",
+                "type": "max_concentration",
+                "requirement": "0,6 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        }
+      ],
+      "cruelty_free": {},
+      "sources": [
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#35",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 35 (consolidated version 2026-05-18).\nSubstance: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon and its monoethanolamine salt. INCI: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon; Piroctone Olamine. CAS: 50650-76-5; 68890-66-4.\nProduct type, body parts: (a) Rinse-off products (b) Other products\nMaximum concentration in ready for use preparation: (a) 1,0 % (b) 0,5 %"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#4",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 4 (consolidated version 2026-05-18).\nSubstance: Hexa-2,4-dienoic acid and its salts. INCI: Sorbic acid; Calcium sorbate; Sodium sorbate; Potassium sorbate. CAS: 110-44-1; 7492-55-9; 7757-81-5; 24634-61-5.\nMaximum concentration in ready for use preparation: 0,6 % (acid)"
+        }
+      ],
+      "product": {
+        "category": "bodylotion creme-öl",
+        "exposure_type": "leave_on"
+      }
+    }
+  },
+  {
+    "case_id": "real_balea_shampoo",
+    "expected_valid": true,
+    "expected_flags": [],
+    "description": "Real report, Balea Shampoo Anti-Schuppen (4066447982596, rinse-off), rules-only regulatory agent. Three Annex V restrictions (item (a), rinse-off) and one Annex III fragrance allergen. Nothing to flag.",
+    "draft": {
+      "ingredients": [
+        {
+          "ingredient_id": "piroctone olamine",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/35",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products (b) Other products",
+                "result": "satisfied",
+                "reason": "The product (shampoo anti-schuppen) matches item (a) of the entry; the limits of item (a) apply."
+              },
+              {
+                "entry": "V/35",
+                "type": "max_concentration",
+                "requirement": "(a) 1,0 % (b) 0,5 %",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "sodium benzoate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product (shampoo anti-schuppen) matches item (a) of the entry; the limits of item (a) apply."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "potassium sorbate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/4",
+                "type": "max_concentration",
+                "requirement": "0,6 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "linalool",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "III/84",
+                "type": "usage",
+                "requirement": "The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products",
+                "result": "unknown",
+                "reason": "Not checked against the product information."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex III entry 84); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        }
+      ],
+      "cruelty_free": {},
+      "sources": [
+        {
+          "evidence_id": "eu_1223_2009_annex_v#35",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 35 (consolidated version 2026-05-18).\nSubstance: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon and its monoethanolamine salt. INCI: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon; Piroctone Olamine. CAS: 50650-76-5; 68890-66-4.\nProduct type, body parts: (a) Rinse-off products (b) Other products\nMaximum concentration in ready for use preparation: (a) 1,0 % (b) 0,5 %"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#4",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 4 (consolidated version 2026-05-18).\nSubstance: Hexa-2,4-dienoic acid and its salts. INCI: Sorbic acid; Calcium sorbate; Sodium sorbate; Potassium sorbate. CAS: 110-44-1; 7492-55-9; 7757-81-5; 24634-61-5.\nMaximum concentration in ready for use preparation: 0,6 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#84",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 84 (consolidated version 2026-05-18).\nSubstance: 1,6-Octadien-3-ol, 3,7-dimethyl-. INCI: Linalool. CAS: 78-70-6.\nOther: The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products"
+        }
+      ],
+      "product": {
+        "category": "shampoo anti-schuppen",
+        "exposure_type": "rinse_off"
+      }
+    }
+  },
+  {
+    "case_id": "real_soap_planted_errors",
+    "expected_valid": false,
+    "expected_flags": [
+      [
+        "regulatory",
+        "sodium benzoate"
+      ],
+      [
+        "regulatory",
+        "linalool"
+      ]
+    ],
+    "description": "Real report, Balea Flüssigseife (4066447921793, rinse-off), with two planted errors: sodium benzoate 'complies with the 0,5 % limit' (leave-on item, and the concentration is unknown), and linalool called prohibited/banned although its excerpt is an Annex III restriction.",
+    "draft": {
+      "ingredients": [
+        {
+          "ingredient_id": "sodium benzoate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product (Flüssigseife) matches item (a) of the entry; the limits of item (a) apply."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Complies with the Annex V entry 1 limit of 0,5 % for this product.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "potassium sorbate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/4",
+                "type": "max_concentration",
+                "requirement": "0,6 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "linalool",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "prohibited",
+            "conditions": [
+              {
+                "entry": "III/84",
+                "type": "usage",
+                "requirement": "The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products",
+                "result": "unknown",
+                "reason": "Not checked against the product information."
+              }
+            ],
+            "explanation": "Linalool is banned in EU cosmetics (Annex III entry 84).",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "limonene",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "III/88",
+                "type": "usage",
+                "requirement": "The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products. The peroxide value for each substance shall be less than 20 mmoles/L",
+                "result": "unknown",
+                "reason": "Not checked against the product information."
+              }
+            ],
+            "explanation": "Allowed only under conditions (Annex III entry 88); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#88"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        }
+      ],
+      "cruelty_free": {},
+      "sources": [
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#4",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 4 (consolidated version 2026-05-18).\nSubstance: Hexa-2,4-dienoic acid and its salts. INCI: Sorbic acid; Calcium sorbate; Sodium sorbate; Potassium sorbate. CAS: 110-44-1; 7492-55-9; 7757-81-5; 24634-61-5.\nMaximum concentration in ready for use preparation: 0,6 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#84",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 84 (consolidated version 2026-05-18).\nSubstance: 1,6-Octadien-3-ol, 3,7-dimethyl-. INCI: Linalool. CAS: 78-70-6.\nOther: The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#88",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 88 (consolidated version 2026-05-18).\nSubstance: 1-methyl-4-prop-1-en-2-yl-cyclohexene; dl-limonene (racemic); Dipentene. INCI: Limonene. CAS: 138-86-3/ 7705-14-8.\nOther: The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products. The peroxide value for each substance shall be less than 20 mmoles/L"
+        }
+      ],
+      "product": {
+        "category": "Flüssigseife",
+        "exposure_type": null
+      }
+    }
+  },
+  {
+    "case_id": "live_balea_lotion",
+    "expected_valid": true,
+    "expected_flags": [],
+    "description": "Live end-to-end report (scenario 1): Balea Bodylotion, explanations written by the live regulatory agent, e.g. 'Annex V entry 35 requires a maximum concentration of 0.5% for leave-on products. The concentration is unknown.' All correct ((b) Other products covers leave-on).",
+    "draft": {
+      "ingredients": [
+        {
+          "ingredient_id": "sodium benzoate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (c) of the entry."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "The concentration of sodium benzoate is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 1 requires a maximum concentration of 0.5% acid for leave-on products. The concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "piroctone olamine",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/35",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products (b) Other products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (b) of the entry."
+              },
+              {
+                "entry": "V/35",
+                "type": "max_concentration",
+                "requirement": "(a) 1,0 % (b) 0,5 %",
+                "result": "unknown",
+                "reason": "The concentration of piroctone olamine is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 35 requires a maximum concentration of 0.5% for leave-on products. The concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "potassium sorbate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/4",
+                "type": "max_concentration",
+                "requirement": "0,6 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Annex V entry 4 requires a maximum concentration of 0.6% (acid) for sorbic acid and its salts. The concentration of potassium sorbate is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        }
+      ],
+      "cruelty_free": {},
+      "sources": [
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#35",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 35 (consolidated version 2026-05-18).\nSubstance: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon and its monoethanolamine salt. INCI: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon; Piroctone Olamine. CAS: 50650-76-5; 68890-66-4.\nProduct type, body parts: (a) Rinse-off products (b) Other products\nMaximum concentration in ready for use preparation: (a) 1,0 % (b) 0,5 %"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#4",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 4 (consolidated version 2026-05-18).\nSubstance: Hexa-2,4-dienoic acid and its salts. INCI: Sorbic acid; Calcium sorbate; Sodium sorbate; Potassium sorbate. CAS: 110-44-1; 7492-55-9; 7757-81-5; 24634-61-5.\nMaximum concentration in ready for use preparation: 0,6 % (acid)"
+        }
+      ],
+      "product": {
+        "category": "bodylotion creme-öl",
+        "exposure_type": "leave_on"
+      }
+    }
+  },
+  {
+    "case_id": "live_cerave_ocr",
+    "expected_valid": true,
+    "expected_flags": [],
+    "description": "Live end-to-end report (scenario 2): CeraVe cleanser read from a label photo, rinse-off. Sodium benzoate 2.5 % (item a) and phenoxyethanol 1 %, concentrations unknown. All correct.",
+    "draft": {
+      "ingredients": [
+        {
+          "ingredient_id": "sodium benzoate",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product is a rinse-off cleanser, matching item (a) of the entry."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "The concentration of sodium benzoate is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 1 requires a maximum concentration of 2.5% for rinse-off products. The concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          }
+        },
+        {
+          "ingredient_id": "phenoxyethanol",
+          "concentration_percent": null,
+          "regulatory": {
+            "status": "restricted",
+            "conditions": [
+              {
+                "entry": "V/29",
+                "type": "max_concentration",
+                "requirement": "1,0 %",
+                "result": "unknown",
+                "reason": "The concentration of phenoxyethanol is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 29 requires a maximum concentration of 1.0% for phenoxyethanol in rinse-off products, but the concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#29"
+            ]
+          },
+          "toxicology": {
+            "hazards": [
+              {
+                "label": "CLP Eye Dam. 1 (H318)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              },
+              {
+                "label": "CLP Acute Tox. 4 (H302); STOT SE 3 (H335)",
+                "evidence_ids": [
+                  "clp_test_ingredients#phenoxyethanol"
+                ]
+              }
+            ],
+            "explanation": "A hazard classification exists for the pure substance. Consumer risk depends on concentration and exposure, which are unknown.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ]
+          }
+        }
+      ],
+      "cruelty_free": {},
+      "sources": [
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)"
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#29",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 29 (consolidated version 2026-05-18).\nSubstance: 2-Phenoxyethanol. INCI: Phenoxyethanol. CAS: 122-99-6.\nMaximum concentration in ready for use preparation: 1,0 %"
+        },
+        {
+          "evidence_id": "clp_test_ingredients#phenoxyethanol",
+          "kind": "toxicology",
+          "excerpt": "2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        }
+      ],
+      "product": {
+        "category": "cleanser",
+        "exposure_type": "rinse_off"
+      }
+    }
   }
 ]

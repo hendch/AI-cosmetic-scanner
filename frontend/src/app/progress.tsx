@@ -11,9 +11,8 @@ import { pickImage } from '@/scan/pick-image';
 import { useScan } from '@/scan/scan-context';
 
 const TITLES = {
-  completed: 'Report ready',
+  report: 'Report ready',
   needs_input: 'One more photo needed',
-  needs_review: 'Report held back',
   error: 'Analysis stopped',
 } as const;
 
@@ -23,7 +22,7 @@ export default function ProgressScreen() {
   const [photoError, setPhotoError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (outcome?.kind === 'completed') router.replace('/report');
+    if (outcome?.kind === 'report') router.replace('/report');
   }, [outcome]);
 
   if (!input) return <Redirect href="/" />;
@@ -56,11 +55,11 @@ export default function ProgressScreen() {
         </View>
       </View>
 
-      <StageList stage={stage} finished={outcome?.kind === 'completed'} />
+      <StageList stage={stage} finished={outcome?.kind === 'report'} />
 
       {running && (
         <View style={styles.actions}>
-          {stage === null && <Txt muted>The scanner doesn’t report each step, so they will all tick once it finishes.</Txt>}
+          {stage === null && <Txt muted>A scan usually takes 10 to 30 seconds, up to a minute more if the service was asleep.</Txt>}
           <Button
             label="Cancel"
             kind="secondary"
@@ -85,22 +84,6 @@ export default function ProgressScreen() {
               {photoError}
             </Txt>
           )}
-          <Button label="Scan another product" kind="secondary" onPress={scanAnother} />
-        </Panel>
-      )}
-
-      {outcome?.kind === 'needs_review' && (
-        <Panel>
-          <View style={styles.titleRow}>
-            <WarningCircleIcon size={22} color={theme.attention} weight="fill" />
-            <Txt variant="strong">Report held back for review</Txt>
-          </View>
-          <Txt>{outcome.message}</Txt>
-          {outcome.issues.map((issue) => (
-            <Txt key={issue} variant="small" muted>
-              {issue}
-            </Txt>
-          ))}
           <Button label="Scan another product" kind="secondary" onPress={scanAnother} />
         </Panel>
       )}

@@ -12,7 +12,8 @@ How to read this file:
 2. [The problem we found](#2-the-problem-we-found-on-main): what was wrong on `main`, with evidence.
 3. [Before and after](#3-before-and-after-how-a-scan-flows): how a scan flows.
 4. [Status](#4-status-what-works-now-and-what-does-not): what works now and what does not.
-5. [Every change in detail](#5-every-change-in-detail): before / now / why / example, area by area.
+5. [Every change in detail](#5-every-change-in-detail): before / now / why / example, area by area
+   (5.10 n8n workflow, 5.11 app, 5.12 fixes from real products, 5.13 evaluation are new on 2026-10-18).
 6. [What this means for your module](#6-what-this-means-for-your-module): one section per teammate.
 7. [Still to do](#7-still-to-do).
 
@@ -44,7 +45,10 @@ How to read this file:
 | **Pydantic** | The Python library that checks data has the right shape (e.g. that the model's answer is valid JSON with the right fields). |
 | **Rule check** | A check written in code (always gives the same answer), e.g. "every claim cites a source". |
 | **Validator agent** | An AI agent that re-reads the report and checks each claim against the text of its source. |
-| **Test** | Code that checks other code works (`pytest`). On `main` there were 64 tests; now there are 127, all passing. |
+| **Test** | Code that checks other code works (`pytest`). On `main` there were 64 tests; now there are 130, all passing (plus 13 for the app). |
+| **Webhook** | An address on n8n that starts the workflow when something sends it a request. The app sends every scan to the webhook `/webhook/cosmetic-scanner-live`. |
+| **Scenario** | One real scan sent to the webhook exactly like the app sends it, with the full answer saved (`eval/scenarios/`). |
+| **False alarm** | The validator flags a claim that is in fact correct. |
 
 ---
 
@@ -83,10 +87,10 @@ app ──► n8n ──► /v1/* mock endpoints ──► always "Mock Moisturi
 Our real modules (ingestion, regulatory, toxicology, ethics, RAG, report): never called.
 ```
 
-**Target (this branch; the parts marked ✔ are done, ✘ still to do):**
+**Now (this branch; the parts marked ✔ are done, ✘ still to do):**
 
 ```
-app ──► n8n (✘ workflow still to rewrite)
+app ──► n8n webhook  ✔ one workflow, every step is an HTTP call to our API (5.10)
           │
           ├─► POST /ingestion/scan        ✔ barcode → Open Beauty Facts → ingredient list
           │                               ✔ no list? → label photo → vision model (OCR)
@@ -94,9 +98,10 @@ app ──► n8n (✘ workflow still to rewrite)
           ├─► POST /regulatory/analyze    ✔ EU annexes, found through the RAG search, + Qwen
           ├─► POST /toxicology/analyze    ✘ still the mock
           ├─► POST /ethics/analyze        ✘ still the mock
-          ├─► POST /report/build          ✔ merges everything, attaches source text, runs 8 rule checks
-          └─► POST /report/validate       ✔ validator agent re-checks each claim
+          ├─► POST /report/build          ✔ merges everything, attaches source text, runs 9 rule checks
+          └─► POST /report/validate       ✔ validator agent re-checks each claim (advisory)
                                           → back to the app: report + status (completed / needs_review)
+app ✔ shows the new report (5.11)
 All AI calls go to the Hugging Face router with HF_TOKEN.
 ```
 
@@ -107,20 +112,20 @@ All AI calls go to the Hugging Face router with HF_TOKEN.
 | Part | State on this branch |
 |---|---|
 | Deployment files for Render | **Ready** (`render.yaml`, both Docker images built and tested on our computer). Not deployed yet. |
-| Barcode lookup | Works (Open Beauty Facts). |
-| Ingredient normalization | **Fixed**: 14 of 15 ingredients recognised on the real Balea product (was 0 of 15). |
+| Barcode lookup | Works (Open Beauty Facts), with one retry; an outage is reported as an outage, not as "not found" (5.6). |
+| Ingredient normalization | **Fixed**: 15 of 15 on the real Balea product (was 0 of 15); 88.8 % of 491 names on 25 real products (5.6). |
 | Label OCR | **Done**: tested on 2 real label photos (15/15 and 23/25 ingredients, see 5.7). |
 | RAG search | **Works online-ready**: no heavy AI library needed, search index shipped with the code, used by the regulatory agent. |
-| Regulatory agent | **Fixed and extended**: 41 ingredients covered (was 19). Runs live on a real product. |
+| Regulatory agent | **Fixed and extended**: 41 ingredients covered (was 19). Runs live on real products. |
 | Toxicology agent | **Still the Day-1 mock.** |
 | Ethics agent | **Still the Day-1 mock.** |
-| Report (`/report/build`) | **Done**, works on the real agent outputs. |
-| Validator agent (`/report/validate`) | **Done**, advisory for now (see 5.5). |
-| n8n workflow | **Not done**: still the old placeholder. |
-| App (frontend) | **Not updated** to the new report format yet. |
-| Recorded test scenarios and evaluation write-up | **Not done.** |
+| Report (`/report/build`) | **Done**, works on the real agent outputs, 9 rule checks. |
+| Validator agent (`/report/validate`) | **Done**, prompt v5, advisory (5.5). |
+| n8n workflow | **Done**: rewritten as HTTP calls to our API, tested locally (5.10). |
+| App (frontend) | **Done**: new report format and request, tested in the browser against local n8n (5.11). |
+| Recorded test scenarios and evaluation write-up | **Done**: `EVALUATION.md`, `eval/scenarios/` (5.13). Not yet run online. |
 
-Tests: **127 pass** (64 on `main`). AI calls spent on this branch so far: about 35 (each section says how many).
+Tests: **130 pass** (64 on `main`), plus 13 app tests. AI calls spent on this branch so far: about 90 (each section says how many).
 
 ---
 
@@ -211,7 +216,7 @@ format that nothing produces.
   `eu_1223_2009_annex_ii#1670`, whose text is the annex entry itself. Evidence comes from: annex entries (Kreemi's CSV files),
   the coverage list (for "no restriction found"), CLP table rows (toxicology), and the ethics agent's evidence.
 - **Overview numbers**: how many prohibited, restricted, conditions not met, concentration unknown, not assessed.
-- **8 rule checks** (code, no AI). If one of the "error" checks fails, the report's status is `needs_review` instead of `completed`:
+- **9 rule checks** (code, no AI). If one of the "error" checks fails, the report's status is `needs_review` instead of `completed`:
 
 | Check | What it verifies | Level |
 |---|---|---|
@@ -222,6 +227,7 @@ format that nothing produces.
 | excerpts_available | Every claim's source has real text (catches "MOCK - replace with retrieved text") | error |
 | claims_have_evidence | Statuses, hazards and "certified" claims cite a source | error |
 | missing_concentration | A concentration limit is never marked met/broken when the concentration is unknown | error |
+| status_matches_annex | "Prohibited" cites Annex II; "restricted" cites Annexes III to VI (added 2026-10-18, see 5.5) | error |
 | no_safety_verdicts | No "safe", "toxic", "avoid", "illegal" in what the user reads | error |
 
 **Example (real).** For the sample `clean_product`, the report correctly fails two checks: the ethics mock's "Mock Certified
@@ -237,7 +243,7 @@ of the sources they cite, and the product type (leave-on / rinse-off). The AI an
 unsupported. The answer is added to the report as one more check, `ai_validator`.
 
 **Decisions, each based on a real test:**
-- **It is advisory for now** (setting `VALIDATOR_BLOCKING=false`). Its doubts are shown as warnings; the 8 rule checks decide
+- **It is advisory for now** (setting `VALIDATOR_BLOCKING=false`). Its doubts are shown as warnings; the 9 rule checks decide
   `completed` / `needs_review`. Why: on real reports the 7B model wrongly called correct findings "overstated", for example the
   methylisothiazolinone restriction (3 runs out of 3), and it read piroctone olamine's "0,5 % for other products" as the
   rinse-off limit. If it could block reports, the products most worth showing would always be held back.
@@ -248,7 +254,22 @@ unsupported. The answer is added to the report as one more check, `ai_validator`
 - **It sees the product type**, because claims like "rinse-off only, this product is leave-on" depend on it.
 - If the AI service is down, the report still comes back, with a warning.
 
-**Prompts.** `prompts/validator/v1.yaml` to `v4.yaml`, each with its observed failures. Results: `eval/validator/results/`.
+**Prompts.** `prompts/validator/v1.yaml` to `v6.yaml`, each with its observed failures. Results: `eval/validator/results/`.
+
+**Update 2026-10-18: prompt v5 is active, v6 was rejected.**
+- *Before:* v4 called three correct "restricted" findings on the real Balea lotion report "unsupported", because "the excerpt
+  does not state that the product meets the conditions". It treated each condition's result as something the regulation text
+  must prove. But the result (e.g. "product type: met") is computed by our rule code from the product data, not read from the text.
+- *Now (v5):* the prompt explains this, explains lettered items ("(a) rinse-off 2,5 % (b) leave-on 0,5 %": item (a) goes
+  with limit (a)), and says that "cannot be checked" is not a claim. Tested on 6 cases, 3 of them built from real reports
+  (one with two planted errors): v5 6/6 verdicts right, v4 5/6.
+- *Still wrong:* on reports worded by the live regulatory agent, v5 asks the regulation text to prove "the concentration is
+  unknown". In the 5 recorded scenarios it flagged 10 claims and **all 10 were correct claims** (false alarms). v6 told it
+  explicitly to check such facts against the product data, and scored worse (4/8 against v5's 6/8), so it was rejected.
+  This is why the validator stays advisory. Full comparison: `EVALUATION.md` section 3.
+- *New rule check (no AI):* `status_matches_annex`: "prohibited" must cite Annex II, "restricted" must cite Annexes III to VI.
+  Both validator prompts missed a planted "linalool is banned (Annex III entry 84)"; the rule check catches it every time.
+- AI calls used: 22 (v4 and v5 on 6 cases, v6 on 8, v5 on the 2 new ones).
 
 **Files.** `app/report/agent.py`. Tests: `tests/test_report_build.py`, `tests/test_report_validator.py`.
 
@@ -265,25 +286,35 @@ unsupported. The answer is added to the report as one more check, `ai_validator`
 - An OCR typo like "Phenoxyethan0l" (zero instead of O) was rejected.
 
 **Now.**
-- **A real dictionary of 22,183 official ingredients** (33,886 names with their synonyms in several languages: water / eau /
+- **A real dictionary of 22,186 official ingredients** (33,889 names with their synonyms in several languages: water / eau /
   wasser → aqua). It comes from the Open Beauty Facts ingredient list, which is built from the EU CosIng database (open licence,
   ODbL). Built by `scripts/build_inci_dictionary.py` into `app/ingestion/data/inci_dictionary.json.gz` (362 KB).
 - "Recognised" now means "a real INCI ingredient". Whether our corpus covers it is each agent's job.
 - Splitting handles `,` `;` `. ` bullets and new lines (not inside brackets), removes "Ingredients:" and `*` marks, keeps
-  "may contain" colorants.
+  "may contain" colorants. Since 2026-10-18 also " - " when a list has no commas ("AQUA - GLYCERIN - PARFUM"); in a comma list
+  " - " is a word broken across two lines on the package ("Ethyl - hexyl Triazone") and is joined back ("ethylhexyl triazone").
 - Typo tolerance: "Phenoxyethan0l" → phenoxyethanol (confidence 0.95). Numbered names are never swapped (benzophenone-3 stays -3).
 - Confidence means "how sure we are of this name": 1.0 exact, 0.9-0.99 for a typo match, 0 when unknown.
 - "Needs review" is only set when a name is unknown or uncertain.
 
 **Example (real).** Balea body lotion: **14 of 15 recognised** (was 0), including the label's own typos ("Hybride Oil" →
-hybrid oil, "Ethylhexyl Sterate" → ethylhexyl stearate). The one missed, hydrogenated castor oil, is missing from the
-dictionary itself; such names come out "not recognised", never wrongly matched.
+hybrid oil, "Ethylhexyl Sterate" → ethylhexyl stearate). The one missed, hydrogenated castor oil, was missing from the
+dictionary itself; such names come out "not recognised", never wrongly matched. **Update 2026-10-18:** the Open Beauty Facts
+file lacks some very common names. The build script now adds a short, checked list (`SUPPLEMENT`: hydrogenated castor oil,
+PEG-40 hydrogenated castor oil), so Balea is now **15 of 15**. Measured on 25 real products (491 names, `python -m
+scripts.eval_normalize`): 84.5 % exact, 4.3 % after typo correction, 11.2 % not recognised. Most of what is left (polyisobutene,
+olive oil "Olea Europaea Fruit Oil", aloe "Aloe Barbadensis Leaf Juice") is missing from the source file; the full EU CosIng list
+is no longer offered as a download.
 
 **Other fixes in `app/ingestion/extract.py`:**
 - The barcode must be 8-14 digits. Before, a "barcode" like `../../samples/input/x` could read any JSON file of the project.
-- If Open Beauty Facts cannot be reached, the scan says "barcode not found" instead of crashing.
+- If Open Beauty Facts cannot be reached, the scan no longer crashes. **Update 2026-10-18:** it now retries once (10 s, then
+  20 s) and reports "product database unavailable" so the app says "try again in a minute" instead of "take a photo" (a real
+  timeout during the scenarios showed the old message was misleading). A real "not found" (HTTP 404) is not retried.
 - Many products have no category on Open Beauty Facts; the product name is used instead ("Bodylotion" → leave-on), so the
-  leave-on / rinse-off rules can still be checked.
+  leave-on / rinse-off rules can still be checked. **Update 2026-10-18:** Open Beauty Facts categories are often German or French
+  ("klärendes-gesichtswasser", "Flüssigseife"), so German and French words were added (gesichtswasser, toner, creme, dusch,
+  seife, savon, ...). Before, a facial toner and a liquid soap got no leave-on / rinse-off type.
 
 **Files.** New: `app/ingestion/normalize.py`, `scripts/build_inci_dictionary.py`, `app/ingestion/data/inci_dictionary.json.gz`.
 Removed: `app/ingestion/known.py`. Tests: `tests/test_normalize.py`, `tests/test_ingestion.py`.
@@ -394,6 +425,19 @@ validator, in **13 seconds**. Results: sodium benzoate V/1 (leave-on limit 0,5 %
 products"), potassium sorbate V/4 (0,6 %), all "conditions unknown" because the label gives no concentration. Qwen claimed
 potassium sorbate's limit was "not met" with no concentration known; the safety rule corrected it to "unknown".
 
+#### f) Fragrance allergens named on the label (2026-10-18)
+
+**Before.** For linalool (Annex III/84) the only condition is: "must be indicated in the list of ingredients when its
+concentration exceeds 0,001 % (leave-on) / 0,01 % (rinse-off)". The code reported it as "cannot be checked", and the AI was
+called to interpret it. But the scanner read linalool **from** the ingredient list, so the condition is met by definition. In
+one live run the AI even wrote "which is satisfied" while the condition said "unknown".
+
+**Now.** When that sentence is the whole condition (in the "other conditions" or the "warnings" column of the entry), the rule
+code marks it **met**: "The substance is named in the product's ingredient list, as the entry requires." The AI cannot
+overturn it. Limonene (III/88) also has a peroxide limit, which a label cannot show, so it stays "cannot be checked".
+
+**Also:** when the rules decide every condition of an ingredient, the AI is not called at all (one call saved per such ingredient).
+
 **Tests changed and why.** Some of Kreemi's tests checked the old corpus on purpose ("sodium benzoate is not covered",
 "3 AI calls"). Sodium benzoate is now covered (Annex V/1), so they were updated, with the reason written next to the change.
 The evaluation answer key `eval/regulatory/gold.json` was updated for the same ingredient. New tests: product-type cases,
@@ -409,12 +453,103 @@ concentration, new entries, missing token, both search methods.
 | `.gitignore`, `.dockerignore` | `data/` (any folder named "data") | `/data/` (only the one at the project root) | The old rule also hid `app/ingestion/data/inci_dictionary.json.gz`. It would never have reached GitHub or Render, and normalization would have crashed online. Checked: the rebuilt API image contains it. |
 | `.gitattributes` (new) | – | Shell scripts and Dockerfiles always use Linux line endings | The n8n start script would not run on Render if committed from Windows with Windows line endings. |
 | `frontend/.env.example`, `frontend/src/scan/client.ts` | `EXPO_PUBLIC_API_KEY` | `EXPO_PUBLIC_WEBHOOK_KEY` | Makes clear it is the public app key, not the secret API key. |
+| `tests/conftest.py` (new) | Tests used whatever was in your `.env` | Tests always run offline (rules-only regulatory, CSV search, local embeddings, no API key) | With `RETRIEVAL_BACKEND=rag` in `.env`, one test called the embedding service and failed depending on the order of results. Tests must not spend credits or depend on your settings. |
+| `app/regulatory/retrieval.py` | Results in the order the search backend returned them | Sorted by annex and entry number | The CSV and RAG backends returned the same entries in a different order. |
+
+### 5.10 The n8n workflow (Lyna's module)
+
+**Before.** The workflow on `main` (`AI-Cosmetic-Scanner-Live-Only.json`) called the four `/v1/*` mock endpoints (always "Mock
+Moisturizer") and ran the agents as AI nodes inside n8n on Ollama (section 2). Its report logic lived in JavaScript files
+(`deploy/n8n/nodes/report/*.js`) copied into the nodes by `scripts/install_report_nodes.py`.
+
+**Now.** One workflow, **AI Cosmetic Scanner** (`deploy/n8n/workflows/AI-Cosmetic-Scanner.json`), generated by
+`scripts/build_n8n_workflow.py`. n8n only orchestrates: every step is an HTTP call to our API, where all logic and AI calls live.
+
+```
+Scan request (webhook POST /webhook/cosmetic-scanner-live)
+ → Check request       app key, barcode is 8-14 digits, photos are data:image/... or https://
+ → Read product        POST /ingestion/scan
+ → Ingredients found?  no → "Ask for label photo" (status needs_input, with a message that says what happened)
+ → Regulatory agent → Toxicology agent → Ethics agent → Build report → Validator agent
+ → Public result → Reply
+ Any API call that fails (after one retry) → Service failed → Reply (status unavailable)
+```
+
+- n8n imports and publishes the workflow at every start (`deploy/n8n/start.sh`): nothing to click by hand, no n8n credentials.
+  The keys come from environment variables (`SCANNER_API_URL`, `SCANNER_API_KEY`, `EXPO_PUBLIC_WEBHOOK_KEY`).
+- The workflow's version id now changes with its content. Before, it was fixed, and after a change n8n kept running the old
+  stored version (found while testing).
+- The "Ask for label photo" message says what happened: "We read the barcode 6001230011808, but Open Beauty Facts has no
+  ingredient list for this product..." / "We could not find a barcode or a readable ingredient list in this photo..." /
+  "The product database did not answer. Try again in a minute...". Before, a barcode photo of a product missing from Open
+  Beauty Facts got "The ingredient list on the photo could not be read" (a real user test: the barcode had been read fine).
+- Contract (request, answer, statuses): `docs/N8N_SETUP.md`. Quick test: `scripts/test_scan.sh <app-key>`.
+
+**Removed** (all only served the old mock path): `app/integration/` (the `/v1/*` mock endpoints) and `tests/test_integration.py`,
+`deploy/n8n/workflows/AI-Cosmetic-Scanner-Live-Only.json`, `deploy/n8n/nodes/report/*.js`, `scripts/install_report_nodes.py`
+(replaced by `/report/build`), `docs/CONTRACT.md` (the old data format), `deploy/db/init/001_runs.sql` (a run-history table the
+new workflow does not use; n8n keeps its own execution history in Postgres).
+
+**Tested** (local docker compose): no key → `unauthorized`; bad barcode → `invalid_input`; unknown barcode → `needs_input`;
+Balea barcode → `completed`; CeraVe label photo only → `completed` through OCR; browser CORS check → allowed; API stopped →
+`unavailable`.
+
+### 5.11 The app (Omar's module)
+
+**Before.** The app expected the old report format (`report_version` 0.1: `regulatory_status`, `annex_entry`, conditions as
+plain text, sources as a list of names) and the old request (`label_image_base64`, plus a status webhook it polled).
+
+**Now.**
+- Sends `{barcode, barcode_image_ref, label_image_ref}` to the webhook; a photo goes as a `data:image/...;base64` URI in both
+  image fields (the API tries the barcode first, then reads the list). One request, one answer, waits up to 3 minutes (a
+  sleeping Render service takes about a minute to wake).
+- Reads Report 1.0, checked with zod (the TypeScript twin of Pydantic) in `frontend/src/report/schema.ts`.
+- Each ingredient shows: the EU rule and annex entry, **each condition** with its result in plain words (Met / Not met /
+  Cannot be checked / Does not apply) and why, the concentration if known, hazards, what is not known, and the evidence ids.
+- Sources show the **text the claim rests on**, the kind of source, publisher, date and a link.
+- The check panel shows whether the report passed the rule checks, how many cited items come with their text, and the AI
+  validator's result marked as advisory.
+- The step list shows the workflow's 6 real steps. n8n does not report progress, so it shows what will happen, not a live position.
+- `frontend/tests/fixtures/report-balea.json` is a **real** report from the API; the tests check that the app reads it.
+
+**Tested:** typecheck, lint, 13 tests; and in the browser against local n8n (Balea barcode → full report shown).
+
+### 5.12 Fixes found by testing real products (2026-10-18)
+
+Summary of the "Update 2026-10-18" notes above, in one place:
+
+| Problem found | Fix | Section |
+|---|---|---|
+| Hydrogenated castor oil not recognised | checked supplement list in the dictionary build | 5.6 |
+| "AQUA - GLYCERIN - ..." not split; "Ethyl - hexyl Triazone" not recognised | split on " - " only without commas; join broken words | 5.6 |
+| Open Beauty Facts timeout reported as "not found" | one retry; outage reported separately | 5.6 |
+| Toner and liquid soap had no leave-on / rinse-off type | German and French category words | 5.6 |
+| Linalool "cannot be checked" although named in the list | met by rule; AI not called | 5.8 f |
+| "Prohibited" backed by an Annex III entry not caught | rule check `status_matches_annex` | 5.5 |
+| n8n kept the old workflow version after a change | version id from the content | 5.10 |
+| Barcode photo answered "the ingredient list could not be read" | message says what was read and what is missing | 5.10 |
+
+### 5.13 Evaluation and the five scenarios
+
+`EVALUATION.md` has every number with the file it comes from. In short:
+
+- **5 scenarios** through n8n (`python -m scripts.run_scenarios`, saved in `eval/scenarios/2026-10-18_1511/`): barcode found,
+  OCR fallback, unknown ingredient, missing concentration, no cruelty-free evidence. All behave as designed; every rule check passes.
+- **Regulatory agent** v4: 100 % on status, compliance, conditions and citations (45 gold cases).
+- **RAG**: Recall@3 1.0 with structured chunks, 0.2 with fixed-size chunks.
+- **OCR**: 15/15 and 23/25. **Names**: 88.8 % recognised on 25 real products.
+- **Validator**: v5 best of six prompts, but 10 of 10 flags on the live scenarios were false alarms, so it stays advisory.
+
+New scripts: `scripts/run_scenarios.py` (also takes the Render webhook URL), `scripts/eval_normalize.py` (no AI calls).
+`scripts/run_validator_eval.py` takes `--cases` and no longer overwrites a result file from the same minute (it did once: the
+v6 numbers were copied from the run log into `prompts/validator/v6.yaml`). AI calls used: about 55.
 
 ---
 
 ## 6. What this means for your module
 
-**Muaadh (barcode, OCR, normalization).** `known.py` is replaced by a real dictionary (5.6). OCR now exists in
+**Muaadh (barcode, OCR, normalization).** `known.py` is replaced by a real dictionary (5.6, with the 2026-10-18 updates:
+supplement list, " - " splitting, broken words, retry, German/French categories). OCR now exists in
 `app/ingestion/ocr.py` with the team's Hugging Face token instead of Gemini (5.7). New endpoint `/ingestion/scan` for n8n. Your
 old tests asserted the old behaviour (aqua not recognised) and were updated. `samples/input/*.json` were hand-written and do not
 match what the code produces (e.g. "Water" matched=true at 0.62); they still work as test inputs.
@@ -425,7 +560,7 @@ agent now uses your search (5.8 d). Your evaluation (`eval/rag/`) is not changed
 `python eval/rag/run_eval.py` fails (path), `metrics.csv` comes from an older run, 11 questions (plan: 10-25).
 
 **Kreemi (regulatory).** 13 annex entries added, 41 ingredients in scope, concentration field, product-type matching fixed,
-search through RAG, no crash without a token (5.8). Please re-check the new CSV rows against the PDF if you want a second pair of eyes.
+search through RAG, no crash without a token, fragrance allergens named in the list are met by rule (5.8). Please re-check the new CSV rows against the PDF if you want a second pair of eyes.
 
 **Hind (toxicology, ethics).** Your modules are unchanged and still the Day-1 mocks: they are next on our list.
 The report already replaces the mock's "MOCK - replace with retrieved text" quotes with the real CLP table row when it can.
@@ -433,17 +568,15 @@ For everyone: a second model is now used, for OCR only: `Qwen/Qwen3-VL-30B-A3B-I
 `app/common/llm.py` got one optional parameter (`model`); nothing else changed in it.
 
 **Lyna (n8n, deployment).** `app/main.py` now checks an API key when `SCANNER_API_KEY` is set (5.2). The n8n image and
-`render.yaml` are new (5.1); `docker-compose.yml` no longer starts Ollama. The workflow itself is not changed yet: the plan is to
-replace the `/v1/*` mock nodes and the four AI nodes by HTTP calls to `/ingestion/scan`, `/regulatory/analyze`,
-`/toxicology/analyze`, `/ethics/analyze`, `/report/build`, `/report/validate`.
+`render.yaml` are new (5.1); `docker-compose.yml` no longer starts Ollama. Your placeholder workflow is replaced by the HTTP
+chain (5.10), keeping the same idea (check the request, read the product, ask for a label photo, agents, report, validator,
+public result). To change it, edit `scripts/build_n8n_workflow.py` and rerun it, or edit in the n8n editor and export it.
 
 ---
 
 ## 7. Still to do
 
 1. Toxicology and ethics: real agents instead of the mocks (CLP table and SCCS texts through RAG; Open Beauty Facts labels and a certification list).
-2. n8n workflow: the HTTP chain above; remove the `/v1/*` mock path, the four AI nodes, `deploy/n8n/nodes/report/*.js` and `scripts/install_report_nodes.py` (made obsolete by `/report/build`).
-3. App: show the new report format; send photos as `label_image_ref`.
-4. Validator prompt v5 (use the product type, read lettered options correctly), tested on real reports.
-5. The five end-to-end scenarios from the plan (barcode found, OCR fallback, unknown ingredient, missing concentration, no cruelty-free evidence), recorded; evaluation and prompt-comparison write-up.
-6. Deploy on Render and run the scenarios online.
+2. Deploy on Render and run the scenarios online: `python -m scripts.run_scenarios https://<n8n>.onrender.com/webhook/cosmetic-scanner-live`.
+3. Validator: a bigger model for this one call, or only send it the claims the rule checks cannot judge (`EVALUATION.md` section 3).
+4. Ingredient dictionary: a fuller source than the Open Beauty Facts file for the 11 % of names not recognised.

@@ -2,7 +2,7 @@ id: validator
 version: v4
 date: 2026-10-16
 author: omar
-status: active
+status: superseded
 description: >
   v3 plus one fix: a cruelty-free status of "claimed" that cites a brand_claim source is
   supported; only "verified" needs a certification source. v3 rejected correctly

@@ -27,7 +27,7 @@ export function AnnotatedLabel({ ingredients, onSelect }: { ingredients: Ingredi
             <Text
               accessibilityRole="link"
               accessibilityHint={`${toneLegend[tones[i]]}. Shows details.`}
-              onPress={() => onSelect(ing.ingredient)}
+              onPress={() => onSelect(ing.ingredient_id)}
               style={[
                 styles.name,
                 {
