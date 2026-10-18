@@ -35,13 +35,13 @@ export function BarcodeCamera({ onScanned }: { onScanned: (barcode: string) => v
     [onScanned],
   );
 
-  const frame = [styles.frame, { backgroundColor: theme.surface, borderColor: theme.line }];
+  const frame = [styles.frame, { backgroundColor: theme.ink }];
 
   if (!permission) return <View style={frame} accessibilityLabel="Starting the camera" />;
 
   if (!permission.granted) {
     return (
-      <View style={[frame, styles.prompt]}>
+      <View style={[styles.frame, styles.prompt, { backgroundColor: theme.surface }]}>
         <Txt variant="strong">Allow the camera to scan barcodes</Txt>
         <Txt muted>The camera is only used while this screen is open. You can also type the number below.</Txt>
         <Button
@@ -64,13 +64,16 @@ export function BarcodeCamera({ onScanned }: { onScanned: (barcode: string) => v
           onBarcodeScanned={onBarcodeScanned}
         />
       )}
-      <View style={[styles.guide, { borderColor: theme.onAccent }]} pointerEvents="none" />
+      <View style={[styles.guide, { borderColor: '#FFFFFF' }]} pointerEvents="none">
+        <View style={[styles.line, { backgroundColor: theme.accent }]} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  frame: { aspectRatio: 4 / 3, borderRadius: Radius.panel, borderWidth: 1, overflow: 'hidden', justifyContent: 'center' },
+  frame: { aspectRatio: 4 / 3, borderRadius: Radius.panel, overflow: 'hidden', justifyContent: 'center' },
   prompt: { padding: Spacing.five, gap: Spacing.three, aspectRatio: undefined },
-  guide: { alignSelf: 'center', width: '70%', height: '32%', borderWidth: 2, borderRadius: Radius.control, opacity: 0.85 },
+  guide: { alignSelf: 'center', width: '70%', height: '32%', borderWidth: 2, borderRadius: Radius.tile, opacity: 0.9, justifyContent: 'center' },
+  line: { height: 2, marginHorizontal: Spacing.three, opacity: 0.9 },
 });

@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { summarizeCitations } from '@/report/citations';
 import { ReportSchema, type Ingredient, type Report } from '@/report/schema';
 import { displayName, ingredientTone, overviewLines } from '@/report/wording';
+import { productScore } from '@/report/score';
+import { estimatedStage } from '@/scan/estimate';
 import { gtinProblem } from '@/scan/gtin';
 
 // A real report from the API: Balea barcode 4066447870213 through /ingestion/scan, the three
@@ -138,5 +140,40 @@ describe('displayName', () => {
   it('turns INCI names into sentence case', () => {
     expect(displayName('SODIUM BENZOATE')).toBe('Sodium benzoate');
     expect(displayName('aqua')).toBe('Aqua');
+  });
+});
+
+describe('estimatedStage', () => {
+  it('follows typical timings and holds the last step until the answer arrives', () => {
+    expect(estimatedStage(0, false)).toBe('product');
+    expect(estimatedStage(5, false)).toBe('regulatory');
+    expect(estimatedStage(5, true)).toBe('product'); // a label photo is read by OCR first
+    expect(estimatedStage(300, false)).toBe('validation');
+  });
+});
+
+describe('productScore', () => {
+  it('scores the real Balea report and explains every deduction', () => {
+    const s = productScore(real);
+    const deducted = s.factors.reduce((sum, f) => sum + f.points, 0);
+    expect(s.score).toBe(Math.max(0, Math.round((10 - deducted) * 2) / 2));
+    expect(s.conclusion[0].text).toBe('No ingredient prohibited in EU cosmetics.');
+    expect(s.total).toBe(real.ingredients.length);
+  });
+  it('caps the score when an ingredient is prohibited', () => {
+    const reg = ingredient().regulatory;
+    const r = report({ ingredients: [ingredient({ regulatory: { ...reg, status: 'prohibited', compliance_check: 'not_applicable' } })] });
+    const s = productScore(r);
+    expect(s.score).toBeLessThanOrEqual(2);
+    expect(s.band.tone).toBe('prohibited');
+    expect(s.conclusion[0].tone).toBe('prohibited');
+  });
+  it('gives a high score when nothing is restricted and animal testing is verified', () => {
+    const reg = ingredient().regulatory;
+    const r = report({
+      ingredients: [ingredient({ regulatory: { ...reg, status: 'no_restriction_found', compliance_check: 'not_applicable', conditions: [] } })],
+      cruelty_free: { ...real.cruelty_free, status: 'verified' },
+    });
+    expect(productScore(r)).toMatchObject({ score: 10, band: { tone: 'clear' }, confidence: 'high' });
   });
 });

@@ -6,7 +6,7 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { STAGES, stageIndex } from '@/scan/stages';
 
-import { Txt } from './ui';
+import { Radius, Txt } from './ui';
 
 function Spinner({ color }: { color: string }) {
   const [turn] = useState(() => new Animated.Value(0));
@@ -36,12 +36,12 @@ export function StageList({ stage, finished }: { stage: string | null; finished:
   const current = finished ? STAGES.length : stageIndex(stage);
 
   return (
-    <View style={styles.list} accessibilityRole="list">
+    <View style={[styles.list, { backgroundColor: theme.surface }]} accessibilityRole="list">
       {STAGES.map((s, i) => {
         const done = i < current;
         const running = i === current;
         return (
-          <View key={s.id} style={styles.row} accessibilityLabel={`${done ? s.done : s.running}${done ? ', done' : running ? ', in progress' : ''}`}>
+          <View key={s.id} style={[styles.row, running && { backgroundColor: theme.accentSoft }]} accessibilityLabel={`${done ? s.done : s.running}${done ? ', done' : running ? ', in progress' : ''}`}>
             {done ? (
               <CheckCircleIcon size={22} color={theme.clear} weight="fill" />
             ) : running ? (
@@ -49,7 +49,7 @@ export function StageList({ stage, finished }: { stage: string | null; finished:
             ) : (
               <CircleIcon size={22} color={theme.line} weight="bold" />
             )}
-            <Txt variant={running ? 'strong' : 'body'} muted={!done && !running}>
+            <Txt variant={running ? 'strong' : 'body'} muted={!done && !running} style={running ? { color: theme.accent } : undefined}>
               {done ? s.done : s.running}
             </Txt>
           </View>
@@ -60,6 +60,6 @@ export function StageList({ stage, finished }: { stage: string | null; finished:
 }
 
 const styles = StyleSheet.create({
-  list: { gap: Spacing.three },
-  row: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  list: { borderRadius: Radius.panel, padding: Spacing.two, gap: 2 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, borderRadius: Radius.control, paddingHorizontal: Spacing.three, paddingVertical: Spacing.three },
 });
