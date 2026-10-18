@@ -1,115 +1,84 @@
+// Talks to the n8n scan webhook (docs/N8N_SETUP.md). One request, one answer: n8n replies when the
+// whole pipeline has run (product lookup or label OCR, three agents, report, validator).
 import { ReportSchema, type Report } from '@/report/schema';
 
 export type PickedImage = { uri: string; base64: string; mimeType: string };
 export type ScanInput = { barcode?: string; image?: PickedImage };
 
 export type ScanOutcome =
-  | { kind: 'completed'; report: Report }
+  | { kind: 'report'; report: Report; status: 'completed' | 'needs_review' }
   | { kind: 'needs_input'; message: string }
-  | { kind: 'needs_review'; message: string; issues: string[] }
   | { kind: 'error'; message: string };
 
-/** Called whenever n8n reports progress. `stage` is null when n8n does not report steps. */
+/** Called when the scan starts. `stage` is null: n8n does not report individual steps. */
 export type ProgressListener = (stage: string | null) => void;
 
 const SCAN_URL = process.env.EXPO_PUBLIC_SCAN_URL ?? '';
-const STATUS_URL = process.env.EXPO_PUBLIC_STATUS_URL ?? '';
 const WEBHOOK_KEY = process.env.EXPO_PUBLIC_WEBHOOK_KEY ?? '';
-const POLL_MS = 1500;
+// A sleeping free API on Render needs about a minute to wake up, on top of the scan itself.
+const TIMEOUT_MS = 180_000;
 
 const LABEL_PHOTO_MESSAGE =
-  'This barcode has no ingredient list in the product database. Take a photo of the ingredient list on the back of the product.';
+  'This product has no ingredient list in the product database. Take a photo of the ingredient list on the back of the product.';
 
-// What n8n returns: the final public result, or {request_id, status: "running", stage} while it works.
 type PublicResult = {
-  request_id?: string;
   status: string;
-  stage?: string | null;
   report?: unknown;
   next_action?: { message?: string } | null;
   error?: { code?: string; message?: string } | null;
-  validation?: { issues?: string[]; checks?: { passed: boolean; issues: string[] }[] } | null;
 };
-
-class ServiceError extends Error {}
-
-function sleep(ms: number, signal?: AbortSignal) {
-  return new Promise<void>((resolve, reject) => {
-    const timer = setTimeout(resolve, ms);
-    signal?.addEventListener('abort', () => {
-      clearTimeout(timer);
-      reject(new DOMException('Scan cancelled', 'AbortError'));
-    });
-  });
-}
-
-async function call(url: string, init: RequestInit): Promise<PublicResult> {
-  let response: Response;
-  try {
-    response = await fetch(url, { ...init, headers: { 'Content-Type': 'application/json', 'X-API-Key': WEBHOOK_KEY } });
-  } catch (err) {
-    if ((err as Error).name === 'AbortError') throw err;
-    throw new ServiceError(
-      `Couldn't reach the scanner service at ${url}. Check that n8n is running and that this device is on the same network.`,
-    );
-  }
-  if (!response.ok) throw new ServiceError(`The scanner service answered with HTTP ${response.status}.`);
-  return (await response.json()) as PublicResult;
-}
 
 function toOutcome(result: PublicResult): ScanOutcome {
   switch (result.status) {
-    case 'completed': {
+    case 'completed':
+    case 'needs_review': {
       const parsed = ReportSchema.safeParse(result.report);
-      if (parsed.success) return { kind: 'completed', report: parsed.data };
+      if (parsed.success) return { kind: 'report', report: parsed.data, status: result.status };
       const where = parsed.error.issues[0]?.path.join('.') || 'report';
       return { kind: 'error', message: `The report doesn't match the expected format (first problem at "${where}").` };
     }
     case 'needs_input':
       return { kind: 'needs_input', message: result.next_action?.message ?? LABEL_PHOTO_MESSAGE };
-    case 'needs_review': {
-      const v = result.validation;
-      const issues = v?.issues ?? v?.checks?.filter((c) => !c.passed).flatMap((c) => c.issues) ?? [];
-      return {
-        kind: 'needs_review',
-        message: result.error?.message ?? 'Some findings could not be backed by the evidence, so the report was held back.',
-        issues,
-      };
-    }
+    case 'unauthorized':
+      return { kind: 'error', message: 'The app is not allowed to use the scanner service (wrong EXPO_PUBLIC_WEBHOOK_KEY).' };
     default:
       return { kind: 'error', message: result.error?.message ?? `The scan stopped with status "${result.status}".` };
   }
 }
 
+function dataUri(image: PickedImage): string {
+  return `data:${image.mimeType || 'image/jpeg'};base64,${image.base64}`;
+}
+
 export async function runScan(input: ScanInput, onProgress: ProgressListener, signal?: AbortSignal): Promise<ScanOutcome> {
   if (!SCAN_URL) return { kind: 'error', message: 'The app is not connected to a scanner service. Set EXPO_PUBLIC_SCAN_URL in frontend/.env.' };
+  onProgress(null);
 
+  // A photo may show the barcode or the ingredient list: the API tries the barcode first, then reads the label.
+  const photo = input.image ? dataUri(input.image) : null;
+  const timeout = AbortSignal.timeout(TIMEOUT_MS);
+  const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
+
+  let response: Response;
   try {
-    onProgress(null);
-    let result = await call(SCAN_URL, {
+    response = await fetch(SCAN_URL, {
       method: 'POST',
-      signal,
-      body: JSON.stringify({
-        barcode: input.barcode ?? null,
-        label_image_base64: input.image?.base64 ?? null,
-        label_image_mime: input.image?.mimeType ?? null,
-        market: 'EU',
-        assessment_date: new Date().toISOString().slice(0, 10),
-      }),
+      signal: combined,
+      headers: { 'Content-Type': 'application/json', 'X-API-Key': WEBHOOK_KEY },
+      body: JSON.stringify({ barcode: input.barcode ?? null, barcode_image_ref: photo, label_image_ref: photo }),
     });
-
-    // Asynchronous mode: n8n answered straight away and keeps working; follow its progress.
-    while (result.status === 'running') {
-      onProgress(result.stage ?? null);
-      if (!STATUS_URL || !result.request_id) {
-        return { kind: 'error', message: 'The scan started, but the app has no EXPO_PUBLIC_STATUS_URL to follow it.' };
-      }
-      await sleep(POLL_MS, signal);
-      result = await call(`${STATUS_URL}?request_id=${encodeURIComponent(result.request_id)}`, { method: 'GET', signal });
-    }
-    return toOutcome(result);
   } catch (err) {
-    if (err instanceof ServiceError) return { kind: 'error', message: err.message };
-    throw err;
+    if (signal?.aborted) throw err; // the user cancelled
+    if (timeout.aborted) return { kind: 'error', message: 'The scanner service took too long to answer. Try again in a minute.' };
+    return {
+      kind: 'error',
+      message: `Couldn't reach the scanner service at ${SCAN_URL}. Check your connection; a local n8n must be on the same network.`,
+    };
+  }
+  if (!response.ok) return { kind: 'error', message: `The scanner service answered with HTTP ${response.status}.` };
+  try {
+    return toOutcome((await response.json()) as PublicResult);
+  } catch {
+    return { kind: 'error', message: 'The scanner service sent an answer the app could not read.' };
   }
 }

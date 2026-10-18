@@ -38,8 +38,11 @@ def _keys() -> list[str]:
 
 
 def split_ingredients(text: str) -> list[str]:
-    """Split an ingredient list on commas, semicolons, bullets, '. ' and new lines, but not inside brackets."""
+    """Split an ingredient list on commas, semicolons, bullets, ' - ', '. ' and new lines, but not inside brackets."""
     text = MAY_CONTAIN.sub(",", PREFIX.sub("", text or ""))
+    # " - " separates only in lists without commas ("AQUA - GLYCERIN - ..."). In comma lists it is a word
+    # broken across two lines ("Ethyl - hexyl Triazone"), joined again in _candidates.
+    dash_list = not re.search(r"[,;]", text) and len(re.findall(r" [-–] ", text)) >= 2
     parts, depth, current = [], 0, []
     for n, ch in enumerate(text):
         if ch in "([":
@@ -48,7 +51,9 @@ def split_ingredients(text: str) -> list[str]:
             depth = max(depth - 1, 0)
         # ". " also separates (INCI names never contain it; decimals like 0.5 have no space)
         period = ch == "." and text[n + 1:n + 2].isspace()
-        if depth == 0 and (ch in ",;•·\n\r" or period):
+        # " - " and " – " separate too (some brands print "AQUA - GLYCERIN - ..."); "PEG-40" has no spaces
+        dash = dash_list and ch in "-–" and text[n - 1:n] == " " and text[n + 1:n + 2] == " "
+        if depth == 0 and (dash or ch in",;•·\n\r" or period):
             parts.append("".join(current))
             current = []
         else:
@@ -70,7 +75,7 @@ def _clean(raw: str) -> str:
 def _candidates(raw: str) -> list[str]:
     """Ways a label may write one ingredient: as is, without the bracket, the bracket alone, each '/' part."""
     c = _clean(raw)
-    out = [c]
+    out = [c, re.sub(r"(\w)- ?(\w)|(\w) - (\w)", lambda m: "".join(g for g in m.groups() if g), c)]
     no_bracket = re.sub(r"\s*\([^)]*\)", "", c).strip()
     out.append(no_bracket)
     out += [b.strip() for b in re.findall(r"\(([^)]*)\)", c)]

@@ -1,0 +1,620 @@
+{
+  "name": "AI Cosmetic Scanner",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cosmetic-scanner-live",
+        "authentication": "none",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "92717df5-c4c2-593f-9ff2-63d05e3cb360",
+      "name": "Scan request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "18f2a2be-d87c-53c9-b5fb-9a347a47d637",
+      "notes": "Called by the app. Body: {barcode, barcode_image_ref, label_image_ref}.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Checks the app's key and the request. Images are data URIs (data:image/...;base64,...) or https links.\nconst req = $input.first().json;\nconst body = req.body && typeof req.body === 'object' ? req.body : {};\nconst headers = req.headers || {};\nconst expected = $env.EXPO_PUBLIC_WEBHOOK_KEY || '';\nconst request_id = 'scan-' + $execution.id;\nlet error = null;\nif (expected && headers['x-api-key'] !== expected) {\n  error = { code: 'UNAUTHORIZED', message: 'Missing or wrong X-API-Key header.' };\n}\nconst barcode = body.barcode == null || body.barcode === '' ? null : String(body.barcode).replace(/\\s/g, '');\nif (!error && barcode && !/^\\d{8,14}$/.test(barcode)) {\n  error = { code: 'GTIN_FORMAT', message: 'A barcode number has 8 to 14 digits.' };\n}\nconst isRef = (r) => typeof r === 'string' && (r.startsWith('data:image/') || r.startsWith('https://'));\nconst barcode_image_ref = isRef(body.barcode_image_ref) ? body.barcode_image_ref : null;\nconst label_image_ref = isRef(body.label_image_ref) ? body.label_image_ref : null;\nif (!error && !barcode && !barcode_image_ref && !label_image_ref) {\n  error = { code: 'NO_INPUT', message: 'Send a barcode, a barcode photo or a photo of the ingredient list.' };\n}\nreturn [{ json: { ok: !error, request_id, error, request: { barcode, barcode_image_ref, label_image_ref } } }];\n"
+      },
+      "id": "d59a3ea6-3e7a-5f3c-bb04-197e38b3d4fc",
+      "name": "Check request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "notes": "",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5fea7117-a80d-5b68-9a25-61e80e50dc8c",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "319eb671-a155-58f1-933f-10cf320d4697",
+      "name": "Request OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const c = $input.first().json;\nreturn [{ json: { schema_version: '1.0', request_id: c.request_id,\n  status: c.error.code === 'UNAUTHORIZED' ? 'unauthorized' : 'invalid_input',\n  report: null, next_action: null, error: c.error } }];\n"
+      },
+      "id": "7de1a09b-3c3a-58c6-b5b0-a358353dffe6",
+      "name": "Reject request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        520
+      ],
+      "notes": "",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/ingestion/scan' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.request }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "d483702d-f78b-5ce6-8e09-68325deff2f7",
+      "name": "Read product",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "Barcode -> Open Beauty Facts; no ingredient list -> label photo OCR; names -> INCI.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "351f6841-fae2-5236-a12a-f50d096ea3a1",
+              "leftValue": "={{ ($json.ingredients || []).length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "753ecc90-765e-5597-99eb-1b81d2bd0562",
+      "name": "Ingredients found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const p = $input.first().json;\nconst c = $('Check request').first().json;\nconst r = c.request;\nconst code = (p.product && p.product.barcode) || '';\n// The app sends one photo as both refs: it may show the barcode or the ingredient list.\nconst onePhoto = !!r.label_image_ref && r.label_image_ref === r.barcode_image_ref;\nconst labelOnly = !!r.label_image_ref && !onePhoto;\nlet message;\nif ((p.warnings || []).includes('product database unavailable')) {\n  message = 'The product database (Open Beauty Facts) did not answer. Try again in a minute, '\n    + 'or take a photo of the ingredient list on the back of the product.';\n} else if (code) {\n  message = 'We read the barcode ' + code + ', but Open Beauty Facts has no ingredient list for this product. '\n    + 'Take a photo of the ingredient list on the back of the product.';\n} else if (onePhoto) {\n  message = 'We could not find a barcode or a readable ingredient list in this photo. '\n    + 'Take a sharper photo of the barcode or of the ingredient list, flat and well lit, or type the barcode number.';\n} else if (labelOnly) {\n  message = 'The ingredient list on the photo could not be read. Take a sharper photo of the ingredient list, flat and well lit.';\n} else {\n  message = 'This product has no ingredient list in the product database. Take a photo of the ingredient list on the back of the product.';\n}\nreturn [{ json: { schema_version: '1.0', request_id: c.request_id, status: 'needs_input', report: null,\n  product: p.product, warnings: p.warnings || [],\n  next_action: { type: 'label_photo', message, barcode: code || null },\n  error: null } }];\n"
+      },
+      "id": "f41a21c6-ffa7-5c87-b031-589331e4449f",
+      "name": "Ask for label photo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        520
+      ],
+      "notes": "",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/regulatory/analyze' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Read product').first().json }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "9bf2ae43-6e3d-5432-bc8d-1c42d7db9022",
+      "name": "Regulatory agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "EU annexes II-VI found through the RAG index + Qwen.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/toxicology/analyze' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Read product').first().json }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "7e8e0b71-3c20-5ba0-a8e7-f38c41ec7eb1",
+      "name": "Toxicology agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "Hazard classifications (CLP, SCCS).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/ethics/analyze' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('Read product').first().json }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "c2a52238-de3e-51cc-85d7-3dc9461ac724",
+      "name": "Ethics agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "Cruelty-free claims and certifications.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/report/build' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ product_input: $('Read product').first().json, regulatory: $('Regulatory agent').first().json, toxicology: $('Toxicology agent').first().json, ethics: $('Ethics agent').first().json }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "3e3b9172-20c3-5f30-8a0f-09d5af84a1a6",
+      "name": "Build report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "Merges the three agents, attaches the source text of every claim, runs the rule checks.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SCANNER_API_URL + '/report/validate' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "={{ $env.SCANNER_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ report: $json }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "2f9aba3f-88ce-5d6e-bcf2-ed0781111167",
+      "name": "Validator agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        300
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "onError": "continueErrorOutput",
+      "notes": "Re-checks each claim against its source text (advisory).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const v = $input.first().json;\nconst c = $('Check request').first().json;\nreturn [{ json: { schema_version: '1.0', request_id: c.request_id, status: v.status,\n  report: v.report, validation: v.report.validation,\n  validator: v.validator ? { prompt_version: v.validator.prompt_version, model: v.validator.model } : null,\n  next_action: null, error: null } }];\n"
+      },
+      "id": "1ba1c22e-ef78-5ab5-beed-9be5c792f80a",
+      "name": "Public result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        300
+      ],
+      "notes": "",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const e = $input.first().json;\nconst c = $('Check request').first().json;\nconst detail = (e.error && (e.error.message || e.error.description)) || e.message || 'no details';\nreturn [{ json: { schema_version: '1.0', request_id: c.request_id, status: 'unavailable', report: null,\n  next_action: null, error: { code: 'SERVICE_FAILED', message: 'A scanner service did not answer: ' + detail } } }];\n"
+      },
+      "id": "8e985a91-ee7b-5b47-97ce-e7d1205cadfe",
+      "name": "Service failed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        620
+      ],
+      "notes": "",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "d9b7b359-fed4-57c4-8d53-761e8038be04",
+      "name": "Reply",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2440,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Read product": {
+      "main": [
+        [
+          {
+            "node": "Ingredients found?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Regulatory agent": {
+      "main": [
+        [
+          {
+            "node": "Toxicology agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Toxicology agent": {
+      "main": [
+        [
+          {
+            "node": "Ethics agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ethics agent": {
+      "main": [
+        [
+          {
+            "node": "Build report",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build report": {
+      "main": [
+        [
+          {
+            "node": "Validator agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validator agent": {
+      "main": [
+        [
+          {
+            "node": "Public result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Service failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scan request": {
+      "main": [
+        [
+          {
+            "node": "Check request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check request": {
+      "main": [
+        [
+          {
+            "node": "Request OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Request OK?": {
+      "main": [
+        [
+          {
+            "node": "Read product",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reject request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reject request": {
+      "main": [
+        [
+          {
+            "node": "Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingredients found?": {
+      "main": [
+        [
+          {
+            "node": "Regulatory agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ask for label photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask for label photo": {
+      "main": [
+        [
+          {
+            "node": "Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Public result": {
+      "main": [
+        [
+          {
+            "node": "Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Service failed": {
+      "main": [
+        [
+          {
+            "node": "Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6692ebe1-29ad-5013-8d7d-e704e94d2480",
+  "meta": {
+    "instanceId": "cosmetic-scanner"
+  },
+  "id": "CosmeticScan0001",
+  "tags": []
+}

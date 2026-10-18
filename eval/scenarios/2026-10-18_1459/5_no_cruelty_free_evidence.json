@@ -1,0 +1,759 @@
+{
+  "request": {
+    "barcode": "4305615657196"
+  },
+  "seconds": 19.7,
+  "answer": {
+    "schema_version": "1.0",
+    "request_id": "scan-13",
+    "status": "completed",
+    "report": {
+      "report_version": "1.0",
+      "generated_at": "2026-10-18T14:01:15.346134Z",
+      "input_source": "barcode",
+      "product": {
+        "name": "Gesichtswasser",
+        "brand": "Isana",
+        "barcode": "4305615657196",
+        "category": "Klärendes Gesichtswasser",
+        "exposure_type": null
+      },
+      "needs_review": true,
+      "overview": {
+        "total_ingredients": 14,
+        "prohibited": 0,
+        "restricted": 3,
+        "conditions_not_met": 0,
+        "conditions_unknown": 3,
+        "concentration_unknown": 3,
+        "hazard_classified": 0,
+        "not_assessed": 9
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "aqua",
+          "raw": "Aqua",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#aqua"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 2,
+          "ingredient_id": "alcohol denat.",
+          "raw": "Alcohol Denat",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 3,
+          "ingredient_id": "glycerin",
+          "raw": "Glycerin",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#glycerin"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "none_identified",
+            "hazards": [],
+            "explanation": "No hazard classification or concern identified in the retrieved evidence.",
+            "evidence_ids": [
+              "clp_test_ingredients#glycerin"
+            ]
+          },
+          "missing_information": [],
+          "evidence_confidence": "medium"
+        },
+        {
+          "position": 4,
+          "ingredient_id": "decyl glucoside",
+          "raw": "Decyl Glucoside",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 5,
+          "ingredient_id": "aloe barbadensis leaf juice",
+          "raw": "Aloe Barbadensis Leaf Juice",
+          "matched": false,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "Ingredient not recognised as an INCI name; no evidence retrieved.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "recognised INCI name"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 6,
+          "ingredient_id": "allantoin",
+          "raw": "Allantoin",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 7,
+          "ingredient_id": "caprylyl/capryl glucoside",
+          "raw": "Caprylyl/ Capryl Glucoside",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 8,
+          "ingredient_id": "parfum",
+          "raw": "Parfum",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 9,
+          "ingredient_id": "citric acid",
+          "raw": "Citric Acid",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 10,
+          "ingredient_id": "disodium edta",
+          "raw": "Disodium EDTA",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 11,
+          "ingredient_id": "benzyl alcohol",
+          "raw": "Benzyl Alcohol",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "III/45",
+              "V/34"
+            ],
+            "conditions": [
+              {
+                "entry": "III/45",
+                "type": "usage",
+                "requirement": "For purposes other than inhibiting the development of microorganisms in the product. This purpose has to be apparent from the presentation of the product.",
+                "result": "unknown",
+                "reason": "The intended purpose of the product is unknown."
+              },
+              {
+                "entry": "III/45",
+                "type": "labelling",
+                "requirement": "The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: 0,001 % in leave-on products; 0,01 % in rinse-off products.",
+                "result": "unknown",
+                "reason": "The concentration of benzyl alcohol is unknown."
+              },
+              {
+                "entry": "V/34",
+                "type": "max_concentration",
+                "requirement": "1,0 %",
+                "result": "unknown",
+                "reason": "The concentration of benzyl alcohol is unknown."
+              }
+            ],
+            "explanation": "Annex III entry 45 and Annex V entry 34 require specific conditions for benzyl alcohol in rinse-off products, but the product type and concentration are unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#45",
+              "eu_1223_2009_annex_v#34"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "label text",
+            "concentration",
+            "intended purpose",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 12,
+          "ingredient_id": "linalool",
+          "raw": "Linalool",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "III/84"
+            ],
+            "conditions": [
+              {
+                "entry": "III/84",
+                "type": "labelling",
+                "requirement": "The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products",
+                "result": "unknown",
+                "reason": "The concentration of linalool is unknown, so it cannot be determined if it exceeds 0.001% for leave-on or 0.01% for rinse-off products."
+              }
+            ],
+            "explanation": "Annex III entry 84 requires linalool to be indicated in the ingredient list if its concentration exceeds 0.001% in leave-on or 0.01% in rinse-off products. The concentration is missing.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "label text",
+            "concentration",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 13,
+          "ingredient_id": "limonene",
+          "raw": "Limonene",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "III/88"
+            ],
+            "conditions": [
+              {
+                "entry": "III/88",
+                "type": "usage",
+                "requirement": "The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products. The peroxide value for each substance shall be less than 20 mmoles/L",
+                "result": "unknown",
+                "reason": "The concentration of limonene is unknown, and the product type is not specified, making it impossible to determine if the concentration exceeds the required threshold."
+              }
+            ],
+            "explanation": "Annex III entry 88 requires the presence of limonene to be indicated in the ingredient list if its concentration exceeds 0.001% in leave-on products or 0.01% in rinse-off products, with a peroxide value less than 20 mmoles/L.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#88"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "concentration",
+            "product type",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 14,
+          "ingredient_id": "geraniol",
+          "raw": "Geraniol",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        }
+      ],
+      "cruelty_free": {
+        "status": "not_verified",
+        "explanation": "No cruelty-free claim or certification found for this brand.",
+        "brand_claim_found": false,
+        "certifications_found": [],
+        "certifications_checked": [
+          "Leaping Bunny",
+          "PETA Beauty Without Bunnies"
+        ],
+        "conflicts": [],
+        "evidence_ids": [
+          "eu_1223_2009_art18#1"
+        ],
+        "evidence_confidence": "medium"
+      },
+      "evidence_coverage": {
+        "covered": 5,
+        "total": 14,
+        "percent": 36,
+        "definition": "Ingredients with at least one cited regulatory or toxicology source (with its text) about that ingredient, divided by all listed ingredients. It measures how much evidence was found, not how safe the product is."
+      },
+      "sources": [
+        {
+          "evidence_id": "regulatory_scope#aqua",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'aqua' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "regulatory_scope#glycerin",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'glycerin' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "source_id": "clp_test_ingredients",
+          "kind": "toxicology",
+          "excerpt": "Glycerol (CAS 56-81-5): no harmonised classification; notified classification: Not classified.",
+          "title": "CLP classification per test ingredient (harmonised from Annex VI ATP23; notified from ECHA CHEM)",
+          "publisher": "ECHA (derived)",
+          "date": "2026-10-15",
+          "url": "https://chem.echa.europa.eu",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#45",
+          "source_id": "eu_1223_2009_annex_iii",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 45 (consolidated version 2026-05-18).\nSubstance: Benzyl alcohol. INCI: Benzyl Alcohol. CAS: 100-51-6.\nOther: For purposes other than inhibiting the development of microorganisms in the product. This purpose has to be apparent from the presentation of the product.\nWording of conditions of use and warnings: The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: 0,001 % in leave-on products; 0,01 % in rinse-off products.",
+          "title": "Regulation (EC) No 1223/2009, Annex III (restricted substances), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#34",
+          "source_id": "eu_1223_2009_annex_v",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 34 (consolidated version 2026-05-18).\nSubstance: Benzyl alcohol. INCI: Benzyl Alcohol. CAS: 100-51-6.\nMaximum concentration in ready for use preparation: 1,0 %",
+          "title": "Regulation (EC) No 1223/2009, Annex V (allowed preservatives), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#84",
+          "source_id": "eu_1223_2009_annex_iii",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 84 (consolidated version 2026-05-18).\nSubstance: 1,6-Octadien-3-ol, 3,7-dimethyl-. INCI: Linalool. CAS: 78-70-6.\nOther: The presence of the substance must be indicated in the list of ingredients referred to in Article 19(1)(g) when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products",
+          "title": "Regulation (EC) No 1223/2009, Annex III (restricted substances), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_iii#88",
+          "source_id": "eu_1223_2009_annex_iii",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex III, entry 88 (consolidated version 2026-05-18).\nSubstance: 1-methyl-4-prop-1-en-2-yl-cyclohexene; dl-limonene (racemic); Dipentene. INCI: Limonene. CAS: 138-86-3/ 7705-14-8.\nOther: The presence of the substance shall be indicated in the list of ingredients referred to in Article 19(1), point (g), when its concentration exceeds: — 0,001 % in leave-on products — 0,01 % in rinse-off products. The peroxide value for each substance shall be less than 20 mmoles/L",
+          "title": "Regulation (EC) No 1223/2009, Annex III (restricted substances), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_art18#1",
+          "source_id": "eu_1223_2009_art18",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Art. 18: Animal testing of cosmetics and their ingredients is banned for products marketed in the EU.",
+          "title": "Regulation (EC) No 1223/2009, Article 18 (animal testing), paragraph 1",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "agents_present",
+            "severity": "warning",
+            "passed": true,
+            "description": "All three agents returned an output.",
+            "issues": []
+          },
+          {
+            "name": "agent_coverage",
+            "severity": "error",
+            "passed": true,
+            "description": "Each agent covers every ingredient exactly once.",
+            "issues": []
+          },
+          {
+            "name": "citations_known",
+            "severity": "error",
+            "passed": true,
+            "description": "Every cited source is registered in corpus/sources.csv.",
+            "issues": []
+          },
+          {
+            "name": "citation_subject",
+            "severity": "warning",
+            "passed": true,
+            "description": "Cited sources are about the ingredient they support.",
+            "issues": []
+          },
+          {
+            "name": "excerpts_available",
+            "severity": "error",
+            "passed": true,
+            "description": "Every claim's evidence has its source text.",
+            "issues": []
+          },
+          {
+            "name": "claims_have_evidence",
+            "severity": "error",
+            "passed": true,
+            "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+            "issues": []
+          },
+          {
+            "name": "missing_concentration",
+            "severity": "error",
+            "passed": true,
+            "description": "Concentration limits stay unknown when the concentration is unknown.",
+            "issues": []
+          },
+          {
+            "name": "no_safety_verdicts",
+            "severity": "error",
+            "passed": true,
+            "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+            "issues": []
+          },
+          {
+            "name": "status_matches_annex",
+            "severity": "error",
+            "passed": true,
+            "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+            "issues": []
+          },
+          {
+            "name": "ai_validator",
+            "severity": "warning",
+            "passed": false,
+            "description": "The validator agent found every claim supported by the text of its cited evidence.",
+            "issues": [
+              "regulatory/benzyl alcohol: overstated. The concentration of benzyl alcohol is unknown.",
+              "regulatory/linalool: overstated. The concentration of linalool is unknown.",
+              "regulatory/limonene: overstated. The concentration of limonene is unknown, and the product type is not specified."
+            ]
+          }
+        ]
+      },
+      "prompt_versions": {
+        "regulatory": "v4",
+        "toxicology": "mock",
+        "ethics": "mock"
+      },
+      "warnings": [],
+      "limitations": [
+        "Ingredient concentrations are not on the label, so limits that depend on concentration cannot be checked.",
+        "A hazard classification describes the substance; consumer risk also depends on concentration and exposure.",
+        "This report does not state that the product is safe, unsafe, legal or illegal, and is not medical advice.",
+        "Only ingredients covered by the current corpus are assessed; the others are marked as not assessed.",
+        "Brand claims and independent certifications are reported as separate kinds of evidence."
+      ]
+    },
+    "validation": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "agents_present",
+          "severity": "warning",
+          "passed": true,
+          "description": "All three agents returned an output.",
+          "issues": []
+        },
+        {
+          "name": "agent_coverage",
+          "severity": "error",
+          "passed": true,
+          "description": "Each agent covers every ingredient exactly once.",
+          "issues": []
+        },
+        {
+          "name": "citations_known",
+          "severity": "error",
+          "passed": true,
+          "description": "Every cited source is registered in corpus/sources.csv.",
+          "issues": []
+        },
+        {
+          "name": "citation_subject",
+          "severity": "warning",
+          "passed": true,
+          "description": "Cited sources are about the ingredient they support.",
+          "issues": []
+        },
+        {
+          "name": "excerpts_available",
+          "severity": "error",
+          "passed": true,
+          "description": "Every claim's evidence has its source text.",
+          "issues": []
+        },
+        {
+          "name": "claims_have_evidence",
+          "severity": "error",
+          "passed": true,
+          "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+          "issues": []
+        },
+        {
+          "name": "missing_concentration",
+          "severity": "error",
+          "passed": true,
+          "description": "Concentration limits stay unknown when the concentration is unknown.",
+          "issues": []
+        },
+        {
+          "name": "no_safety_verdicts",
+          "severity": "error",
+          "passed": true,
+          "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+          "issues": []
+        },
+        {
+          "name": "status_matches_annex",
+          "severity": "error",
+          "passed": true,
+          "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+          "issues": []
+        },
+        {
+          "name": "ai_validator",
+          "severity": "warning",
+          "passed": false,
+          "description": "The validator agent found every claim supported by the text of its cited evidence.",
+          "issues": [
+            "regulatory/benzyl alcohol: overstated. The concentration of benzyl alcohol is unknown.",
+            "regulatory/linalool: overstated. The concentration of linalool is unknown.",
+            "regulatory/limonene: overstated. The concentration of limonene is unknown, and the product type is not specified."
+          ]
+        }
+      ]
+    },
+    "validator": {
+      "prompt_version": "v5",
+      "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai"
+    },
+    "next_action": null,
+    "error": null
+  }
+}

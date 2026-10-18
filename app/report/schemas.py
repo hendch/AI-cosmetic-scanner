@@ -208,7 +208,7 @@ class ValidateResponse(BaseModel):
 
 class ValidateRequest(BaseModel):
     report: Report
-    prompt_version: str = "v4"  # active prompt; see prompts/validator
+    prompt_version: str = "v5"  # active prompt; see prompts/validator
 
 
 class ValidatedReport(BaseModel):

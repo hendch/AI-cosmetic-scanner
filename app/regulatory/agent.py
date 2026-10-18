@@ -135,7 +135,11 @@ def _merge(ingredient: Ingredient, product: Product, baseline: RegulatoryFinding
         if base.type == "max_concentration" and not has_conc and result != "unknown":
             stats.overrides.append(f"{ingredient.normalized} [{i}] concentration unknown -> 'unknown' (LLM said '{result}')")
             result, reason = "unknown", rules.NO_CONCENTRATION
-        if base.type == "labelling" and result in ("satisfied", "not_satisfied"):
+        if base.type == "labelling" and base.result != "unknown" and result != base.result:
+            # e.g. a fragrance allergen named in the ingredient list (rules.LISTED_ABOVE_THRESHOLD)
+            stats.overrides.append(f"{ingredient.normalized} [{i}] labelling decided by rule -> '{base.result}' (LLM said '{result}')")
+            result, reason = base.result, base.reason
+        elif base.type == "labelling" and base.result == "unknown" and result in ("satisfied", "not_satisfied"):
             stats.overrides.append(f"{ingredient.normalized} [{i}] label text not available -> 'unknown' (LLM said '{result}')")
             result, reason = "unknown", "The label text is not available to check the required wording."
         if base.type == "max_concentration" and has_conc and base.result != "unknown" and result != base.result:
@@ -214,7 +218,8 @@ def _assess(ingredient: Ingredient, product: Product, prompt: Prompt, chat: Chat
         return rules.apply_ocr_confidence(rules.no_restriction(ingredient), ingredient)
 
     baseline = rules.baseline_finding(ingredient, product, [p.to_row() for p in passages])
-    if baseline.regulatory_status == "restricted" and baseline.conditions:
+    # The model interprets conditions the rules leave open; when the rules decide all of them, it is not called.
+    if baseline.regulatory_status == "restricted" and any(c.result == "unknown" for c in baseline.conditions):
         baseline = _interpret(ingredient, product, baseline, passages, prompt, chat, stats, warnings)
     return rules.apply_ocr_confidence(baseline, ingredient)
 

@@ -117,6 +117,17 @@ def search_regulation(ingredient: str, product_type: str | None = None, top_k: i
     passages = search(query, ingredient, top_k) if search else _local_search(ingredient, top_k)
     # Keep only passages that really concern this ingredient (fixed-size chunks may not).
     wanted = ingredient.strip().lower()
-    return [p for p in passages
+    kept = [p for p in passages
             if wanted in {i.strip().lower() for i in str(p.metadata.get("ingredients") or p.metadata.get("ingredient", "")).split(";")}
             and p.annex]
+    # Same order whatever the backend (RAG ranks by similarity): annex, then entry number.
+    return sorted(kept, key=_entry_order)
+
+
+_ANNEX_ORDER = {"II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6}
+
+
+def _entry_order(p: Passage) -> tuple[int, int, str]:
+    entry = str(p.entry or "")
+    digits = "".join(ch for ch in entry if ch.isdigit())
+    return _ANNEX_ORDER.get(str(p.annex), 99), int(digits) if digits else 0, entry

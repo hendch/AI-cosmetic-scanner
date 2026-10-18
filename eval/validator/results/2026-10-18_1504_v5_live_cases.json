@@ -1,0 +1,119 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai",
+  "runs": [
+    {
+      "prompt_version": "v5",
+      "case_id": "live_balea_lotion",
+      "expected_valid": true,
+      "valid": false,
+      "verdict_correct": false,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Annex V entry 1 requires a maximum concentration of 0.5% acid for leave-on products.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt states the requirement for leave-on products, but the concentration is unknown."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "piroctone olamine",
+            "claim": "Annex V entry 35 requires a maximum concentration of 0.5% for leave-on products.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt states the requirement for leave-on products, but the concentration is unknown."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Annex V entry 4 requires a maximum concentration of 0.6% (acid) for sorbic acid and its salts.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt states the requirement for sorbic acid and its salts, but the concentration is unknown."
+          }
+        ],
+        "issues": [
+          "The concentration of sodium benzoate is unknown, so the claim about the maximum concentration cannot be verified.",
+          "The concentration of piroctone olamine is unknown, so the claim about the maximum concentration cannot be verified.",
+          "The concentration of potassium sorbate is unknown, so the claim about the maximum concentration cannot be verified."
+        ],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 5.4
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "live_cerave_ocr",
+      "expected_valid": true,
+      "valid": false,
+      "verdict_correct": false,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Annex V entry 1 requires a maximum concentration of 2.5% for rinse-off products.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "The concentration of sodium benzoate is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not provide the concentration of sodium benzoate."
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "A hazard classification exists for the pure substance.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Annex V entry 29 requires a maximum concentration of 1.0% for phenoxyethanol in rinse-off products, but the concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#29"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [
+          "The concentration of sodium benzoate is unknown, making the claim about its compliance with the concentration limit unsupported."
+        ],
+        "unsupported_evidence_ids": [
+          "eu_1223_2009_annex_v#1"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 5.0
+    }
+  ]
+}

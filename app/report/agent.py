@@ -47,7 +47,7 @@ def _extract_json(text: str) -> str:
     return text[start : end + 1] if start >= 0 and end > start else text
 
 
-def validate_draft(draft: Draft, version: str = "v4") -> ValidateResponse:
+def validate_draft(draft: Draft, version: str = "v5") -> ValidateResponse:
     prompt = load_prompt(version)
     payload = draft.model_dump(mode="json", include={"product", "ingredients", "cruelty_free", "sources"})
     messages = [
@@ -130,7 +130,7 @@ def draft_from_report(report: Report) -> Draft | None:
     )
 
 
-def validate_report(report: Report, version: str = "v4") -> ValidatedReport:
+def validate_report(report: Report, version: str = "v5") -> ValidatedReport:
     """Run the validator agent on a built report and add its verdict as the `ai_validator` check.
 
     Unsupported or overstated claims fail the check: a warning by default, an error with

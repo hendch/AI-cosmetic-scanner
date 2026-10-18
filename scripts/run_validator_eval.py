@@ -3,7 +3,7 @@
 One model call per case and prompt version (plus at most one retry on bad JSON).
 Credits are shared: the script prints the number of calls before it starts.
 
-Usage: python -m scripts.run_validator_eval [v1 v2 v3 ...]
+Usage: python -m scripts.run_validator_eval [v1 v2 v3 ...] [--cases id1,id2]
        python -m scripts.run_validator_eval --rescore <results.json>   (no model calls)
 """
 
@@ -69,8 +69,8 @@ def write_results(path: Path, model: str, runs: list[dict]) -> None:
     print(f"wrote eval/validator/results/{path.name}.md and .json")
 
 
-def run(versions: list[str]) -> None:
-    cases = load_cases()
+def run(versions: list[str], only: list[str] | None = None) -> None:
+    cases = {k: v for k, v in load_cases().items() if not only or k in only}
     print(f"{len(cases)} cases x {len(versions)} versions = {len(cases) * len(versions)} model calls")
     runs = []
     for version in versions:
@@ -89,7 +89,7 @@ def run(versions: list[str]) -> None:
                          "seconds": round(time.time() - started, 1)})
             print(f"{version} {case['case_id']}: valid={response.result.valid} (expected {case['expected_valid']})")
     RESULTS_DIR.mkdir(exist_ok=True)
-    write_results(RESULTS_DIR / datetime.now().strftime("%Y-%m-%d_%H%M"), model_name(), runs)
+    write_results(RESULTS_DIR / datetime.now().strftime("%Y-%m-%d_%H%M%S"), model_name(), runs)
 
 
 def rescore(path: Path) -> None:
@@ -106,4 +106,9 @@ if __name__ == "__main__":
     if sys.argv[1:2] == ["--rescore"]:
         rescore(Path(sys.argv[2]))
     else:
-        run(sys.argv[1:] or ["v1", "v2", "v3", "v4"])
+        args = sys.argv[1:]
+        only = None
+        if "--cases" in args:
+            only = args[args.index("--cases") + 1].split(",")
+            args = args[:args.index("--cases")] + args[args.index("--cases") + 2:]
+        run(args or ["v5", "v6"], only)

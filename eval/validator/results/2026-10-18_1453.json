@@ -1,0 +1,756 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai",
+  "runs": [
+    {
+      "prompt_version": "v4",
+      "case_id": "supported_draft",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol has a harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [
+          "The concentration of phenoxyethanol is unknown, so the claim about its maximum concentration being 1.0% cannot be verified."
+        ],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 8.2
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "risk_leap_and_false_compliance",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "2/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        },
+        {
+          "agent": "regulatory",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "This product complies with the 1.0% maximum concentration for phenoxyethanol.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt only states the regulation but does not confirm the product's compliance."
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol in this cream can seriously damage your eyes, so avoid using it near the eyes.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt only states the hazard classification but does not provide a consumer risk conclusion."
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts. No independent certification was found.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "supported",
+            "reason": "The excerpt confirms the product is labelled cruelty-free."
+          }
+        ],
+        "issues": [
+          "The product's compliance with the 1.0% maximum concentration for phenoxyethanol is unsupported.",
+          "The product's risk to the user's eyes is overstated based on the provided evidence."
+        ],
+        "unsupported_evidence_ids": [
+          "sccs_phenoxyethanol_2016#background"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 5.3
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "wrong_subject_and_brand_as_certification",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "2/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "glycerin",
+          "flagged": true
+        },
+        {
+          "agent": "ethics",
+          "ingredient_id": null,
+          "flagged": true
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol has a harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "glycerin",
+            "claim": "Glycerin is classified for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#glycerin"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt states 'no harmonised classification in Annex VI to CLP' for glycerin."
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The brand is certified cruelty-free.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "unsupported",
+            "reason": "The evidence is a brand claim, not a certification."
+          }
+        ],
+        "issues": [
+          "The claim about glycerin's serious eye damage classification is overstated.",
+          "The cruelty-free status is unsupported as it is a brand claim, not a certification."
+        ],
+        "unsupported_evidence_ids": [
+          "obf_labels#0000000000001"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 5.3
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "real_balea_lotion",
+      "expected_valid": true,
+      "valid": false,
+      "verdict_correct": false,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the product meets the conditions."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "piroctone olamine",
+            "claim": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the product meets the conditions."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the product meets the conditions."
+          }
+        ],
+        "issues": [
+          "The excerpt for sodium benzoate does not state the product meets the conditions.",
+          "The excerpt for piroctone olamine does not state the product meets the conditions.",
+          "The excerpt for potassium sorbate does not state the product meets the conditions."
+        ],
+        "unsupported_evidence_ids": [
+          "eu_1223_2009_annex_v#1",
+          "eu_1223_2009_annex_v#35",
+          "eu_1223_2009_annex_v#4"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 4.4
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "real_balea_shampoo",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "piroctone olamine",
+            "claim": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "linalool",
+            "claim": "Allowed only under conditions (Annex III entry 84); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 4.5
+    },
+    {
+      "prompt_version": "v4",
+      "case_id": "real_soap_planted_errors",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "1/2",
+      "flags": [
+        {
+          "agent": "regulatory",
+          "ingredient_id": "sodium benzoate",
+          "flagged": true
+        },
+        {
+          "agent": "regulatory",
+          "ingredient_id": "linalool",
+          "flagged": false
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Complies with the Annex V entry 1 limit of 0,5 % for this product.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "unsupported",
+            "reason": "No concentration is provided, making the compliance check impossible."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt only states the maximum concentration, not the product's compliance."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "linalool",
+            "claim": "Linalool is banned in EU cosmetics (Annex III entry 84).",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ],
+            "verdict": "supported",
+            "reason": "The excerpt confirms the ban on linalool in EU cosmetics."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "limonene",
+            "claim": "Allowed only under conditions (Annex III entry 88); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#88"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt only states the maximum concentration, not the product's compliance."
+          }
+        ],
+        "issues": [
+          "The compliance of sodium benzoate and potassium sorbate with their respective concentration limits cannot be verified due to missing concentration data.",
+          "The product information is not enough to confirm the compliance of limonene and potassium sorbate with their respective conditions."
+        ],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 5.9
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "supported_draft",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol has a harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [
+          "The concentration of phenoxyethanol is unknown, so the condition cannot be checked."
+        ],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 4.1
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "risk_leap_and_false_compliance",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "2/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        },
+        {
+          "agent": "regulatory",
+          "ingredient_id": "phenoxyethanol",
+          "flagged": true
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "This product complies with the 1.0% maximum concentration for phenoxyethanol.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the concentration of phenoxyethanol in the product."
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol in this cream can seriously damage your eyes, so avoid using it near the eyes.",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "overstated",
+            "reason": "The excerpt only states the hazard classification, not the consumer risk or advice."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": null,
+            "claim": "The product is labelled cruelty-free on Open Beauty Facts. No independent certification was found.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt only states the label, not the verification of the claim."
+          }
+        ],
+        "issues": [
+          "The claim about phenoxyethanol concentration is unsupported because the concentration is unknown.",
+          "The claim about phenoxyethanol's consumer risk is overstated because the excerpt only provides the hazard classification.",
+          "The claim about the product being cruelty-free is unsupported because no independent certification was found."
+        ],
+        "unsupported_evidence_ids": [
+          "sccs_phenoxyethanol_2016#background"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 5.0
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "wrong_subject_and_brand_as_certification",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "0/2",
+      "flags": [
+        {
+          "agent": "toxicology",
+          "ingredient_id": "glycerin",
+          "flagged": false
+        },
+        {
+          "agent": "ethics",
+          "ingredient_id": null,
+          "flagged": false
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol is authorized as a preservative in cosmetic formulations at a maximum concentration of 1.0%.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Phenoxyethanol has a harmonised CLP classification for serious eye damage (H318).",
+            "evidence_ids": [
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "toxicology",
+            "ingredient_id": "phenoxyethanol",
+            "claim": "Consumer risk depends on concentration and exposure, which are unknown.",
+            "evidence_ids": [
+              "sccs_phenoxyethanol_2016#background",
+              "clp_test_ingredients#phenoxyethanol"
+            ],
+            "verdict": "unsupported",
+            "reason": "The concentration is unknown, making the consumer risk assessment unsupported."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "glycerin",
+            "claim": "No rule found for glycerin in the indexed regulation snapshot.",
+            "evidence_ids": [],
+            "verdict": "unsupported",
+            "reason": "No evidence provided to support the claim."
+          },
+          {
+            "agent": "ethics",
+            "ingredient_id": null,
+            "claim": "The brand is certified cruelty-free.",
+            "evidence_ids": [
+              "obf_labels#0000000000001"
+            ],
+            "verdict": "supported",
+            "reason": "The brand claim is supported by the cited source."
+          }
+        ],
+        "issues": [
+          "The consumer risk of phenoxyethanol cannot be assessed due to unknown concentration."
+        ],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 6.3
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "real_balea_lotion",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "piroctone olamine",
+            "claim": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 4.3
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "real_balea_shampoo",
+      "expected_valid": true,
+      "valid": true,
+      "verdict_correct": true,
+      "expected_flags_found": "0/0",
+      "flags": [],
+      "result": {
+        "valid": true,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "piroctone olamine",
+            "claim": "Allowed only under conditions (Annex V entry 35); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Allowed only under conditions (Annex V entry 1); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "linalool",
+            "claim": "Allowed only under conditions (Annex III entry 84); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ],
+            "verdict": "supported",
+            "reason": ""
+          }
+        ],
+        "issues": [],
+        "unsupported_evidence_ids": []
+      },
+      "attempts": 1,
+      "seconds": 6.9
+    },
+    {
+      "prompt_version": "v5",
+      "case_id": "real_soap_planted_errors",
+      "expected_valid": false,
+      "valid": false,
+      "verdict_correct": true,
+      "expected_flags_found": "1/2",
+      "flags": [
+        {
+          "agent": "regulatory",
+          "ingredient_id": "sodium benzoate",
+          "flagged": true
+        },
+        {
+          "agent": "regulatory",
+          "ingredient_id": "linalool",
+          "flagged": false
+        }
+      ],
+      "result": {
+        "valid": false,
+        "claims": [
+          {
+            "agent": "regulatory",
+            "ingredient_id": "sodium benzoate",
+            "claim": "Complies with the Annex V entry 1 limit of 0,5 % for this product.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the concentration of sodium benzoate."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "potassium sorbate",
+            "claim": "Allowed only under conditions (Annex V entry 4); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the concentration of potassium sorbate."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "linalool",
+            "claim": "Linalool is banned in EU cosmetics (Annex III entry 84).",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#84"
+            ],
+            "verdict": "supported",
+            "reason": "The excerpt states the ban condition for linalool."
+          },
+          {
+            "agent": "regulatory",
+            "ingredient_id": "limonene",
+            "claim": "Allowed only under conditions (Annex III entry 88); the product information is not enough to confirm they are met.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_iii#88"
+            ],
+            "verdict": "unsupported",
+            "reason": "The excerpt does not state the concentration of limonene."
+          }
+        ],
+        "issues": [
+          "The concentration of sodium benzoate, potassium sorbate, and limonene is not provided, making it impossible to check if they comply with the concentration limits.",
+          "The product information is not enough to confirm if the conditions for potassium sorbate and limonene are met."
+        ],
+        "unsupported_evidence_ids": [
+          "eu_1223_2009_annex_v#1",
+          "eu_1223_2009_annex_v#4",
+          "eu_1223_2009_annex_iii#88"
+        ]
+      },
+      "attempts": 1,
+      "seconds": 6.4
+    }
+  ]
+}

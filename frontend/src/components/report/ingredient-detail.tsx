@@ -1,10 +1,26 @@
 import { StyleSheet, View, type LayoutChangeEvent } from 'react-native';
 
 import { Chip, Txt } from '@/components/ui';
-import { Spacing } from '@/constants/theme';
+import { Spacing, type Tone } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import type { Ingredient } from '@/report/schema';
-import { concernLabel, confidenceLabel, hazardEndpointLabel, ingredientTone, regulatoryLabel } from '@/report/wording';
+import type { Condition, Ingredient } from '@/report/schema';
+import {
+  concernLabel,
+  conditionLabel,
+  conditionTypeLabel,
+  confidenceLabel,
+  displayName,
+  hazardEndpointLabel,
+  ingredientTone,
+  regulatoryLabel,
+} from '@/report/wording';
+
+const CONDITION_TONE: Record<Condition['result'], Tone | undefined> = {
+  satisfied: 'clear',
+  not_satisfied: 'prohibited',
+  unknown: 'unknown',
+  not_applicable: undefined,
+};
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -20,38 +36,55 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function IngredientDetail({ ingredient: i, onLayout }: { ingredient: Ingredient; onLayout?: (e: LayoutChangeEvent) => void }) {
   const theme = useTheme();
   const tone = ingredientTone(i);
-  const name = i.ingredient.charAt(0).toUpperCase() + i.ingredient.slice(1);
+  const reg = i.regulatory;
+  const tox = i.toxicology;
+  const evidence = [...new Set([...reg.evidence_ids, ...tox.evidence_ids])];
 
   return (
     <View onLayout={onLayout} style={[styles.item, { borderTopColor: theme.line }]}>
       <View style={styles.head}>
         <View style={styles.flex}>
-          <Txt variant="heading">{name}</Txt>
-          {i.raw.toLowerCase() !== i.ingredient && (
+          <Txt variant="heading">{displayName(i.ingredient_id)}</Txt>
+          {i.raw.toLowerCase() !== i.ingredient_id.toLowerCase() && (
             <Txt variant="small" muted>
               Printed as {i.raw}
             </Txt>
           )}
         </View>
-        <Chip label={regulatoryLabel[i.regulatory_status]} tone={tone} />
+        <Chip label={i.matched ? regulatoryLabel[reg.status] : 'Not recognised'} tone={tone} />
       </View>
 
-      <Row label={i.annex_entry ? `EU rules, ${i.annex_entry}` : 'EU rules'}>
-        <Txt>{i.regulatory_explanation}</Txt>
-        {i.conditions.map((c) => (
-          <Txt key={c} variant="small">
-            {c}
-          </Txt>
+      <Row label={reg.entries.length ? `EU rules, Annex ${reg.entries.join(', ')}` : 'EU rules'}>
+        <Txt>{reg.explanation}</Txt>
+        {reg.conditions.map((c) => (
+          <View key={`${c.entry}-${c.type}-${c.requirement}`} style={styles.condition}>
+            <Txt variant="small">
+              {conditionTypeLabel[c.type]}: {c.requirement}.{' '}
+              <Txt variant="small" tone={CONDITION_TONE[c.result]} muted={!CONDITION_TONE[c.result]} style={styles.bold}>
+                {conditionLabel[c.result]}
+              </Txt>
+            </Txt>
+            {c.reason ? (
+              <Txt variant="small" muted>
+                {c.reason}
+              </Txt>
+            ) : null}
+          </View>
         ))}
+        {i.concentration_percent != null && (
+          <Txt variant="small" muted>
+            Concentration in this product: {i.concentration_percent}%
+          </Txt>
+        )}
       </Row>
 
-      <Row label={`Hazards, ${concernLabel[i.concern_level].toLowerCase()}`}>
-        {i.hazards.map((h) => (
-          <Txt key={`${h.endpoint}-${h.classification}`} variant="small">
-            {hazardEndpointLabel[h.endpoint] ?? h.endpoint}: {h.classification}
+      <Row label={`Hazards, ${concernLabel[tox.concern_level].toLowerCase()}`}>
+        {tox.hazards.map((h) => (
+          <Txt key={`${h.endpoint}-${h.label}`} variant="small">
+            {hazardEndpointLabel[h.endpoint] ?? h.endpoint}: {h.label}
           </Txt>
         ))}
-        <Txt>{i.risk_interpretation}</Txt>
+        <Txt>{tox.explanation}</Txt>
       </Row>
 
       {i.missing_information.length > 0 && (
@@ -64,9 +97,9 @@ export function IngredientDetail({ ingredient: i, onLayout }: { ingredient: Ingr
         <Txt variant="small" muted>
           Evidence confidence: {confidenceLabel[i.evidence_confidence]}
         </Txt>
-        {i.sources.length > 0 && (
+        {evidence.length > 0 && (
           <Txt variant="small" muted>
-            Sources: {i.sources.join(', ')}
+            Evidence: {evidence.join(', ')}
           </Txt>
         )}
       </View>
@@ -80,5 +113,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   rowBlock: { gap: 2 },
   rowBody: { gap: Spacing.one },
+  condition: { gap: 2 },
+  bold: { fontWeight: '600' },
   footer: { gap: 2 },
 });

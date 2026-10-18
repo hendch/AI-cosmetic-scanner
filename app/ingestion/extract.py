@@ -11,10 +11,13 @@ from app.ingestion.ocr import OcrError, read_label
 CACHE_DIR = Path(__file__).parent / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
 
+# Open Beauty Facts category tags are often German or French ("de:klärendes-gesichtswasser", "Flüssigseife").
 RINSE_OFF = ("shampoo", "conditioner", "shower", "body-wash", "bath", "soap",
-             "cleans", "face-wash", "hair-mask", "scrub")
+             "cleans", "face-wash", "hair-mask", "scrub",
+             "dusch", "seife", "spülung", "waschgel", "savon", "gel-douche", "nettoyant", "zahnpasta", "toothpaste")
 LEAVE_ON = ("cream", "lotion", "serum", "moistur", "deodorant", "sun", "lip",
-            "makeup", "make-up", "foundation", "mascara", "perfume", "balm", "oil")
+            "makeup", "make-up", "foundation", "mascara", "perfume", "balm", "oil",
+            "toner", "gesichtswasser", "tonique", "creme", "crème", "deo", "lippen", "sonnen", "körpermilch", "fluid")
 
 
 def exposure_from_categories(tags):
@@ -41,6 +44,10 @@ def scan_barcode(img_bytes: bytes) -> Optional[str]:
 OCR_UNSURE_CONFIDENCE = 0.7  # below the agents' 0.8 threshold: they mark the name as unverified
 
 
+class ProductDatabaseUnavailable(Exception):
+    """Open Beauty Facts did not answer (network error, timeout, rate limit): not the same as "not found"."""
+
+
 def lookup_barcode(code):
     # Only digits: the barcode becomes a cache file name (no "../" path tricks).
     if not re.fullmatch(r"\d{8,14}", code or ""):
@@ -48,12 +55,20 @@ def lookup_barcode(code):
     path = CACHE_DIR / f"{code}.json"
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
-    try:
-        r = requests.get(f"https://world.openbeautyfacts.org/api/v2/product/{code}.json",
-                         params={"fields": "product_name,brands,ingredients_text,categories_tags,labels_tags"},
-                         headers={"User-Agent": "school-project/0.1"}, timeout=10).json()
-    except (requests.RequestException, ValueError):
-        return None  # reported as "barcode not found or no ingredients"
+    for timeout in (10, 20):  # one retry: OBF sometimes times out or rate-limits for a moment
+        try:
+            resp = requests.get(f"https://world.openbeautyfacts.org/api/v2/product/{code}.json",
+                                params={"fields": "product_name,brands,ingredients_text,categories_tags,labels_tags"},
+                                headers={"User-Agent": "school-project/0.1"}, timeout=timeout)
+            if resp.status_code == 404:  # OBF answers 404 with status 0 for unknown barcodes
+                return None
+            resp.raise_for_status()
+            r = resp.json()
+            break
+        except (requests.RequestException, ValueError):
+            r = None
+    if r is None:
+        raise ProductDatabaseUnavailable(code)
     if r.get("status") == 1:
         path.write_text(json.dumps(r["product"]), encoding="utf-8")
         return r["product"]
@@ -96,7 +111,11 @@ def build_response(barcode: Optional[str], label_image: Optional[bytes] = None) 
            "ingredients": [], "needs_review": False, "warnings": []}
     text = None
     if barcode:
-        p = lookup_barcode(barcode)
+        try:
+            p = lookup_barcode(barcode)
+        except ProductDatabaseUnavailable:
+            p = None
+            out["warnings"].append("product database unavailable")
         if p:
             cats = p.get("categories_tags", [])
             name = p.get("product_name", "")

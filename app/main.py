@@ -30,7 +30,6 @@ async def require_api_key(request: Request, call_next):
 
 # (module path, router attribute); add a line when a new module lands.
 ROUTER_MODULES = [
-    "app.integration.router",
     "app.toxicology.router",
     "app.ethics.router",
     "app.regulatory.router",

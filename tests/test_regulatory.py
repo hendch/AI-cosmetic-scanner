@@ -189,3 +189,17 @@ def test_new_annex_entries():
     assert {r.ref for r in kb.entries_for("isopropylparaben")} == {"II/1374"}
     assert {r.ref for r in kb.entries_for("benzyl alcohol")} == {"III/45", "V/34"}
     assert kb.canonical("potassium sorbate") == "potassium sorbate"
+
+
+def test_allergen_named_in_the_ingredient_list_meets_its_only_condition():
+    from app.common_schemas import Product
+    from app.regulatory.kb import load_kb
+    from app.regulatory.rules import baseline_conditions
+
+    kb = load_kb()
+    shampoo = Product(name="Shampoo", brand="Balea", barcode="4066447982596", category="shampoo", exposure_type="rinse_off")
+    [linalool] = baseline_conditions(next(iter(kb.entries_for("linalool"))), shampoo)
+    assert (linalool.type, linalool.result) == ("labelling", "satisfied")
+    # Limonene also has a peroxide limit, which the label cannot show.
+    usage = [c for c in baseline_conditions(next(iter(kb.entries_for("limonene"))), shampoo) if c.type == "usage"]
+    assert usage and usage[0].result == "unknown"

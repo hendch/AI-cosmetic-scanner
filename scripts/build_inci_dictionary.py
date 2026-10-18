@@ -29,6 +29,12 @@ DESCRIPTION_LINE = re.compile(r"^inci_description:en:\s*(.+)$")
 
 # EU labels use the INCI name PARFUM; "fragrance" / "perfume" are how it is often printed next to it.
 OVERRIDES = {"fragrance": "parfum", "perfume": "parfum", "parfum/fragrance": "parfum"}
+# Common INCI names (EU CosIng) missing from the Open Beauty Facts file, found on real labels.
+# Add a name here only after checking it in CosIng: https://ec.europa.eu/growth/tools-databases/cosing/
+SUPPLEMENT = [
+    "hydrogenated castor oil",
+    "peg-40 hydrogenated castor oil",
+]
 
 
 def key(name: str) -> str:
@@ -87,6 +93,7 @@ def main() -> None:
     src = sys.argv[1] if len(sys.argv) > 1 else URL
     text = requests.get(src, timeout=60).text if src.startswith("http") else Path(src).read_text(encoding="utf-8")
     names = parse(text)
+    names.update({n: n for n in SUPPLEMENT if n not in names})
     names.update(OVERRIDES)
     names.update(corpus_aliases())  # the agents' names win
     OUT.parent.mkdir(parents=True, exist_ok=True)

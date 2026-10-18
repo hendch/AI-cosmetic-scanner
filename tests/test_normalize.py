@@ -53,3 +53,14 @@ def test_duplicates_and_review_flag():
     assert [i["normalized"] for i in ings] == ["aqua", "glycerin"] and [i["position"] for i in ings] == [1, 2]
     assert review is False
     assert normalize_list("Aqua, Xyl0-blend")[1] is True
+
+
+def test_spaced_dashes_separate_ingredients_only_in_lists_without_commas():
+    from app.ingestion.normalize import normalize, split_ingredients
+
+    assert split_ingredients("AQUA - PEG-40 HYDROGENATED CASTOR OIL – PARFUM") == [
+        "AQUA", "PEG-40 HYDROGENATED CASTOR OIL", "PARFUM"]
+    # In a comma list, " - " is a word broken across two lines on the package.
+    assert split_ingredients("Aqua, Ethyl - hexyl Triazone, Glycerin") == ["Aqua", "Ethyl - hexyl Triazone", "Glycerin"]
+    assert normalize("Ethyl - hexyl Triazone", 2)["normalized"] == "ethylhexyl triazone"
+    assert normalize("BUTYROS-PERMUM PARKII BUTTER", 3)["normalized"] == "butyrospermum parkii butter"

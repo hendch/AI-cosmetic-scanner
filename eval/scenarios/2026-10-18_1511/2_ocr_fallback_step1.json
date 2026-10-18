@@ -1,0 +1,30 @@
+{
+  "request": {
+    "barcode": "3600523351350"
+  },
+  "seconds": 0.4,
+  "answer": {
+    "schema_version": "1.0",
+    "request_id": "scan-19",
+    "status": "needs_input",
+    "report": null,
+    "product": {
+      "name": "",
+      "brand": "",
+      "barcode": "3600523351350",
+      "category": "",
+      "exposure_type": null,
+      "labels": []
+    },
+    "warnings": [
+      "barcode not found or no ingredients",
+      "no input produced ingredients"
+    ],
+    "next_action": {
+      "type": "label_photo",
+      "message": "We read the barcode 3600523351350, but Open Beauty Facts has no ingredient list for this product. Take a photo of the ingredient list on the back of the product.",
+      "barcode": "3600523351350"
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "request": {
+    "barcode": "4066447870213"
+  },
+  "seconds": 14.5,
+  "answer": {
+    "schema_version": "1.0",
+    "request_id": "scan-8",
+    "status": "completed",
+    "report": {
+      "report_version": "1.0",
+      "generated_at": "2026-10-18T13:59:47.495858Z",
+      "input_source": "barcode",
+      "product": {
+        "name": "Bodylotion Creme-Öl",
+        "brand": "Balea",
+        "barcode": "4066447870213",
+        "category": "bodylotion creme-öl",
+        "exposure_type": "leave_on"
+      },
+      "needs_review": false,
+      "overview": {
+        "total_ingredients": 15,
+        "prohibited": 0,
+        "restricted": 3,
+        "conditions_not_met": 0,
+        "conditions_unknown": 3,
+        "concentration_unknown": 3,
+        "hazard_classified": 0,
+        "not_assessed": 10
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "aqua",
+          "raw": "Aqua",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#aqua"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 2,
+          "ingredient_id": "helianthus annuus hybrid oil",
+          "raw": "Helianthus Annuus Hybride Oil",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 3,
+          "ingredient_id": "ethylhexyl stearate",
+          "raw": "Ethylhexyl Sterate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 4,
+          "ingredient_id": "glycerin",
+          "raw": "Glycerin",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#glycerin"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "none_identified",
+            "hazards": [],
+            "explanation": "No hazard classification or concern identified in the retrieved evidence.",
+            "evidence_ids": [
+              "clp_test_ingredients#glycerin"
+            ]
+          },
+          "missing_information": [],
+          "evidence_confidence": "medium"
+        },
+        {
+          "position": 5,
+          "ingredient_id": "isopropyl palmitate",
+          "raw": "Isopropyl Palmitate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 6,
+          "ingredient_id": "polyglyceryl-4 diisostearate/polyhydroxystearate/sebacate",
+          "raw": "Polyglyceryl-4 Diisostearate/Polyhydroxystearate/Sebacate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 7,
+          "ingredient_id": "allantoin",
+          "raw": "Allantoin",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 8,
+          "ingredient_id": "hydrogenated castor oil",
+          "raw": "Hydrogenated Castor Oil",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 9,
+          "ingredient_id": "parfum",
+          "raw": "Parfum",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 10,
+          "ingredient_id": "sodium benzoate",
+          "raw": "Sodium Benzoate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "V/1"
+            ],
+            "conditions": [
+              {
+                "entry": "V/1",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (c) of the entry."
+              },
+              {
+                "entry": "V/1",
+                "type": "max_concentration",
+                "requirement": "(a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+                "result": "unknown",
+                "reason": "The concentration of sodium benzoate is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 1 requires a maximum concentration of 0.5% acid for leave-on products. The concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#1"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "concentration",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 11,
+          "ingredient_id": "piroctone olamine",
+          "raw": "Piroctone Olamine",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "V/35"
+            ],
+            "conditions": [
+              {
+                "entry": "V/35",
+                "type": "product_type",
+                "requirement": "(a) Rinse-off products (b) Other products",
+                "result": "satisfied",
+                "reason": "The product (bodylotion creme-öl) matches item (b) of the entry."
+              },
+              {
+                "entry": "V/35",
+                "type": "max_concentration",
+                "requirement": "(a) 1,0 % (b) 0,5 %",
+                "result": "unknown",
+                "reason": "The concentration of piroctone olamine is unknown."
+              }
+            ],
+            "explanation": "Annex V entry 35 requires a maximum concentration of 0.5% for leave-on products. The concentration is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#35"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "concentration",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 12,
+          "ingredient_id": "potassium sorbate",
+          "raw": "Potassium Sorbate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "restricted",
+            "compliance_check": "unknown",
+            "entries": [
+              "V/4"
+            ],
+            "conditions": [
+              {
+                "entry": "V/4",
+                "type": "max_concentration",
+                "requirement": "0,6 % (acid)",
+                "result": "unknown",
+                "reason": "Concentration is not provided on the label."
+              }
+            ],
+            "explanation": "Annex V entry 4 requires a maximum concentration of 0.6% (acid) for sorbic acid and its salts. The concentration of potassium sorbate is unknown.",
+            "evidence_ids": [
+              "eu_1223_2009_annex_v#4"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "concentration",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 13,
+          "ingredient_id": "magnesium sulfate",
+          "raw": "Magnesium Sulfate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 14,
+          "ingredient_id": "citric acid",
+          "raw": "Citric Acid",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 15,
+          "ingredient_id": "sodium hydroxide",
+          "raw": "Sodium Hydroxide",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        }
+      ],
+      "cruelty_free": {
+        "status": "not_verified",
+        "explanation": "No cruelty-free claim or certification found for this brand.",
+        "brand_claim_found": false,
+        "certifications_found": [],
+        "certifications_checked": [
+          "Leaping Bunny",
+          "PETA Beauty Without Bunnies"
+        ],
+        "conflicts": [],
+        "evidence_ids": [
+          "eu_1223_2009_art18#1"
+        ],
+        "evidence_confidence": "medium"
+      },
+      "evidence_coverage": {
+        "covered": 5,
+        "total": 15,
+        "percent": 33,
+        "definition": "Ingredients with at least one cited regulatory or toxicology source (with its text) about that ingredient, divided by all listed ingredients. It measures how much evidence was found, not how safe the product is."
+      },
+      "sources": [
+        {
+          "evidence_id": "regulatory_scope#aqua",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'aqua' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "regulatory_scope#glycerin",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'glycerin' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "source_id": "clp_test_ingredients",
+          "kind": "toxicology",
+          "excerpt": "Glycerol (CAS 56-81-5): no harmonised classification; notified classification: Not classified.",
+          "title": "CLP classification per test ingredient (harmonised from Annex VI ATP23; notified from ECHA CHEM)",
+          "publisher": "ECHA (derived)",
+          "date": "2026-10-15",
+          "url": "https://chem.echa.europa.eu",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#1",
+          "source_id": "eu_1223_2009_annex_v",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 1 (consolidated version 2026-05-18).\nSubstance: Benzoic acid and its sodium salt. INCI: Benzoic acid; Sodium Benzoate. CAS: 65-85-0; 532-32-1.\nProduct type, body parts: (a) Rinse-off products, except oral products (b) Oral products (c) Leave-on products\nMaximum concentration in ready for use preparation: (a) 2,5 % (acid) (b) 1,7 % (acid) (c) 0,5 % (acid)",
+          "title": "Regulation (EC) No 1223/2009, Annex V (allowed preservatives), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#35",
+          "source_id": "eu_1223_2009_annex_v",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 35 (consolidated version 2026-05-18).\nSubstance: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon and its monoethanolamine salt. INCI: 1-Hydroxy-4-methyl-6-(2,4,4-trimethylpentyl) 2-pyridon; Piroctone Olamine. CAS: 50650-76-5; 68890-66-4.\nProduct type, body parts: (a) Rinse-off products (b) Other products\nMaximum concentration in ready for use preparation: (a) 1,0 % (b) 0,5 %",
+          "title": "Regulation (EC) No 1223/2009, Annex V (allowed preservatives), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_annex_v#4",
+          "source_id": "eu_1223_2009_annex_v",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Annex V, entry 4 (consolidated version 2026-05-18).\nSubstance: Hexa-2,4-dienoic acid and its salts. INCI: Sorbic acid; Calcium sorbate; Sodium sorbate; Potassium sorbate. CAS: 110-44-1; 7492-55-9; 7757-81-5; 24634-61-5.\nMaximum concentration in ready for use preparation: 0,6 % (acid)",
+          "title": "Regulation (EC) No 1223/2009, Annex V (allowed preservatives), selected entries",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_art18#1",
+          "source_id": "eu_1223_2009_art18",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Art. 18: Animal testing of cosmetics and their ingredients is banned for products marketed in the EU.",
+          "title": "Regulation (EC) No 1223/2009, Article 18 (animal testing), paragraph 1",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "agents_present",
+            "severity": "warning",
+            "passed": true,
+            "description": "All three agents returned an output.",
+            "issues": []
+          },
+          {
+            "name": "agent_coverage",
+            "severity": "error",
+            "passed": true,
+            "description": "Each agent covers every ingredient exactly once.",
+            "issues": []
+          },
+          {
+            "name": "citations_known",
+            "severity": "error",
+            "passed": true,
+            "description": "Every cited source is registered in corpus/sources.csv.",
+            "issues": []
+          },
+          {
+            "name": "citation_subject",
+            "severity": "warning",
+            "passed": true,
+            "description": "Cited sources are about the ingredient they support.",
+            "issues": []
+          },
+          {
+            "name": "excerpts_available",
+            "severity": "error",
+            "passed": true,
+            "description": "Every claim's evidence has its source text.",
+            "issues": []
+          },
+          {
+            "name": "claims_have_evidence",
+            "severity": "error",
+            "passed": true,
+            "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+            "issues": []
+          },
+          {
+            "name": "missing_concentration",
+            "severity": "error",
+            "passed": true,
+            "description": "Concentration limits stay unknown when the concentration is unknown.",
+            "issues": []
+          },
+          {
+            "name": "no_safety_verdicts",
+            "severity": "error",
+            "passed": true,
+            "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+            "issues": []
+          },
+          {
+            "name": "status_matches_annex",
+            "severity": "error",
+            "passed": true,
+            "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+            "issues": []
+          },
+          {
+            "name": "ai_validator",
+            "severity": "warning",
+            "passed": false,
+            "description": "The validator agent found every claim supported by the text of its cited evidence.",
+            "issues": [
+              "regulatory/sodium benzoate: unsupported. The concentration is unknown, but the excerpt does not state this.",
+              "regulatory/piroctone olamine: overstated. The product is a leave-on product, but the excerpt states the limit for rinse-off products.",
+              "regulatory/piroctone olamine: unsupported. The concentration is unknown, but the excerpt does not state this.",
+              "regulatory/potassium sorbate: unsupported. The concentration is unknown, but the excerpt does not state this.",
+              "evidence eu_1223_2009_annex_v#1 does not state what it is cited for",
+              "evidence eu_1223_2009_annex_v#35 does not state what it is cited for",
+              "evidence eu_1223_2009_annex_v#4 does not state what it is cited for"
+            ]
+          }
+        ]
+      },
+      "prompt_versions": {
+        "regulatory": "v4",
+        "toxicology": "mock",
+        "ethics": "mock"
+      },
+      "warnings": [],
+      "limitations": [
+        "Ingredient concentrations are not on the label, so limits that depend on concentration cannot be checked.",
+        "A hazard classification describes the substance; consumer risk also depends on concentration and exposure.",
+        "This report does not state that the product is safe, unsafe, legal or illegal, and is not medical advice.",
+        "Only ingredients covered by the current corpus are assessed; the others are marked as not assessed.",
+        "Brand claims and independent certifications are reported as separate kinds of evidence."
+      ]
+    },
+    "validation": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "agents_present",
+          "severity": "warning",
+          "passed": true,
+          "description": "All three agents returned an output.",
+          "issues": []
+        },
+        {
+          "name": "agent_coverage",
+          "severity": "error",
+          "passed": true,
+          "description": "Each agent covers every ingredient exactly once.",
+          "issues": []
+        },
+        {
+          "name": "citations_known",
+          "severity": "error",
+          "passed": true,
+          "description": "Every cited source is registered in corpus/sources.csv.",
+          "issues": []
+        },
+        {
+          "name": "citation_subject",
+          "severity": "warning",
+          "passed": true,
+          "description": "Cited sources are about the ingredient they support.",
+          "issues": []
+        },
+        {
+          "name": "excerpts_available",
+          "severity": "error",
+          "passed": true,
+          "description": "Every claim's evidence has its source text.",
+          "issues": []
+        },
+        {
+          "name": "claims_have_evidence",
+          "severity": "error",
+          "passed": true,
+          "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+          "issues": []
+        },
+        {
+          "name": "missing_concentration",
+          "severity": "error",
+          "passed": true,
+          "description": "Concentration limits stay unknown when the concentration is unknown.",
+          "issues": []
+        },
+        {
+          "name": "no_safety_verdicts",
+          "severity": "error",
+          "passed": true,
+          "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+          "issues": []
+        },
+        {
+          "name": "status_matches_annex",
+          "severity": "error",
+          "passed": true,
+          "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+          "issues": []
+        },
+        {
+          "name": "ai_validator",
+          "severity": "warning",
+          "passed": false,
+          "description": "The validator agent found every claim supported by the text of its cited evidence.",
+          "issues": [
+            "regulatory/sodium benzoate: unsupported. The concentration is unknown, but the excerpt does not state this.",
+            "regulatory/piroctone olamine: overstated. The product is a leave-on product, but the excerpt states the limit for rinse-off products.",
+            "regulatory/piroctone olamine: unsupported. The concentration is unknown, but the excerpt does not state this.",
+            "regulatory/potassium sorbate: unsupported. The concentration is unknown, but the excerpt does not state this.",
+            "evidence eu_1223_2009_annex_v#1 does not state what it is cited for",
+            "evidence eu_1223_2009_annex_v#35 does not state what it is cited for",
+            "evidence eu_1223_2009_annex_v#4 does not state what it is cited for"
+          ]
+        }
+      ]
+    },
+    "validator": {
+      "prompt_version": "v5",
+      "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai"
+    },
+    "next_action": null,
+    "error": null
+  }
+}

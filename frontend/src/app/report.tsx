@@ -28,7 +28,7 @@ export default function ReportScreen() {
     router.dismissTo('/');
   };
 
-  if (outcome?.kind !== 'completed') {
+  if (outcome?.kind !== 'report') {
     return (
       <Screen>
         <View style={styles.block}>
@@ -62,11 +62,16 @@ export default function ReportScreen() {
         <Txt variant="small" muted>
           {exposure ? `${origin}. ${exposure}.` : `${origin}.`}
         </Txt>
+        {r.needs_review && (
+          <Txt variant="small" tone="attention">
+            Some ingredient names were hard to read. Check the underlined names against your label.
+          </Txt>
+        )}
       </View>
 
       <AnnotatedLabel ingredients={r.ingredients} onSelect={jumpTo} />
 
-      <ValidationBanner report={r} />
+      <ValidationBanner report={r} needsReview={outcome.status === 'needs_review'} />
 
       <Section title="Overview">
         <View style={styles.lines}>
@@ -99,7 +104,7 @@ export default function ReportScreen() {
             <IngredientDetail
               key={ing.position}
               ingredient={ing}
-              onLayout={(e) => (offsets.current.items[ing.ingredient] = e.nativeEvent.layout.y)}
+              onLayout={(e) => (offsets.current.items[ing.ingredient_id] = e.nativeEvent.layout.y)}
             />
           ))}
         </View>
@@ -110,7 +115,7 @@ export default function ReportScreen() {
           <Txt variant="strong" tone={cf.tone}>
             {cf.title}
           </Txt>
-          <Txt>{r.cruelty_free.status_reason}</Txt>
+          <Txt>{r.cruelty_free.explanation}</Txt>
           <Txt variant="small" muted>
             Brand claim: {r.cruelty_free.brand_claim_found ? 'found' : 'not found'}. Certifications found:{' '}
             {r.cruelty_free.certifications_found.length ? r.cruelty_free.certifications_found.join(', ') : 'none'}.

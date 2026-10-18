@@ -1,0 +1,727 @@
+{
+  "request": {
+    "barcode": "3574660085563"
+  },
+  "seconds": 0.8,
+  "answer": {
+    "schema_version": "1.0",
+    "request_id": "scan-11",
+    "status": "completed",
+    "report": {
+      "report_version": "1.0",
+      "generated_at": "2026-10-18T14:00:16.468652Z",
+      "input_source": "barcode",
+      "product": {
+        "name": "Neutrogena Lipcare Stick Norwegian Formula",
+        "brand": "Neutrogena",
+        "barcode": "3574660085563",
+        "category": "Open beauty facts",
+        "exposure_type": "leave_on"
+      },
+      "needs_review": true,
+      "overview": {
+        "total_ingredients": 17,
+        "prohibited": 0,
+        "restricted": 0,
+        "conditions_not_met": 0,
+        "conditions_unknown": 0,
+        "concentration_unknown": 0,
+        "hazard_classified": 0,
+        "not_assessed": 15
+      },
+      "ingredients": [
+        {
+          "position": 1,
+          "ingredient_id": "hydrogenated polybutene",
+          "raw": "Hydrogenated Polyisobutene",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 2,
+          "ingredient_id": "synthetic wax",
+          "raw": "Synthetic Wax",
+          "matched": false,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "Ingredient not recognised as an INCI name; no evidence retrieved.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "recognised INCI name"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 3,
+          "ingredient_id": "polyisobutene",
+          "raw": "Polyisobutene",
+          "matched": false,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "Ingredient not recognised as an INCI name; no evidence retrieved.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "recognised INCI name"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 4,
+          "ingredient_id": "polyglyceryl-3 diisostearate",
+          "raw": "Polycyceryl-3 Diisostearate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 5,
+          "ingredient_id": "cera microcristallina",
+          "raw": "Cera crocristallina",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 6,
+          "ingredient_id": "caprylic/capric triglyceride",
+          "raw": "Caprylic/Capric Triglyceride",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 7,
+          "ingredient_id": "copernicia cerifera cera",
+          "raw": "Copernicia Cerifera Cera",
+          "matched": false,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "Ingredient not recognised as an INCI name; no regulatory evidence retrieved.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "Ingredient not recognised as an INCI name; no evidence retrieved.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "recognised INCI name"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 8,
+          "ingredient_id": "disteardimonium hectorite",
+          "raw": "Disteardimonium Hectorite",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 9,
+          "ingredient_id": "tocopheryl acetate",
+          "raw": "Tocopheryl Acetate",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 10,
+          "ingredient_id": "butyrospermum parkii butter",
+          "raw": "Butyrospermum Parkii Butter",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 11,
+          "ingredient_id": "prunus amygdalus dulcis oil",
+          "raw": "Prunus Amygdalus Dulcis Oil",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 12,
+          "ingredient_id": "persea gratissima oil",
+          "raw": "Persea Gratissima Oil",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 13,
+          "ingredient_id": "glycerin",
+          "raw": "Glycerin",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#glycerin"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "none_identified",
+            "hazards": [],
+            "explanation": "No hazard classification or concern identified in the retrieved evidence.",
+            "evidence_ids": [
+              "clp_test_ingredients#glycerin"
+            ]
+          },
+          "missing_information": [],
+          "evidence_confidence": "medium"
+        },
+        {
+          "position": 14,
+          "ingredient_id": "alcohol",
+          "raw": "Alcohol",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 15,
+          "ingredient_id": "aqua",
+          "raw": "Aqua",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": true,
+          "regulatory": {
+            "status": "no_restriction_found",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "No entry for this ingredient was found in Annexes II to VI of the consolidated regulation checked. It is not prohibited or restricted by these annexes; the product's safety assessment still applies.",
+            "evidence_ids": [
+              "regulatory_scope#aqua"
+            ]
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 16,
+          "ingredient_id": "tocopherol",
+          "raw": "Tocopherol",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        },
+        {
+          "position": 17,
+          "ingredient_id": "parfum",
+          "raw": "Parfum",
+          "matched": true,
+          "concentration_percent": null,
+          "covered": false,
+          "regulatory": {
+            "status": "not_assessed",
+            "compliance_check": "not_applicable",
+            "entries": [],
+            "conditions": [],
+            "explanation": "This ingredient is not covered by the current regulatory corpus.",
+            "evidence_ids": []
+          },
+          "toxicology": {
+            "concern_level": "insufficient_evidence",
+            "hazards": [],
+            "explanation": "No evidence found in the knowledge base for this ingredient.",
+            "evidence_ids": []
+          },
+          "missing_information": [
+            "evidence in regulatory corpus",
+            "evidence in knowledge base"
+          ],
+          "evidence_confidence": "low"
+        }
+      ],
+      "cruelty_free": {
+        "status": "not_verified",
+        "explanation": "No cruelty-free claim or certification found for this brand.",
+        "brand_claim_found": false,
+        "certifications_found": [],
+        "certifications_checked": [
+          "Leaping Bunny",
+          "PETA Beauty Without Bunnies"
+        ],
+        "conflicts": [],
+        "evidence_ids": [
+          "eu_1223_2009_art18#1"
+        ],
+        "evidence_confidence": "medium"
+      },
+      "evidence_coverage": {
+        "covered": 2,
+        "total": 17,
+        "percent": 12,
+        "definition": "Ingredients with at least one cited regulatory or toxicology source (with its text) about that ingredient, divided by all listed ingredients. It measures how much evidence was found, not how safe the product is."
+      },
+      "sources": [
+        {
+          "evidence_id": "regulatory_scope#glycerin",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'glycerin' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "clp_test_ingredients#glycerin",
+          "source_id": "clp_test_ingredients",
+          "kind": "toxicology",
+          "excerpt": "Glycerol (CAS 56-81-5): no harmonised classification; notified classification: Not classified.",
+          "title": "CLP classification per test ingredient (harmonised from Annex VI ATP23; notified from ECHA CHEM)",
+          "publisher": "ECHA (derived)",
+          "date": "2026-10-15",
+          "url": "https://chem.echa.europa.eu",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "regulatory_scope#aqua",
+          "source_id": "regulatory_scope",
+          "kind": "coverage_list",
+          "excerpt": "Coverage list: 'aqua' was looked up in Annexes II, III, IV, V, VI of Regulation (EC) No 1223/2009 (consolidated version 2026-05-18); no entry was found for it.",
+          "title": "Coverage list: ingredients checked against Annexes II-VI of the consolidated text (cited for no_restriction_found findings)",
+          "publisher": "EUR-Lex (derived)",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        },
+        {
+          "evidence_id": "eu_1223_2009_art18#1",
+          "source_id": "eu_1223_2009_art18",
+          "kind": "regulation",
+          "excerpt": "Regulation (EC) No 1223/2009, Art. 18: Animal testing of cosmetics and their ingredients is banned for products marketed in the EU.",
+          "title": "Regulation (EC) No 1223/2009, Article 18 (animal testing), paragraph 1",
+          "publisher": "EUR-Lex",
+          "date": "2026-05-18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009R1223-20260518",
+          "in_corpus": true
+        }
+      ],
+      "validation": {
+        "passed": true,
+        "checks": [
+          {
+            "name": "agents_present",
+            "severity": "warning",
+            "passed": true,
+            "description": "All three agents returned an output.",
+            "issues": []
+          },
+          {
+            "name": "agent_coverage",
+            "severity": "error",
+            "passed": true,
+            "description": "Each agent covers every ingredient exactly once.",
+            "issues": []
+          },
+          {
+            "name": "citations_known",
+            "severity": "error",
+            "passed": true,
+            "description": "Every cited source is registered in corpus/sources.csv.",
+            "issues": []
+          },
+          {
+            "name": "citation_subject",
+            "severity": "warning",
+            "passed": true,
+            "description": "Cited sources are about the ingredient they support.",
+            "issues": []
+          },
+          {
+            "name": "excerpts_available",
+            "severity": "error",
+            "passed": true,
+            "description": "Every claim's evidence has its source text.",
+            "issues": []
+          },
+          {
+            "name": "claims_have_evidence",
+            "severity": "error",
+            "passed": true,
+            "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+            "issues": []
+          },
+          {
+            "name": "missing_concentration",
+            "severity": "error",
+            "passed": true,
+            "description": "Concentration limits stay unknown when the concentration is unknown.",
+            "issues": []
+          },
+          {
+            "name": "no_safety_verdicts",
+            "severity": "error",
+            "passed": true,
+            "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+            "issues": []
+          },
+          {
+            "name": "status_matches_annex",
+            "severity": "error",
+            "passed": true,
+            "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+            "issues": []
+          },
+          {
+            "name": "ai_validator",
+            "severity": "warning",
+            "passed": true,
+            "description": "The validator agent found every claim supported by the text of its cited evidence.",
+            "issues": []
+          }
+        ]
+      },
+      "prompt_versions": {
+        "regulatory": "v4",
+        "toxicology": "mock",
+        "ethics": "mock"
+      },
+      "warnings": [],
+      "limitations": [
+        "Ingredient concentrations are not on the label, so limits that depend on concentration cannot be checked.",
+        "A hazard classification describes the substance; consumer risk also depends on concentration and exposure.",
+        "This report does not state that the product is safe, unsafe, legal or illegal, and is not medical advice.",
+        "Only ingredients covered by the current corpus are assessed; the others are marked as not assessed.",
+        "Brand claims and independent certifications are reported as separate kinds of evidence."
+      ]
+    },
+    "validation": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "agents_present",
+          "severity": "warning",
+          "passed": true,
+          "description": "All three agents returned an output.",
+          "issues": []
+        },
+        {
+          "name": "agent_coverage",
+          "severity": "error",
+          "passed": true,
+          "description": "Each agent covers every ingredient exactly once.",
+          "issues": []
+        },
+        {
+          "name": "citations_known",
+          "severity": "error",
+          "passed": true,
+          "description": "Every cited source is registered in corpus/sources.csv.",
+          "issues": []
+        },
+        {
+          "name": "citation_subject",
+          "severity": "warning",
+          "passed": true,
+          "description": "Cited sources are about the ingredient they support.",
+          "issues": []
+        },
+        {
+          "name": "excerpts_available",
+          "severity": "error",
+          "passed": true,
+          "description": "Every claim's evidence has its source text.",
+          "issues": []
+        },
+        {
+          "name": "claims_have_evidence",
+          "severity": "error",
+          "passed": true,
+          "description": "Statuses, hazards and cruelty-free claims cite evidence.",
+          "issues": []
+        },
+        {
+          "name": "missing_concentration",
+          "severity": "error",
+          "passed": true,
+          "description": "Concentration limits stay unknown when the concentration is unknown.",
+          "issues": []
+        },
+        {
+          "name": "no_safety_verdicts",
+          "severity": "error",
+          "passed": true,
+          "description": "No 'safe', 'toxic', 'avoid' or 'illegal' verdicts in explanations.",
+          "issues": []
+        },
+        {
+          "name": "status_matches_annex",
+          "severity": "error",
+          "passed": true,
+          "description": "Prohibited cites Annex II; restricted cites Annexes III to VI.",
+          "issues": []
+        },
+        {
+          "name": "ai_validator",
+          "severity": "warning",
+          "passed": true,
+          "description": "The validator agent found every claim supported by the text of its cited evidence.",
+          "issues": []
+        }
+      ]
+    },
+    "validator": null,
+    "next_action": null,
+    "error": null
+  }
+}

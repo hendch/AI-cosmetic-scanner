@@ -1,0 +1,14 @@
+# End-to-end scenarios 2026-10-18_1511
+
+Webhook: `http://localhost:5678/webhook/cosmetic-scanner-live`
+
+| Scenario | What it shows | Seconds | Result |
+|---|---|---|---|
+| 1_barcode_found | Barcode in Open Beauty Facts: ingredient list from the database, full report. | 16.5 | status: completed; product: Balea Bodylotion Creme-Öl; input_source: barcode; ingredients: 15; restricted: sodium benzoate (V/1), piroctone olamine (V/35), potassium sorbate (V/4); concentration_unknown: 3; cruelty_free: not_verified; evidence_coverage: 5/15; ai_validator: 6 issues; validator_prompt: v5 |
+| 2_ocr_fallback_step1 | Barcode not in Open Beauty Facts: the app is asked for a label photo; the photo is read by OCR. | 0.4 | status: needs_input; message: We read the barcode 3600523351350, but Open Beauty Facts has no ingredient list for this product. Take a photo of the ingredient list on the back of the product. |
+| 2_ocr_fallback_step2 | (label photo) | 22.9 | status: completed; product: CeraVe Skummande Rens; input_source: ocr; ingredients: 25; restricted: sodium benzoate (V/1), phenoxyethanol (V/29); concentration_unknown: 2; cruelty_free: not_verified; evidence_coverage: 5/25; ai_validator: 2 issues; validator_prompt: v5 |
+| 3_unknown_ingredient | Ingredient names the dictionary does not know: shown as not recognised, not assessed. | 1.2 | status: completed; product: Neutrogena Neutrogena Lipcare Stick Norwegian Formula; input_source: barcode; ingredients: 17; not_recognised: Synthetic Wax, Polyisobutene, Copernicia Cerifera Cera; concentration_unknown: 0; cruelty_free: not_verified; evidence_coverage: 2/17; ai_validator: passed |
+| 4_missing_concentration | Restricted ingredients whose limit depends on a concentration the label does not give. | 12.9 | status: completed; product: Balea Shampoo Anti-Schuppen; input_source: barcode; ingredients: 21; restricted: piroctone olamine (V/35), sodium benzoate (V/1), potassium sorbate (V/4), linalool (III/84); concentration_unknown: 3; cruelty_free: not_verified; evidence_coverage: 7/21; ai_validator: 6 issues; validator_prompt: v5 |
+| 5_no_cruelty_free_evidence | No brand claim or certification found: animal testing reported as not verified. | 14.9 | status: completed; product: Isana Gesichtswasser; input_source: barcode; ingredients: 14; not_recognised: Aloe Barbadensis Leaf Juice; restricted: benzyl alcohol (III/45, V/34), linalool (III/84), limonene (III/88); concentration_unknown: 2; cruelty_free: not_verified; evidence_coverage: 5/14; ai_validator: 4 issues; validator_prompt: v5 |
+
+Scenario 3 first answered needs_input: Open Beauty Facts did not answer in time and the API reported it as "not found" (3_unknown_ingredient_first_try_obf_timeout.json). The lookup now retries once and reports an outage separately; scenario 3 was re-run at 15:14 after that fix (no model calls) and its row above is that run.
