@@ -29,8 +29,13 @@ async def extract(barcode: Optional[str] = Form(None),
 
 
 class ScanRequest(BaseModel):
-    """What n8n forwards from the app. Image refs are data URIs (data:image/jpeg;base64,...) or https URLs."""
+    """What n8n forwards from the app. Image refs are data URIs (data:image/jpeg;base64,...) or https URLs.
+
+    image_ref is one photo that may show the barcode or the ingredient list (what the app sends): it is
+    decoded once and used for both. barcode_image_ref / label_image_ref are for two different photos.
+    """
     barcode: Optional[str] = None
+    image_ref: Optional[str] = None
     barcode_image_ref: Optional[str] = None
     label_image_ref: Optional[str] = None
 
@@ -59,7 +64,8 @@ def scan(req: ScanRequest):
     if USE_MOCK:
         return MOCK
     barcode = (req.barcode or "").strip() or None
-    if not barcode and req.barcode_image_ref:
-        barcode = scan_barcode(image_from_ref(req.barcode_image_ref))
-    label = image_from_ref(req.label_image_ref) if req.label_image_ref else None
+    photo = image_from_ref(req.image_ref) if req.image_ref else None
+    if not barcode and (photo or req.barcode_image_ref):
+        barcode = scan_barcode(photo if photo else image_from_ref(req.barcode_image_ref))
+    label = photo if photo else (image_from_ref(req.label_image_ref) if req.label_image_ref else None)
     return build_response(barcode, label)

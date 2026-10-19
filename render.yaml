@@ -84,6 +84,18 @@ services:
         fromDatabase: {name: cosmetic-scanner-db, property: user}
       - key: DB_POSTGRESDB_PASSWORD
         fromDatabase: {name: cosmetic-scanner-db, property: password}
+      # n8n has 512 MB: do not keep a copy of every successful run (each one holds the photo and the full report).
+      # Failed runs are still saved, for debugging; old ones are pruned after 7 days.
+      - key: EXECUTIONS_DATA_SAVE_ON_SUCCESS
+        value: none
+      - key: EXECUTIONS_DATA_SAVE_ON_PROGRESS
+        value: "false"
+      - key: EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS
+        value: "false"
+      - key: EXECUTIONS_DATA_PRUNE
+        value: "true"
+      - key: EXECUTIONS_DATA_MAX_AGE
+        value: "168"
 
   - type: web
     name: cosmetic-scanner-web

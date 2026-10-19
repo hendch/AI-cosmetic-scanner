@@ -55,6 +55,7 @@ export async function runScan(input: ScanInput, onProgress: ProgressListener, si
   onProgress(null);
 
   // A photo may show the barcode or the ingredient list: the API tries the barcode first, then reads the label.
+  // Sent once (image_ref), not in both barcode_image_ref and label_image_ref: n8n keeps every copy in memory.
   const photo = input.image ? dataUri(input.image) : null;
   const timeout = AbortSignal.timeout(TIMEOUT_MS);
   const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
@@ -65,7 +66,7 @@ export async function runScan(input: ScanInput, onProgress: ProgressListener, si
       method: 'POST',
       signal: combined,
       headers: { 'Content-Type': 'application/json', 'X-API-Key': WEBHOOK_KEY },
-      body: JSON.stringify({ barcode: input.barcode ?? null, barcode_image_ref: photo, label_image_ref: photo }),
+      body: JSON.stringify({ barcode: input.barcode ?? null, image_ref: photo }),
     });
   } catch (err) {
     if (signal?.aborted) throw err; // the user cancelled

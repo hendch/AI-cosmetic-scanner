@@ -33,8 +33,9 @@ Checks: `npm run typecheck`, `npm run lint`, `npm test`.
 The full contract is in `docs/N8N_SETUP.md`. In short:
 
 - **Request:** `POST EXPO_PUBLIC_SCAN_URL`, header `X-API-Key: EXPO_PUBLIC_WEBHOOK_KEY`, body
-  `{ barcode, barcode_image_ref, label_image_ref }`. A photo is sent inline as a `data:image/...;base64,` URI in
-  both image fields: the API tries to read a barcode from it first, then reads the ingredient list (OCR).
+  `{ barcode, image_ref }`. A photo is shrunk to 2000 px on the longest side (JPEG, quality 0.7, about 0.5 MB;
+  `src/scan/photo-size.ts`) and sent once, inline, as a `data:image/...;base64,` URI: the API tries to read a barcode
+  from it first, then reads the ingredient list (OCR).
 - **Answer:** one JSON object with `status`:
   `completed` or `needs_review` → `report` is shown (needs review shows the failed checks);
   `needs_input` → the app asks for a photo of the ingredient list; anything else → `error.message`.

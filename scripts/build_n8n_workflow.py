@@ -74,7 +74,7 @@ def if_node(name, x, y, expression):
 node("Scan request", "n8n-nodes-base.webhook", 2, 0, 300, {
     "httpMethod": "POST", "path": WEBHOOK_PATH, "authentication": "none", "responseMode": "responseNode",
     "options": {"allowedOrigins": "*"},  # the web app calls this from the browser (CORS)
-}, webhookId=_id("webhook"), notes="Called by the app. Body: {barcode, barcode_image_ref, label_image_ref}.", notesInFlow=True)
+}, webhookId=_id("webhook"), notes="Called by the app. Body: {barcode, image_ref} (or barcode_image_ref / label_image_ref for two photos).", notesInFlow=True)
 
 code("Check request", 220, 300, r"""
 // Checks the app's key and the request. Images are data URIs (data:image/...;base64,...) or https links.
@@ -92,12 +92,14 @@ if (!error && barcode && !/^\d{8,14}$/.test(barcode)) {
   error = { code: 'GTIN_FORMAT', message: 'A barcode number has 8 to 14 digits.' };
 }
 const isRef = (r) => typeof r === 'string' && (r.startsWith('data:image/') || r.startsWith('https://'));
+// image_ref: one photo that may show the barcode or the ingredient list (what the app sends, once).
+const image_ref = isRef(body.image_ref) ? body.image_ref : null;
 const barcode_image_ref = isRef(body.barcode_image_ref) ? body.barcode_image_ref : null;
 const label_image_ref = isRef(body.label_image_ref) ? body.label_image_ref : null;
-if (!error && !barcode && !barcode_image_ref && !label_image_ref) {
+if (!error && !barcode && !image_ref && !barcode_image_ref && !label_image_ref) {
   error = { code: 'NO_INPUT', message: 'Send a barcode, a barcode photo or a photo of the ingredient list.' };
 }
-return [{ json: { ok: !error, request_id, error, request: { barcode, barcode_image_ref, label_image_ref } } }];
+return [{ json: { ok: !error, request_id, error, request: { barcode, image_ref, barcode_image_ref, label_image_ref } } }];
 """)
 
 if_node("Request OK?", 440, 300, "={{ $json.ok }}")
@@ -119,8 +121,8 @@ const p = $input.first().json;
 const c = $('Check request').first().json;
 const r = c.request;
 const code = (p.product && p.product.barcode) || '';
-// The app sends one photo as both refs: it may show the barcode or the ingredient list.
-const onePhoto = !!r.label_image_ref && r.label_image_ref === r.barcode_image_ref;
+// The app sends one photo (image_ref): it may show the barcode or the ingredient list.
+const onePhoto = !!r.image_ref || (!!r.label_image_ref && r.label_image_ref === r.barcode_image_ref);
 const labelOnly = !!r.label_image_ref && !onePhoto;
 let message;
 if ((p.warnings || []).includes('product database unavailable')) {

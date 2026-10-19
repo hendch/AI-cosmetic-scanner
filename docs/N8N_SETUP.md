@@ -42,10 +42,13 @@ editor and export it with `scripts/export_workflow.sh`. Commit the JSON file; th
 `X-API-Key: <EXPO_PUBLIC_WEBHOOK_KEY>`.
 
 ```json
-{"barcode": "4066447870213", "barcode_image_ref": null, "label_image_ref": null}
+{"barcode": "4066447870213", "image_ref": null}
 ```
 
-Send at least one. Photos are `data:image/jpeg;base64,...` (or an `https://` link), at most 10 MB.
+Send at least one. `image_ref` is one photo that may show the barcode or the ingredient list: the API tries the
+barcode first, then reads the label. For two different photos use `barcode_image_ref` and `label_image_ref` instead.
+Photos are `data:image/jpeg;base64,...` (or an `https://` link), at most 10 MB. The app shrinks them to 2000 px on
+the longest side (about 0.5 MB) and sends them once: n8n on Render has 512 MB and keeps every copy in memory.
 
 **Answer (always HTTP 200; read `status`):**
 

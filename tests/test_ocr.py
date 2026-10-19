@@ -101,6 +101,16 @@ def test_barcode_ingredients_win_over_the_photo(vision, monkeypatch):
     assert body["source"] == "barcode" and not calls  # no OCR call when the database has the list
 
 
+def test_one_photo_is_used_for_barcode_and_label(vision, monkeypatch):
+    answers, calls = vision
+    answers.append(answer())
+    scanned = []
+    monkeypatch.setattr("app.ingestion.router.scan_barcode", lambda data: scanned.append(data) or None)
+    body = client.post("/ingestion/scan", json={"image_ref": data_uri(photo(400, 300))}).json()
+    assert len(scanned) == 1  # no barcode found in the photo ...
+    assert body["source"] == "ocr" and len(calls) == 1  # ... so the same photo is read as a label
+
+
 def test_bad_refs_are_rejected():
     assert client.post("/ingestion/scan", json={"label_image_ref": "file:///etc/passwd"}).status_code == 422
     big = "data:image/jpeg;base64," + base64.b64encode(b"x" * (10 * 1024 * 1024 + 1)).decode()
