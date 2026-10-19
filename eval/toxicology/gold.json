@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "author": "hind",
+    "date": "2026-10-19",
+    "corpus_version": "corpus/index/evidence_structured.jsonl, 1,250 points (12 SCCS opinions, 15 CLP rows)",
+    "how": "Expected toxicology output per product and ingredient, from the SCCS conclusion sections and the CLP table. concern: expected concern_level (a list when two readings are defensible). sccs: SCCS opinions a finding may cite; sccs_required (default true): at least one correct SCCS finding is expected. limits: the only quantities an SCCS label may give for this product type (empty list: none). label_must_not: text an SCCS label must not contain. covers: does the cited opinion cover this product's use (true / false; null = not scored); when false, the interpretation must say so.",
+    "products": "keys 'regulatory/<name>' = eval/regulatory/products, 'samples/<name>' = samples/input, 'toxicology/<name>' = eval/toxicology/products"
+  },
+  "cases": {
+    "samples/leave_on_restricted": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "niacinamide": {"concern": "low"},
+      "salicylic acid": {
+        "concern": "moderate", "sccs": ["sccs_salicylic_acid_2023"], "limits": ["2 %", "0.5 %"], "covers": true,
+        "why": "Face cream = 'other products' (2.0 %); 0.5 % as a preservative in all cosmetic products. CLP Repr. 2 harmonised."
+      },
+      "retinol": {
+        "concern": "moderate", "sccs": ["sccs_retinol_2022"], "limits": ["0.3 %"], "covers": true,
+        "why": "0.3 % RE for leave-on products other than body lotion (0.05 % is body lotion only)."
+      },
+      "methylisothiazolinone": {
+        "concern": "moderate", "sccs": ["sccs_methylisothiazolinone_2015"], "limits": ["100 ppm", "15 ppm", "0.0015 %"], "covers": false,
+        "why": "The 2015 opinion covers rinse-off and leave-on hair products only, not a face cream."
+      },
+      "zinc pyrithione": {
+        "concern": "high", "sccs": ["sccs_zinc_pyrithione_2020"], "limits": ["1 %"], "covers": false,
+        "why": "Opinion covers anti-dandruff rinse-off hair products only. CLP Repr. 1B harmonised."
+      },
+      "sodium benzoate": {"concern": "insufficient_evidence"}
+    },
+    "toxicology/sunscreen_body_lotion": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "homosalate": {
+        "concern": "moderate", "sccs": ["sccs_homosalate_2021"], "limits": ["7.34 %"], "covers": false,
+        "why": "The 2021 advice covers face cream and pump spray only, not a body lotion."
+      },
+      "octocrylene": {
+        "concern": "moderate", "sccs": ["sccs_octocrylene_2021"], "limits": ["10 %"], "covers": true,
+        "label_must_not": ["propellant"],
+        "why": "No concern up to 10 % in cosmetic products, including sunscreen cream/lotion; the 9-10 % propellant spray sentence is another product type."
+      },
+      "benzophenone-3": {
+        "concern": "moderate", "sccs": ["sccs_benzophenone-3_2021"], "limits": ["6 %", "2.2 %", "1.7 %", "0.5 %"], "covers": true,
+        "why": "6 % in sunscreen body cream is not safe for the consumer (concern); 2.2 % (1.7 % with the 0.5 % formulation use) accepted."
+      },
+      "glycerin": {"concern": "none_identified"},
+      "phenoxyethanol": {
+        "concern": "low", "sccs": ["sccs_phenoxyethanol_2016"], "limits": ["1 %"], "covers": true,
+        "why": "1.0 % as a preservative, no product type restriction. CLP Acute Tox. 4, STOT SE 3, Eye Dam. 1."
+      },
+      "propylparaben": {
+        "concern": "none_identified", "sccs": ["sccs_propylparaben_2021"], "limits": ["0.14 %"], "covers": true,
+        "why": "2021: no concern up to 0.14 % in cosmetic products. The 2013 parabens opinion (concern) is superseded."
+      }
+    },
+    "regulatory/anti_dandruff_shampoo": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "salicylic acid": {
+        "concern": "moderate", "sccs": ["sccs_salicylic_acid_2023"], "limits": ["3 %", "0.5 %"], "covers": true,
+        "why": "3.0 % in rinse-off hair products; 0.5 % as a preservative."
+      },
+      "zinc pyrithione": {
+        "concern": "high", "sccs": ["sccs_zinc_pyrithione_2020"], "limits": ["1 %"], "covers": true,
+        "why": "Anti-dandruff rinse-off hair products up to 1 %: exactly this product."
+      },
+      "methylisothiazolinone": {
+        "concern": "moderate", "sccs": ["sccs_methylisothiazolinone_2015"], "limits": ["100 ppm", "15 ppm", "0.0015 %"], "covers": true,
+        "why": "Rinse-off: 100 ppm not supported, 15 ppm (0.0015 %) accepted."
+      },
+      "limonene": {"concern": "insufficient_evidence"}
+    },
+    "regulatory/baby_nappy_cream": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "glycerin": {"concern": "none_identified"},
+      "propylparaben": {
+        "concern": "none_identified", "sccs": ["sccs_propylparaben_2021"], "limits": ["0.14 %"], "covers": true,
+        "why": "2021 conclusion is for cosmetic products in general. The nappy-area ban for children under 3 is regulatory (Annex V), not in this SCCS conclusion."
+      },
+      "phenoxyethanol": {
+        "concern": "low", "sccs": ["sccs_phenoxyethanol_2016"], "limits": ["1 %"], "covers": true,
+        "why": "1.0 %; the opinion states its margin of safety also covers children."
+      }
+    },
+    "regulatory/body_lotion": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "glycerin": {"concern": "none_identified"},
+      "retinol": {
+        "concern": "moderate", "sccs": ["sccs_retinol_2022"], "limits": ["0.05 %"], "covers": true,
+        "why": "Body lotion has its own limit: 0.05 % RE (0.3 % is for other leave-on products)."
+      },
+      "salicylic acid": {
+        "concern": "moderate", "sccs": ["sccs_salicylic_acid_2023"], "limits": ["0.5 %"], "covers": true,
+        "why": "Body lotion is in the 0.5 % list (and 0.5 % as a preservative); 2.0 % explicitly excludes body lotion."
+      },
+      "benzophenone-3": {
+        "concern": ["none_identified", "moderate"], "sccs": ["sccs_benzophenone-3_2021"], "limits": ["6 %", "2.2 %", "1.7 %", "0.5 %"], "covers": null,
+        "why": "A body lotion that is not a sunscreen: 0.5 % (formulation protection) applies, the sunscreen body cream conclusions may. Both readings accepted."
+      },
+      "phenoxyethanol": {
+        "concern": "low", "sccs": ["sccs_phenoxyethanol_2016"], "limits": ["1 %"], "covers": true
+      }
+    },
+    "regulatory/body_sunscreen_spray": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "homosalate": {
+        "concern": "moderate", "sccs": ["sccs_homosalate_2021"], "limits": ["7.34 %"], "covers": false,
+        "why": "Face cream and pump spray as face products only; this is a body spray."
+      },
+      "benzophenone-3": {
+        "concern": "moderate", "sccs": ["sccs_benzophenone-3_2021"], "limits": ["6 %", "2.2 %", "1.7 %", "0.5 %"], "covers": true,
+        "why": "6 % in sunscreen propellant or pump spray is not safe for the consumer; 2.2 % accepted."
+      },
+      "octocrylene": {
+        "concern": "moderate", "sccs": ["sccs_octocrylene_2021"], "limits": ["10 %", "9 %"], "covers": true,
+        "why": "10 % in sunscreen pump spray; propellant spray at 10 % or above not safe in combined use, 9 % accepted."
+      }
+    },
+    "regulatory/face_sunscreen": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "homosalate": {
+        "concern": "moderate", "sccs": ["sccs_homosalate_2021"], "limits": ["7.34 %"], "covers": true,
+        "why": "Face cream up to 7.34 %: exactly this product."
+      },
+      "octocrylene": {
+        "concern": "moderate", "sccs": ["sccs_octocrylene_2021"], "limits": ["10 %"], "covers": true,
+        "label_must_not": ["propellant"]
+      },
+      "benzophenone-3": {
+        "concern": "none_identified", "sccs": ["sccs_benzophenone-3_2021"], "limits": ["6 %", "0.5 %"], "covers": true,
+        "label_must_not": ["body"],
+        "why": "6 % in face cream is safe for the consumer; the 'not safe' conclusion is for body cream and sprays."
+      },
+      "titanium dioxide": {
+        "concern": "none_identified", "sccs": ["sccs_titanium_dioxide_nano_coating_2024"], "sccs_required": false, "limits": [], "covers": false,
+        "why": "The 2024 opinion is about one coated nano form (Eclipse 70) and reaches no conclusion; it says nothing about this product's titanium dioxide."
+      },
+      "niacinamide": {"concern": "low"}
+    },
+    "regulatory/toothpaste": {
+      "aqua": {"concern": "insufficient_evidence"},
+      "bht": {
+        "concern": "none_identified", "sccs": ["sccs_bht_2021"], "limits": ["0.1 %"], "covers": true,
+        "why": "0.1 % in toothpaste (0.001 % is mouthwash, 0.8 % other products)."
+      },
+      "salicylic acid": {
+        "concern": "moderate", "sccs": ["sccs_salicylic_acid_2023"], "limits": ["0.5 %"], "covers": true,
+        "why": "Oral products are in the 0.5 % list; 0.5 % as a preservative."
+      },
+      "limonene": {"concern": "insufficient_evidence"}
+    }
+  }
+}

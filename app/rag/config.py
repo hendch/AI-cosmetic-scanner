@@ -29,6 +29,9 @@ COLLECTIONS = {                       # one collection per chunking strategy
 # --- Chunking ---
 FIXED_CHUNK_TOKENS = 500
 FIXED_CHUNK_OVERLAP = 100
+# SCCS opinions (corpus/toxicology/sccs/): smaller windows, so a quote and its context fit a prompt
+SCCS_CHUNK_TOKENS = 300
+SCCS_CHUNK_OVERLAP = 50
 
 # --- Retrieval ---
 TOP_K_DEFAULT = 5
@@ -39,4 +42,6 @@ DEFAULT_STRATEGY = "structured"
 CORPUS_RAW = ROOT / "corpus" / "raw"
 CORPUS_STRUCTURED = ROOT / "corpus" / "structured"
 SOURCES_YAML = ROOT / "corpus" / "sources.yaml"
+SOURCES_CSV = ROOT / "corpus" / "sources.csv"  # the registry the report checks citations against
+CLP_CSV = ROOT / "corpus" / "toxicology" / "clp" / "clp_test_ingredients.csv"
 EVAL_DIR = ROOT / "eval" / "rag"

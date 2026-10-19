@@ -9,13 +9,14 @@ from pathlib import Path
 from app.common_schemas import ProductInput
 from app.ethics.agent import analyze as ethics_agent
 from app.regulatory.mock import build_mock_response as regulatory_mock
-from app.toxicology.mock import build_mock_response as toxicology_mock
+from app.toxicology.agent import analyze as toxicology_agent
 
 SAMPLES = Path(__file__).resolve().parent.parent / "samples"
 
 
 def main() -> None:
-    for agent, build in (("toxicology", toxicology_mock), ("ethics", ethics_agent), ("regulatory", regulatory_mock)):
+    toxicology_rules = lambda payload: toxicology_agent(payload, mode="rules")  # noqa: E731  no LLM call
+    for agent, build in (("toxicology", toxicology_rules), ("ethics", ethics_agent), ("regulatory", regulatory_mock)):
         out_dir = SAMPLES / agent
         out_dir.mkdir(exist_ok=True)
         for input_file in sorted((SAMPLES / "input").glob("*.json")):

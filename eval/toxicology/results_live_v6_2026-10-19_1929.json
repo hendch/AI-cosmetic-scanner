@@ -1,0 +1,124 @@
+{
+  "mode": "live",
+  "prompt_version": "v6",
+  "model": "Qwen/Qwen2.5-7B-Instruct:featherless-ai",
+  "date": "2026-10-19T19:28",
+  "cases_filter": "sunscreen",
+  "concern_accuracy": 94.1,
+  "finding_recall": 90.9,
+  "finding_precision": 83.3,
+  "coverage_accuracy": 75.0,
+  "ungrounded_numbers": 0,
+  "wording_violations": 0,
+  "citation_validity": 100.0,
+  "ingredients": 17,
+  "sccs_findings": 12,
+  "llm_calls": 18,
+  "retries": 6,
+  "fallbacks": 0,
+  "partial_fallbacks": 0,
+  "rejected_findings": 6,
+  "label_rewordings": 0,
+  "replay_missing": 0,
+  "seconds": 73.7,
+  "errors": [
+    "toxicology/sunscreen_body_lotion homosalate: coverage expected NOT covered: 'The SCCS raised no concern for use of homosalate up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.'",
+    "toxicology/sunscreen_body_lotion octocrylene: finding 'SCCS concern for use in sunscreen propellant spray at 10%' label contains one of ['propellant']",
+    "regulatory/body_sunscreen_spray homosalate: coverage expected NOT covered: 'The SCCS raised no concern for use of Homosalate up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.'",
+    "regulatory/face_sunscreen benzophenone-3: concern moderate != none_identified",
+    "regulatory/face_sunscreen titanium dioxide: finding 'No SCCS concern for use in dermally applied cosmetic products up to 10% w/w' limit ['10 %'] not in [] for this product",
+    "regulatory/face_sunscreen titanium dioxide: coverage expected NOT covered: 'The SCCS raised no concern for the use of titanium dioxide in dermally applied cosmetic products up to 10% w/w. The risk depends on the concentration in this product, which is not given.'"
+  ],
+  "raw_answers": [
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS considers homosalate safe up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for use of homosalate up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "phenoxyethanol",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"No SCCS concern up to 1.0% in cosmetic formulations\",\n      \"evidence_id\": \"sccs_phenoxyethanol_2016#conclusion-000\",\n      \"quote\": \"The SCCS considers 2-phenoxyethanol safe for use as a preservative with a maximum concentration of 1.0%, taking into account the information provided.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for the use of phenoxyethanol as a preservative up to 1.0% in cosmetic formulations. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_phenoxyethanol_2016#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "benzophenone-3",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen products not supported by the SCCS\",\n      \"evidence_id\": \"sccs_benzophenone-3_2021#conclusion-000\",\n      \"quote\": \"The use of BP-3 as a UV-filter up to a maximum concentration of 6% in sunscreen products, either in the form of body cream, sunscreen propellant spray or pump spray, is not safe for the consumer.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised a concern for the use of benzophenone-3 in sunscreen products up to a maximum concentration of 6%. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_benzophenone-3_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen lotion up to 10%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"Octocrylene is safe as a UV-filter at concentrations up to 10% in cosmetic products when used individually.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS considers Octocrylene safe up to 10% in sunscreen lotion. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\"concentration\"],\n  \"evidence_ids\": [\"sccs_octocrylene_2021#conclusion-000\"]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"SCCS concern for use in sunscreen propellant spray at 10%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"the use of Octocrylene at 10% or above in sunscreen propellant spray is not considered safe for the combined use.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised a concern for use in sunscreen propellant spray at 10%. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\"concentration\"],\n  \"evidence_ids\": [\"sccs_octocrylene_2021#conclusion-000\"]\n}"
+    },
+    {
+      "case": "toxicology/sunscreen_body_lotion",
+      "ingredient": "propylparaben",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"No SCCS concern up to 0.14% in cosmetic products\",\n      \"evidence_id\": \"sccs_propylparaben_2021#conclusion-000\",\n      \"quote\": \"On the basis of the safety assessment of Propylparaben, and considering the concerns related to potential endocrine disrupting properties, the SCCS has concluded that propylparaben is safe when used as a preservative in cosmetic products up to a maximum concentration of 0.14 %.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for the use of propylparaben up to 0.14% in cosmetic products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_propylparaben_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/body_sunscreen_spray",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen propellant spray not supported by the SCCS\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene at 10% or above in sunscreen propellant spray is not considered safe for the combined use.\"\n    },\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"No SCCS concern up to 9% in sunscreen propellant spray with 10% in other products\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene in sunscreen propellant spray is considered safe when its concentration does not exceed 9% when used together with face cream, hand cream, and lipstick containing 10% Octocrylene.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for the use of Octocrylene up to 9% in sunscreen propellant spray when used with other products containing 10% Octocrylene. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_octocrylene_2021#conclusion-000\",\n    \"sccs_octocrylene_2021#conclusion-001\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/body_sunscreen_spray",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS considers Homosalate safe up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/body_sunscreen_spray",
+      "ingredient": "benzophenone-3",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen products not supported by the SCCS\",\n      \"evidence_id\": \"sccs_benzophenone-3_2021#conclusion-000\",\n      \"quote\": \"The use of BP-3 as a UV-filter up to a maximum concentration of 6% in sunscreen products, either in the form of body cream, sunscreen propellant spray or pump spray, is not safe for the consumer.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised a concern for the use of benzophenone-3 in sunscreen products up to a maximum concentration of 6%. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_benzophenone-3_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/body_sunscreen_spray",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for use of Homosalate up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/body_sunscreen_spray",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen propellant spray not supported by the SCCS\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene at 10% or above in sunscreen propellant spray is not considered safe for the combined use.\"\n    },\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"No SCCS concern up to 9% in sunscreen propellant spray with 10% in other products\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene in sunscreen propellant spray is considered safe when its concentration does not exceed 9% when used together with face cream, hand cream, and lipstick containing 10% Octocrylene.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for the use of Octocrylene up to 10% in cosmetic products when used individually. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_octocrylene_2021#conclusion-000\",\n    \"sccs_octocrylene_2021#conclusion-001\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face cream, hand cream, and lipstick up to 10%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"Octocrylene is also considered safe for a combined use of sunscreen cream/lotion, sunscreen pump spray, face cream, hand cream and lipstick at a concentration up to 10%.\"\n    },\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen propellant spray up to 9%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene in sunscreen propellant spray is considered safe when its concentration does not exceed 9% when used together with face cream, hand cream, and lipstick containing 10% Octocrylene.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS considers Octocrylene safe up to 10% in face cream, hand cream, and lipstick. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_octocrylene_2021#conclusion-000\",\n    \"sccs_octocrylene_2021#conclusion-001\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "benzophenone-3",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen products not supported by the SCCS\",\n      \"evidence_id\": \"sccs_benzophenone-3_2021#conclusion-000\",\n      \"quote\": \"The use of BP-3 as a UV-filter up to a maximum concentration of 6% in sunscreen products, either in the form of body cream, sunscreen propellant spray or pump spray, is not safe for the consumer.\"\n    },\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face cream, hand cream, and lipsticks is safe up to 6%\",\n      \"evidence_id\": \"sccs_benzophenone-3_2021#conclusion-000\",\n      \"quote\": \"The use of BP-3 as a UV-filter up to a maximum concentration of 6% in face cream, hand cream, and lipsticks is safe for the consumer.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised a concern for the use of benzophenone-3 in sunscreen products up to a maximum concentration of 6%. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_benzophenone-3_2021#conclusion-000\",\n    \"sccs_benzophenone-3_2021#conclusion-001\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS considers Homosalate safe up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "titanium dioxide",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"No SCCS concern for use in dermally applied cosmetic products up to 10% w/w\",\n      \"evidence_id\": \"sccs_titanium_dioxide_nano_coating_2024#opinion-077\",\n      \"quote\": \"Given the low skin penetration potential of Eclipse 70 and the overall low toxicity profile of its individual constituents, the calculation of margins of safety (MoS) to evaluate its safety when used as a UV-filter at concentrations of up to 10% w/w in dermally applied cosmetic products is not considered necessary.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for the use of titanium dioxide in dermally applied cosmetic products up to 10% w/w. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_titanium_dioxide_nano_coating_2024#opinion-077\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "octocrylene",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face cream, hand cream, and lipstick up to 10%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"Octocrylene is also considered safe for a combined use of sunscreen cream/lotion, sunscreen pump spray, face cream, hand cream and lipstick at a concentration up to 10%.\"\n    },\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in sunscreen propellant spray up to 9%\",\n      \"evidence_id\": \"sccs_octocrylene_2021#conclusion-000\",\n      \"quote\": \"The use of Octocrylene in sunscreen propellant spray is considered safe when its concentration does not exceed 9% when used together with face cream, hand cream, and lipstick containing 10% Octocrylene.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for use in face cream, hand cream, and lipstick up to 10%. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_octocrylene_2021#conclusion-000\",\n    \"sccs_octocrylene_2021#conclusion-001\"\n  ]\n}"
+    },
+    {
+      "case": "regulatory/face_sunscreen",
+      "ingredient": "homosalate",
+      "text": "{\n  \"sccs_findings\": [\n    {\n      \"endpoint\": \"other\",\n      \"finding\": \"Use in face products up to 7.34%\",\n      \"evidence_id\": \"sccs_homosalate_2021#conclusion-000\",\n      \"quote\": \"On the basis of safety assessment, and considering the concerns related to potential endocrine disrupting properties of Homosalate, the SCCS is of the opinion that Homosalate is safe as a UV-filter at concentrations up to 7.34% in face cream and pump spray.\"\n    }\n  ],\n  \"risk_interpretation\": \"The SCCS raised no concern for use of Homosalate up to 7.34% in face products. The risk depends on the concentration in this product, which is not given.\",\n  \"missing_information\": [\n    \"concentration\"\n  ],\n  \"evidence_ids\": [\n    \"sccs_homosalate_2021#conclusion-000\"\n  ]\n}"
+    }
+  ]
+}

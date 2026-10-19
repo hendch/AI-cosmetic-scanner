@@ -10,6 +10,7 @@ in corpus/index/, loaded into an in-memory Qdrant (deployment: no disk needed).
 
 import json
 import os
+import threading
 from functools import lru_cache
 
 import httpx
@@ -67,8 +68,18 @@ def _load_exported(client: QdrantClient) -> None:
                       [PointStruct(id=p["id"], vector=p["vector"], payload=p["payload"]) for p in points])
 
 
-@lru_cache(maxsize=1)
+_client_lock = threading.Lock()
+
+
 def get_client() -> QdrantClient:
+    # Agents retrieve from several threads at once: without the lock, each first call opens
+    # data/qdrant, and local Qdrant refuses a second opener ("already accessed by another instance").
+    with _client_lock:
+        return _open_client()
+
+
+@lru_cache(maxsize=1)
+def _open_client() -> QdrantClient:
     if config.QDRANT_URL:
         return QdrantClient(url=config.QDRANT_URL)
     if os.path.isdir(config.QDRANT_PATH):

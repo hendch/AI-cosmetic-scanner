@@ -1,9 +1,18 @@
 {
   "agent": "toxicology",
-  "prompt_version": "mock",
+  "prompt_version": "rules",
   "findings": [],
   "warnings": [
     "no barcode detected",
     "no input produced ingredients"
-  ]
+  ],
+  "run": {
+    "mode": "rules",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "rejected_findings": []
+  }
 }

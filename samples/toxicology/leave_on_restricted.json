@@ -1,6 +1,6 @@
 {
   "agent": "toxicology",
-  "prompt_version": "mock",
+  "prompt_version": "rules",
   "findings": [
     {
       "position": 1,
@@ -8,9 +8,9 @@
       "matched": true,
       "hazards": [],
       "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "risk_interpretation": "No CLP classification or SCCS opinion for this ingredient in the corpus.",
       "missing_information": [
-        "evidence in knowledge base"
+        "evidence in toxicology corpus"
       ],
       "evidence_confidence": "low",
       "sources": []
@@ -19,40 +19,93 @@
       "position": 2,
       "ingredient": "niacinamide",
       "matched": true,
-      "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
-      "missing_information": [
-        "evidence in knowledge base"
+      "hazards": [
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Irrit. 2 (H319), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: niacinamide\nCLP classification (ECHA): Nicotinamide (CAS 98-92-0): no harmonised classification; notified classification: Eye Irrit. 2 (H319)."
+        }
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "concern_level": "low",
+      "risk_interpretation": "CLP classification notified by companies, not harmonised: Eye Irrit. 2 (H319), notified. A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give.",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "medium",
+      "sources": [
+        "clp_test_ingredients"
+      ]
     },
     {
       "position": 3,
       "ingredient": "salicylic acid",
       "matched": true,
-      "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
-      "missing_information": [
-        "evidence in knowledge base"
+      "hazards": [
+        {
+          "endpoint": "reproductive_toxicity",
+          "classification": "CLP Repr. 2 (H361d)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: salicylic acid\nCLP classification (ECHA): salicylic acid (CAS 69-72-7): harmonised classification, CLP Annex VI index 607-732-00-5 (ATP13): Repr. 2; Acute Tox. 4; Eye Dam. 1. Hazard statements: H361d; H302; H318."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 4 (H302)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: salicylic acid\nCLP classification (ECHA): salicylic acid (CAS 69-72-7): harmonised classification, CLP Annex VI index 607-732-00-5 (ATP13): Repr. 2; Acute Tox. 4; Eye Dam. 1. Hazard statements: H361d; H302; H318."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: salicylic acid\nCLP classification (ECHA): salicylic acid (CAS 69-72-7): harmonised classification, CLP Annex VI index 607-732-00-5 (ATP13): Repr. 2; Acute Tox. 4; Eye Dam. 1. Hazard statements: H361d; H302; H318."
+        }
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "concern_level": "moderate",
+      "risk_interpretation": "CLP harmonised EU classification: Repr. 2 (H361d), Acute Tox. 4 (H302), Eye Dam. 1 (H318). A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1646/22 Opinion on Salicylic acid).",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_salicylic_acid_2023"
+      ]
     },
     {
       "position": 4,
       "ingredient": "retinol",
       "matched": true,
-      "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
-      "missing_information": [
-        "evidence in knowledge base"
+      "hazards": [
+        {
+          "endpoint": "reproductive_toxicity",
+          "classification": "CLP Repr. 1B (H360), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Irrit. 2 (H319), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        },
+        {
+          "endpoint": "sensitisation",
+          "classification": "CLP Skin Sens. 1 (H317), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        }
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "concern_level": "moderate",
+      "risk_interpretation": "CLP classification notified by companies, not harmonised: Repr. 1B (H360), notified, Eye Irrit. 2 (H319), notified, Skin Sens. 1 (H317), notified. A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1639/21 Revision of the Opinion on vitamin A (Retinol; Retinyl Acetate; Retinyl Palmitate)).",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "medium",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_retinol_2022"
+      ]
     },
     {
       "position": 5,
@@ -60,14 +113,44 @@
       "matched": true,
       "hazards": [
         {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 2 (H330)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 3 (H311)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 3 (H301)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
+        },
+        {
+          "endpoint": "skin_irritation",
+          "classification": "CLP Skin Corr. 1B (H314)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
+        },
+        {
           "endpoint": "sensitisation",
           "classification": "CLP Skin Sens. 1A (H317)",
           "source_id": "clp_test_ingredients",
-          "quote": "MOCK - replace with retrieved text"
+          "quote": "Ingredient: methylisothiazolinone\nCLP classification (ECHA): 2-methylisothiazol-3(2H)-one (CAS 2682-20-4): harmonised classification, CLP Annex VI index 613-326-00-9 (ATP13): Acute Tox. 2; Acute Tox. 3; Acute Tox. 3; Skin Corr. 1B; Eye Dam. 1; Skin Sens. 1A; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H330; H311; H301; H314; H318; H317; H400; H410."
         }
       ],
       "concern_level": "moderate",
-      "risk_interpretation": "Classified as a skin sensitiser. Whether this matters for this product depends on concentration and on leave-on vs. rinse-off use.",
+      "risk_interpretation": "CLP harmonised EU classification: Acute Tox. 2 (H330), Acute Tox. 3 (H311), Acute Tox. 3 (H301), Skin Corr. 1B (H314), Eye Dam. 1 (H318), Skin Sens. 1A (H317). A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1557/15 Opinion on Methylisothiazolinone (MI) Submission III (sensitisation only)).",
       "missing_information": [
         "concentration"
       ],
@@ -81,14 +164,48 @@
       "position": 6,
       "ingredient": "zinc pyrithione",
       "matched": true,
-      "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
-      "missing_information": [
-        "evidence in knowledge base"
+      "hazards": [
+        {
+          "endpoint": "reproductive_toxicity",
+          "classification": "CLP Repr. 1B (H360D)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: zinc pyrithione\nCLP classification (ECHA): pyrithione zinc (CAS 13463-41-7): harmonised classification, CLP Annex VI index 613-333-00-7 (ATP15): Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H360D; H330; H301; H372; H318; H400; H410. Note: Banned in EU cosmetics as CMR."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 2 (H330)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: zinc pyrithione\nCLP classification (ECHA): pyrithione zinc (CAS 13463-41-7): harmonised classification, CLP Annex VI index 613-333-00-7 (ATP15): Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H360D; H330; H301; H372; H318; H400; H410. Note: Banned in EU cosmetics as CMR."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 3 (H301)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: zinc pyrithione\nCLP classification (ECHA): pyrithione zinc (CAS 13463-41-7): harmonised classification, CLP Annex VI index 613-333-00-7 (ATP15): Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H360D; H330; H301; H372; H318; H400; H410. Note: Banned in EU cosmetics as CMR."
+        },
+        {
+          "endpoint": "other",
+          "classification": "CLP STOT RE 1 (H372)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: zinc pyrithione\nCLP classification (ECHA): pyrithione zinc (CAS 13463-41-7): harmonised classification, CLP Annex VI index 613-333-00-7 (ATP15): Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H360D; H330; H301; H372; H318; H400; H410. Note: Banned in EU cosmetics as CMR."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: zinc pyrithione\nCLP classification (ECHA): pyrithione zinc (CAS 13463-41-7): harmonised classification, CLP Annex VI index 613-333-00-7 (ATP15): Repr. 1B; Acute Tox. 2; Acute Tox. 3; STOT RE 1; Eye Dam. 1; Aquatic Acute 1; Aquatic Chronic 1. Hazard statements: H360D; H330; H301; H372; H318; H400; H410. Note: Banned in EU cosmetics as CMR."
+        }
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "concern_level": "high",
+      "risk_interpretation": "CLP harmonised EU classification: Repr. 1B (H360D), Acute Tox. 2 (H330), Acute Tox. 3 (H301), STOT RE 1 (H372), Eye Dam. 1 (H318). A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1614/19 Opinion on Zinc Pyrithione (ZPT) Submission III).",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "high",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_zinc_pyrithione_2020"
+      ]
     },
     {
       "position": 7,
@@ -96,13 +213,22 @@
       "matched": true,
       "hazards": [],
       "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "risk_interpretation": "No CLP classification or SCCS opinion for this ingredient in the corpus.",
       "missing_information": [
-        "evidence in knowledge base"
+        "evidence in toxicology corpus"
       ],
       "evidence_confidence": "low",
       "sources": []
     }
   ],
-  "warnings": []
+  "warnings": [],
+  "run": {
+    "mode": "rules",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "rejected_findings": []
+  }
 }

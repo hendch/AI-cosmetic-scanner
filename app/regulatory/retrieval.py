@@ -88,7 +88,8 @@ def _rag_search(query: str, ingredient: str, top_k: int) -> list[Passage]:
     from app.rag.schemas import RetrieveRequest
 
     try:
-        res = retrieve(RetrieveRequest(ingredient=ingredient, query=query, top_k=top_k, strategy="structured"))
+        res = retrieve(RetrieveRequest(ingredient=ingredient, query=query, top_k=top_k, strategy="structured",
+                                       doc_types=["regulation"]))
     except (IndexNotBuilt, LLMError) as e:
         raise RetrievalError(f"RAG retrieval failed: {e}") from e
     return _from_rag([r.model_dump() for r in res.results])
@@ -98,7 +99,8 @@ def _http_search(query: str, ingredient: str, top_k: int) -> list[Passage]:
     url = os.environ.get("RETRIEVAL_URL", "").rstrip("/")
     if not url:
         raise RetrievalError("RETRIEVAL_BACKEND=http but RETRIEVAL_URL is not set")
-    body = {"ingredient": ingredient, "query": query, "top_k": top_k, "strategy": "structured"}
+    body = {"ingredient": ingredient, "query": query, "top_k": top_k, "strategy": "structured",
+            "doc_types": ["regulation"]}
     headers = {"X-API-Key": os.environ.get("SCANNER_API_KEY", "")}
     try:
         r = httpx.post(f"{url}/rag/retrieve", json=body, headers=headers, timeout=30)
