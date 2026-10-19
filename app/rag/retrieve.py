@@ -15,7 +15,10 @@ def _to_item(p) -> EvidenceItem:
     keys = ("ingredient", "status", "product_type", "max_concentration", "entry_ref", "source_id",
             # annex entries (doc_type "regulation"): what the regulatory agent needs to rebuild the entry
             "doc_type", "ingredients", "annex", "entry", "product_type_body_parts", "other_conditions",
-            "warnings", "inci_names", "chemical_name", "cas", "consolidated_version", "source_url")
+            "warnings", "inci_names", "chemical_name", "cas", "consolidated_version", "source_url",
+            # toxicology chunks (doc_type "sccs_opinion" / "clp")
+            "harmonised", "hazard_classes", "hazard_statements", "notified_classification", "atp",
+            "annex_vi_index_no", "echa_substance_name", "note")
     meta = {k: pl.get(k) for k in keys if pl.get(k) is not None}
     return EvidenceItem(evidence_id=pl["evidence_id"], text=pl["text"],
                         score=round(float(p.score), 4), source=pl["source"],
@@ -34,8 +37,10 @@ def retrieve(req: RetrieveRequest, use_filter: bool = True) -> RetrieveResponse:
     vec = embed_query(f"{req.ingredient}: {req.query}")
 
     if req.strategy == "structured":
-        flt = Filter(must=[FieldCondition(key="names", match=MatchAny(any=[name]))]) \
-            if use_filter else None
+        must = [FieldCondition(key="names", match=MatchAny(any=[name]))] if use_filter else []
+        if req.doc_types:
+            must.append(FieldCondition(key="doc_type", match=MatchAny(any=req.doc_types)))
+        flt = Filter(must=must) if must else None
         points = client.query_points(coll, query=vec, query_filter=flt,
                                      limit=req.top_k, with_payload=True).points
     else:

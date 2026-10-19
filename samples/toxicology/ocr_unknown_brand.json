@@ -1,6 +1,6 @@
 {
   "agent": "toxicology",
-  "prompt_version": "mock",
+  "prompt_version": "rules",
   "findings": [
     {
       "position": 1,
@@ -8,9 +8,9 @@
       "matched": true,
       "hazards": [],
       "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "risk_interpretation": "No CLP classification or SCCS opinion for this ingredient in the corpus.",
       "missing_information": [
-        "evidence in knowledge base"
+        "evidence in toxicology corpus"
       ],
       "evidence_confidence": "low",
       "sources": []
@@ -21,20 +21,26 @@
       "matched": true,
       "hazards": [
         {
-          "endpoint": "eye_irritation",
-          "classification": "CLP Eye Dam. 1 (H318)",
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 4 (H302)",
           "source_id": "clp_test_ingredients",
-          "quote": "MOCK - replace with retrieved text"
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
         },
         {
           "endpoint": "other",
-          "classification": "CLP Acute Tox. 4 (H302); STOT SE 3 (H335)",
+          "classification": "CLP STOT SE 3 (H335)",
           "source_id": "clp_test_ingredients",
-          "quote": "MOCK - replace with retrieved text"
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
         }
       ],
       "concern_level": "low",
-      "risk_interpretation": "A hazard classification exists for the pure substance. Consumer risk depends on concentration and exposure, which are unknown.",
+      "risk_interpretation": "CLP harmonised EU classification: Acute Tox. 4 (H302), STOT SE 3 (H335), Eye Dam. 1 (H318). A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1575/16 Opinion on Phenoxyethanol).",
       "missing_information": [
         "concentration",
         "ingredient name from OCR, unverified"
@@ -61,5 +67,14 @@
   ],
   "warnings": [
     "barcode not found or no ingredients"
-  ]
+  ],
+  "run": {
+    "mode": "rules",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "rejected_findings": []
+  }
 }

@@ -20,8 +20,13 @@ def fixed(text: str, tokenizer, size: int = config.FIXED_CHUNK_TOKENS,
           overlap: int = config.FIXED_CHUNK_OVERLAP) -> list[str]:
     """Token windows measured with the embedding model's own tokenizer,
     so a 500-token chunk really fits the model's 512 limit."""
-    tokenizer.model_max_length = 10**9            
-    enc = tokenizer(text, add_special_tokens=False, return_offsets_mapping=True)
+    # Tokenize the whole text without the length warning, then restore the limit: the same tokenizer
+    # embeds the chunks afterwards and must keep truncating at the model's 512 tokens.
+    limit, tokenizer.model_max_length = tokenizer.model_max_length, 10**9
+    try:
+        enc = tokenizer(text, add_special_tokens=False, return_offsets_mapping=True)
+    finally:
+        tokenizer.model_max_length = limit
     offs = enc["offset_mapping"]
     step = size - overlap
     chunks = []
@@ -84,6 +89,57 @@ def structured(rec: dict, sources: dict) -> Chunk:
 # with the legal fields as metadata, so the regulatory agent can retrieve exact entries.
 REGULATION_FIELDS = ("product_type_body_parts", "max_concentration", "other_conditions", "warnings",
                      "inci_names", "chemical_name", "cas", "status", "consolidated_version", "source_url")
+
+
+def sccs_chunks(doc: dict, tokenizer, size: int = config.SCCS_CHUNK_TOKENS,
+                overlap: int = config.SCCS_CHUNK_OVERLAP) -> list[Chunk]:
+    """An SCCS opinion (ingest.load_sccs_opinions) -> token windows inside each section,
+    each tagged with the section and the opinion's ingredients (for the ingredient filter)."""
+    names = sorted({norm(i) for i in doc["ingredients"]})
+    chunks = []
+    for section, text in doc["sections"]:
+        slug = section.lower().replace(" ", "_")
+        for n, window in enumerate(fixed(text, tokenizer, size, overlap)):
+            eid = f"{doc['source_id']}#{slug}-{n:03d}"
+            body = f"{doc['title']} - {section}\n{window.strip()}"
+            chunks.append(Chunk(eid, body, {
+                "evidence_id": eid, "text": body, "strategy": "structured", "doc_type": "sccs_opinion",
+                "ingredient": names[0] if names else "", "names": names, "ingredients": ";".join(names),
+                "source_id": doc["source_id"], "source": doc["title"], "section": section,
+                "source_date": doc.get("date"), "url": doc.get("url"),
+            }))
+    return chunks
+
+
+CLP_FIELDS = ("cas", "echa_substance_name", "harmonised", "annex_vi_index_no", "atp", "hazard_classes",
+              "hazard_statements", "notified_classification", "note")
+
+
+def clp_text(r: dict) -> str:
+    """Same wording as app/report/sources.clp_text, so the report excerpt and the passage agree."""
+    head = f"{r['echa_substance_name']} (CAS {r['cas']})"
+    if r["harmonised"].strip().lower() == "yes":
+        text = (f"{head}: harmonised classification, CLP Annex VI index {r['annex_vi_index_no']} ({r['atp']}): "
+                f"{r['hazard_classes']}. Hazard statements: {r['hazard_statements']}.")
+    elif r["notified_classification"]:
+        text = f"{head}: no harmonised classification; notified classification: {r['notified_classification']}."
+    else:
+        text = f"{head}: no harmonised classification in Annex VI to CLP."
+    return text + (f" Note: {r['note']}" if r.get("note") else "")
+
+
+def clp_row(r: dict, source: dict) -> Chunk:
+    """One row of corpus/toxicology/clp/clp_test_ingredients.csv -> one chunk."""
+    name = norm(r["ingredient"])
+    eid = f"{source['source_id']}#{name}"
+    text = f"Ingredient: {r['ingredient']}\nCLP classification (ECHA): {clp_text(r)}"
+    return Chunk(eid, text, {
+        "evidence_id": eid, "text": text, "strategy": "structured", "doc_type": "clp",
+        "ingredient": name, "names": sorted({name, norm(r["echa_substance_name"])}), "ingredients": name,
+        "source_id": source["source_id"], "source": source["title"], "section": "CLP classification",
+        "source_date": source.get("date"), "url": r.get("notified_source_url") or source.get("url"),
+        **{k: r.get(k, "") for k in CLP_FIELDS},
+    })
 
 
 def annex_row(row) -> Chunk:

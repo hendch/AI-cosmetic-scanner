@@ -34,6 +34,13 @@ def build():
 
     s_chunks = [chunkers.structured(r, sources) for r in records]
     s_chunks += [chunkers.annex_row(row) for row in load_kb().rows]
+    # Toxicology: SCCS opinions (corpus/toxicology/sccs/, by section) and CLP rows, with the
+    # source_ids of corpus/sources.csv so the report accepts their citations.
+    opinions = ingest.load_sccs_opinions()
+    tox_chunks = [c for d in opinions for c in chunkers.sccs_chunks(d, model.tokenizer)]
+    clp_source, clp_rows = ingest.load_clp_rows()
+    tox_chunks += [chunkers.clp_row(r, clp_source) for r in clp_rows]
+    s_chunks += tox_chunks
     _recreate(client, config.COLLECTIONS["structured"], dim)
     _upsert(client, config.COLLECTIONS["structured"], s_chunks)
 
@@ -52,7 +59,9 @@ def build():
 
     export(client)
     print(f"model={config.EMBEDDING_MODEL} dim={dim}")
-    print(f"structured: {len(s_chunks)} chunks ({len(records)} records + {len(s_chunks) - len(records)} annex entries)")
+    n_annex = len(s_chunks) - len(records) - len(tox_chunks)
+    print(f"structured: {len(s_chunks)} chunks ({len(records)} records + {n_annex} annex entries + "
+          f"{len(tox_chunks) - len(clp_rows)} SCCS passages from {len(opinions)} opinions + {len(clp_rows)} CLP rows)")
     print(f"fixed:      {len(f_chunks)} chunks from {len(docs)} documents "
           f"({', '.join(sorted({d['origin'] for d in docs}))})")
 

@@ -1,6 +1,6 @@
 {
   "agent": "toxicology",
-  "prompt_version": "mock",
+  "prompt_version": "rules",
   "findings": [
     {
       "position": 1,
@@ -21,20 +21,26 @@
       "matched": true,
       "hazards": [
         {
-          "endpoint": "eye_irritation",
-          "classification": "CLP Eye Dam. 1 (H318)",
+          "endpoint": "other",
+          "classification": "CLP Acute Tox. 4 (H302)",
           "source_id": "clp_test_ingredients",
-          "quote": "MOCK - replace with retrieved text"
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
         },
         {
           "endpoint": "other",
-          "classification": "CLP Acute Tox. 4 (H302); STOT SE 3 (H335)",
+          "classification": "CLP STOT SE 3 (H335)",
           "source_id": "clp_test_ingredients",
-          "quote": "MOCK - replace with retrieved text"
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Dam. 1 (H318)",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: phenoxyethanol\nCLP classification (ECHA): 2-phenoxyethanol (CAS 122-99-6): harmonised classification, CLP Annex VI index 603-098-00-9 (ATP17): Acute Tox. 4; STOT SE 3; Eye Dam. 1. Hazard statements: H302; H335; H318."
         }
       ],
       "concern_level": "low",
-      "risk_interpretation": "A hazard classification exists for the pure substance. Consumer risk depends on concentration and exposure, which are unknown.",
+      "risk_interpretation": "CLP harmonised EU classification: Acute Tox. 4 (H302), STOT SE 3 (H335), Eye Dam. 1 (H318). A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1575/16 Opinion on Phenoxyethanol).",
       "missing_information": [
         "concentration"
       ],
@@ -48,27 +54,53 @@
       "position": 3,
       "ingredient": "retinol",
       "matched": true,
-      "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
-      "missing_information": [
-        "evidence in knowledge base"
+      "hazards": [
+        {
+          "endpoint": "reproductive_toxicity",
+          "classification": "CLP Repr. 1B (H360), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        },
+        {
+          "endpoint": "eye_irritation",
+          "classification": "CLP Eye Irrit. 2 (H319), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        },
+        {
+          "endpoint": "sensitisation",
+          "classification": "CLP Skin Sens. 1 (H317), notified",
+          "source_id": "clp_test_ingredients",
+          "quote": "Ingredient: retinol\nCLP classification (ECHA): Retinol (CAS 68-26-8): no harmonised classification; notified classification: Repr. 1B (H360); Eye Irrit. 2 (H319); Skin Sens. 1 (H317); Aquatic Chronic 4 (H413)."
+        }
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "concern_level": "moderate",
+      "risk_interpretation": "CLP classification notified by companies, not harmonised: Repr. 1B (H360), notified, Eye Irrit. 2 (H319), notified, Skin Sens. 1 (H317), notified. A hazard classification describes the pure substance; the risk for a consumer depends on its concentration in the product and on exposure, which the label does not give. The SCCS assessed its use in cosmetic products (SCCS/1639/21 Revision of the Opinion on vitamin A (Retinol; Retinyl Acetate; Retinyl Palmitate)).",
+      "missing_information": [
+        "concentration"
+      ],
+      "evidence_confidence": "medium",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_retinol_2022"
+      ]
     },
     {
       "position": 4,
       "ingredient": "propylparaben",
       "matched": true,
       "hazards": [],
-      "concern_level": "insufficient_evidence",
-      "risk_interpretation": "No evidence found in the knowledge base for this ingredient.",
+      "concern_level": "none_identified",
+      "risk_interpretation": "No human-health hazard classification for this substance in the CLP data. The SCCS assessed its use in cosmetic products (SCCS/1514/13 Opinion on Parabens (propyl- and butylparaben); SCCS/1623/20 Opinion on Propylparaben (PP)).",
       "missing_information": [
-        "evidence in knowledge base"
+        "concentration"
       ],
-      "evidence_confidence": "low",
-      "sources": []
+      "evidence_confidence": "medium",
+      "sources": [
+        "clp_test_ingredients",
+        "sccs_propylparaben_2021",
+        "sccs_parabens_2013"
+      ]
     },
     {
       "position": 5,
@@ -84,5 +116,14 @@
       "sources": []
     }
   ],
-  "warnings": []
+  "warnings": [],
+  "run": {
+    "mode": "rules",
+    "model": null,
+    "retrieval_backend": "local",
+    "llm_calls": 0,
+    "retries": 0,
+    "fallbacks": 0,
+    "rejected_findings": []
+  }
 }
