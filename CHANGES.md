@@ -13,7 +13,7 @@ How to read this file:
 3. [Before and after](#3-before-and-after-how-a-scan-flows): how a scan flows.
 4. [Status](#4-status-what-works-now-and-what-does-not): what works now and what does not.
 5. [Every change in detail](#5-every-change-in-detail): before / now / why / example, area by area
-   (5.10 n8n workflow, 5.11 app, 5.12 fixes from real products, 5.13 evaluation are new on 2026-10-18).
+   (5.10 n8n workflow, 5.11 app, 5.12 fixes from real products, 5.13 evaluation are new on 2026-10-18; 5.14 toxicology and 5.15 ethics on 2026-10-19).
 6. [What this means for your module](#6-what-this-means-for-your-module): one section per teammate.
 7. [Still to do](#7-still-to-do).
 
@@ -34,6 +34,9 @@ How to read this file:
 | **Embedding** | A list of 384 numbers that represents the meaning of a sentence. Two sentences with similar meaning get similar numbers. This is how the search finds "phenoxyethanol maximum concentration" in the regulation text. Model: `BAAI/bge-small-en-v1.5`. |
 | **RAG** | "Retrieval-augmented generation": before an agent answers, we **search our documents** (the corpus) for the relevant passages and give them to the agent, so it answers from real sources instead of memory. |
 | **Corpus** | Our collection of source documents: the EU cosmetics regulation (Regulation (EC) No 1223/2009) and its annexes, SCCS opinions, the CLP hazard table. Folder `corpus/`. |
+| **CLP** | The EU law that classifies chemicals by hazard (e.g. "Skin Sens. 1, H317" = may cause an allergic skin reaction). **Harmonised** classifications are decided by the EU (Annex VI table); **notified** ones are reported by companies. A hazard is a property of the pure substance, not the risk of a cosmetic. |
+| **SCCS** | The EU Scientific Committee on Consumer Safety. Its opinions say at which concentrations an ingredient is considered safe in cosmetics. |
+| **PETA list** | PETA's "Beauty Without Bunnies" lists of brands that do and do not test on animals. The ethics agent checks brands against them. |
 | **Chunk** | A piece of a document stored in the search index. "Structure-aware" chunks follow the document's own structure (one chunk = one annex entry); "fixed-size" chunks cut every 500 tokens. |
 | **Vector index / Qdrant** | The database that stores chunks with their embeddings and finds the closest ones to a question. Qdrant is the program we use. |
 | **Annexes II-VI** | Parts of the EU cosmetics regulation. Annex II = **prohibited** substances. Annex III = **restricted** substances (allowed with conditions). Annex IV = colorants, V = preservatives, VI = UV filters (allowed, with conditions). Each substance has an **entry number**, written like "V/29" (Annex V, entry 29 = phenoxyethanol, max 1 %). |
@@ -45,7 +48,7 @@ How to read this file:
 | **Pydantic** | The Python library that checks data has the right shape (e.g. that the model's answer is valid JSON with the right fields). |
 | **Rule check** | A check written in code (always gives the same answer), e.g. "every claim cites a source". |
 | **Validator agent** | An AI agent that re-reads the report and checks each claim against the text of its source. |
-| **Test** | Code that checks other code works (`pytest`). On `main` there were 64 tests; now there are 130, all passing (plus 13 for the app). |
+| **Test** | Code that checks other code works (`pytest`). On `main` there were 64 tests; now there are 193, all passing (plus 17 for the app). |
 | **Webhook** | An address on n8n that starts the workflow when something sends it a request. The app sends every scan to the webhook `/webhook/cosmetic-scanner-live`. |
 | **Scenario** | One real scan sent to the webhook exactly like the app sends it, with the full answer saved (`eval/scenarios/`). |
 | **False alarm** | The validator flags a claim that is in fact correct. |
@@ -96,8 +99,8 @@ app ──► n8n webhook  ✔ one workflow, every step is an HTTP call to our A
           │                               ✔ no list? → label photo → vision model (OCR)
           │                               ✔ every name normalized to its INCI name
           ├─► POST /regulatory/analyze    ✔ EU annexes, found through the RAG search, + Qwen
-          ├─► POST /toxicology/analyze    ✘ still the mock
-          ├─► POST /ethics/analyze        ✘ still the mock
+          ├─► POST /toxicology/analyze    ✔ CLP hazard table + SCCS opinions through RAG, rules, AI for SCCS passages
+          ├─► POST /ethics/analyze        ✔ brand looked up in PETA's lists
           ├─► POST /report/build          ✔ merges everything, attaches source text, runs 9 rule checks
           └─► POST /report/validate       ✔ validator agent re-checks each claim (advisory)
                                           → back to the app: report + status (completed / needs_review)
@@ -117,15 +120,15 @@ All AI calls go to the Hugging Face router with HF_TOKEN.
 | Label OCR | **Done**: tested on 2 real label photos (15/15 and 23/25 ingredients, see 5.7). |
 | RAG search | **Works online-ready**: no heavy AI library needed, search index shipped with the code, used by the regulatory agent. |
 | Regulatory agent | **Fixed and extended**: 41 ingredients covered (was 19). Runs live on real products. |
-| Toxicology agent | **Still the Day-1 mock.** |
-| Ethics agent | **Still the Day-1 mock.** |
+| Toxicology agent | **Done by Hind** (5.14): rules on the CLP hazard table, AI only for SCCS passages, every AI quote checked. Covers 15 ingredients in the CLP table and 12 SCCS opinions, so most ingredients of a real product come out "not enough evidence". |
+| Ethics agent | **Done by Hind** (5.15): brand and parent company looked up in PETA's lists, built on Render at deploy (6,730 brands). |
 | Report (`/report/build`) | **Done**, works on the real agent outputs, 9 rule checks. |
 | Validator agent (`/report/validate`) | **Done**, prompt v5, advisory (5.5). |
 | n8n workflow | **Done**: rewritten as HTTP calls to our API, tested locally (5.10). |
 | App (frontend) | **Done**: new report format and request, tested in the browser against local n8n (5.11). |
 | Recorded test scenarios and evaluation write-up | **Done**: `EVALUATION.md`, `eval/scenarios/` (5.13). Not yet run online. |
 
-Tests: **130 pass** (64 on `main`), plus 13 app tests. AI calls spent on this branch so far: about 90 (each section says how many).
+Tests: **193 pass** (64 on `main`), plus 17 app tests. AI calls spent on this branch so far: about 90 (each section says how many).
 
 ---
 
@@ -230,8 +233,9 @@ format that nothing produces.
 | status_matches_annex | "Prohibited" cites Annex II; "restricted" cites Annexes III to VI (added 2026-10-18, see 5.5) | error |
 | no_safety_verdicts | No "safe", "toxic", "avoid", "illegal" in what the user reads | error |
 
-**Example (real).** For the sample `clean_product`, the report correctly fails two checks: the ethics mock's "Mock Certified
-Brand" certification is not a registered source and has no text.
+**Example (tested).** A "verified" cruelty-free status backed by a made-up certification list fails two checks: the list is
+not a registered source, and its "evidence" has no real text (`tests/test_report_build.py`). Before Hind's ethics agent, the
+mock produced exactly that for the sample brand "Mock Certified Brand".
 
 **Files.** `app/report/builder.py`, `app/report/checks.py`, `app/report/sources.py` (new); `app/report/schemas.py`,
 `app/report/router.py` (changed). Tests: `tests/test_report_build.py`.
@@ -544,6 +548,61 @@ New scripts: `scripts/run_scenarios.py` (also takes the Render webhook URL), `sc
 `scripts/run_validator_eval.py` takes `--cases` and no longer overwrites a result file from the same minute (it did once: the
 v6 numbers were copied from the run log into `prompts/validator/v6.yaml`). AI calls used: about 55.
 
+### 5.14 Toxicology agent (Hind's module, merged 2026-10-19)
+
+**Before.** The Day-1 mock: it knew 3 ingredients and returned placeholder quotes ("MOCK - replace with retrieved text").
+
+**Now.** For each ingredient (`app/toxicology/`):
+1. **Search.** It retrieves the ingredient's row of the CLP hazard table and the passages of its SCCS opinion from the RAG
+   index. Hind added the 12 SCCS opinions and the CLP table to the index (55 entries became 1,250); the regulatory agent
+   now only searches regulation entries.
+2. **Rules decide the hazards and the concern level** from the CLP hazard codes (e.g. a reproductive-toxicity code gives a
+   higher concern than an eye irritation). An SCCS passage that states a concern can raise the level; a "no concern"
+   conclusion does not lower it.
+3. **The AI is only called when SCCS passages exist**, to say what the opinion concludes. Its answer is checked in code:
+   the cited passage must have been retrieved, the quote must appear word for word, numbers and product types must come
+   from the quote, and verdict words ("safe", "toxic") are refused. One retry, then the rule result.
+4. Each answer reports how it was made (AI calls, retries, fallbacks, findings rejected by the checks).
+
+**Prompts** `prompts/toxicology/v2.yaml` to `v7.yaml`, each with the failures seen in live runs; v7 is the default.
+`TOXICOLOGY_MODE=mock` runs search + rules only (no AI): what the tests use.
+
+**Evaluation** (`scripts/eval_toxicology.py`, answer key `eval/toxicology/gold.json`: 8 products, 43 ingredients):
+
+| Run | Concern level right | SCCS findings found | Findings correct | AI calls |
+|---|---|---|---|---|
+| Rules only, all 43 ingredients | 95.3 % | none (no AI) | - | 0 |
+| v6, sunscreen product (17 ingredients) | 94.1 % | 90.9 % | 83.3 % | 18 |
+| v7 (default), sunscreen product | 88.2 % | 90.9 % | 90.9 % | 19 |
+
+Citations were 100 % valid and no answer used verdict wording in any run.
+
+**Checked with the report (2026-10-19).** Her output goes into `/report/build` unchanged and every rule check passes: e.g.
+methylisothiazolinone shows its harmonised CLP classifications (skin sensitiser, eye damage) with the table row as source.
+
+**Limit.** The CLP table has 15 ingredients (the test set) and there are 12 SCCS opinions, so on real products almost
+everything is "not enough evidence" (14 of 15 ingredients of the Balea lotion). The full EU CLP table (Annex VI, several
+thousand substances) would fix it: `scripts/build_clp_table.py` already reads it but keeps only the 15 test ingredients.
+Kept as it is for now.
+
+### 5.15 Ethics (cruelty-free) agent (Hind's module, merged 2026-10-19)
+
+**Before.** The mock called a brand "certified" only if it was literally named "Mock Certified Brand".
+
+**Now.** A lookup, no AI (`app/ethics/agent.py`):
+- The brand is looked up in PETA's "don't test" and "do test" lists; if it is not listed, its parent company is
+  (from PETA's "Brand (Parent)" names or `corpus/ethics/brand_parents.csv`). The brand's own listing wins over its parent's.
+- **verified**: brand (or parent) on the "don't test" list. **conflicting**: labelled cruelty-free on Open Beauty Facts but
+  listed as testing. **claimed**: cruelty-free label only. **not verified**: nothing found, or listed as testing.
+- The EU animal-testing ban is shown as context only; it never raises the status.
+
+**The PETA list on Render.** It is scraped from PETA's site by `python -m scripts.build_peta_brands` and is not
+committed (public repo). The API's Docker build runs that script, so Render builds the list at deploy
+(about 2.5 minutes, 6,730 brands on 2026-10-19). Docker caches the step: later deploys reuse the list until the
+script or `requirements.txt` changes; "Manual Deploy → Clear build cache & deploy" refreshes it. If PETA cannot be
+reached the build still succeeds and every product is "not verified", with the warning "PETA brand list not
+available". Locally, run the script once (it writes `data/peta_brands.json`).
+
 ---
 
 ## 6. What this means for your module
@@ -562,8 +621,10 @@ agent now uses your search (5.8 d). Your evaluation (`eval/rag/`) is not changed
 **Kreemi (regulatory).** 13 annex entries added, 41 ingredients in scope, concentration field, product-type matching fixed,
 search through RAG, no crash without a token, fragrance allergens named in the list are met by rule (5.8). Please re-check the new CSV rows against the PDF if you want a second pair of eyes.
 
-**Hind (toxicology, ethics).** Your modules are unchanged and still the Day-1 mocks: they are next on our list.
-The report already replaces the mock's "MOCK - replace with retrieved text" quotes with the real CLP table row when it can.
+**Hind (toxicology, ethics).** Both your agents are merged and work end to end with the report (5.14, 5.15). As you
+asked, the PETA list is built by your script during the API's Docker build on Render (the script now runs without
+`truststore`, which is only in the dev requirements). Open question: v7 is the default although v6 got more concern levels right on
+the sunscreen test (94.1 % against 88.2 %).
 For everyone: a second model is now used, for OCR only: `Qwen/Qwen3-VL-30B-A3B-Instruct` (label-photo path). The shared client
 `app/common/llm.py` got one optional parameter (`model`); nothing else changed in it.
 
@@ -576,7 +637,8 @@ public result). To change it, edit `scripts/build_n8n_workflow.py` and rerun it,
 
 ## 7. Still to do
 
-1. Toxicology and ethics: real agents instead of the mocks (CLP table and SCCS texts through RAG; Open Beauty Facts labels and a certification list).
-2. Deploy on Render and run the scenarios online: `python -m scripts.run_scenarios https://<n8n>.onrender.com/webhook/cosmetic-scanner-live`.
-3. Validator: a bigger model for this one call, or only send it the claims the rule checks cannot judge (`EVALUATION.md` section 3).
-4. Ingredient dictionary: a fuller source than the Open Beauty Facts file for the 11 % of names not recognised.
+1. Run the scenarios online: `python -m scripts.run_scenarios https://<n8n>.onrender.com/webhook/cosmetic-scanner-live`.
+2. Validator: a bigger model for this one call, or only send it the claims the rule checks cannot judge (`EVALUATION.md` section 3).
+3. Ingredient dictionary: a fuller source than the Open Beauty Facts file for the 11 % of names not recognised.
+4. Coverage, optional (the app works without it): the full CLP Annex VI table for toxicology (5.14) and the full Annexes II-VI
+   for the regulatory agent, so fewer ingredients are "not assessed" or "not enough evidence".

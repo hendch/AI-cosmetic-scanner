@@ -20,6 +20,7 @@ Words used below:
 |---|---|---|
 | 5 end-to-end scenarios through n8n (local docker) | 5/5 behave as designed; every rule check passes; 1 to 23 s per scan | `eval/scenarios/2026-10-18_1511/` |
 | Regulatory agent, prompt v4 (45 gold cases) | status 100 %, compliance 100 %, conditions 100 %, citations 100 % | `eval/regulatory/RESULTS.md` |
+| Toxicology agent (Hind), 43 gold ingredients | rules only: 95.3 % concern levels right; with AI (v7, sunscreen product): 88.2 %, findings 90.9 % found and 90.9 % correct | `eval/toxicology/` |
 | RAG retrieval (10 questions) | Recall@3 = 1.0, MRR = 0.9 with structured chunks; 0.2 with fixed-size chunks | `eval/rag/metrics.csv` |
 | Label OCR (2 real label photos) | 15/15 and 23/25 ingredients identical to the database text | `CHANGES.md` 5.7 |
 | Ingredient-name recognition (25 real products, 491 names) | 88.8 % recognised (84.5 % exact, 4.3 % after typo correction) | `eval/normalize/results.md` |
@@ -150,10 +151,35 @@ the Open Beauty Facts copy of the EU CosIng list lacks common names such as Poly
 Aloe Barbadensis Leaf Juice. The full CosIng list is not offered as a download any more. A name that is not recognised
 is never guessed: it is shown as "not recognised" and not assessed.
 
-## 7. Limits of this evaluation
+## 7. Toxicology agent (Hind)
+
+Run: `python -m scripts.eval_toxicology` (modes `rules`, `live`, `replay`). Answer key `eval/toxicology/gold.json`:
+8 products, 43 ingredients, with the expected concern level and the SCCS findings an answer should contain.
+
+| Run | Concern level right | SCCS findings found | Findings correct | Coverage right | AI calls |
+|---|---|---|---|---|---|
+| Rules only, all 43 ingredients | 95.3 % | none (no AI) | - | 80.8 % | 0 |
+| Prompt v6, sunscreen product (17 ingredients) | 94.1 % | 90.9 % | 83.3 % | 75.0 % | 18 |
+| Prompt v7 (default), sunscreen product | 88.2 % | 90.9 % | 90.9 % | 75.0 % | 19 |
+
+In every run citations were 100 % valid, no answer used verdict wording, and no number appeared that was not in a quote.
+The code checks each AI finding (quote word for word, numbers and product types taken from the quote) and drops what fails.
+v7 is the default: it is more precise, but v6 got more concern levels right on the one product tested live.
+
+Coverage limit: the CLP table holds 15 ingredients and there are 12 SCCS opinions, so on real products most ingredients
+are "not enough evidence" (14 of 15 for the Balea lotion, 13 of 14 for the Isana toner, run 2026-10-19).
+
+## 8. Ethics (cruelty-free) agent (Hind)
+
+A lookup in PETA's lists, no AI, so there is no prompt to evaluate; 13 unit tests cover each status (verified, claimed,
+conflicting, not verified) and the brand vs parent-company rule. The five recorded scenarios (2026-10-18) ran before
+this agent was merged, so their "not verified" results came from the earlier placeholder.
+
+## 9. Limits of this evaluation
 
 - Small sets: 5 scenarios, 8 validator cases, 45 regulatory cases, 10 retrieval questions, 2 OCR photos.
-- Toxicology and ethics are still the teammates' placeholder agents: every product came out "not verified" and no
-  hazard was found, so those parts of the report are not evaluated yet.
+- The five scenarios were recorded before the toxicology and ethics agents were merged (2026-10-19); they should be
+  re-run online to include them.
+- The toxicology live evaluation covers one product (17 ingredients).
 - The scenarios ran on local docker. Running them on Render: `python -m scripts.run_scenarios https://<n8n>.onrender.com/webhook/cosmetic-scanner-live`.
 - Model calls used on 2026-10-18 for this evaluation: about 55 (validator eval 22, two scenario runs about 32, one app test).

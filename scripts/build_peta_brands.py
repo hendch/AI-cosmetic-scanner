@@ -16,9 +16,13 @@ from datetime import date
 from pathlib import Path
 
 import httpx
-import truststore
 
-truststore.inject_into_ssl()  # use the OS certificate store (needed behind some proxies)
+try:  # dev only: use the OS certificate store (needed behind some proxies); the Docker build runs without it
+    import truststore
+
+    truststore.inject_into_ssl()
+except ImportError:
+    pass
 
 OUTPUT = Path(__file__).resolve().parent.parent / "data" / "peta_brands.json"
 LISTS = {

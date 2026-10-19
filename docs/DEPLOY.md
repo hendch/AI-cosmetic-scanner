@@ -48,6 +48,10 @@ The services use their public https URLs: free Render services cannot receive pr
    - `https://<api>/health` returns `{"ok": true}`; any other API path without the key returns 401.
    - n8n logs show `importing ... (id ...)` and no publish warning.
    - The web app opens, and a scan with a known barcode reaches the report.
+7. PETA brand list for the ethics agent: nothing to do. The API's Docker build runs
+   `python -m scripts.build_peta_brands` (about 2.5 minutes on the first build, cached afterwards; the build log shows
+   `wrote N companies`). To refresh the list: Manual Deploy → Clear build cache & deploy. If PETA is unreachable the
+   build continues and every product's animal testing is "not verified".
 
 ## Phones
 

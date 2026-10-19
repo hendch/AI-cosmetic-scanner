@@ -33,7 +33,7 @@ services:
     dockerContext: .
     healthCheckPath: /health
     buildFilter:
-      paths: ["app/**", "corpus/**", "prompts/**", "samples/**", "requirements.txt", "Dockerfile"]
+      paths: ["app/**", "corpus/**", "prompts/**", "samples/**", "requirements.txt", "Dockerfile", "scripts/build_peta_brands.py"]
     envVars:
       - fromGroup: scanner-api-key
       - key: HF_TOKEN
