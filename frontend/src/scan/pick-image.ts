@@ -25,7 +25,8 @@ export async function pickImage(source: 'camera' | 'library'): Promise<PickResul
     const base64 = await shrink(asset);
     if (!base64) return { problem: "That photo couldn't be read. Try another one." };
     return { image: { uri: asset.uri, base64, mimeType: 'image/jpeg' } };
-  } catch {
+  } catch (err) {
+    console.warn('Could not shrink the photo', err);
     return { problem: "That photo couldn't be read. Try another one." };
   }
 }
